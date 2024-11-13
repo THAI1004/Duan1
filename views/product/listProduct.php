@@ -13,7 +13,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/aff/include/header.php';
 <body>
    
 <h1>Danh sách sản Phẩm</h1>
-<table class="table table-bordered">
+<table class="table table-striped table-nowrap align-middle mb-0 table text-center ">
 <thead style="background-image: radial-gradient(circle 248px at center, #16d9e3 0%, #30c7ec 47%, #46aef7 100%);">
     <tr>
         <th scope="col">STT</th>

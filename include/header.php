@@ -260,7 +260,6 @@
                         <ul aria-expanded="false">
                         <li><a href="./layout-blank.html">Danh Sách Danh Mục</a></li>
                             <li><a href="./layout-blank.html">Thêm Danh Mục</a></li>
-                            <li><a href="./layout-one-column.html">Sửa Danh Mục</a></li>
                         </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">
@@ -270,7 +269,6 @@
                         <ul aria-expanded="false">
                         <li><a href="?act=listProduct">Danh Sách sản phẩm</a></li>
                             <li><a href="?act=addProduct">Thêm Sản Phẩm</a></li>
-                            <li><a href="./layout-one-column.html">Sửa Sản Phẩm</a></li>
                         </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">

@@ -16,6 +16,11 @@ class productModel{
         $data=$this->pdo->query($sql)->fetchAll();
         return $data;
     }
+    public function getProductById($id){
+        $sql = "SELECT * FROM `products` where id=$id";
+        $data=$this->pdo->query($sql)->fetch();
+        return $data;
+    }
     public function addProduct($product_name, $description, $category_id, $price, $created_at, $updated_at) {
         try {
             // Tạo câu lệnh SQL
@@ -49,6 +54,26 @@ class productModel{
             echo "<hr>";
         }
         
+    }
+    public function update($id,$product_name,$description,$category_id,$price,$created_at,$updated_at){
+        try{
+            $sql = "UPDATE products 
+        SET product_name = '$product_name', 
+            description = '$description', 
+            category_id = $category_id, 
+            price = $price, 
+            created_at = '$created_at', 
+            updated_at = '$updated_at' 
+        WHERE id = $id";
+// Thực thi câu lệnh SQL
+            $data=$this->pdo->exec($sql);
+            if($data===1||$data===0){
+                return "OK";
+            }
+        }catch(Exception $er){
+            echo "Lỗi hàm insert :" .$er->getMessage();
+            echo "<hr>";
+        }
     }
 }
 

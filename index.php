@@ -10,7 +10,6 @@ $id = "";
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
 }
-
 // 3. Kiểm tra giá trị "act" và gọi xuống controller tương ứng
 switch ($act) {
     case "Trangchu":
@@ -37,5 +36,14 @@ switch ($act) {
     $productC = new productController();
     $productC->delete($id);
      break;
-    
+    case "editProduct":
+            // Gọi xuống controller để xử lý logic và hiển thị file view
+    $productC = new productController();
+    $productC->showFormEdit($id);
+     break;
+     case "submitEditProduct":
+        // Gọi xuống controller để xử lý logic và hiển thị file view
+    $productC = new productController();
+    $productC->submitEdit($id);
+    break;
 }
