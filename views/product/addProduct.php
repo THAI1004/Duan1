@@ -17,7 +17,7 @@ if (!empty($thongBaoTC)) {
 <body>
 
 <h1>Trang thêm mới</h1>
-<form action="?act=submitAddProduct" method="post">
+<form action="?act=submitAddProduct" method="post" enctype="multipart/form-data">
   <div class="mb-3">
     <label for="product_name" class="form-label">Tên sản phẩm:</label>
     <input type="text" class="form-control" id="product_name" name="product_name" value="<?= isset($_POST['product_name']) ? htmlspecialchars($_POST['product_name']) : '' ?>" required>
@@ -53,6 +53,13 @@ if (!empty($thongBaoTC)) {
     <input type="number" class="form-control" id="price" name="price" min="0" value="<?= isset($_POST['price']) ? htmlspecialchars($_POST['price']) : '' ?>" required>
     <?php if (!empty($thongBaoLoiPrice)): ?>
       <div class="alert alert-danger"><?= htmlspecialchars($thongBaoLoiPrice) ?></div>
+    <?php endif; ?>
+  </div>
+  <div class="mb-3">
+    <label for="image" class="form-label">Hình ảnh sản phẩm:</label>
+    <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+    <?php if (!empty($thongBaoLoiUpload)): ?>
+      <div class="alert alert-danger"><?= htmlspecialchars($thongBaoLoiUpload) ?></div>
     <?php endif; ?>
   </div>
 

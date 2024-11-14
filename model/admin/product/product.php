@@ -21,11 +21,11 @@ class productModel{
         $data=$this->pdo->query($sql)->fetch();
         return $data;
     }
-    public function addProduct($product_name, $description, $category_id, $price, $created_at, $updated_at) {
+    public function addProduct($product_name, $description, $category_id, $price, $created_at, $updated_at,$image) {
         try {
             // Tạo câu lệnh SQL
-            $sql = "INSERT INTO products (product_name, description, category_id, price, created_at, updated_at) 
-                    VALUES ('$product_name', '$description', '$category_id', '$price', '$created_at', '$updated_at')";
+            $sql = "INSERT INTO products (product_name, description, category_id, price, created_at, updated_at,image) 
+                    VALUES ('$product_name', '$description', '$category_id', '$price', '$created_at', '$updated_at','$image')";
             
             // Thực thi câu lệnh SQL
             $stmt = $this->pdo->exec($sql);
@@ -55,7 +55,7 @@ class productModel{
         }
         
     }
-    public function update($id,$product_name,$description,$category_id,$price,$created_at,$updated_at){
+    public function update($id,$product_name,$description,$category_id,$price,$created_at,$updated_at,$image){
         try{
             $sql = "UPDATE products 
         SET product_name = '$product_name', 
@@ -63,7 +63,8 @@ class productModel{
             category_id = $category_id, 
             price = $price, 
             created_at = '$created_at', 
-            updated_at = '$updated_at' 
+            updated_at = '$updated_at',
+            image='$image'
         WHERE id = $id";
 // Thực thi câu lệnh SQL
             $data=$this->pdo->exec($sql);
@@ -74,6 +75,32 @@ class productModel{
             echo "Lỗi hàm insert :" .$er->getMessage();
             echo "<hr>";
         }
+    }
+    public function getAllProductVariant($id){
+        $sql = "
+        SELECT 
+            pv.id AS variant_id, 
+            p.product_name, 
+            pc.color_name, 
+            pc.color_code,
+            ps.size_name, 
+            pv.stock_quantity,
+            pv.price_adjustment,
+            pv.image_variant
+        FROM 
+            Product_Variants pv
+        JOIN 
+            Products p ON pv.product_id = p.id
+        JOIN 
+            Product_Colors pc ON pv.color_id = pc.id
+        JOIN 
+            Product_Sizes ps ON pv.size_id = ps.id
+        WHERE 
+            pv.product_id = $id";
+    
+
+        $data=$this->pdo->query($sql)->fetchAll();
+        return $data;
     }
 }
 
