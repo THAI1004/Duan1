@@ -1,4 +1,4 @@
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/aff/include/header.php';
+<?php include $_SERVER['DOCUMENT_ROOT'] . '../include/header.php';
 if (!empty($thongBaoTC)) {
   echo "<script>
       if (confirm('Bạn đã thêm sản phẩm thành công. Nhấn OK để quay lại danh sách sản phẩm.')) {
@@ -77,4 +77,4 @@ if (!empty($thongBaoTC)) {
 </body>
 </html>
 
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/aff/include/footer.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '../include/footer.php'; ?>

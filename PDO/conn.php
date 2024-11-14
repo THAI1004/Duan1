@@ -1,6 +1,6 @@
 <?php
 const _HOST = 'localhost';
-const _PORT =3307;
+const _PORT =3306;
 const _USER="root";
 const _PASS="";
 const _DBNAME ="duan1";
