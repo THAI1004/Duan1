@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <?php include $_SERVER['DOCUMENT_ROOT'] . '../include/header.php';
+=======
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/Duan1/include/header.php';
+>>>>>>> 862d03b7d8c784ffa50ee14ae68649f3867d89b2
 if (!empty($thongBaoTC)) {
   echo "<script>
       if (confirm('Bạn đã thêm sản phẩm thành công. Nhấn OK để quay lại danh sách sản phẩm.')) {
@@ -84,4 +88,8 @@ if (!empty($thongBaoTC)) {
 </body>
 </html>
 
+<<<<<<< HEAD
 <?php include $_SERVER['DOCUMENT_ROOT'] . '../include/footer.php'; ?>
+=======
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/Duan1/include/footer.php'; ?>
+>>>>>>> 862d03b7d8c784ffa50ee14ae68649f3867d89b2
