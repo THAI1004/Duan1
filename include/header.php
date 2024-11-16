@@ -24,9 +24,7 @@
 </head>
 <body>
     
-    <!--*******************
-        Preloader start
-    ********************-->
+
     <div id="preloader">
         <div class="loader">
             <svg class="circular" viewBox="25 25 50 50">
@@ -34,19 +32,10 @@
             </svg>
         </div>
     </div>
-    <!--*******************
-        Preloader end
-    ********************-->
-
-    
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
+ 
     <div id="main-wrapper">
 
-        <!--**********************************
-            Nav header start
-        ***********************************-->
+
         <div class="nav-header">
             <div class="brand-logo">
                 <a href="?act=Trangchu">
@@ -58,13 +47,7 @@
                 </a>
             </div>
         </div>
-        <!--**********************************
-            Nav header end
-        ***********************************-->
 
-        <!--**********************************
-            Header start
-        ***********************************-->
         <div class="header">    
             <div class="header-content clearfix">
                 
@@ -98,13 +81,7 @@
                 </div>
             </div>
         </div>
-        <!--**********************************
-            Header end ti-comment-alt
-        ***********************************-->
 
-        <!--**********************************
-            Sidebar start
-        ***********************************-->
         <div class="nk-sidebar">           
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
@@ -141,8 +118,9 @@
                         </a>
                     </li>
                     <li class="mega-menu mega-menu-sm">
-                        <a href="javascript:void()" aria-expanded="false">
-                        <i class="fa-solid fa-comment"></i><span class="nav-text">Quản lý bình luận</span>
+
+                        <a href="?act=listReview" aria-expanded="false">
+                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Quản lý bình luận</span>         
                         </a>
                     </li>
                     <li class="mega-menu mega-menu-sm">
@@ -150,19 +128,13 @@
                         <i class="fa-solid fa-image"></i><span class="nav-text">Quản lí Banner</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./layout-blank.html">Thêm Banner</a></li>
+                            <li><a href="?act=listSlider">Danh sách banner</a></li>
+                            <li><a href="?act=addSlider">Thêm Banner</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </div>
-        <!--**********************************
-            Sidebar end
-        ***********************************-->
-
-        <!--**********************************
-            Content body start
-        ***********************************-->
         <div class="content-body">
 
             <div class="container-fluid mt-3">
