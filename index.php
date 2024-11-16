@@ -46,31 +46,31 @@ switch ($act) {
 
         $productC->listProductVariant($id);
         break;
-    case 'listDanhMuc':
-        $categoryC->listCategory();
-        break;
-    case 'addCategory':
-        $categoryC->formCategory();
-        break;
-    case 'submitAddCategory':
-        $categoryC->addCategory();
-        break;
-    case 'deleteCategory':
-        $id = $_GET['id'];
-        $categoryC->delete($id);
-        break;
-    case 'editCategory':
-        $id = $_GET['id'];
-        $categoryC->formEdit($id);
-        break;
-    case 'update':
-        $id = $_GET['id'];
-        $categoryC->update($id);
-        break;
-    case 'listTKNV':
-        $taiKhoan->listTKNV();
-        break;
-    case 'listTKC':
-        $taiKhoan->listTKC();
-        break;
+        case 'listDanhMuc':
+            $categoryC->listCategory();
+            break;
+        case 'addCategory':
+            $categoryC->formCategory();
+            break;
+        case 'submitAddCategory':
+            $categoryC->addCategory();
+            break;
+        case 'deleteCategory':
+            $id = $_GET['id'];
+            $categoryC->delete($id);
+            break;
+        case 'editCategory':
+            $id = $_GET['id'];
+            $categoryC->formEdit($id);
+            break;
+        case 'update':
+            $id = $_GET['id'];
+            $categoryC->update($id);
+            break;
+        case 'listTKNV':
+            $taiKhoan->listTKNV();
+            break;
+        case 'listTKC':
+            $taiKhoan->listTKC();
+            break;
 }
