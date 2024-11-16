@@ -29,9 +29,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/aff/include/header.php';
 <script src="./jss/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
-   
 <h1>Sản Phẩm</h1>
-<div class="content-wraper mt-95">
+<div class="content-wraper ">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col">
@@ -65,69 +64,15 @@ include $_SERVER['DOCUMENT_ROOT'] . '/aff/include/header.php';
                                     <div class="quick-view-content">
                                         <div class="product-info">
                                             
-                                            <h2><?=$Product['product_name']?></h2>
-                                            <div class="rating-box">
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
+                                            <h2>Tên sản phẩm: <?=$Product['product_name']?></h2> 
                                             <div class="price-box">
-                                               <span class="new-price"><?=$Product['price']?></span>
-                                               <span class="old-price">$250.00</span>
+                                               <span class="new-price">Giá: <?=$Product['price']?></span>
+                                               <span class="old-price"><?= $Product['discount_price']?></span>
                                             </div>
-                                            <p>100% cotton double printed dress. Black and white striped top and orange high waisted skater skirt bottom.</p>
-                                            <div class="modal-size">
-                                                <h4>Size</h4>
-                                                <select>
-                                                <?php
-                                                    foreach($productVariant as $row){?>
-
-                                                        <option title="<?=$row["size_name"]?>" value="1"><?=$row["size_name"]?></option>
-                                                    <?php }?>
-                                                    
-                                                </select>
-                                            </div>
-                                            <div class="modal-color">
-                                                <h4>Color</h4>
-                                                <div class="color-list">
-                                                    <ul>
-                                                    <?php
-                                                    foreach($productVariant as $row){?>
-
-                                                        <li><a href="#" style="background:<?=$row['color_code']?> none repeat scroll 0 0;" class=" active"></a></li>
-                                                    <?php }?>
-
-                                                        
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="quick-add-to-cart">
-                                                <form class="modal-cart">
-                                                    <div class="quantity">
-                                                        <label>Quantity</label>
-                                                        <div class="cart-plus-minus">
-                                                            <input disabled class="cart-plus-minus-box" type="number" value="<?=$Product['stock_quantity']?>">
-                                                        </div>
-                                                    </div>
-                                                    <button class="add-to-cart" type="submit">Add to cart</button>
-                                                </form>
-                                            </div>
-                                            <div class="instock">
-                                                <p>In stock </p>
-                                            </div>
-                                            <div class="social-sharing">
-                                                <h3>Share</h3>
-                                                <ul>
-                                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                                </ul>
-                                            </div>
+                                            <p>Mô tả: 100% cotton double printed dress. Black and white striped top and orange high waisted skater skirt bottom.</p>
+                                            
+                                            
+                                            
                                         </div>
                                     </div>
                                     <!-- product-thumbnail-content end -->
@@ -139,39 +84,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/aff/include/header.php';
                 </div>
             </div>
             <!-- content-wraper end -->
-            
-<!-- <table class="table table-striped table-hover table-bordered table-sm text-center custom-table">
-<thead class="table-dark">
-    <tr>
-        <th scope="col">STT</th>
-        <th scope="col">Tên</th>
-        <th scope="col">Ảnh sản phẩm</th>
-        <th scope="col">Mô tả</th>
-        <th scope="col">Giá</th>
-        <th scope="col">Ngày tạo</th>
-        <th scope="col">Ngày sửa</th>
-        <th scope="col" colspan="3" class="text-center align-middle">Thao tác</th>
-    </tr>
-</thead>
-<tbody>
-    <tr>
-        <td><?=$i++?></td>
-        <td><?=$Product['product_name']?></td>
-        <td >
-            <img style="width:100%;height: 100px; " src="<?=$Product['image']?>" alt="">
-            </td>
-        <td><?=$Product['description']?></td>
-        <td><?=$Product['price']?></td>
-        <td><?=$Product['created_at']?></td>
-        <td><?=$Product['updated_at']?></td>
-        <td>
-            <a class="btn btn-danger" href="?act=editProduct&id=<?= $row["id"]?>">Sửa</a>
-            <a class="btn btn-secondary" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="?act=deleteProduct&id=<?= $row["id"] ?>">Xóa</a>
-        </td>
-    </tr>
-</tbody>
-</table>
-<h1>Biến thể</h1>
+            <br><br>
+            <h3>Danh sách biến thể</h3>
 <table class="table table-striped table-hover table-bordered table-sm text-center custom-table">
 <thead class="table-dark">
     <tr>
@@ -179,29 +93,32 @@ include $_SERVER['DOCUMENT_ROOT'] . '/aff/include/header.php';
         <th scope="col">Màu</th>
         <th scope="col">Size</th>
         <th scope="col">Số lượng</th>
-        <th scope="col">Giá giảm</th>
+        <th scope="col">Ảnh biến thể</th>
         <th scope="col" colspan="3" class="text-center align-middle">Thao tác</th>
     </tr>
 </thead>
 <tbody>
-    <tr>
+    
+<?php
+$i=1;
+foreach($productVariant as $row){?>
+
+    <tr >
         <td><?=$i++?></td>
-        <td><?=$Product['product_name']?></td>
-        <td >
-            <img style="width:100%;height: 100px; " src="<?=$Product['image']?>" alt="">
-            </td>
-        <td><?=$Product['description']?></td>
-        <td><?=$Product['price']?></td>
-        <td><?=$Product['created_at']?></td>
-        <td><?=$Product['updated_at']?></td>
+        <td><?=$row["color_name"]?></td>
+        <td><?=$row['size_name']?></td>
+        <td><?=$row["stock_quantity"]?></td>
+        <td><img style="width: 70px;" src="<?=$row["image_variant"]?>" alt=""></td>
         <td>
-            <a class="btn btn-danger" href="?act=editProduct&id=<?= $row["id"]?>">Sửa</a>
-            <a class="btn btn-secondary" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="?act=deleteProduct&id=<?= $row["id"] ?>">Xóa</a>
+            <a class="btn btn-danger" href="?act=updateVariant&id=<?=$row['product_id']?>&idVariant=<?=$row["variant_id"]?>">Sửa</a>
+            <a class="btn btn-secondary" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="?act=deleteVariant&id=<?=$row['product_id']?>&idVariant=<?=$row["variant_id"]?>">Xóa</a>
         </td>
     </tr>
+<?php } ?>
 </tbody>
-</table> -->
-<a class="btn btn-primary" href="?act=addProduct">Thêm biến thể</a>
+</table>
+<a class="btn btn-primary" href="?act=addVariant&id=<?=$Product['id']?>">Thêm biến thể</a>
+
 <script src="./jss/vendor/jquery-3.5.1.min.js"></script>
 <script src="./jss/vendor/jquery-migrate-3.3.0.min.js"></script>
 <script src="./jss/bootstrap.min.js"></script>

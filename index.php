@@ -3,12 +3,15 @@
 include_once "./model/admin/product/product.php";
 include_once "./model/admin/category/category.php";
 include_once "./controller/product.php";
-include_once "./controller/home.php";
 include_once "./controller/category.php";
 $act = $_GET['act'] ?? 'Trangchu';
 $id = "";
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
+}
+$idVariant = "";
+if (isset($_GET["idVariant"])) {
+    $idVariant = $_GET["idVariant"];
 }
 $productC = new productController();
 switch ($act) {
@@ -43,4 +46,25 @@ switch ($act) {
    
     $productC->listProductVariant($id);
     break;
+    case "deleteVariant":
+   
+    $productC->deleteVariant($id,$idVariant);
+    break;
+    case "addVariant":
+   
+        $productC->showFormAddVariant($id);
+        break;
+    case "submitAddProductVariant":
+   
+        $productC->addProductVariant($id);
+        break;
+    case "updateVariant":
+   
+        $productC->showFormEditVariant($id,$idVariant);
+        break;
+    case "submitEditProductVariant":
+   
+        $productC->submitEditVariant($id,$idVariant);
+       break;
+    
 }
