@@ -10,9 +10,15 @@ class productController{
         $this->productModel = new productModel();
     }
     public function listProduct(){
-        $listProduct = $this->productModel->getAllProduct();
-        
+       
+            $listProduct = $this->productModel->getAllProduct(); // Hiển thị toàn bộ sản phẩm
         require_once './views/product/listProduct.php';
+    }
+    public function searchProduct($keyword) {
+        if($keyword==""){}
+        $listProduct = $this->productModel->searchProduct($keyword); // Gọi model để tìm kiếm sản phẩm
+        require_once './views/product/listProduct.php';
+        // Hiển thị kết quả trong view
     }
     public function showFormCreate(){
         $listCategory=$this->categoryModel->getAllCategory();
