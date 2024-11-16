@@ -15,6 +15,8 @@ $idVariant = "";
 if (isset($_GET["idVariant"])) {
     $idVariant = $_GET["idVariant"];
 }
+$categoryC = new categoryController();
+$taiKhoan = new AccountController();
 $productC = new productController();
 switch ($act) {
     case "Trangchu":
