@@ -1,70 +1,51 @@
 <?php
-
-include $_SERVER['DOCUMENT_ROOT'] . '../include/header.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '../include/header.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-    .custom-table {
-        border-radius: 8px; /* Bo góc */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng */
-        overflow: hidden; /* Để đảm bảo các góc được bo tròn */
-    }
-</style>
 </head>
 <body>
    
 <h1>Danh sách bình luận</h1>
-<table class="table table-striped table-hover table-bordered table-sm text-center custom-table">
-<thead  class="table-dark">
+<table class="table table-striped table-nowrap align-middle mb-0 table text-center ">
+<thead style="background-image: radial-gradient(circle 248px at center, #16d9e3 0%, #30c7ec 47%, #46aef7 100%);">
     <tr>
-        <<th>ID</th>
-                <th>User ID</th>
-                <th>Product ID</th>
-                <th>Rating</th>
-                <th>Review Text</th>
-                <th>Ngày tạo</th>
-        <th scope="col" colspan="3" class="text-center align-middle">Thao tác</th>
-    </tr>
-</thead>
-<tbody>
-    
-<h1>Danh sách đánh giá</h1>
-    <table border="1">
-        <thead>
             <tr>
-                <th>ID</th>
-                <th>User ID</th>
-                <th>Product ID</th>
-                <th>Rating</th>
-                <th>Review Text</th>
-                <th>Hành động</th>
+                <th scope="col">STT</th>
+                <th scope="col">Khách hàng</th>
+                <th scope="col">Sản phẩm</th>
+                <th scope="col">Nội dung</th>
+                <th scope="col">Đánh giá</th>
+                <th scope="col">Ngày tạo</th>
+                <th scope="col" colspan="3" class="text-center align-middle">Thao tác</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($reviews as $review): ?>
+            <?php 
+            $i=1;
+             foreach ($listReview as $listReview): ?>
                 <tr>
-                    <td><?= htmlspecialchars($review['id']) ?></td>
-                    <td><?= htmlspecialchars($review['user_id']) ?></td>
-                    <td><?= htmlspecialchars($review['product_id']) ?></td>
-                    <td><?= htmlspecialchars($review['rating']) ?></td>
-                    <td><?= htmlspecialchars($review['review_text']) ?></td>
+                    <td><?= $i++ ?></td>
+                    <td><?=$listReview['customer_name'] ?></td>
+                    <td><?=$listReview['product_name'] ?></td>
+                    <td><?=$listReview['review_text'] ?></td>
+                    <td><?=$listReview['rating'] ?></td>
+                    <td><?=$listReview["created_at"]?></td>
                     <td>
-                        <a href="index.php?controller=reviews&action=delete&id=<?= $review['id'] ?>" 
-                           onclick="return confirm('Bạn có chắc muốn xóa không?')">Xóa</a>
+                        <a  class="btn btn-secondary" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="?act=deleteReview&id=<?= $listReview["id"] ?>">Xóa</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
-            
         </tbody>
     </table>
 </body>
 </html>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '../include/footer.php'; ?>
+<?php
 
+include $_SERVER['DOCUMENT_ROOT'] . '../include/footer.php';
 
+?>

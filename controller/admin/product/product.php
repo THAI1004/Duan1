@@ -53,15 +53,23 @@ class productController{
             if (empty($price)) {
                 $thongBaoLoiPrice = "Vui lòng nhập giá sản phẩm.";
             }
+            $thamSo1=$_FILES["image"]["tmp_name"];
+            $thamSo2="./images/imgs".$_FILES["image"]["name"]; //đường dẫn để di chuyển file từ bộ nhớ tạm vào
+
+            if(move_uploaded_file($thamSo1, $thamSo2)){
+                $image="./images/imgs".$_FILES["image"]["name"];
+            }else{
+                $thongBaoLoiUpload="upload thất bại";
+            }
         
             // Nếu không có lỗi, thực hiện thêm sản phẩm
-            if (empty($thongBaoLoiProductName) && empty($thongBaoLoiDescription) && empty($thongBaoLoiCategory) && empty($thongBaoLoiPrice)) {
+            if (empty($thongBaoLoiProductName) && empty($thongBaoLoiUpload)  && empty($thongBaoLoiDescription) && empty($thongBaoLoiCategory) && empty($thongBaoLoiPrice)) {
                 // Kiểm tra hợp lệ và gọi model để thêm sản phẩm
                 $date = new DateTime('now', new DateTimeZone('Asia/Ho_Chi_Minh'));
                 $created_at = $date->format('Y-m-d H:i:s');
                 $updated_at = $created_at;
 
-                $result = $this->productModel->addProduct($product_name, $description, $category_id, $price, $created_at, $updated_at);
+                $result = $this->productModel->addProduct($product_name, $description, $category_id, $price, $created_at, $updated_at,$image);
                 
                 if ($result === "OK") {
                     $thongBaoTC = "Tạo mới thành công, mời bạn tiếp tục tạo mới hoặc quay lại trang danh sách";
@@ -162,9 +170,16 @@ class productController{
             if (empty($price)) {
                 $thongBaoLoiPrice = "Vui lòng nhập giá sản phẩm.";
             }
-    
+            $thamSo1=$_FILES["image"]["tmp_name"];
+            $thamSo2="./images/imgs".$_FILES["image"]["name"]; //đường dẫn để di chuyển file từ bộ nhớ tạm vào
+
+            if(move_uploaded_file($thamSo1, $thamSo2)){
+                $image="./images/imgs".$_FILES["image"]["name"];
+            }else{
+                $thongBaoLoiUpload="upload thất bại";
+            }
             // Nếu không có lỗi, thực hiện cập nhật sản phẩm
-            if (empty($thongBaoLoiProductName) && empty($thongBaoLoiDescription) && empty($thongBaoLoiCategory) && empty($thongBaoLoiPrice)) {
+            if (empty($thongBaoLoiProductName) && empty($thongBaoLoiUpload) && empty($thongBaoLoiDescription) && empty($thongBaoLoiCategory) && empty($thongBaoLoiPrice)) {
                 $date = new DateTime('now', new DateTimeZone('Asia/Ho_Chi_Minh'));
                 $updated_at = $date->format('Y-m-d H:i:s');
     
@@ -172,7 +187,7 @@ class productController{
                     $created_at = $product["created_at"]; // Giữ nguyên created_at từ sản phẩm cũ
                
                 
-                $result = $this->productModel->update( $id,$product_name,$description,$category_id,$price,$created_at,$updated_at);
+                $result = $this->productModel->update( $id,$product_name,$description,$category_id,$price,$created_at,$updated_at,$image);
                 
                 if ($result === "OK") {
                     $thongBaoTC = "Sửa sản phẩm thành công. Mời bạn tiếp tục tạo mới hoặc quay lại trang danh sách.";
@@ -192,6 +207,13 @@ class productController{
     
         // Nếu có lỗi, hiển thị lại form với thông báo lỗi
         $this->showFormEdit($id); // Gọi lại hàm hiển thị form với ID sản phẩm
+    }
+    public function listProductVariant($id){
+        $i=1;
+        $Product = $this->productModel->getProductById($id);
+        $productVariant=$this->productModel->getAllProductVariant($id);
+        // var_dump($productVariant);
+        require_once './views/product/listProductVariant.php';
     }
     }
 

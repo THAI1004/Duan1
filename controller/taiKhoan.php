@@ -23,7 +23,7 @@ class AccountController
             }
         }
         $listTK = $this->modelTaiKhoan->getAllTaiKhoan(2);
-        include './views/TaiKhoan/listTKNV.php';
+        include './views/taiKhoan/listTKNV.php';
     }
     public function listTKC()
     {
@@ -40,6 +40,6 @@ class AccountController
             }
         }
         $listTK = $this->modelTaiKhoan->getAllTaiKhoan(3);
-        include './views/TaiKhoan/listTKC.php';
+        include './views/taiKhoan/listTKC.php';
     }
 }

@@ -2,9 +2,11 @@
 // 1. Nhúng các file cần thiết
 include_once "./model/admin/product/product.php";
 include_once "./model/admin/category/category.php";
+include_once "./model/admin/review/review.php";
 include_once "./controller/admin/product/product.php";
 include_once "./controller/admin/home/home.php";
 include_once "./controller/admin/category/category.php";
+include_once "./controller/review.php";
 $act = $_GET['act'] ?? 'Trangchu';
 $id = "";
 if (isset($_GET["id"])) {
@@ -31,7 +33,7 @@ switch ($act) {
         $productC = new productController();
         $productC->addProduct();
         break;
-    case "deleteProduct":
+    case "deleteProduct":   
             // Gọi xuống controller để xử lý logic và hiển thị file view
     $productC = new productController();
     $productC->delete($id);
@@ -45,5 +47,15 @@ switch ($act) {
         // Gọi xuống controller để xử lý logic và hiển thị file view
     $productC = new productController();
     $productC->submitEdit($id);
+    
+    case "listReview":
+    $review = new reviewController();
+    $review->listReview();
     break;
+
+    case "deleteReview":
+        // Gọi xuống controller để xử lý logic và hiển thị file view
+    $review = new reviewController();
+    $review->delete($id);
+ break;
 }

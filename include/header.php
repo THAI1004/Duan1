@@ -286,7 +286,7 @@
                         </a>
                     </li>
                     <li class="mega-menu mega-menu-sm">
-                        <a href="javascript:void()" aria-expanded="false">
+                        <a href="?act=listReview" aria-expanded="false">
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Quản lý bình luận</span>
                         </a>
                     </li>
@@ -295,7 +295,7 @@
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Quản lí Banner</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./layout-blank.html">Thêm Banner</a></li>
+                            <li><a href="?act=listBanner">Thêm Banner</a></li>
                         </ul>
                     </li>
                 </ul>
