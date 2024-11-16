@@ -215,6 +215,209 @@ class productController{
         // var_dump($productVariant);
         require_once './views/product/listProductVariant.php';
     }
+    public function deleteVariant($id,$idVariant){
+        if($idVariant!==""){
+            $datadelete=$this->productModel->deleteProductVariant($idVariant);
+            if($datadelete==="OK"){
+                header("location: ?act=listProductVariant&id=$id");
+            }
+            // chuyển hướng về trang danh sách
+           
+        }else{
+            echo "Không có thông tin id mời bạn kiểm tra lại";
+        }
+    } 
+    public function showFormAddVariant($id){
+        $product=$this->productModel->getProductById($id);
+        $colors=$this->productModel->getAllColor();
+        $sizes=$this->productModel->getAllSize();
+        // var_dump($colors);
+        require_once './views/product/addVariant.php';
+    }
+    public function addProductVariant($id){
+        $product=$this->productModel->getProductById($id);
+        $colors=$this->productModel->getAllColor();
+        $sizes=$this->productModel->getAllSize();
+        // Khởi tạo biến thông báo
+        $thongBaoLoi = "";
+        $thongBaoTC = "";
+    
+        // 2: Kiểm tra submit
+        if (isset($_POST['submit'])) {
+            // Lấy giá trị từ form
+            $product_id=$_GET["id"];
+            $color_id = isset($_POST['color_id']) ? trim($_POST['color_id']) : null;
+            $size_id = isset($_POST['size_id']) ? trim($_POST['size_id']) : null;
+            $stock_quantity = trim($_POST['stock_quantity']);
+            
+            // Biến thông báo lỗi cho từng trường
+            $thongBaoLoiColor = "";
+            $thongBaoLoiSize = "";
+            $thongBaoLoiQuantity = "";
+            
+        
+            // Kiểm tra lỗi cho từng trường
+            if (empty($color_id)) {
+                $thongBaoLoiColor = "Vui lòng Chọn màu.";
+            }
+        
+            if (empty($size_id)) {
+                $thongBaoLoiSize = "Vui lòng Chọn size.";
+            }
+        
+            if (empty($stock_quantity) || $stock_quantity < 0) {
+                $thongBaoLoiQuantity = "Vui lòng nhập số lượng hợp lệ.";
+            }
+            $thamSo1=$_FILES["image_variant"]["tmp_name"];
+            $thamSo2="./images/imgs".$_FILES["image_variant"]["name"]; //đường dẫn để di chuyển file từ bộ nhớ tạm vào
+
+            if(move_uploaded_file($thamSo1, $thamSo2)){
+                $image_variant="./images/imgs".$_FILES["image_variant"]["name"];
+            }else{
+                $thongBaoLoiUploadVariant="upload thất bại";
+            }
+        
+            // Nếu không có lỗi, thực hiện thêm sản phẩm
+                $thongBaoLoiUploadVariant="upload thất bại";
+                if (empty($thongBaoLoiColor) && empty($thongBaoLoiSize)  && empty($thongBaoLoiQuantity) && empty($thongBaoLoiCategory) ) {
+                // Kiểm tra hợp lệ và gọi model để thêm sản phẩm
+                $date = new DateTime('now', new DateTimeZone('Asia/Ho_Chi_Minh'));
+                $created_at = $date->format('Y-m-d H:i:s');
+                $updated_at = $created_at;
+
+                $result = $this->productModel->addProductVariant($product_id, $color_id, $size_id , $stock_quantity, $image_variant, $created_at,$updated_at);
+                
+                if ($result === "OK") {
+                    $thongBaoTC = "Tạo mới thành công, mời bạn tiếp tục tạo mới hoặc quay lại trang danh sách";
+                    // Reset form fields sau khi thêm thành công
+                    $color_id = $size_id = $stock_quantity = $image_variant = "";
+                } else {
+                    $thongBaoLoi = "Có lỗi xảy ra trong quá trình tạo biến thể.";
+                }
+            }
+        }
+        
+        
+        // Gọi view và truyền thông báo
+        include "./views/product/addVariant.php";
+    }
+    public function showFormEditVariant($id, $idVariant) {
+        // Kiểm tra xem ID sản phẩm và ID biến thể có hợp lệ không
+        if (empty($id)) {
+            $thongBaoLoi = "ID sản phẩm không hợp lệ.";
+            require_once './views/product/editVariant.php';
+            return;
+        }
+        if (empty($idVariant)) {
+            $thongBaoLoi = "ID Biến thể không hợp lệ.";
+            require_once './views/product/editVariant.php';
+            return;
+        }
+    
+        // Lấy thông tin sản phẩm và biến thể
+        $product = $this->productModel->getProductById($id);
+        $variant = $this->productModel->getVariantById($idVariant);
+        $colors = $this->productModel->getAllColor();
+        $sizes = $this->productModel->getAllSize();
+        $color_id = trim($variant["color_id"]);
+        $size_id = trim($variant["size_id"]);
+        $color = $this->productModel->getColorById($color_id);
+        $size = $this->productModel->getSizeById($size_id);
+    
+        // Kiểm tra xem sản phẩm và biến thể có tồn tại không
+        if (!$product) {
+            $thongBaoLoi = "Sản phẩm không tồn tại.";
+            require_once './views/product/editProduct.php';
+            return;
+        }
+        if (!$variant) {
+            $thongBaoLoi = "Biến thể không tồn tại.";
+            require_once './views/product/editVariant.php';
+            return;
+        }
+    
+        // Khởi tạo các biến từ dữ liệu của biến thể
+        $product_name = trim($product["product_name"]);
+        $color_name = trim($color["color_name"]);
+        $size_name = trim($size["size_name"]);
+        $stock_quantity = trim($variant["stock_quantity"]);
+        $image_variant = trim($variant["image_variant"]);
+    
+        // Gọi view để hiển thị form
+        require_once './views/product/editVariant.php';
+    }
+    
+    public function submitEditVariant($id, $idVariant) {
+        if (isset($_POST['submit'])) {
+            // Lấy giá trị từ form
+            $product = $this->productModel->getProductById($id);
+            $variant = $this->productModel->getVariantById($idVariant);
+            $colors = $this->productModel->getAllColor();
+            $sizes = $this->productModel->getAllSize();
+            $color_id = trim($variant["color_id"]);
+            $size_id = trim($variant["size_id"]);
+            $color = $this->productModel->getColorById($color_id);
+            $size = $this->productModel->getSizeById($size_id);
+            $product_name = trim($product["product_name"]);
+            $color_name = trim($color["color_name"]);
+            $size_name = trim($size["size_name"]);
+            $stock_quantity = trim($variant["stock_quantity"]);
+            $image_variant = trim($variant["image_variant"]);
+    
+            $product_id = $id;
+            $color_id = isset($_POST['color_id']) ? trim($_POST['color_id']) : null;
+            $size_id = isset($_POST['size_id']) ? trim($_POST['size_id']) : null;
+            $stock_quantity = trim($_POST['stock_quantity']);
+            $created_at = trim($variant["created_at"]);
+    
+            // Biến thông báo lỗi
+            $thongBaoLoiColor = $thongBaoLoiSize = $thongBaoLoiQuantity = $thongBaoLoiUploadVariant = "";
+    
+            // Kiểm tra lỗi
+            if (empty($color_id)) {
+                $thongBaoLoiColor = "Vui lòng Chọn màu.";
+            }
+            if (empty($size_id)) {
+                $thongBaoLoiSize = "Vui lòng Chọn size.";
+            }
+            if (empty($stock_quantity) || $stock_quantity < 0) {
+                $thongBaoLoiQuantity = "Vui lòng nhập số lượng hợp lệ.";
+            }
+    
+            // Upload ảnh
+            $thamSo1 = $_FILES["image_variant"]["tmp_name"];
+            $thamSo2 = "./images/imgs" . $_FILES["image_variant"]["name"]; 
+    
+            if (move_uploaded_file($thamSo1, $thamSo2)) {
+                $image_variant = $thamSo2;
+            } else {
+                $thongBaoLoiUploadVariant = "Upload thất bại.";
+            }
+    
+            // Nếu không có lỗi, thực hiện chỉnh sửa biến thể
+            if (empty($thongBaoLoiColor) && empty($thongBaoLoiSize) && empty($thongBaoLoiQuantity) && empty($thongBaoLoiUploadVariant)) {
+                $date = new DateTime('now', new DateTimeZone('Asia/Ho_Chi_Minh'));
+                $updated_at = $date->format('Y-m-d H:i:s');
+    
+                $result = $this->productModel->editProductVariant($idVariant, $product_id, $color_id, $size_id, $stock_quantity, $image_variant, $created_at, $updated_at);
+    
+                if ($result === "OK") {
+                    echo "<script>
+                        if (confirm('Bạn đã sửa sản phẩm thành công. Nhấn OK để quay lại danh sách sản phẩm.')) {
+                            window.location.href = '?act=listProductVariant&id=$product_id';
+                        }
+                    </script>";
+                    exit;
+                } else {
+                    $thongBaoLoi = "Có lỗi xảy ra trong quá trình sửa sản phẩm.";
+                }
+            }
+        }
+    
+        // Gọi view và truyền thông báo
+        include "./views/product/editVariant.php";
+    }
+    
     }
 
 ?>
