@@ -258,8 +258,8 @@
                         <i class="fa-solid fa-list"></i><span class="nav-text">Danh Mục</span>
                         </a>
                         <ul aria-expanded="false">
-                        <li><a href="./layout-blank.html">Danh Sách Danh Mục</a></li>
-                            <li><a href="./layout-blank.html">Thêm Danh Mục</a></li>
+                        <li><a href="?act=listDanhMuc">Danh Sách Danh Mục</a></li>
+                            <li><a href="?act=addCategory">Thêm Danh Mục</a></li>
                         </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">
@@ -276,8 +276,8 @@
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">User</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./layout-blank.html">Thêm User</a></li>
-                            <li><a href="./layout-one-column.html">Sửa User</a></li>
+                            <li><a href="?act=listTKNV">Danh sách nhân viên</a></li>
+                            <li><a href="?act=listTKC">Danh sách khách hàng</a></li>
                         </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">
@@ -295,19 +295,13 @@
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Quản lí Banner</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="?act=listBanner">Thêm Banner</a></li>
+                            <li><a href="?act=listSlider">Danh sách banner</a></li>
+                            <li><a href="?act=addSlider">Thêm Banner</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </div>
-        <!--**********************************
-            Sidebar end
-        ***********************************-->
-
-        <!--**********************************
-            Content body start
-        ***********************************-->
         <div class="content-body">
 
             <div class="container-fluid mt-3">

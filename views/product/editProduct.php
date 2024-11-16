@@ -1,4 +1,4 @@
-<?php include $_SERVER['DOCUMENT_ROOT'] . '../include/header.php';
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/Duan1/include/header.php';
 
 ?>
 
@@ -12,7 +12,7 @@
 <body>
 
 <h1>Trang thêm mới</h1>
-<form action="?act=submitEditProduct&id=<?=$product_id?>" method="post">
+<form action="?act=submitEditProduct&id=<?=$product_id?>" enctype="multipart/form-data" method="post">
   <div class="mb-3">
     <label for="product_name" class="form-label">Tên sản phẩm:</label>
     <input type="text" class="form-control" id="product_name" name="product_name" value="<?= $product["product_name"]?>" required>    
@@ -48,6 +48,13 @@
     <input type="number" class="form-control" id="price" name="price" min="0"  value="<?=$product["price"]?>" required>
     <?php if (!empty($thongBaoLoiPrice)): ?>
       <div class="alert alert-danger"><?= htmlspecialchars($thongBaoLoiPrice) ?></div>
+    <?php endif; ?>
+  </div>
+  <div class="mb-3">
+    <label for="image" class="form-label">Hình ảnh sản phẩm:</label>
+    <input type="file" class="form-control" id="image" name="image" required>
+    <?php if (!empty($thongBaoLoiUpload)): ?>
+      <div class="alert alert-danger"><?= htmlspecialchars($thongBaoLoiUpload) ?></div>
     <?php endif; ?>
   </div>
 

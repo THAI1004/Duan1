@@ -7,7 +7,7 @@ const _DBNAME ="duan1";
 
 function connect(){
     try {
-        $pdo = new PDO("mysql:host=" . _HOST . "; port=" . _PORT . "; dbname=" . _DBNAME, _USER, _PASS);
+        $pdo = new PDO("mysql:host=" . _HOST . "; dbname=" . _DBNAME, _USER, _PASS);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $pdo;
     } catch (PDOException $e) {

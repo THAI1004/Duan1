@@ -59,4 +59,8 @@ include '../include/header.php';
 </body>
 
 </html>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '../include/footer.php'; ?>
+
+
+<?php
+include './include/footer.php';
+?>

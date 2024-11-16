@@ -17,7 +17,7 @@ if (!empty($thongBaoTC)) {
 <body>
 
 <h1>Trang thêm mới</h1>
-<form action="?act=submitAddProduct" method="post">
+<form action="?act=submitAddProduct" method="post" enctype="multipart/form-data">
   <div class="mb-3">
     <label for="product_name" class="form-label">Tên sản phẩm:</label>
     <input type="text" class="form-control" id="product_name" name="product_name" value="<?= isset($_POST['product_name']) ? htmlspecialchars($_POST['product_name']) : '' ?>" required>
@@ -55,6 +55,13 @@ if (!empty($thongBaoTC)) {
       <div class="alert alert-danger"><?= htmlspecialchars($thongBaoLoiPrice) ?></div>
     <?php endif; ?>
   </div>
+  <div class="mb-3">
+    <label for="image" class="form-label">Hình ảnh sản phẩm:</label>
+    <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+    <?php if (!empty($thongBaoLoiUpload)): ?>
+      <div class="alert alert-danger"><?= htmlspecialchars($thongBaoLoiUpload) ?></div>
+    <?php endif; ?>
+  </div>
 
   <a class="btn btn-primary" href="?act=listProduct">Quay lại</a>
   <button type="submit" name="submit" class="btn btn-primary">Thêm mới</button>
@@ -77,4 +84,8 @@ if (!empty($thongBaoTC)) {
 </body>
 </html>
 
+<<<<<<< HEAD
 <?php include $_SERVER['DOCUMENT_ROOT'] . '../include/footer.php'; ?>
+=======
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/Duan1/include/footer.php'; ?>
+>>>>>>> 862d03b7d8c784ffa50ee14ae68649f3867d89b2
