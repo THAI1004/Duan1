@@ -1,33 +1,39 @@
 <?php
-class AccountModel{
+class AccountModel
+{
     public $pdo;
     public function __construct()
     {
-        $this->pdo=connect();
+        $this->pdo = connect();
     }
     public function __destruct()
     {
-        $this->pdo=null;
+        $this->pdo = null;
     }
-    public function getAllTaiKhoan($role){
-        $query="SELECT * FROM users WHERE role= $role";
-        $results= $this->pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
+    public function getAllTaiKhoan($role)
+    {
+        $query = "SELECT users.*, GROUP_CONCAT(vouchers.code SEPARATOR '\n \n ') AS vouchers FROM users JOIN user_vouchers ON users.id = user_vouchers.user_id 
+        JOIN vouchers ON user_vouchers.voucher_id = vouchers.voucher_id WHERE role= $role GROUP BY users.id";
+        $results = $this->pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
         return $results;
     }
-    public function getIdTK($id){
+    public function getIdTK($id)
+    {
         $query = "SELECT * FROM users WHERE id=$id";
         $results = $this->pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
         return $results;
     }
-    public function updateStatus($id, $status){
-        if(!in_array($status,[0,1])){
+    public function updateStatus($id, $status)
+    {
+        if (!in_array($status, [0, 1])) {
             return false;
         }
         $query = "UPDATE users SET  status='$status' WHERE id = $id";
         $this->pdo->exec($query);
     }
-    public function updateRole($id, $role){
-        if(!in_array($role,[1,2,3])){
+    public function updateRole($id, $role)
+    {
+        if (!in_array($role, [1, 2, 3])) {
             return false;
         }
         $query = "UPDATE users SET  role='$role' WHERE id = $id";

@@ -22,30 +22,37 @@ include '../include/header.php';
                     <th scope="col">Password</th>
                     <th scope="col">Ngày tạo</th>
                     <th scope="col">Ngày sửa</th>
+                    <th scope="col">Voucher</th>
                     <th scope="col">Vai trò</th>
                     <th scope="col" colspan="2">Trạng Thái</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($listTK as $listTK): ?>
+                <?php foreach ($listTK as $item): ?>
                     <tr>
-                        <td><?= $listTK['id'] ?></td>
-                        <td><?= $listTK['username'] ?></td>
-                        <td><?= $listTK['email'] ?></td>
-                        <td><?= $listTK['password'] ?></td>
-                        <td><?= $listTK['created_at'] ?></td>
-                        <td><?= $listTK['updated_at'] ?></td>
+                        <td><?= $item['id'] ?></td>
+                        <td><?= $item['username'] ?></td>
+                        <td><?= $item['email'] ?></td>
+                        <td><?= $item['password'] ?></td>
+                        <td><?= $item['created_at'] ?></td>
+                        <td><?= $item['updated_at'] ?></td>
                         <td>
-                            <select name="role[<?= $listTK['id'] ?>]" class="form-control">
-                                <option value="1" <?= $listTK['role'] == 1 ? 'selected' : '' ?>>ADMIN</option>
-                                <option value="2" <?= $listTK['role'] == 2 ? 'selected' : '' ?>>Nhân Viên</option>
-                                <option value="3" <?= $listTK['role'] == 3 ? 'selected' : '' ?>>Khách Hàng</option>
+                            <!-- In nhiều voucher nếu có -->
+                            <?php if (!empty($item['vouchers'])): ?>
+                                <p><?= nl2br($item['vouchers']) ?></p>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <select name="role[<?= $item['id'] ?>]" class="form-control">
+                                <option value="1" <?= $item['role'] == 1 ? 'selected' : '' ?>>ADMIN</option>
+                                <option value="2" <?= $item['role'] == 2 ? 'selected' : '' ?>>Nhân Viên</option>
+                                <option value="3" <?= $item['role'] == 3 ? 'selected' : '' ?>>Khách Hàng</option>
                             </select>
                         </td>
                         <td>
-                            <select name="status[<?= $listTK['id'] ?>]" class="form-control">
-                                <option value="1" <?= $listTK['status'] == 1 ? 'selected' : '' ?>>Active</option>
-                                <option value="0" <?= $listTK['status'] == 0 ? 'selected' : '' ?>>Inactive</option>
+                            <select name="status[<?= $item['id'] ?>]" class="form-control">
+                                <option value="1" <?= $item['status'] == 1 ? 'selected' : '' ?>>Active</option>
+                                <option value="0" <?= $item['status'] == 0 ? 'selected' : '' ?>>Inactive</option>
                             </select>
                         </td>
                         <td class="text-center align-middle">
