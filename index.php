@@ -26,6 +26,10 @@ switch ($act) {
 
         $productC->listProduct();
         break;
+    case "searchProduct":
+        $keyword = $_POST['search'] ?? '';
+        $productC->searchProduct($keyword);
+        break;
     case "addProduct":
 
         $productC->showFormCreate();
