@@ -11,8 +11,10 @@ $id = "";
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
 }
-$taiKhoan = new AccountController(); 
-$categoryC = new categoryController();
+$idVariant = "";
+if (isset($_GET["idVariant"])) {
+    $idVariant = $_GET["idVariant"];
+}
 $productC = new productController();
 switch ($act) {
     case "Trangchu":
@@ -43,34 +45,28 @@ switch ($act) {
         $productC->submitEdit($id);
         break;
     case "listProductVariant":
-
-        $productC->listProductVariant($id);
+   
+    $productC->listProductVariant($id);
+    break;
+    case "deleteVariant":
+   
+    $productC->deleteVariant($id,$idVariant);
+    break;
+    case "addVariant":
+   
+        $productC->showFormAddVariant($id);
         break;
-    case 'listDanhMuc':
-        $categoryC->listCategory();
+    case "submitAddProductVariant":
+   
+        $productC->addProductVariant($id);
         break;
-    case 'addCategory':
-        $categoryC->formCategory();
+    case "updateVariant":
+   
+        $productC->showFormEditVariant($id,$idVariant);
         break;
-    case 'submitAddCategory':
-        $categoryC->addCategory();
-        break;
-    case 'deleteCategory':
-        $id = $_GET['id'];
-        $categoryC->delete($id);
-        break;
-    case 'editCategory':
-        $id = $_GET['id'];
-        $categoryC->formEdit($id);
-        break;
-    case 'update':
-        $id = $_GET['id'];
-        $categoryC->update($id);
-        break;
-    case 'listTKNV':
-        $taiKhoan->listTKNV();
-        break;
-    case 'listTKC':
-        $taiKhoan->listTKC();
-        break;
+    case "submitEditProductVariant":
+   
+        $productC->submitEditVariant($id,$idVariant);
+       break;
+    
 }
