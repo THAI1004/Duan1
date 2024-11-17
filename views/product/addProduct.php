@@ -1,5 +1,5 @@
 
-<?php include $_SERVER['DOCUMENT_ROOT'] . '../include/header.php';?>
+<?php include './include/header.php';?>
 
 
 
@@ -153,6 +153,6 @@ if (!empty($thongBaoTC)) {
 </html>
 
 
-<?php include $_SERVER['DOCUMENT_ROOT'] . '../include/footer.php'; ?>
+<?php include './include/footer.php'; ?>
 
 
