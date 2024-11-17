@@ -17,6 +17,7 @@ if (!empty($thongBaoTC)) {
     <title>Thêm Banner</title>
 </head>
 
+
 <body>
 
     <h1>Trang thêm mới</h1>
