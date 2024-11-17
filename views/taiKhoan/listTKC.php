@@ -1,5 +1,5 @@
 <?php
-include './include/header.php';
+include '../include/header.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -174,6 +174,8 @@ include './include/header.php';
 </body>
 
 </html>
+
+
 <?php
 include './include/footer.php';
 ?>

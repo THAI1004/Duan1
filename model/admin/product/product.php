@@ -31,6 +31,11 @@ class productModel{
         $data=$this->pdo->query($sql)->fetch();
         return $data;
     }
+    public function searchProduct($keyword){
+        $sql = "SELECT * FROM products WHERE product_name LIKE '%$keyword%'";
+        $data=$this->pdo->query($sql)->fetchAll();
+        return $data;
+    }
     public function getColorById($id){
         $sql = "SELECT * FROM `product_colors` where id=$id";
         $data=$this->pdo->query($sql)->fetch();

@@ -1,6 +1,6 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT'] . '/Duan1/include/header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '../include/header.php';
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +21,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Duan1/include/header.php';
    
 <h1>Danh sách sản Phẩm</h1>
 <table class="table table-striped table-hover table-bordered table-sm text-center custom-table">
-<thead class="table-dark">
+<thead  class="table-dark">
     <tr>
         <th scope="col">STT</th>
         <th scope="col">Tên</th>
@@ -64,6 +64,6 @@ foreach($listProduct as $row){?>
 
 <?php
 
-include $_SERVER['DOCUMENT_ROOT'] . '/Duan1/include/footer.php';
+include $_SERVER['DOCUMENT_ROOT'] . '../include/footer.php';
 
 ?>
