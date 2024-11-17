@@ -1,5 +1,5 @@
 <?php
-    include $_SERVER['DOCUMENT_ROOT'] . '../include/header.php';
+    include './include/header.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,6 +46,6 @@
 </html>
 <?php
 
-include $_SERVER['DOCUMENT_ROOT'] . '../include/footer.php';
+include '../include/footer.php';
 
 ?>
