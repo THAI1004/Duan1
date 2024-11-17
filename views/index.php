@@ -1,6 +1,7 @@
 <?php
 
-include './include/header.php';
+
+include  './include/header.php';
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +18,9 @@ include './include/header.php';
 
 <?php
 
-include './include/footer.php';
+
+include  './include/footer.php';
+
+
 
 ?>
