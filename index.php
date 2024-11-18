@@ -15,6 +15,10 @@ $id = "";
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
 }
+if (isset($_GET["idVariant"])) {
+    $idVariant = $_GET["idVariant"];}
+$productC = new productController();
+// 3. Kiểm tra giá trị "act" và gọi xuống controller tương ứng
 $categoryC = new categoryController();
 $taiKhoan = new AccountController();
 $productC = new productController();
@@ -39,6 +43,33 @@ switch ($act) {
         break;
     case "submitEditProduct":
         $productC->submitEdit($id);
+        case "listProductVariant":
+   
+            $productC->listProductVariant($id);
+            break;
+    case "addVariant":
+        $productC->showFormAddVariant($id);
+        break;
+    case "submitAddProductVariant":
+        $productC->addProductVariant($id);
+        break;
+    case "updateVariant":
+        $productC->showFormEditVariant($id,$idVariant);
+        break;
+    case "submitEditProductVariant":
+        $productC->submitEditVariant($id,$idVariant);
+        break;
+    case "deleteVariant":
+        $productC->deleteVariant($id,$idVariant);
+        break;
+        case "searchProduct":
+            $keyword = $_POST['search'] ?? '';
+            $productC->searchProduct($keyword);
+            break;
+
+
+
+
 
     case "listReview":
         $review = new reviewController();

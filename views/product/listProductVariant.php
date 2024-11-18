@@ -1,6 +1,6 @@
 <?php
 
-include './include/header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Duan1/include/header.php';
 ?>
 
 <!DOCTYPE html>
@@ -271,6 +271,6 @@ include './include/header.php';
 
 <?php
 
-include './include/footer.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Duan1/include/footer.php';
 
 ?>
