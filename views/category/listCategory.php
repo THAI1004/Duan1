@@ -22,10 +22,12 @@ include './include/header.php';
             background-color: #f4f8fb;
             width: 100%;
         }
+
         .container {
             max-width: 1300px;
             margin: 0 auto;
         }
+
         h1 {
             color: #007bb5;
             margin-bottom: 20px;
@@ -33,6 +35,7 @@ include './include/header.php';
             font-size: 28px;
             text-align: left;
         }
+
         .table {
             width: 100%;
             border-collapse: collapse;
@@ -41,25 +44,32 @@ include './include/header.php';
             overflow: hidden;
             border-radius: 10px;
         }
-        .table th, .table td {
+
+        .table th,
+        .table td {
             padding: 14px 20px;
             text-align: center;
             border-bottom: 1px solid #ddd;
             font-size: 15px;
         }
+
         .table thead {
             background-color: #007bb5;
             color: #fff;
         }
+
         .table tbody tr:nth-child(even) {
             background-color: #e9f6fc;
         }
+
         .table tbody tr:nth-child(odd) {
             background-color: #fdfdfd;
         }
+
         .table tbody tr:hover {
             background-color: #d1efff;
         }
+
         .btn {
             padding: 8px 16px;
             border: none;
@@ -68,27 +78,44 @@ include './include/header.php';
             text-decoration: none;
             transition: background-color 0.3s ease;
         }
+
         .btn-danger {
             background-color: #ff4d4d;
         }
+
         .btn-secondary {
             background-color: #6c757d;
         }
+
         .btn-primary {
             background-color: #28a745;
         }
+
         .btn:hover {
             opacity: 0.85;
+        }
+
+        .table img {
+            width: 150px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
         }
     </style>
 </head>
 
 <body>
+    <div class="container">
+        <h1>Danh sách danh mục</h1>
+
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">STT</th>
                     <th scope="col">Tên</th>
+                    <th scope="col">Logo</th>
                     <th scope="col">Mô tả</th>
                     <th scope="col">Ngày tạo</th>
                     <th scope="col">Ngày cập nhật</th>
@@ -100,6 +127,7 @@ include './include/header.php';
                     <tr>
                         <td><?= $listcategory['id'] ?></td>
                         <td><?= $listcategory['category_name'] ?></td>
+                        <td><img src="./images/category/<?= $listcategory['image_category'] ?>" alt=""></td>
                         <td><?= $listcategory['description'] ?></td>
                         <td><?= $listcategory['created_at'] ?></td>
                         <td><?= $listcategory['updated_at'] ?></td>
