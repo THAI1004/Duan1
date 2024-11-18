@@ -1,11 +1,13 @@
 <?php
-// 1. Nhúng các file cần thiết
+include "./controller/product.php";
+include "./controller/category.php";
+include "./controller/taiKhoan.php";
+include_once "./model/admin/taiKhoan/taiKhoan.php";
 include_once "./model/admin/product/product.php";
 include_once "./model/admin/category/category.php";
 include_once "./model/admin/review/review.php";
 include_once "./model/admin/slider/slider.php";
 include_once "./controller/product.php";
-include_once "./controller/admin/category/category.php";
 include_once "./controller/review.php";
 include_once "./controller/slider.php";
 $act = $_GET['act'] ?? 'Trangchu';
@@ -17,32 +19,29 @@ if (isset($_GET["idVariant"])) {
     $idVariant = $_GET["idVariant"];}
 $productC = new productController();
 // 3. Kiểm tra giá trị "act" và gọi xuống controller tương ứng
+$categoryC = new categoryController();
+$taiKhoan = new AccountController();
+$productC = new productController();
 switch ($act) {
     case "Trangchu":
         include './views/index.php';
         break;
     case "listProduct":
-   
         $productC->listProduct();
         break;
     case "addProduct":
-     
         $productC->showFormCreate();
         break;
     case "submitAddProduct":
-       
         $productC->addProduct();
         break;
     case "deleteProduct":
-       
         $productC->delete($id);
         break;
     case "editProduct":
-        
         $productC->showFormEdit($id);
         break;
     case "submitEditProduct":
-    
         $productC->submitEdit($id);
         case "listProductVariant":
    
@@ -94,18 +93,45 @@ switch ($act) {
         $slider->addSlider();
         break;
 
-        case "editSlider":
-            // Gọi xuống controller để xử lý logic và hiển thị file view
-            $slider = new sliderController();
-            $slider->showFormEdit($id);
-            break;
-        case "submitEditSlider":
-            // Gọi xuống controller để xử lý logic và hiển thị file view
-            $slider = new sliderController();
-            $slider->submitEdit($id);
-            case "deleteSlider":
-                // Gọi xuống controller để xử lý logic và hiển thị file view
-                $review = new sliderController();
-                $review->delete($id);
-                break;
+    case "editSlider":
+        // Gọi xuống controller để xử lý logic và hiển thị file view
+        $slider = new sliderController();
+        $slider->showFormEdit($id);
+        break;
+    case "submitEditSlider":
+        // Gọi xuống controller để xử lý logic và hiển thị file view
+        $slider = new sliderController();
+        $slider->submitEdit($id);
+    case "deleteSlider":
+        // Gọi xuống controller để xử lý logic và hiển thị file view
+        $review = new sliderController();
+        $review->delete($id);
+        break;
+    case 'listDanhMuc':
+        $categoryC->listCategory();
+        break;
+    case 'addCategory':
+        $categoryC->formCategory();
+        break;
+    case 'submitAddCategory':
+        $categoryC->addCategory();
+        break;
+    case 'deleteCategory':
+        $id = $_GET['id'];
+        $categoryC->delete($id);
+        break;
+    case 'editCategory':
+        $id = $_GET['id'];
+        $categoryC->formEdit($id);
+        break;
+    case 'update':
+        $id = $_GET['id'];
+        $categoryC->update($id);
+        break;
+    case 'listTKNV':
+        $taiKhoan->listTKNV();
+        break;
+    case 'listTKC':
+        $taiKhoan->listTKC();
+        break;
 }
