@@ -3,8 +3,8 @@
 <?php
 if (!empty($thongBaoTC)) {
     echo "<script>
-        if (confirm('Bạn đã thêm sản phẩm thành công. Nhấn OK để quay lại danh sách sản phẩm.')) {
-            window.location.href = '?act=listSlider'; // Chuyển hướng đến trang danh sách sản phẩm
+        if (confirm('Bạn đã thêm ảnh thành công. Nhấn OK để quay lại danh sách banner.')) {
+            window.location.href = '?act=listSlider'; // Chuyển hướng đến trang danh sách banner
         }
     </script>";
 }
