@@ -84,9 +84,6 @@ include './include/header.php';
 </head>
 
 <body>
-    <div class="container">
-        <h1>Danh sách danh mục</h1>
-        
         <table class="table">
             <thead>
                 <tr>
