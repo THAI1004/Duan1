@@ -137,7 +137,7 @@ if (!empty($thongBaoTC)) {
             <!-- Link -->
             <div class="form-group">
                 <label for="link">Link ảnh:</label>
-                <input type="text" id="link" name="link"
+                <input type="text" id="link" name="link" 
                     value="<?= isset($_POST['link']) ? htmlspecialchars($_POST['link']) : '' ?>" required>
                 <?php if (!empty($thongBaoLoilink)): ?>
                     <div class="alert alert-danger"><?= htmlspecialchars($thongBaoLoilink) ?></div>
