@@ -13,40 +13,64 @@ $id = "";
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
 }
+if (isset($_GET["idVariant"])) {
+    $idVariant = $_GET["idVariant"];}
+$productC = new productController();
 // 3. Kiểm tra giá trị "act" và gọi xuống controller tương ứng
 switch ($act) {
     case "Trangchu":
         include './views/index.php';
         break;
     case "listProduct":
-        // Gọi xuống controller để xử lý logic và hiển thị file view
-        $productC = new productController();
+   
         $productC->listProduct();
         break;
     case "addProduct":
-        // Gọi xuống controller để xử lý logic và hiển thị file view
-        $productC = new productController();
+     
         $productC->showFormCreate();
         break;
     case "submitAddProduct":
-        // Gọi xuống controller để xử lý logic và hiển thị file view
-        $productC = new productController();
+       
         $productC->addProduct();
         break;
     case "deleteProduct":
-        // Gọi xuống controller để xử lý logic và hiển thị file view
-        $productC = new productController();
+       
         $productC->delete($id);
         break;
     case "editProduct":
-        // Gọi xuống controller để xử lý logic và hiển thị file view
-        $productC = new productController();
+        
         $productC->showFormEdit($id);
         break;
     case "submitEditProduct":
-        // Gọi xuống controller để xử lý logic và hiển thị file view
-        $productC = new productController();
+    
         $productC->submitEdit($id);
+        case "listProductVariant":
+   
+            $productC->listProductVariant($id);
+            break;
+    case "addVariant":
+        $productC->showFormAddVariant($id);
+        break;
+    case "submitAddProductVariant":
+        $productC->addProductVariant($id);
+        break;
+    case "updateVariant":
+        $productC->showFormEditVariant($id,$idVariant);
+        break;
+    case "submitEditProductVariant":
+        $productC->submitEditVariant($id,$idVariant);
+        break;
+    case "deleteVariant":
+        $productC->deleteVariant($id,$idVariant);
+        break;
+        case "searchProduct":
+            $keyword = $_POST['search'] ?? '';
+            $productC->searchProduct($keyword);
+            break;
+
+
+
+
 
     case "listReview":
         $review = new reviewController();

@@ -130,4 +130,4 @@
 </body>
 </html>
 
-<?php include $_SERVER['DOCUMENT_ROOT'] . '../include/footer.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/Duan1/include/footer.php'; ?>
