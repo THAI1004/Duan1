@@ -1,5 +1,5 @@
 
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/Duan1/include/header.php';
+<?php include './include/header.php';
 if (!empty($thongBaoTC)) {
     echo "<script>
         if (confirm('Bạn đã thêm sản phẩm thành công. Nhấn OK để quay lại danh sách sản phẩm.')) {
@@ -155,6 +155,6 @@ if (!empty($thongBaoTC)) {
 </html>
 
 
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/Duan1/include/footer.php'; ?>
+<?php include './include/footer.php'; ?>
 
 
