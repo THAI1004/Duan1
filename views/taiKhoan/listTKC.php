@@ -53,7 +53,7 @@ include './include/header.php';
 
         .table th,
         .table td {
-            padding: 12px;
+            padding: 6px;
             text-align: center;
             border-bottom: 1px solid #ddd;
             font-size: 16px;

@@ -1,6 +1,6 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT'] . '/Duan1/include/header.php';
+include './include/header.php';
 ?>
 
 <!DOCTYPE html>
@@ -194,6 +194,6 @@ foreach($listProduct as $row){?>
 
 <?php
 
-include $_SERVER['DOCUMENT_ROOT'] . '/Duan1/include/footer.php';
+include './include/footer.php';
 
 ?>

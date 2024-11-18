@@ -43,6 +43,7 @@ switch ($act) {
         break;
     case "submitEditProduct":
         $productC->submitEdit($id);
+        break;
         case "listProductVariant":
    
             $productC->listProductVariant($id);
