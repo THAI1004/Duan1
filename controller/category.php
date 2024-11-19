@@ -16,11 +16,13 @@ class categoryController{
     public function addCategory(){
         if(isset($_POST['submitAddCategory'])){
             $name= $_POST['category_name'];
+            $image_category= $_FILES['image_category']['name'];
+            move_uploaded_file($_FILES['image_category']['tmp_name'],'./images/category/'.$image_category);
             $description = $_POST['description'];
             date_default_timezone_set('Asia/Ho_Chi_Minh');
             $created_at = date('Y-m-d H:i:s');  
             $updated_at = date('Y-m-d H:i:s');
-            $this->categoryModel->insertCategories($name,$description,$created_at,$updated_at);
+            $this->categoryModel->insertCategories($name,$image_category,$description,$created_at,$updated_at);
             header('location:?act=listDanhMuc');
         }
     }
@@ -35,8 +37,14 @@ class categoryController{
     public function update($id){
         if(isset($_POST['update'])){
             $name =$_POST['category_name'];
+            $image_category = $_FILES['image_category']['name'];
+            if(!empty($image_category)){
+                move_uploaded_file($_FILES['image_category']['tmp_name'],'./images/category/'.$image_category);
+            }else{
+                $image_category = null;
+            }
             $description = $_POST['description'];
-            $this->categoryModel->updateDM($id,$name,$description);
+            $this->categoryModel->updateDM($id,$name,$image_category,$description);
             header('location:?act=listDanhMuc');
         }
     }

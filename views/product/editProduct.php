@@ -1,4 +1,12 @@
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/Duan1/include/header.php'; ?>
+<?php include './include/header.php';
+
+if (!empty($thongBaoTC)) {
+  echo "<script>
+      if (confirm('Bạn đã sửa sản phẩm thành công. Nhấn OK để quay lại danh sách sản phẩm.')) {
+          window.location.href = '?act=listProduct'; // Chuyển hướng đến trang danh sách sản phẩm
+      }
+  </script>";}
+?>
 
 
 <!DOCTYPE html>
@@ -131,4 +139,4 @@
 </body>
 </html>
 
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/Duan1/include/footer.php'; ?>
+<?php include './include/footer.php'; ?>
