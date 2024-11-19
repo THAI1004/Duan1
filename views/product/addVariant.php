@@ -2,7 +2,7 @@
 <?php include './include/header.php';
 if (!empty($thongBaoTC)) {
     echo "<script>
-        if (confirm('Bạn đã thêm sản phẩm thành công. Nhấn OK để quay lại danh sách sản phẩm.')) {
+        if (confirm('Bạn đã thêm biến thể thành công. Nhấn OK để quay lại danh sách sản phẩm.')) {
             window.location.href = '?act=listProductVariant&id=$product_id'; // Chuyển hướng đến trang danh sách sản phẩm
         }
     </script>";

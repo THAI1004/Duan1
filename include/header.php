@@ -113,7 +113,7 @@
                         </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">
-                        <a  href="javascript:void()" aria-expanded="false">
+                        <a  href="?act=listOrder" aria-expanded="false">
                         <i class="fa-solid fa-cart-shopping"></i><span class="nav-text">Quản lý đơn hàng</span>
                         </a>
                     </li>
