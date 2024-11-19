@@ -31,6 +31,14 @@ class categoryModel{
         $query ="UPDATE categories SET category_name='$name',description='$description',image_category='$image_category' WHERE id=$id";
         $this->pdo->exec($query);
     }
+    public function thongKe(){
+        $sql=" SELECT categories.*, COUNT(products.category_id ) AS 'number_cate' 
+                FROM products 
+                INNER JOIN categories ON products.category_id  = categories.id  
+                GROUP BY products.category_id ;";
+                $data=$this->pdo->query($sql)->fetchALl();
+                return $data;
+    }
 }
 
 ?>
