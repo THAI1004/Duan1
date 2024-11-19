@@ -12,6 +12,7 @@ include_once "./controller/product.php";
 include_once "./controller/review.php";
 include_once "./controller/slider.php";
 include_once "./controller/oder.php";
+include_once "./controller/home.php";
 $act = $_GET['act'] ?? 'Trangchu';
 $id = "";
 if (isset($_GET["id"])) {
@@ -25,9 +26,10 @@ $categoryC = new categoryController();
 $taiKhoan = new AccountController();
 $productC = new productController();
 $oder=new oderController();
+$home=new homeController();
 switch ($act) {
     case "Trangchu":
-        include './views/index.php';
+        $home->home();
         break;
     case "listProduct":
         $productC->listProduct();

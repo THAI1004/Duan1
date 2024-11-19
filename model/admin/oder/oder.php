@@ -57,6 +57,15 @@ class oderModel{
     $data=$this->pdo->query($sql)->fetch();
     return $data;
 }
+    public function getThongKe(){
+        $sql="SELECT DATE(created_at) AS order_day, COUNT(*) AS total_orders
+FROM orders
+GROUP BY DATE(created_at)
+ORDER BY order_day;
+";
+$data=$this->pdo->query($sql)->fetchAll();
+    return $data;
+    }
 }
 
 ?>
