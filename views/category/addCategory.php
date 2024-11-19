@@ -96,10 +96,14 @@ include './include/header.php';
             </div>
         <?php endif; ?>
 
-        <form action="?act=submitAddCategory" method="post">
+        <form action="?act=submitAddCategory" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="category_name" class="form-label">Tên Danh Mục:</label>
                 <input type="text" class="form-control" id="category_name" name="category_name" required>
+            </div>
+            <div class="mb-3">
+                <label for="image_category" class="form-label">Logo:</label>
+                <input type="file" class="form-control" id="image_category" name="image_category" required>
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Mô tả:</label>

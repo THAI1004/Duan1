@@ -29,7 +29,7 @@ include './include/header.php';
             width: 90%;
             max-width: 1200px;
             margin: 0;
-            padding: 20px;
+            padding: 20px 20px 20px 0px;
         }
 
         h1 {
