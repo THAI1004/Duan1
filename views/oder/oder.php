@@ -26,97 +26,100 @@ include './include/header.php';
         }
 
         .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0;
-            padding: 20px;
-        }
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    overflow-x: hidden; /* Không tạo thanh cuộn ngang */
+}
 
-        h1 {
-            color: #007bb5;
-            margin-bottom: 30px;
-            font-weight: 700;
-            font-size: 36px;
-            text-align: left;
-        }
+.table {
+    width: 100%;
+    /* table-layout: fixed; Cố định độ rộng cột để tránh tràn */
+    border-collapse: collapse;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 12px;
+    font-size: 14px;
+    overflow: hidden;
+}
 
-        .table {
-            width: 100%;
-            table-layout: auto;
-            border-collapse: collapse;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-            border-radius: 12px;
-            font-size: 16px;
-            overflow: hidden;
-        }
+.table th, .table td {
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    height: 60px;
+    padding: 5px;
+    vertical-align: middle;
+    overflow: hidden;
+}
 
-        .table th,
-        .table td {
-            /* padding: 6px; */
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-            font-size: 16px;
-            height: 70px;
-            vertical-align: middle;
-            white-space: nowrap;
-            word-wrap: break-word;
-        }
+.table thead {
+    background-color: #007bb5;
+    color: #fff;
+}
 
-        .table thead {
-            background-color: #007bb5;
-            color: #fff;
-        }
+.table tbody tr:nth-child(even) {
+    background-color: #e9f6fc;
+}
 
-        .table tbody tr:nth-child(even) {
-            background-color: #e9f6fc;
-        }
+.table tbody tr:nth-child(odd) {
+    background-color: #fdfdfd;
+}
 
-        .table tbody tr:nth-child(odd) {
-            background-color: #fdfdfd;
-        }
+.table tbody tr:hover {
+    background-color: #d1efff;
+}
 
-        .table tbody tr:hover {
-            background-color: #d1efff;
-        }
+select.form-control {
+    width: 100%;
+    min-width: 100px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #fff;
+}
 
-        select.form-control {
-            width: 100%;
-            min-width: 150px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-            background-color: #fff;
-            box-sizing: border-box;
-            text-align: left;
-            white-space: nowrap;
-            overflow: hidden;
-        }
+select.form-control option {
+    padding: 8px;
+}
 
-        select.form-control option {
-            padding: 10px;
-            white-space: nowrap;
-        }
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%; /* Đảm bảo nút chiếm toàn bộ chiều rộng */
+    margin-bottom: 5px; /* Khoảng cách giữa hai nút */
+}
 
-        .btn {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 5px;
-            color: #fff;
-            text-decoration: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-size: 16px;
-        }
+.btn-primary {
+    background-color: #28a745;
+}
 
-        .btn-primary {
-            background-color: #28a745;
-        }
+.btn-primary:hover {
+    background-color: #218838;
+}
 
-        .btn-primary:hover {
-            background-color: #218838;
-        }
+.btn-info {
+    background-color: #17a2b8;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+}
+
+.table td .text-center {
+    display: flex;
+    flex-direction: column; /* Đặt các nút theo chiều dọc */
+    gap: 5px; /* Khoảng cách giữa các nút */
+    align-items: center;
+}
+
     </style>
 </head>
 
@@ -131,7 +134,7 @@ include './include/header.php';
                         <th>Tên người đặt</th>
                         <th>Email</th>
                         <th>SĐT</th>
-                        <th>ĐỊa chỉ</th>
+                        <th>Địa chỉ</th>
                         <th>Trạng thái TT</th>
                         <th>Trạng thái giao hàng</th>
                         <th>Tổng tiền</th>
