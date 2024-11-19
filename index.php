@@ -7,9 +7,12 @@ include_once "./model/admin/product/product.php";
 include_once "./model/admin/category/category.php";
 include_once "./model/admin/review/review.php";
 include_once "./model/admin/slider/slider.php";
+include_once "./model/admin/oder/oder.php";
 include_once "./controller/product.php";
 include_once "./controller/review.php";
 include_once "./controller/slider.php";
+include_once "./controller/oder.php";
+include_once "./controller/home.php";
 $act = $_GET['act'] ?? 'Trangchu';
 $id = "";
 if (isset($_GET["id"])) {
@@ -22,9 +25,11 @@ $productC = new productController();
 $categoryC = new categoryController();
 $taiKhoan = new AccountController();
 $productC = new productController();
+$oder=new oderController();
+$home=new homeController();
 switch ($act) {
     case "Trangchu":
-        include './views/index.php';
+        $home->home();
         break;
     case "listProduct":
         $productC->listProduct();
@@ -44,10 +49,9 @@ switch ($act) {
     case "submitEditProduct":
         $productC->submitEdit($id);
         break;
-        case "listProductVariant":
-   
-            $productC->listProductVariant($id);
-            break;
+    case "listProductVariant":
+        $productC->listProductVariant($id);
+         break;
     case "addVariant":
         $productC->showFormAddVariant($id);
         break;
@@ -63,37 +67,28 @@ switch ($act) {
     case "deleteVariant":
         $productC->deleteVariant($id,$idVariant);
         break;
-        case "searchProduct":
-            $keyword = $_POST['search'] ?? '';
-            $productC->searchProduct($keyword);
-            break;
-
-
-
-
-
+    case "searchProduct":
+        $keyword = $_POST['search'] ?? '';
+        $productC->searchProduct($keyword);
+        break;
     case "listReview":
         $review = new reviewController();
         $review->listReview();
         break;
-
     case "deleteReview":
         // Gọi xuống controller để xử lý logic và hiển thị file view
         $review = new reviewController();
         $review->delete($id);
         break;
-
     case "listSlider":
         $slider = new sliderController();
         $slider->listSlider();
         break;
-
     case "addSlider":
         // Gọi xuống controller để xử lý logic và hiển thị file view
         $slider = new sliderController();
         $slider->addSlider();
         break;
-
     case "editSlider":
         // Gọi xuống controller để xử lý logic và hiển thị file view
         $slider = new sliderController();
@@ -133,6 +128,12 @@ switch ($act) {
         $taiKhoan->listTKNV();
         break;
     case 'listTKC':
-        $taiKhoan->listTKC();
+        $taiKhoan->listTKC($id);
         break;
+    case 'listOrder':
+        $oder->listOrder();
+        break;
+    case 'chitietorder':
+        $oder->chitietOrder($id);
+        break;    
 }
