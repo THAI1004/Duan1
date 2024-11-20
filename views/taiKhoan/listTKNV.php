@@ -133,7 +133,6 @@ include './include/header.php';
                         <th scope="col">Password</th>
                         <th scope="col">Ngày tạo</th>
                         <th scope="col">Ngày sửa</th>
-                        <th scope="col">Vai trò</th>
                         <th scope="col" colspan="2">Trạng Thái</th>
                     </tr>
                 </thead>
@@ -146,13 +145,6 @@ include './include/header.php';
                             <td><?= $listTK['password'] ?></td>
                             <td><?= $listTK['created_at'] ?></td>
                             <td><?= $listTK['updated_at'] ?></td>
-                            <td>
-                                <select name="role[<?= $listTK['id'] ?>]" class="form-control">
-                                    <option value="1" <?= $listTK['role'] == 1 ? 'selected' : '' ?>>ADMIN</option>
-                                    <option value="2" <?= $listTK['role'] == 2 ? 'selected' : '' ?>>Nhân Viên</option>
-                                    <option value="3" <?= $listTK['role'] == 3 ? 'selected' : '' ?>>Khách Hàng</option>
-                                </select>
-                            </td>
                             <td>
                                 <select name="status[<?= $listTK['id'] ?>]" class="form-control">
                                     <option value="1" <?= $listTK['status'] == 1 ? 'selected' : '' ?>>Active</option>
