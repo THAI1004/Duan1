@@ -19,7 +19,7 @@ include './include/header.php';
     .custom-table th, .custom-table td {
         vertical-align: middle; /* Căn giữa theo chiều dọc */
         font-weight: bold; /* Chữ đậm */
-        padding: 10px; /* Thêm khoảng cách */
+        padding: 10px; 
     }
     .custom-table th {
         background-color: #007bb5; /* Màu nền xanh đậm cho tiêu đề */

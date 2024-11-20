@@ -216,7 +216,7 @@ include './include/header.php';
                                     <span class="new-price">Giá: <?=$Product['price']?></span>
                                     <span class="old-price"><?= $Product['discount_price']?></span>
                                 </div>
-                                <p>Mô tả: 100% cotton double printed dress. Black and white striped top and orange high waisted skater skirt bottom.</p>
+                                <p>Mô tả: <?= $Product["description"]?></p>
                             </div>
                         </div>
                     </div>
