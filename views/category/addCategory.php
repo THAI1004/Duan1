@@ -14,7 +14,6 @@ include './include/header.php';
             font-family: 'Poppins', sans-serif;
             background-color: #f8f9fa;
             color: #333;
-            margin-top: 30px;
         }
 
         h1 {
