@@ -342,7 +342,9 @@ include "./include/headerClient.php"
                     <div class="col-12">
                         <div class="product-carousel-4_2 slick-row-10 slick-arrow-style">
                             <!-- product item start -->
-                             <?php foreach($productLimit20 as $row){?>
+                             <?php  foreach($productLimit20 as $row){
+                                $discountPercentage = (($row["price"] - $row["discount_price"]) / $row["price"]) * 100;
+                                ?>
                             <div class="product-item">
                                 <figure class="product-thumb">
                                     <a href="product-details.html">
@@ -354,7 +356,12 @@ include "./include/headerClient.php"
                                             <span>new</span>
                                         </div>
                                         <div class="product-label discount">
-                                            <span>10%</span>
+                                        <span>
+    <script>
+        var discountPercentage = <?= $discountPercentage ?>;
+        document.write(Math.round(discountPercentage) + "%");
+    </script>    
+</span>
                                         </div>
                                     </div>
                                     <div class="button-group">
