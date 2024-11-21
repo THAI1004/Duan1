@@ -141,14 +141,18 @@ switch ($act) {
     case 'chitietorder':
         $oder->chitietOrder($id);
         break;   
-        
-        
-
     case "homeClient":
-        $client->HomeClient();
+        $client->HomeClient($id);
         break;
     case "login":
-        $client->showForm();
+        $client->formLogin();
         break;
-        
+    case "blog":
+        $client->includeClient();
+        $client->blog($id);
+        break;
+    case "homeBlog":
+        $client->includeClient();
+        $client->homeBlog();
+        break;
 }

@@ -65,7 +65,7 @@
                                     <!-- main menu navbar start -->
                                     <nav class="desktop-menu">
                                         <ul>
-                                            <li class="active"><a href="index.html">Home</a>
+                                            <li class="active"><a href="?act=homeClient">Home</a>
                                             </li>
                                             <li class="position-static"><a href="#">Sneaker <i class="fa fa-angle-down"></i></a>
                                                 <ul class="megamenu dropdown">
@@ -116,9 +116,9 @@
                                                     </li>
                                                 </ul>
                                             </li>
-                                            <li><a href="blog-left-sidebar.html">Blog <i class="fa fa-angle-down"></i></a>
+                                            <li><a href="?act=homeBlog">Blog <i class="fa fa-angle-down"></i></a>
                                                 <ul class="dropdown">
-                                                    <?php foreach($listBlog as $row){?>
+                                                    <?php foreach($listBlogs as $row){?>
                                                     <li><a href="?act=blog&id=<?= $row["id"]?>"><?= $row["title"]?></a></li>
                                                     <?php }?>
                                                 </ul>

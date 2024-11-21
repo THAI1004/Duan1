@@ -10,12 +10,6 @@ class AccountController
     public function listTKNV()
     {
         if (isset($_POST['save_status'])) {
-            if (isset($_POST['role'])) {
-                var_dump($_POST['role']);
-                foreach ($_POST['role'] as $id => $role) {
-                    $this->modelTaiKhoan->updateRole($id, $role);
-                }
-            }
             if (isset($_POST['status'])) {
                 foreach ($_POST['status'] as $id => $status) {
                     $this->modelTaiKhoan->updateStatus($id, $status);

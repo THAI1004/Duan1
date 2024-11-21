@@ -28,10 +28,27 @@
             $projectInfor=$this->projectInforModel->getAllProjectInfor();
             // var_dump($listProduct);
             $productLimit20=$this->productModel->getProductLimit20();
-            $listBlog=$this->blogModel->getAllBlog();
+            $listBlogs=$this->blogModel->getAllBlog();
             $listSlider=$this->slideModel->getAllSlider();
            
             require "./views/client/index.php";
+            
+        }
+        public function formLogin(){
+            include "./views/client/login.php";
+        }
+        public function blog($id){
+            $listBlog=$this->blogModel->getBlogById($id);
+            include "./views/client/blog_detail.php";
+        }
+        public function includeClient(){
+            $listCate=$this->categoryModel->getAllCategory();
+            $listBlogs=$this->blogModel->getAllBlog();
+            include "./include/headerClient.php";
+        }
+        public function homeBlog(){
+            $listBlogs=$this->blogModel->getAllBlog();
+            include "./views/client/homeBlog.php";
         }
         
     }

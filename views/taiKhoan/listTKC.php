@@ -134,7 +134,6 @@ include './include/header.php';
                         <th>Ngày tạo</th>
                         <th>Ngày sửa</th>
                         <th>Voucher</th>
-                        <th>Vai trò</th>
                         <th>Trạng Thái</th>
                         <th>Thao tác</th>
                     </tr>
@@ -149,13 +148,6 @@ include './include/header.php';
                             <td><?= $item['created_at'] ?></td>
                             <td><?= $item['updated_at'] ?></td>
                             <td><?= !empty($item['vouchers']) ? nl2br($item['vouchers']) : 'Không có voucher' ?></td>
-                            <td>
-                                <select name="role[<?= $item['id'] ?>]" class="form-control">
-                                    <option value="1" <?= $item['role'] == 1 ? 'selected' : '' ?>>ADMIN</option>
-                                    <option value="2" <?= $item['role'] == 2 ? 'selected' : '' ?>>Nhân Viên</option>
-                                    <option value="3" <?= $item['role'] == 3 ? 'selected' : '' ?>>Khách Hàng</option>
-                                </select>
-                            </td>
                             <td>
                                 <select name="status[<?= $item['id'] ?>]" class="form-control">
                                     <option value="1" <?= $item['status'] == 1 ? 'selected' : '' ?>>Active</option>
