@@ -31,12 +31,5 @@ class AccountModel
         $query = "UPDATE users SET  status='$status' WHERE id = $id";
         $this->pdo->exec($query);
     }
-    public function updateRole($id, $role)
-    {
-        if (!in_array($role, [1, 2, 3])) {
-            return false;
-        }
-        $query = "UPDATE users SET  role='$role' WHERE id = $id";
-        $this->pdo->exec($query);
-    }
+    
 }

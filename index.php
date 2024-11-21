@@ -8,11 +8,14 @@ include_once "./model/admin/category/category.php";
 include_once "./model/admin/review/review.php";
 include_once "./model/admin/slider/slider.php";
 include_once "./model/admin/oder/oder.php";
+include_once "./model/admin/blog/blog.php";
 include_once "./controller/product.php";
 include_once "./controller/review.php";
 include_once "./controller/slider.php";
 include_once "./controller/oder.php";
 include_once "./controller/home.php";
+include_once "./controller/ClientController.php";
+
 $act = $_GET['act'] ?? 'Trangchu';
 $id = "";
 if (isset($_GET["id"])) {
@@ -27,6 +30,7 @@ $taiKhoan = new AccountController();
 $productC = new productController();
 $oder=new oderController();
 $home=new homeController();
+$client=new clientController();
 switch ($act) {
     case "Trangchu":
         $home->home();
@@ -135,5 +139,19 @@ switch ($act) {
         break;
     case 'chitietorder':
         $oder->chitietOrder($id);
-        break;    
+        break;   
+    case "homeClient":
+        $client->HomeClient($id);
+        break;
+    case "login":
+        $client->formLogin();
+        break;
+    case "blog":
+        $client->includeClient();
+        $client->blog($id);
+        break;
+    case "homeBlog":
+        $client->includeClient();
+        $client->homeBlog();
+        break;
 }
