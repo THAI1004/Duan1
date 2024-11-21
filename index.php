@@ -9,6 +9,7 @@ include_once "./model/admin/review/review.php";
 include_once "./model/admin/slider/slider.php";
 include_once "./model/admin/oder/oder.php";
 include_once "./model/admin/blog/blog.php";
+include_once "./model/admin/projectInfo/projectInfo.php";
 include_once "./controller/product.php";
 include_once "./controller/review.php";
 include_once "./controller/slider.php";
@@ -145,6 +146,9 @@ switch ($act) {
 
     case "homeClient":
         $client->HomeClient();
+        break;
+    case "login":
+        $client->showForm();
         break;
         
 }
