@@ -28,7 +28,7 @@
             $projectInfor=$this->projectInforModel->getAllProjectInfor();
             // var_dump($listProduct);
             $productLimit20=$this->productModel->getProductLimit20();
-            $listBlog=$this->blogModel->getAllBlog();
+            $listBlogs=$this->blogModel->getAllBlog();
             $listSlider=$this->slideModel->getAllSlider();
            
             require "./views/client/index.php";
