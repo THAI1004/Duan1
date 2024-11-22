@@ -41,7 +41,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach($wishlist as $row){?>
+                                        <?php if(isset($wishlist)){ foreach($wishlist as $row){?>
                                         <tr>
                                             <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="<?= $row["product_image"]?>" alt="Product" /></a></td>
                                             <td class="pro-title"><a href="#"><?= $row["product_name"]?></a></td>
@@ -51,7 +51,7 @@
                                                     Cart</a></td>
                                             <td class="pro-remove"><a href="?act=deleteWishlist&id=<?=$row["product_id"]?>"><i class="fa fa-trash-o"></i></a></td>
                                         </tr>
-                                        <?php }?>
+                                        <?php }}?>
                                     </tbody>
                                 </table>
                             </div>

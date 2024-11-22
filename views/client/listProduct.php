@@ -31,25 +31,41 @@
     <link rel="stylesheet" href="./corano/assets/css/plugins/jqueryui.min.css">
     <!-- main style css -->
     <link rel="stylesheet" href="./corano/assets/css/style.css">
-
+    <style>
+        .product-item .product-thumb img {
+            width: 200px;
+            height: 200px;
+            /* Đảm bảo ảnh không bị méo */
+        }
+        .product-item .product-thumb {
+            display: flex;
+            justify-content: center;
+            /* Căn giữa theo chiều ngang */
+            align-items: center;
+            /* Căn giữa theo chiều dọc */
+            height: 200px;
+            /* Đặt chiều cao cụ thể cho phần tử chứa nếu cần */
+        }
+    </style>
 </head>
+
 <body>
-        <div class="breadcrumb-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="breadcrumb-wrap">
-                            <nav aria-label="breadcrumb">
-                                <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Sneaker </li>
-                                </ul>
-                            </nav>
-                        </div>
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-wrap">
+                        <nav aria-label="breadcrumb">
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Sneaker </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     <!-- breadcrumb area end -->
 
     <!-- page main wrapper start -->
@@ -183,60 +199,61 @@
 
                 <!-- shop main wrapper start -->
                 <div class="col-lg-9 order-1 order-lg-2">
-                        <div class="shop-product-wrapper">
-                            <!-- shop product top wrap start -->
-                            <div class="shop-top-bar">
-                                <div class="row align-items-center">
-                                    <div class="col-lg-7 col-md-6 order-2 order-md-1">
-                                        <div class="top-bar-left">
-                                            <div class="product-view-mode">
-                                                <a class="active" href="#" data-target="grid-view" data-bs-toggle="tooltip" title="Grid View"><i class="fa fa-th"></i></a>
-                                                <a href="#" data-target="list-view" data-bs-toggle="tooltip" title="List View"><i class="fa fa-list"></i></a>
-                                            </div>
-                                            <div class="product-amount">
-                                                <p>Showing 1–16 of 21 results</p>
-                                            </div>
+                    <div class="shop-product-wrapper">
+                        <!-- shop product top wrap start -->
+                        <div class="shop-top-bar">
+                            <div class="row align-items-center">
+                                <div class="col-lg-7 col-md-6 order-2 order-md-1">
+                                    <div class="top-bar-left">
+                                        <div class="product-view-mode">
+                                            <a class="active" href="#" data-target="grid-view" data-bs-toggle="tooltip" title="Grid View"><i class="fa fa-th"></i></a>
+                                            <a href="#" data-target="list-view" data-bs-toggle="tooltip" title="List View"><i class="fa fa-list"></i></a>
+                                        </div>
+                                        <div class="product-amount">
+                                            <p>Showing 1–16 of 21 results</p>
                                         </div>
                                     </div>
-                                    <div class="col-lg-5 col-md-6 order-1 order-md-2">
-                                        <div class="top-bar-right">
-                                            <div class="product-short">
-                                                <p>Sort By : </p>
-                                                <select class="nice-select" name="sortby">
-                                                    <option value="trending">Relevance</option>
-                                                    <option value="sales">Name (A - Z)</option>
-                                                    <option value="sales">Name (Z - A)</option>
-                                                    <option value="rating">Price (Low &gt; High)</option>
-                                                    <option value="date">Rating (Lowest)</option>
-                                                    <option value="price-asc">Model (A - Z)</option>
-                                                    <option value="price-asc">Model (Z - A)</option>
-                                                </select>
-                                            </div>
+                                </div>
+                                <div class="col-lg-5 col-md-6 order-1 order-md-2">
+                                    <div class="top-bar-right">
+                                        <div class="product-short">
+                                            <p>Sort By : </p>
+                                            <select class="nice-select" name="sortby">
+                                                <option value="trending">Relevance</option>
+                                                <option value="sales">Name (A - Z)</option>
+                                                <option value="sales">Name (Z - A)</option>
+                                                <option value="rating">Price (Low &gt; High)</option>
+                                                <option value="date">Rating (Lowest)</option>
+                                                <option value="price-asc">Model (A - Z)</option>
+                                                <option value="price-asc">Model (Z - A)</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- shop product top wrap start -->
+                        </div>
+                        <!-- shop product top wrap start -->
 
-                            <!-- product item list wrapper start -->
-                            <div class="shop-product-wrap grid-view row mbn-30">
-                                <!-- product single item start -->
-                                <?php foreach($listProduct as $listProduct): ?>
+                        <!-- product item list wrapper start -->
+                        <div class="shop-product-wrap grid-view row mbn-30">
+                            <!-- product single item start -->
+                            <?php foreach ($listProduct as $product): ?>
+                                <?php $discountPercentage = (($product["price"] - $product["discount_price"]) / $product["price"]) * 100 ?>
                                 <div class="col-md-4 col-sm-6">
                                     <!-- product grid start -->
-                                     
+
                                     <div class="product-item">
                                         <figure class="product-thumb">
                                             <a href="product-details.html">
-                                                <img class="pri-img" src="<?= $listProduct['image'] ?>" alt="product">
-                                                <img class="sec-img" src="<?= $listProduct['image'] ?>" alt="product">
+                                                <img class="pri-img" src="<?= $product['image'] ?>" alt="product">
+                                                <img class="sec-img" src="<?= $product['image'] ?>" alt="product">
                                             </a>
                                             <div class="product-badge">
                                                 <div class="product-label new">
                                                     <span>new</span>
                                                 </div>
                                                 <div class="product-label discount">
-                                                    <span>10%</span>
+                                                    <span><?= $discountPercentage ?> %</span>
                                                 </div>
                                             </div>
                                             <div class="button-group">
@@ -250,11 +267,11 @@
                                         </figure>
                                         <div class="product-caption text-center">
                                             <h6 class="product-name">
-                                                <a href="product-details.html"><?= $listProduct['product_name'] ?></a>
+                                                <a href="product-details.html"><?= $product['product_name'] ?></a>
                                             </h6>
                                             <div class="price-box">
-                                                <span class="price-regular"><?= $listProduct['discount_price'] ?></span>
-                                                <span class="price-old"><del><?= $listProduct['price'] ?></del></span>
+                                                <span class="price-regular"><?= $product['discount_price'] ?></span>
+                                                <span class="price-old"><del><?= $product['price'] ?></del></span>
                                             </div>
                                         </div>
                                     </div>
@@ -264,15 +281,15 @@
                                     <div class="product-list-item">
                                         <figure class="product-thumb">
                                             <a href="product-details.html">
-                                                <img class="pri-img" src="<?= $listProduct['image'] ?>" alt="product">
-                                                <img class="sec-img" src="<?= $listProduct['image'] ?>" alt="product">
+                                                <img class="pri-img" src="<?= $product['image'] ?>" alt="product">
+                                                <img class="sec-img" src="<?= $product['image'] ?>" alt="product">
                                             </a>
                                             <div class="product-badge">
                                                 <div class="product-label new">
                                                     <span>new</span>
                                                 </div>
                                                 <div class="product-label discount">
-                                                    <span>10%</span>
+                                                    <span><?= $discountPercentage = (($product["price"] - $product["discount_price"]) / $product["price"]) * 100; ?></span>
                                                 </div>
                                             </div>
                                             <div class="button-group">
@@ -285,37 +302,37 @@
                                             </div>
                                         </figure>
                                         <div class="product-content-list">
-                                            <h5 class="product-name"><a href="product-details.html"><?= $listProduct['product_name'] ?></a></h5>
+                                            <h5 class="product-name"><a href="product-details.html"><?= $product['product_name'] ?></a></h5>
                                             <div class="price-box">
-                                                <span class="price-regular"><?= $listProduct['discount_price'] ?></span>
-                                                <span class="price-old"><del><?= $listProduct['price'] ?></del></span>
+                                                <span class="price-regular"><?= $product['discount_price'] ?></span>
+                                                <span class="price-old"><del><?= $product['price'] ?></del></span>
                                             </div>
-                                            <p><?= $listProduct['description'] ?></p>
+                                            <p><?= $product['description'] ?></p>
                                         </div>
                                     </div>
                                     <!-- product list item end -->
                                 </div>
-                                <?php endforeach ?>
-                            </div>
-                            <!-- product item list wrapper end -->
-
-                            <!-- start pagination area -->
-                            <div class="paginatoin-area text-center">
-                                <ul class="pagination-box">
-                                    <li><a class="previous" href="#"><i class="pe-7s-angle-left"></i></a></li>
-                                    <li class="active"><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a class="next" href="#"><i class="pe-7s-angle-right"></i></a></li>
-                                </ul>
-                            </div>
-                            <!-- end pagination area -->
+                            <?php endforeach ?>
                         </div>
+                        <!-- product item list wrapper end -->
+
+                        <!-- start pagination area -->
+                        <div class="paginatoin-area text-center">
+                            <ul class="pagination-box">
+                                <li><a class="previous" href="#"><i class="pe-7s-angle-left"></i></a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a class="next" href="#"><i class="pe-7s-angle-right"></i></a></li>
+                            </ul>
+                        </div>
+                        <!-- end pagination area -->
                     </div>
+                </div>
             </div>
         </div>
     </div>
-    
+
     <!-- offcanvas mini cart end -->
 
     <!-- JS
