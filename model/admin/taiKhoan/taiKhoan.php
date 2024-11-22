@@ -31,5 +31,10 @@ class AccountModel
         $query = "UPDATE users SET  status='$status' WHERE id = $id";
         $this->pdo->exec($query);
     }
+    public function getAccount($username,$password){
+        $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+        $results = $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
+    }
     
 }

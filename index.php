@@ -1,5 +1,4 @@
 <?php
-session_start();
 include "./controller/product.php";
 include "./controller/category.php";
 include "./controller/taiKhoan.php";
@@ -19,7 +18,7 @@ include_once "./controller/oder.php";
 include_once "./controller/home.php";
 include_once "./controller/ClientController.php";
 
-$act = $_GET['act'] ?? 'Trangchu';
+$act = $_GET['act'] ?? 'homeClient';
 $id = "";
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
@@ -146,7 +145,7 @@ switch ($act) {
     case "homeClient":
         $client->HomeClient($id);
         break;
-    case "login":
+    case "formLogin":
         $client->formLogin();
         break;
     case "blog":
@@ -157,6 +156,18 @@ switch ($act) {
         $client->includeClient();
         $client->homeBlog();
         break;
+    case "listProductByCate":
+        $client->includeClient();
+        $client->ProductByCategory($id);
+        break;
+    case "login":
+        $client->login();
+        break;
+    case "logout":
+        $client->logout();
+        break;
+    case "singup":
+        $client->singup();
     case "gioiThieu":
         $client->includeClient();
         $client->GioiThieu();
