@@ -146,8 +146,8 @@ switch ($act) {
         $client->HomeClient($id);
         break;
     case "formLogin":
-        $client->formLogin();
         $client->includeClient();
+        $client->formLogin();
         break;
     case "blog":
         $client->includeClient();
@@ -167,8 +167,9 @@ switch ($act) {
     case "logout":
         $client->logout();
         break;
-    // case "singup":
-    //     $client->singup();
+    case "singup":
+        $client->singup();
+        break;
     case "gioiThieu":
         $client->includeClient();
         $client->GioiThieu();

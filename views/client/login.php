@@ -1,6 +1,3 @@
-<?php
-include "./include/headerClient.php"
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -77,6 +74,17 @@ include "./include/headerClient.php"
                     <div class="col-lg-6">
                         <div class="login-reg-form-wrap sign-up-form">
                             <h5>Singup Form</h5>
+                            <?php
+                            if (isset($_SESSION['message'])) {
+                                // Tách loại thông báo và nội dung
+                                list($type, $message) = explode('|', $_SESSION['message']);
+                                unset($_SESSION['message']); // Xóa thông báo sau khi hiển thị
+
+                                echo "<script>
+        alert('$message');
+        </script>";
+                            }
+                            ?>
                             <form action="?act=singup" method="post">
                                 <div class="single-input-item">
                                     <input name="username" type="text" placeholder="Enter your Username" required />

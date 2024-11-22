@@ -153,6 +153,9 @@
                                                 <li><a href="?act=logout">logout</a></li>
                                                 <li><a href="login-register.html">Update Account</a></li>
                                                 <li><a href="my-account.html">my account</a></li>
+                                                <?php if(isset($user['role']) && $user['role'] == 1){ ?>
+                                                    <li><a href="?act=Trangchu">Login Admin</a></li>
+                                                    <?php } ?>
                                             <?php } else { ?>
                                                 <li><a href="?act=formLogin">login and register</a></li>
                                             <?php } ?>
@@ -161,7 +164,9 @@
                                     <li>
                                             <a href="?act=wishlist">
                                                 <i class="pe-7s-like"></i>
-                                                <div class="notification"><?=$wishlist?></div>
+                                                <div class="notification"><?php if(isset($wishlist)){?>
+                                                    <?php $wishlist ?>
+                                                <?php } ?></div>
                                             </a>
                                         </li>
                                     <li>
