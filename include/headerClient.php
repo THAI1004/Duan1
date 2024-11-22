@@ -172,6 +172,90 @@
                                         </a>
                                     </li>
                                 </ul>
+                        <!-- main menu area start -->
+                        <div class="col-lg-6 position-static">
+                            <div class="main-menu-area">
+                                <div class="main-menu">
+                                    <!-- main menu navbar start -->
+                                    <nav class="desktop-menu">
+                                        <ul>
+                                            <li class="active"><a href="?act=homeClient">Trang chủ</a>
+                                            </li>
+                                            <li class="position-static"><a href="#">Sneaker<i class="fa fa-angle-down"></i></a>
+                                                <ul class="megamenu dropdown">
+                                                    <li class="mega-title">
+                                                        <ul>
+                                                        <?php 
+                                                            $count = 0;
+                                                            foreach($listCate as $row){ 
+                                                                if ($count % 4 == 0 && $count != 0) {
+                                                                    echo '</ul></li><li class="mega-title"><ul>'; // Đóng và mở cột mới sau mỗi 4 category
+                                                                }
+                                                            ?>
+                                                                <li><a href="?act=listProductByCate&id=<?= $row['id'] ?>"><?= $row['category_name'] ?></a></li>
+                        
+                                                            <?php 
+                                                                $count++; 
+                                                            } 
+                                                            ?>
+                                                        </ul>
+                                                    </li>
+                                                    
+                                                </ul>
+                                            </li>
+                                            <li><a href="?act=gioiThieu">Giới thiệu</a>
+                                            <li><a href="?act=homeBlog">Tin tức <i class="fa fa-angle-down"></i></a>
+                                                <ul class="dropdown">
+                                                    <?php foreach($listBlogs as $row){?>
+                                                    <li><a href="?act=blog&id=<?= $row["id"]?>"><?= $row["title"]?></a></li>
+                                                    <?php }?>
+                                                </ul>
+                                            </li>
+                                            <li><a href="contact-us.html">Liên hệ</a></li>
+                                        </ul>
+                                    </nav>
+                                    <!-- main menu navbar end -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- main menu area end -->
+
+                        <!-- mini cart area start -->
+                        <div class="col-lg-4">
+                            <div class="header-right d-flex align-items-center justify-content-xl-between justify-content-lg-end">
+                                <div class="header-search-container">
+                                    <button class="search-trigger d-xl-none d-lg-block"><i class="pe-7s-search"></i></button>
+                                    <form class="header-search-box d-lg-none d-xl-block">
+                                        <input type="text" placeholder="Nhập tên sản phẩm ..." class="header-search-field">
+                                        <button class="header-search-btn"><i class="pe-7s-search"></i></button>
+                                    </form>
+                                </div>
+                                <div class="header-configure-area">
+                                    <ul class="nav justify-content-end">
+                                        <li class="user-hover">
+                                            <a href="#">
+                                                <i class="pe-7s-user"></i>
+                                            </a>
+                                            <ul class="dropdown-list">
+                                                <li><a href="?act=login">login</a></li>
+                                                <li><a href="?act=login">register</a></li>
+                                                <li><a href="my-account.html">my account</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="?act=wishlist">
+                                                <i class="pe-7s-like"></i>
+                                                <div class="notification"><?=$wishlist?></div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="minicart-btn">
+                                                <i class="pe-7s-shopbag"></i>
+                                                <div class="notification"></div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
