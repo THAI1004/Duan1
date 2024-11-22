@@ -1,3 +1,6 @@
+<?php
+include "./include/headerClient.php";
+?>
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -448,7 +451,7 @@
                     <div class="col-12">
                         <div class="blog-carousel-active slick-row-10 slick-arrow-style">
                             <!-- blog post item start -->
-                             <?php foreach($listBlog as $row){?>
+                             <?php foreach($listBlogs as $row){?>
                             <div class="blog-post-item">
                                 <figure class="blog-thumb">
                                     <a href="?act=blog&id=<?= $row["id"]?>">
