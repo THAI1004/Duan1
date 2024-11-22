@@ -36,6 +36,9 @@ $home=new homeController();
 $client=new clientController();
 switch ($act) {
     case "Trangchu":
+        $client->HomeClient();
+        break;
+    case "Admin":
         $home->home();
         break;
     case "listProduct":
