@@ -1,5 +1,4 @@
 <?php
-session_start();
 include "./controller/product.php";
 include "./controller/category.php";
 include "./controller/taiKhoan.php";

@@ -97,6 +97,7 @@ session_start();
             $listCate=$this->categoryModel->getAllCategory();
             $listProductById=$this->productModel->getProductByCategoryId($id);
             include "./views/client/productByCategory.php";
+        }
         public function gioiThieu(){
             include "./views/client/gioiThieu.php";
         }
@@ -147,5 +148,4 @@ session_start();
     
     
 }
-
 ?>
