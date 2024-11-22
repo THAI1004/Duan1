@@ -67,7 +67,7 @@
                                     <ul>
                                         <li class="active"><a href="?act=homeClient">Home</a>
                                         </li>
-                                        <li class="position-static"><a href="#">Sneaker <i class="fa fa-angle-down"></i></a>
+                                        <li class="position-static"><a href="?act=listProductClient">Sneaker <i class="fa fa-angle-down"></i></a>
                                             <ul class="megamenu dropdown">
                                                 <li class="mega-title">
                                                     <ul>
@@ -150,7 +150,6 @@
                                         </a>
                                         <ul class="dropdown-list">
                                             <?php if (isset($_SESSION['username'])) { ?>
-                                                
                                                 <li><a href="?act=logout">logout</a></li>
                                                 <li><a href="login-register.html">Update Account</a></li>
                                                 <li><a href="my-account.html">my account</a></li>
