@@ -197,7 +197,11 @@ LIMIT 20;
             echo "<hr>";
         }
     }
-
+    public function getProductByCategoryId($category_id){
+        $sql = "SELECT * FROM products WHERE category_id = $category_id";
+        $data = $this->pdo->query($sql)->fetchAll();
+        return $data;
+    }
 }
 
 ?>

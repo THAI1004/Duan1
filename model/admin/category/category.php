@@ -1,20 +1,23 @@
 <?php
-class categoryModel{
+class categoryModel
+{
     public $pdo;
     public function __construct()
     {
-        $this->pdo=connect();
+        $this->pdo = connect();
     }
     public function __destruct()
     {
-        $this->pdo=null;
+        $this->pdo = null;
     }
-    public function getAllCategory(){
+    public function getAllCategory()
+    {
         $sql = "SELECT * FROM `categories`";
-        $data=$this->pdo->query($sql)->fetchAll();
+        $data = $this->pdo->query($sql)->fetchAll();
         return $data;
     }
-    public function getCategoryTop(){
+    public function getCategoryTop()
+    {
         $sql = "SELECT categories.id, categories.category_name, categories.image_category, COUNT(products.id) AS product_count
 FROM categories 
 LEFT JOIN products  ON categories.id = products.category_id
@@ -22,10 +25,11 @@ GROUP BY categories.id, categories.category_name, categories.image_category
 ORDER BY product_count DESC
 LIMIT 4;
 ";
-        $data=$this->pdo->query($sql)->fetchAll();
+        $data = $this->pdo->query($sql)->fetchAll();
         return $data;
     }
-    public function getCategoryTopOrder(){
+    public function getCategoryTopOrder()
+    {
         $sql = "SELECT products.*, products.product_name, categories.category_name, SUM(order_items.quantity) AS total_sold
 FROM categories 
 JOIN products ON categories.id = products.category_id
@@ -47,35 +51,38 @@ ORDER BY total_sold DESC;
 
 
 ";
-        $data=$this->pdo->query($sql)->fetchAll();
+        $data = $this->pdo->query($sql)->fetchAll();
         return $data;
     }
-    public function insertCategories($name,$image_category,$description,$created_at,$updated_at){
-        $query ="INSERT INTO categories(category_name,image_category,description,created_at,updated_at) VALUES ('$name','$image_category','$description','$created_at','$updated_at')";
+    public function insertCategories($name, $image_category, $description, $created_at, $updated_at)
+    {
+        $query = "INSERT INTO categories(category_name,image_category,description,created_at,updated_at) VALUES ('$name','$image_category','$description','$created_at','$updated_at')";
         $this->pdo->exec($query);
     }
-    public function deletec($id){
+    public function deletec($id)
+    {
         $query = "DELETE FROM categories WHERE id=$id";
         $this->pdo->exec($query);
     }
-    public function getIdDM($id){
+    public function getIdDM($id)
+    {
         $query = "SELECT * FROM categories WHERE id=$id";
         $results = $this->pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
         return $results;
     }
-    public function updateDM($id,$name,$image_category,$description){
-        $query ="UPDATE categories SET category_name='$name',description='$description',image_category='$image_category' WHERE id=$id";
+    public function updateDM($id, $name, $image_category, $description)
+    {
+        $query = "UPDATE categories SET category_name='$name',description='$description',image_category='$image_category' WHERE id=$id";
         $this->pdo->exec($query);
     }
-    public function thongKe(){
-        $sql=" SELECT categories.*, COUNT(products.category_id ) AS 'number_cate' 
+    public function thongKe()
+    {
+        $sql = " SELECT categories.*, COUNT(products.category_id ) AS 'number_cate' 
                 FROM products 
                 INNER JOIN categories ON products.category_id  = categories.id  
                 GROUP BY products.category_id ;";
-                $data=$this->pdo->query($sql)->fetchALl();
-                return $data;
+        $data = $this->pdo->query($sql)->fetchALl();
+        return $data;
     }
-
+    
 }
-
-?>
