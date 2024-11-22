@@ -1,9 +1,11 @@
 <?php
+session_start();
 include "./controller/product.php";
 include "./controller/category.php";
 include "./controller/taiKhoan.php";
 include_once "./model/admin/taiKhoan/taiKhoan.php";
 include_once "./model/admin/product/product.php";
+include_once "./model/admin/product/wishlist.php";
 include_once "./model/admin/category/category.php";
 include_once "./model/admin/review/review.php";
 include_once "./model/admin/slider/slider.php";
@@ -154,5 +156,19 @@ switch ($act) {
     case "homeBlog":
         $client->includeClient();
         $client->homeBlog();
+        break;
+    case "gioiThieu":
+        $client->includeClient();
+        $client->GioiThieu();
+        break;
+    case "addWishlist":
+        $client->addWishlist($id);
+        break;
+    case "wishlist":
+        $client->includeClient();
+        $client->listWishlist();
+        break;
+    case "deleteWishlist":
+        $client->deleteWishlist($id);
         break;
 }

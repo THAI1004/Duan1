@@ -65,9 +65,9 @@
                                     <!-- main menu navbar start -->
                                     <nav class="desktop-menu">
                                         <ul>
-                                            <li class="active"><a href="?act=homeClient">Home</a>
+                                            <li class="active"><a href="?act=homeClient">Trang chủ</a>
                                             </li>
-                                            <li class="position-static"><a href="#">Sneaker <i class="fa fa-angle-down"></i></a>
+                                            <li class="position-static"><a href="#">Sneaker<i class="fa fa-angle-down"></i></a>
                                                 <ul class="megamenu dropdown">
                                                     <li class="mega-title">
                                                         <ul>
@@ -89,41 +89,15 @@
                                                     
                                                 </ul>
                                             </li>
-                                            <li><a href="shop.html">shop<i class="fa fa-angle-down"></i></a>
-                                                <ul class="dropdown">
-                                                    <li><a href="#">shop grid layout <i class="fa fa-angle-right"></i></a>
-                                                        <ul class="dropdown">
-                                                            <li><a href="shop.html">shop grid left sidebar</a></li>
-                                                            <li><a href="shop-grid-right-sidebar.html">shop grid right sidebar</a></li>
-                                                            <li><a href="shop-grid-full-3-col.html">shop grid full 3 col</a></li>
-                                                            <li><a href="shop-grid-full-4-col.html">shop grid full 4 col</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="#">shop list layout <i class="fa fa-angle-right"></i></a>
-                                                        <ul class="dropdown">
-                                                            <li><a href="shop-list-left-sidebar.html">shop list left sidebar</a></li>
-                                                            <li><a href="shop-list-right-sidebar.html">shop list right sidebar</a></li>
-                                                            <li><a href="shop-list-full-width.html">shop list full width</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="#">products details <i class="fa fa-angle-right"></i></a>
-                                                        <ul class="dropdown">
-                                                            <li><a href="product-details.html">product details</a></li>
-                                                            <li><a href="product-details-affiliate.html">product details affiliate</a></li>
-                                                            <li><a href="product-details-variable.html">product details variable</a></li>
-                                                            <li><a href="product-details-group.html">product details group</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="?act=homeBlog">Blog <i class="fa fa-angle-down"></i></a>
+                                            <li><a href="?act=gioiThieu">Giới thiệu</a>
+                                            <li><a href="?act=homeBlog">Tin tức <i class="fa fa-angle-down"></i></a>
                                                 <ul class="dropdown">
                                                     <?php foreach($listBlogs as $row){?>
                                                     <li><a href="?act=blog&id=<?= $row["id"]?>"><?= $row["title"]?></a></li>
                                                     <?php }?>
                                                 </ul>
                                             </li>
-                                            <li><a href="contact-us.html">Contact us</a></li>
+                                            <li><a href="contact-us.html">Liên hệ</a></li>
                                         </ul>
                                     </nav>
                                     <!-- main menu navbar end -->
@@ -138,7 +112,7 @@
                                 <div class="header-search-container">
                                     <button class="search-trigger d-xl-none d-lg-block"><i class="pe-7s-search"></i></button>
                                     <form class="header-search-box d-lg-none d-xl-block">
-                                        <input type="text" placeholder="Search entire store hire" class="header-search-field">
+                                        <input type="text" placeholder="Nhập tên sản phẩm ..." class="header-search-field">
                                         <button class="header-search-btn"><i class="pe-7s-search"></i></button>
                                     </form>
                                 </div>
@@ -149,21 +123,21 @@
                                                 <i class="pe-7s-user"></i>
                                             </a>
                                             <ul class="dropdown-list">
-                                                <li><a href="login-register.html">login</a></li>
-                                                <li><a href="login-register.html">register</a></li>
+                                                <li><a href="?act=login">login</a></li>
+                                                <li><a href="?act=login">register</a></li>
                                                 <li><a href="my-account.html">my account</a></li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="wishlist.html">
+                                            <a href="?act=wishlist">
                                                 <i class="pe-7s-like"></i>
-                                                <div class="notification">0</div>
+                                                <div class="notification"><?=$wishlist?></div>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#" class="minicart-btn">
                                                 <i class="pe-7s-shopbag"></i>
-                                                <div class="notification">2</div>
+                                                <div class="notification"></div>
                                             </a>
                                         </li>
                                     </ul>
