@@ -7,7 +7,6 @@
         public $slideModel;
         public $reviewModel;
         public $blogModel;
-        
         public function __construct()
         {
             $this->productModel=new productModel();
