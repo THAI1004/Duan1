@@ -147,6 +147,7 @@ switch ($act) {
         break;
     case "formLogin":
         $client->formLogin();
+        $client->includeClient();
         break;
     case "blog":
         $client->includeClient();
@@ -166,8 +167,8 @@ switch ($act) {
     case "logout":
         $client->logout();
         break;
-    case "singup":
-        $client->singup();
+    // case "singup":
+    //     $client->singup();
     case "gioiThieu":
         $client->includeClient();
         $client->GioiThieu();
@@ -181,5 +182,9 @@ switch ($act) {
         break;
     case "deleteWishlist":
         $client->deleteWishlist($id);
+        break;
+    case "listProductClient":
+        $client->includeClient();
+        $client->listProduct();
         break;
 }
