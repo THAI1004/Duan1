@@ -14,6 +14,11 @@ class blogModel{
         $data=$this->pdo->query($sql)->fetchAll();
         return $data;
     }
+    public function getBlogById($id){
+        $sql="SELECT * FROM `blogs` WHERE id=$id";
+        $data=$this->pdo->query($sql)->fetchAll();
+        return $data;
+    }
 }
 
 ?>

@@ -9,6 +9,7 @@ include_once "./model/admin/review/review.php";
 include_once "./model/admin/slider/slider.php";
 include_once "./model/admin/oder/oder.php";
 include_once "./model/admin/blog/blog.php";
+include_once "./model/admin/projectInfo/projectInfo.php";
 include_once "./controller/product.php";
 include_once "./controller/review.php";
 include_once "./controller/slider.php";
@@ -140,11 +141,18 @@ switch ($act) {
     case 'chitietorder':
         $oder->chitietOrder($id);
         break;   
-        
-        
-
     case "homeClient":
-        $client->HomeClient();
+        $client->HomeClient($id);
         break;
-        
+    case "login":
+        $client->formLogin();
+        break;
+    case "blog":
+        $client->includeClient();
+        $client->blog($id);
+        break;
+    case "homeBlog":
+        $client->includeClient();
+        $client->homeBlog();
+        break;
 }
