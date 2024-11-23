@@ -11,25 +11,22 @@ class productModel
     {
         $this->pdo = null;
     }
-
-    public function getAllProduct()
-    {
+ 
+    public function getProductLimit20 (){
+            $sql = "SELECT * 
+            FROM products 
+            ORDER BY created_at DESC 
+            LIMIT 20;
+            ";
+        $data=$this->pdo->query($sql)->fetchAll();
+        return $data;
+    }
+    public function getAllProduct(){
         $sql = "SELECT * FROM `products`";
-        $data = $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $data=$this->pdo->query($sql)->fetchAll();
         return $data;
-    }
-    public function getProductLimit20()
-    {
-        $sql = "SELECT * 
-FROM products 
-ORDER BY created_at DESC 
-LIMIT 20;
-";
-        $data = $this->pdo->query($sql)->fetchAll();
-        return $data;
-    }
-    public function getAllColor()
-    {
+    } 
+    public function getAllColor(){
         $sql = "SELECT * FROM `product_colors`";
         $data = $this->pdo->query($sql)->fetchAll();
         return $data;

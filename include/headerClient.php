@@ -1,3 +1,8 @@
+<?php
+ob_start(); // Bắt đầu output buffer
+// Nội dung của bạn
+?>
+
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -51,7 +56,7 @@
                     <!-- start logo area -->
                     <div class="col-lg-2">
                         <div class="logo">
-                            <a href="index.html">
+                            <a href="?act=Trangchu">
                                 <img src="./corano/assets/img/logo/logo.png" alt="Brand Logo">
                             </a>
                         </div>
@@ -89,32 +94,8 @@
 
                                             </ul>
                                         </li>
-                                        <li><a href="shop.html">shop<i class="fa fa-angle-down"></i></a>
-                                            <ul class="dropdown">
-                                                <li><a href="#">shop grid layout <i class="fa fa-angle-right"></i></a>
-                                                    <ul class="dropdown">
-                                                        <li><a href="shop.html">shop grid left sidebar</a></li>
-                                                        <li><a href="shop-grid-right-sidebar.html">shop grid right sidebar</a></li>
-                                                        <li><a href="shop-grid-full-3-col.html">shop grid full 3 col</a></li>
-                                                        <li><a href="shop-grid-full-4-col.html">shop grid full 4 col</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="#">shop list layout <i class="fa fa-angle-right"></i></a>
-                                                    <ul class="dropdown">
-                                                        <li><a href="shop-list-left-sidebar.html">shop list left sidebar</a></li>
-                                                        <li><a href="shop-list-right-sidebar.html">shop list right sidebar</a></li>
-                                                        <li><a href="shop-list-full-width.html">shop list full width</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="#">products details <i class="fa fa-angle-right"></i></a>
-                                                    <ul class="dropdown">
-                                                        <li><a href="product-details.html">product details</a></li>
-                                                        <li><a href="product-details-affiliate.html">product details affiliate</a></li>
-                                                        <li><a href="product-details-variable.html">product details variable</a></li>
-                                                        <li><a href="product-details-group.html">product details group</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
+                                        <li><a href="?act=gioiThieu">Giới thiệu</a>
+                                            
                                         </li>
                                         <li><a href="?act=homeBlog">Blog <i class="fa fa-angle-down"></i></a>
                                             <ul class="dropdown">
@@ -137,8 +118,8 @@
                         <div class="header-right d-flex align-items-center justify-content-xl-between justify-content-lg-end">
                             <div class="header-search-container">
                                 <button class="search-trigger d-xl-none d-lg-block"><i class="pe-7s-search"></i></button>
-                                <form class="header-search-box d-lg-none d-xl-block">
-                                    <input type="text" placeholder="Search entire store hire" class="header-search-field">
+                                <form action="?act=searchProductClient" method="post" class="header-search-box d-lg-none d-xl-block">
+                                    <input type="search" name="search" value="<?= isset($_POST['search']) ? htmlspecialchars($_POST['search']) : '' ?>" placeholder="Tên sản phẩm ..." class="header-search-field">
                                     <button class="header-search-btn"><i class="pe-7s-search"></i></button>
                                 </form>
                             </div>
@@ -162,12 +143,13 @@
                                         </ul>
                                     </li>
                                     <li>
-                                            <a href="?act=wishlist">
-                                                <i class="pe-7s-like"></i>
-                                                <div class="notification"><?php if(isset($wishlist)){?>
-                                                    <?php $wishlist ?>
-                                                <?php } ?></div>
-                                            </a>
+                                    <a href="?act=wishlist">
+                                        <i class="pe-7s-like"></i>
+                                        <div class="notification">
+                                            <?php echo isset($_SESSION["user_id"]) ? $wishlist : 0;?>
+                                        </div>
+                                    </a>
+
                                         </li>
                                     <li>
                                         <a href="#" class="minicart-btn">
@@ -395,3 +377,6 @@
     <!-- offcanvas mobile menu end -->
 </header>
 <!-- end Header Area -->
+<?php
+ob_end_flush(); // Kết thúc output buffer và gửi ra trình duyệt
+?>

@@ -10,6 +10,7 @@ include_once "./model/admin/review/review.php";
 include_once "./model/admin/slider/slider.php";
 include_once "./model/admin/oder/oder.php";
 include_once "./model/admin/blog/blog.php";
+include_once "./model/admin/cart/cart.php";
 include_once "./model/admin/projectInfo/projectInfo.php";
 include_once "./controller/product.php";
 include_once "./controller/review.php";
@@ -25,6 +26,8 @@ if (isset($_GET["id"])) {
 }
 if (isset($_GET["idVariant"])) {
     $idVariant = $_GET["idVariant"];}
+if (isset($_GET["page"])) {
+    $page = $_GET["page"];}
 $productC = new productController();
 // 3. Kiểm tra giá trị "act" và gọi xuống controller tương ứng
 $categoryC = new categoryController();
@@ -35,6 +38,9 @@ $home=new homeController();
 $client=new clientController();
 switch ($act) {
     case "Trangchu":
+        $client->HomeClient();
+        break;
+    case "Admin":
         $home->home();
         break;
     case "listProduct":
@@ -76,6 +82,12 @@ switch ($act) {
     case "searchProduct":
         $keyword = $_POST['search'] ?? '';
         $productC->searchProduct($keyword);
+        break;
+    case "searchProductClient":
+        $keyword = $_POST['search'] ?? '';
+        $client->includeClient();
+
+        $client->searchProductClient($keyword);
         break;
     case "listReview":
         $review = new reviewController();
@@ -162,7 +174,9 @@ switch ($act) {
         $client->ProductByCategory($id);
         break;
     case "login":
+        $client->includeClient();
         $client->login();
+        
         break;
     case "logout":
         $client->logout();
@@ -184,6 +198,18 @@ switch ($act) {
     case "deleteWishlist":
         $client->deleteWishlist($id);
         break;
+    case "deleteCart":
+        $client->deleteCart($id);
+        break;
+    case "viewCart":
+        $client->includeClient();
+        $client->viewCart();
+        break;
+    case "updateCart":
+        $client->updateCart();
+        break;
+    case "updateCartVoucher":
+        $client->updateCartVoucher();
     case "listProductClient":
         $client->includeClient();
         $client->listProduct();
