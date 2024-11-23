@@ -221,4 +221,12 @@ switch ($act) {
         break;
         
     
+    case "myAccount":
+        $client->includeClient();
+        $client->myAccount();
+        break;
+    case "changeAccount":
+        $client->includeClient();
+        $client->updateAccount();
+        break;
 }

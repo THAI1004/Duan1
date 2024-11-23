@@ -24,7 +24,7 @@ ob_start(); // Bắt đầu output buffer
     <!-- google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,900" rel="stylesheet">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="./corano//assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="./corano/assets/css/vendor/bootstrap.min.css">
     <!-- Pe-icon-7-stroke CSS -->
     <link rel="stylesheet" href="./corano/assets/css/vendor/pe-icon-7-stroke.css">
     <!-- Font-awesome CSS -->
@@ -132,10 +132,9 @@ ob_start(); // Bắt đầu output buffer
                                         <ul class="dropdown-list">
                                             <?php if (isset($_SESSION['username'])) { ?>
                                                 <li><a href="?act=logout">logout</a></li>
-                                                <li><a href="login-register.html">Update Account</a></li>
-                                                <li><a href="my-account.html">my account</a></li>
+                                                <li><a href="?act=myAccount">my account</a></li>
                                                 <?php if(isset($user['role']) && $user['role'] == 1){ ?>
-                                                    <li><a href="?act=Trangchu">Login Admin</a></li>
+                                                    <li><a href="?act=Admin">Login Admin</a></li>
                                                     <?php } ?>
                                             <?php } else { ?>
                                                 <li><a href="?act=formLogin">login and register</a></li>

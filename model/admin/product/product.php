@@ -6,27 +6,31 @@ class productModel
     public function __construct()
     {
         $this->pdo = connect();
+        $this->pdo = connect();
     }
     public function __destruct()
     {
         $this->pdo = null;
+        $this->pdo = null;
     }
- 
-    public function getProductLimit20 (){
-            $sql = "SELECT * 
-            FROM products 
-            ORDER BY created_at DESC 
-            LIMIT 20;
-            ";
-        $data=$this->pdo->query($sql)->fetchAll();
+
+    public function getAllProduct()
+    {
+        $sql = "SELECT * 
+FROM products 
+ORDER BY created_at DESC 
+LIMIT 20;
+";
+        $data = $this->pdo->query($sql)->fetchAll();
         return $data;
     }
-    public function getAllProduct(){
+    public function getProductLimit20(){
         $sql = "SELECT * FROM `products`";
-        $data=$this->pdo->query($sql)->fetchAll();
+        $data = $this->pdo->query($sql)->fetchAll();
         return $data;
-    } 
-    public function getAllColor(){
+    }
+    public function getAllColor()
+    {
         $sql = "SELECT * FROM `product_colors`";
         $data = $this->pdo->query($sql)->fetchAll();
         return $data;
@@ -40,7 +44,7 @@ class productModel
     public function getProductById($id)
     {
         $sql = "SELECT * FROM `products` where id=$id";
-        $data = $this->pdo->query($sql)->fetch();
+        $data=$this->pdo->query($sql)->fetch();
         return $data;
     }
     public function searchProduct($keyword)
@@ -121,7 +125,7 @@ class productModel
     public function getAllProductVariant($id)
     {
         $sql = "
-    SELECT 
+    SELECT
         pv.id AS variant_id, 
         pv.product_id,  
         p.product_name, 
@@ -141,9 +145,9 @@ class productModel
     WHERE 
         pv.product_id = $id";
 
+    
 
-
-        $data = $this->pdo->query($sql)->fetchAll();
+        $data=$this->pdo->query($sql)->fetchAll();
         return $data;
     }
     public function deleteProductVariant($idVariant)
