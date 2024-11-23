@@ -1,5 +1,13 @@
-<?php include "./include/headerClient.php"; ?>
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
 <main>
         <!-- breadcrumb area start -->
         <div class="breadcrumb-area">
@@ -22,7 +30,7 @@
 
         <!-- google map start -->
         <div class="map-area section-padding">
-            <div id="google-map"></div>
+          
         </div>
         <!-- google map end -->
 
@@ -84,5 +92,9 @@
         </div>
         <!-- contact area end -->
     </main>
+</body>
+</html>
 
-<?php include "./include/footerClient.php"; ?>
+    <?php
+include "./include/footerClient.php";
+?>
