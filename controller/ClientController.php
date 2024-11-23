@@ -10,6 +10,7 @@ session_start();
         public $blogModel;
         public $projectInforModel;
         public $wishlistModel;
+        public $cartModel;
         
         public function __construct()
         {
@@ -22,6 +23,7 @@ session_start();
             $this->blogModel=new blogModel();
             $this->projectInforModel=new projectInforModel();
             $this->wishlistModel=new WishlistModel();
+            $this->cartModel=new cartModel();
         }
         public function HomeClient(){
             $listCate=$this->categoryModel->getAllCategory();
@@ -40,6 +42,13 @@ session_start();
             require "./views/client/index.php";
             
         }
+        public function searchProductClient($keyword) {
+            $listCate=$this->categoryModel->getAllCategory();
+            if($keyword==""){}
+            $listProductById = $this->productModel->searchProduct($keyword); // Gọi model để tìm kiếm sản phẩm
+            require_once './views/client/ProductByCategory.php';
+            // Hiển thị kết quả trong view
+        }
         public function formLogin(){
             include "./views/client/login.php";
         }
@@ -57,6 +66,76 @@ session_start();
 
             }
         }
+        public function viewCart(){
+            $listCart=$this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
+            // var_dump($listCart);
+            if(isset($_SESSION["user_id"])){
+                $vouchers=$this->cartModel->getVoucherByIdUser($_SESSION["user_id"]);
+            $voucher=$this->cartModel->getVoucher($_SESSION["user_id"]);
+
+                // var_dump($voucher);
+            }
+            include "./views/client/cart.php";
+        }
+        public function deleteCart($id){
+            if($id!==""){
+                $datadelete=$this->cartModel->deleteCart($id);
+                if($datadelete==="OK"){
+                    header("location: ?act=viewCart");
+                }
+                // chuyển hướng về trang danh sách
+               
+            }else{
+                echo "Không có thông tin id mời bạn kiểm tra lại";
+            }
+        } 
+        public function updateCart() {
+            if (isset($_POST['cart_item_id']) && isset($_POST['quantity'])) {
+                $cartItemId = $_POST['cart_item_id'];
+                $newQuantity = $_POST['quantity'];
+                
+                // Kiểm tra xem quantity có phải là số hợp lệ
+                if (is_numeric($newQuantity) && $newQuantity > 0) {
+                    $cartModel = new CartModel();
+                    $result = $cartModel->updateCart($cartItemId, $newQuantity);
+            
+                    if ($result) {
+                        // Cập nhật thành công, có thể chuyển hướng về trang giỏ hàng
+                        header("Location: ?act=viewCart");
+                    } else {
+                        // Xử lý khi cập nhật thất bại
+                        echo "Update failed!";
+                    }
+                } else {
+                    echo "Invalid quantity!";
+                }
+            }
+        }
+        public function updateCartVoucher() {
+            // Kiểm tra nếu người dùng đã đăng nhập và voucher được chọn
+            if (isset($_POST['voucher']) && $_POST['voucher'] !== '' && isset($_SESSION["user_id"])) {
+                $voucherCode = $_POST['voucher']; // Mã voucher người dùng chọn
+                $userId = $_SESSION["user_id"];   // Lấy user_id từ session
+        
+                // Gọi model để cập nhật voucher trong giỏ hàng
+                $result = $this->cartModel->updateCartVoucher($userId, $voucherCode);
+                
+                // Kiểm tra kết quả
+                if ($result) {
+                    // Cập nhật thành công, chuyển hướng về trang giỏ hàng
+                    header("Location: ?act=viewCart");
+                    exit;
+                } else {
+                    // Thông báo khi cập nhật thất bại
+                    echo "Update failed!";
+                }
+            } else {
+                // Nếu không có voucher hoặc người dùng chưa đăng nhập
+                echo "Voucher not selected or user not logged in.";
+            }
+        }
+        
+        
         public function logout(){
             session_unset();
             header('location: index.php');

@@ -11,16 +11,16 @@ class productModel{
         $this->pdo=null;
     }
  
-    public function getAllProduct(){
-        $sql = "SELECT * 
-FROM products 
-ORDER BY created_at DESC 
-LIMIT 20;
-";
+    public function getProductLimit20 (){
+            $sql = "SELECT * 
+            FROM products 
+            ORDER BY created_at DESC 
+            LIMIT 20;
+            ";
         $data=$this->pdo->query($sql)->fetchAll();
         return $data;
     }
-    public function getProductLimit20(){
+    public function getAllProduct(){
         $sql = "SELECT * FROM `products`";
         $data=$this->pdo->query($sql)->fetchAll();
         return $data;

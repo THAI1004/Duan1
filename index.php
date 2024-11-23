@@ -10,6 +10,7 @@ include_once "./model/admin/review/review.php";
 include_once "./model/admin/slider/slider.php";
 include_once "./model/admin/oder/oder.php";
 include_once "./model/admin/blog/blog.php";
+include_once "./model/admin/cart/cart.php";
 include_once "./model/admin/projectInfo/projectInfo.php";
 include_once "./controller/product.php";
 include_once "./controller/review.php";
@@ -79,6 +80,10 @@ switch ($act) {
     case "searchProduct":
         $keyword = $_POST['search'] ?? '';
         $productC->searchProduct($keyword);
+        break;
+    case "searchProductClient":
+        $keyword = $_POST['search'] ?? '';
+        $client->searchProductClient($keyword);
         break;
     case "listReview":
         $review = new reviewController();
@@ -184,5 +189,18 @@ switch ($act) {
         break;
     case "deleteWishlist":
         $client->deleteWishlist($id);
+        break;
+    case "deleteCart":
+        $client->deleteCart($id);
+        break;
+    case "viewCart":
+        $client->includeClient();
+        $client->viewCart();
+        break;
+    case "updateCart":
+        $client->updateCart();
+        break;
+    case "updateCartVoucher":
+        $client->updateCartVoucher();
         break;
 }

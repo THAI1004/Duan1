@@ -22,7 +22,7 @@ include "./include/headerClient.php";
     <!-- google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,900" rel="stylesheet">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="./corano//assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="./corano/assets/css/vendor/bootstrap.min.css">
     <!-- Pe-icon-7-stroke CSS -->
     <link rel="stylesheet" href="./corano/assets/css/vendor/pe-icon-7-stroke.css">
     <!-- Font-awesome CSS -->
@@ -238,14 +238,6 @@ include "./include/headerClient.php";
                             <a href="?act=addWishlist&id=<?=$product["id"]?>" style="" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist">
                                 <i style="margin-top: 10px;" class="pe-7s-like"></i>
                             </a>
-                            <a href="" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare">
-                                <i style="margin-top: 10px;" class="pe-7s-refresh-2"></i>
-                            </a>
-                            <a href="" data-bs-toggle="modal" data-bs-target="#quick_view">
-                                <span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View">
-                                    <i style="margin-top: 10px;" class="pe-7s-search"></i>
-                                </span>
-                            </a>
                         </div>
                         <div class="cart-hover">
                             <button class="btn btn-cart">add to cart</button>
@@ -361,11 +353,6 @@ include "./include/headerClient.php";
                                     <div class="button-group">
                                         <a href="?act=addWishlist&id=<?=$product["id"]?>" data-bs-toggle="tooltip" data-bs-placement="left"
                                             title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                        <a href="" data-bs-toggle="tooltip" data-bs-placement="left"
-                                            title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#quick_view"><span
-                                                data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i
-                                                    class="pe-7s-search"></i></span></a>
                                     </div>
                                     <div class="cart-hover">
                                         <button class="btn btn-cart">add to cart</button>
