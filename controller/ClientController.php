@@ -507,4 +507,5 @@ session_start();
         }
         include './views/client/account.php';
     }
+    
 }
