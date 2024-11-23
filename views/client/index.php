@@ -299,18 +299,18 @@ include "./include/headerClient.php";
                     <div class="col-12">
                         <div class="product-banner-carousel slick-row-10">
                             <!-- banner single slide start -->
-                            <?php foreach ($listCate as $cate) { ?>
-                                <div class="banner-slide-item">
-                                    <figure class="banner-statistics">
-                                        <a href="#">
-                                            <img src="./images/category/<?= $cate["image_category"] ?>" alt="product banner">
-                                        </a>
-                                        <div class="banner-content banner-content_style2">
-                                            <!-- <h5 class="banner-text3"><a href="?act=listProductByCate&id=<?= $cate['id'] ?>"><?= $cate["category_name"] ?></a></h5> -->
-                                        </div>
-                                    </figure>
-                                </div>
-                            <?php } ?>
+                             <?php foreach($listCate as $cate){?>
+                            <div class="banner-slide-item">
+                                <figure class="banner-statistics">
+                                    <a href="?act=listProductByCate&id=<?= $cate["id"]?>">
+                                        <img src="./images/category/<?= $cate["image_category"]?>" alt="product banner">
+                                    </a>
+                                    <div class="banner-content banner-content_style2">
+                                        <!-- <h5 class="banner-text3"><a href="?act=listProductByCate&id=<?= $cate['id'] ?>"><?= $cate["category_name"]?></a></h5> -->
+                                    </div>
+                                </figure> 
+                            </div>
+                            <?php }?>
                             <!-- banner single slide start -->
                         </div>
                     </div>
@@ -463,7 +463,7 @@ include "./include/headerClient.php";
         <i class="fa fa-angle-up"></i>
     </div>
     <!-- Scroll to Top End -->
-
+    
 
 
   
