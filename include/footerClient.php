@@ -13,13 +13,13 @@
                                 </div>
                             </div>
                             <div class="widget-body">
-                                <p>We are a team of designers and developers that create high quality wordpress, shopify, Opencart </p>
+                                <p>Corano là thương hiệu giày sneaker nổi tiếng với thiết kế thời thượng và chất lượng vượt trội. Chúng tôi cung cấp các dòng giày phù hợp với mọi phong cách, từ thể thao năng động đến thời trang dạo phố.</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="widget-item">
-                            <h6 class="widget-title">Contact Us</h6>
+                            <h6 class="widget-title">Liên hệ</h6>
                             <div class="widget-body">
                                 <address class="contact-block">
                                     <ul>
@@ -48,7 +48,7 @@
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="widget-item">
-                            <h6 class="widget-title">Follow Us</h6>
+                            <h6 class="widget-title">Liên kết</h6>
                             <div class="widget-body social-link">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
@@ -61,12 +61,6 @@
                 <div class="row align-items-center mt-20">
                     <div class="col-md-6">
                         <div class="newsletter-wrapper">
-                            <h6 class="widget-title-text">Signup for newsletter</h6>
-                            <form class="newsletter-inner" id="mc-form">
-                                <input type="email" class="news-field" id="mc-email" autocomplete="off" placeholder="Enter your email address">
-                                <button class="news-btn" id="mc-submit">Subscribe</button>
-                            </form>
-                            <!-- mail-chimp-alerts Start -->
                             <div class="mailchimp-alerts">
                                 <div class="mailchimp-submitting"></div><!-- mail-chimp-submitting end -->
                                 <div class="mailchimp-success"></div><!-- mail-chimp-success end -->

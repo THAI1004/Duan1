@@ -4,11 +4,13 @@ include "./controller/category.php";
 include "./controller/taiKhoan.php";
 include_once "./model/admin/taiKhoan/taiKhoan.php";
 include_once "./model/admin/product/product.php";
+include_once "./model/admin/product/wishlist.php";
 include_once "./model/admin/category/category.php";
 include_once "./model/admin/review/review.php";
 include_once "./model/admin/slider/slider.php";
 include_once "./model/admin/oder/oder.php";
 include_once "./model/admin/blog/blog.php";
+include_once "./model/admin/cart/cart.php";
 include_once "./model/admin/projectInfo/projectInfo.php";
 include_once "./controller/product.php";
 include_once "./controller/review.php";
@@ -17,13 +19,15 @@ include_once "./controller/oder.php";
 include_once "./controller/home.php";
 include_once "./controller/ClientController.php";
 
-$act = $_GET['act'] ?? 'Trangchu';
+$act = $_GET['act'] ?? 'homeClient';
 $id = "";
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
 }
 if (isset($_GET["idVariant"])) {
     $idVariant = $_GET["idVariant"];}
+if (isset($_GET["page"])) {
+    $page = $_GET["page"];}
 $productC = new productController();
 // 3. Kiểm tra giá trị "act" và gọi xuống controller tương ứng
 $categoryC = new categoryController();
@@ -34,6 +38,9 @@ $home=new homeController();
 $client=new clientController();
 switch ($act) {
     case "Trangchu":
+        $client->HomeClient();
+        break;
+    case "Admin":
         $home->home();
         break;
     case "listProduct":
@@ -75,6 +82,12 @@ switch ($act) {
     case "searchProduct":
         $keyword = $_POST['search'] ?? '';
         $productC->searchProduct($keyword);
+        break;
+    case "searchProductClient":
+        $keyword = $_POST['search'] ?? '';
+        $client->includeClient();
+
+        $client->searchProductClient($keyword);
         break;
     case "listReview":
         $review = new reviewController();
@@ -144,7 +157,8 @@ switch ($act) {
     case "homeClient":
         $client->HomeClient($id);
         break;
-    case "login":
+    case "formLogin":
+        $client->includeClient();
         $client->formLogin();
         break;
     case "blog":
@@ -154,9 +168,5 @@ switch ($act) {
     case "homeBlog":
         $client->includeClient();
         $client->homeBlog();
-        break;
-    case "productDetail":
-        $client->includeClient();
-        $client->productDetail($id);
         break;
 }
