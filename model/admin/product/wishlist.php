@@ -53,15 +53,12 @@ class WishlistModel {
             products.id AS product_id,
             products.product_name AS product_name, 
             products.image AS product_image, 
-            products.discount_price AS product_price,
-            COUNT(product_variants.id) AS available_variants
+            products.discount_price AS product_price
         FROM wishlist
         JOIN products ON wishlist.product_id = products.id
-        JOIN product_variants ON products.id = product_variants.product_id
-        WHERE wishlist.user_id = $id 
-        AND product_variants.stock_quantity > 0
-        GROUP BY products.id
-        HAVING available_variants > 0";
+        WHERE wishlist.user_id = $id;
+
+";
 
 
         $data=$this->pdo->query($sql)->fetchAll();

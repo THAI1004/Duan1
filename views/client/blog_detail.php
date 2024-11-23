@@ -91,5 +91,5 @@
 
 </html>
 <?php
-include "./include/footerClient.php"
+include "./include/footerClient.php";
 ?>

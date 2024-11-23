@@ -20,7 +20,7 @@ class AccountModel
     public function getIdTK($id)
     {
         $query = "SELECT * FROM users WHERE id=$id";
-        $results = $this->pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
+        $results = $this->pdo->query($query)->fetch(PDO::FETCH_ASSOC);
         return $results;
     }
     public function updateStatus($id, $status)
@@ -40,5 +40,14 @@ class AccountModel
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result ? $result : false;
+    }
+    public function insertTaiKhoan($username, $email, $phone, $address, $password){
+        $sql = "INSERT INTO users(username, email, phone, address,password) VALUES ('$username', '$email', '$phone', '$address', '$password')";
+        $stmt=$this->pdo->exec($sql);
+        if ($stmt > 0) {
+            return "OK";  // Trả về "OK" nếu thành công
+        } else {
+            return "Failed";  // Trả về "Failed" nếu không có dòng nào bị ảnh hưởng
+        }
     }
 }
