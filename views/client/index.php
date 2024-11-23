@@ -1,3 +1,4 @@
+<?php include "./include/headerClient.php"; ?>
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -36,36 +37,37 @@
     <link rel="stylesheet" href="./corano/assets/css/style.css">
     <style>
         .product-item {
-    position: relative;
-    margin-bottom: 30px;
-}
+            position: relative;
+            margin-bottom: 30px;
+        }
 
-.product-thumb {
-    position: relative;
-    overflow: hidden;
-}
+        .product-thumb {
+            position: relative;
+            overflow: hidden;
+        }
 
-.product-thumb img {
-    width: 100%;
-    height: 300px; /* Đặt chiều cao cố định cho hình ảnh */
-    object-fit: cover; /* Đảm bảo hình ảnh được cắt vừa khung mà không bị méo */
-}
+        .product-thumb img {
+            width: 100%;
+            height: 300px;
+            /* Đặt chiều cao cố định cho hình ảnh */
+            object-fit: cover;
+            /* Đảm bảo hình ảnh được cắt vừa khung mà không bị méo */
+        }
 
-.product-caption {
-    padding: 15px;
-}
+        .product-caption {
+            padding: 15px;
+        }
 
-.price-box {
-    margin-top: 10px;
-}
-
+        .price-box {
+            margin-top: 10px;
+        }
     </style>
 </head>
 
 <body>
-    
 
-        
+
+
 
 
     <main>
@@ -73,25 +75,25 @@
         <section class="slider-area">
             <div class="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">
                 <!-- single slider item start -->
-                <?php foreach($listSlider as $row){?>
-                <div class="hero-single-slide hero-overlay">
-                    
-                    <div class="hero-slider-item bg-img" data-bg="<?= $row["image_url"]?>">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="hero-slider-content slide-1">
-                                        <h2 class="slide-title"><?= $row["content"]?></span></h2>
-                                        <h4 class="slide-desc"><?= $row["description"]?></h4>
-                                        <a href="shop.html" class="btn btn-hero">Read More</a>
+                <?php foreach ($listSlider as $row) { ?>
+                    <div class="hero-single-slide hero-overlay">
+
+                        <div class="hero-slider-item bg-img" data-bg="<?= $row["image_url"] ?>">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="hero-slider-content slide-1">
+                                            <h2 class="slide-title"><?= $row["content"] ?></span></h2>
+                                            <h4 class="slide-desc"><?= $row["description"] ?></h4>
+                                            <a href="shop.html" class="btn btn-hero">Read More</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
-                   
-                </div>
-                <?php }?>
+                <?php } ?>
                 <!-- single slider item start -->
             </div>
         </section>
@@ -153,7 +155,7 @@
         <!-- service policy area end -->
 
         <!-- banner statistics area start -->
-       
+
         <!-- banner statistics area end -->
 
         <!-- product area start -->
@@ -170,127 +172,131 @@
                     </div>
                 </div>
                 <div class="row">
-    <div class="col-12">
-    <div class="product-container">
-        <!-- product tab menu start -->
-        <div class="product-tab-menu">
-    <ul class="nav justify-content-center">
-        <?php 
-        $i = 1; 
-        $printedCategories = []; // Mảng để lưu các danh mục đã in
-        foreach($listCateTopOrder as $category) {
-            // Kiểm tra nếu danh mục chưa được in
-            if (!in_array($category["category_id"], $printedCategories)) {
-                $printedCategories[] = $category["category_id"]; // Lưu danh mục đã in
-        ?>
-        <li>
-            <a href="#tab<?= $i ?>" class="<?= ($i == 1) ? 'active' : '' ?>" data-bs-toggle="tab">
-                <?= $category["category_name"] ?>
-            </a>
-        </li>
-        <?php $i++; } } ?>
-    </ul>
-</div>
-<!-- product tab menu end -->
+                    <div class="col-12">
+                        <div class="product-container">
+                            <!-- product tab menu start -->
+                            <div class="product-tab-menu">
+                                <ul class="nav justify-content-center">
+                                    <?php
+                                    $i = 1;
+                                    $printedCategories = []; // Mảng để lưu các danh mục đã in
+                                    foreach ($listCateTopOrder as $category) {
+                                        // Kiểm tra nếu danh mục chưa được in
+                                        if (!in_array($category["category_id"], $printedCategories)) {
+                                            $printedCategories[] = $category["category_id"]; // Lưu danh mục đã in
+                                    ?>
+                                            <li>
+                                                <a href="#tab<?= $i ?>" class="<?= ($i == 1) ? 'active' : '' ?>" data-bs-toggle="tab">
+                                                    <?= $category["category_name"] ?>
+                                                </a>
+                                            </li>
+                                    <?php $i++;
+                                        }
+                                    } ?>
+                                </ul>
+                            </div>
+                            <!-- product tab menu end -->
 
-<!-- product tab content start -->
-<div class="tab-content">
-    <?php 
-    $i = 1; 
-    $printedCategories = []; // Mảng theo dõi lại các danh mục đã hiển thị trong nội dung tab
-    foreach($listCateTopOrder as $category) { 
-        // Chỉ hiển thị nếu danh mục chưa được in
-        if (!in_array($category["category_id"], $printedCategories)) {
-            $printedCategories[] = $category["category_id"]; // Lưu lại danh mục đã hiển thị
-    ?>
-    <div class="tab-pane fade <?= ($i == 1) ? 'show active' : '' ?>" id="tab<?= $i ?>">
-        <div class="row">
-            <?php 
-            
-            $found = false; // Đặt cờ để kiểm soát việc hiển thị sản phẩm
-            foreach($listProduct as $product) { 
-                $discountPercentage = (($product["price"] - $product["discount_price"]) / $product["price"]) * 100;
-                // Hiển thị sản phẩm chỉ khi category_id khớp với id của danh mục hiện tại
-                if ($product["category_id"] == $category["category_id"]) {
-                    $found = true; // Khi tìm thấy ít nhất một sản phẩm
-            ?>
-            <div class="col-md-3 col-sm-6">
-                <div class="product-item">
-                    <figure class="product-thumb">
-                        <a href="?act=productDetail&id=<?= $product["id"] ?>">
-                            <img class="pri-img" src="<?= $product["image"] ?>" alt="product">
-                            <img class="sec-img" src="<?= $product["image"] ?>" alt="product">
-                        </a>
-                        <div class="product-badge">
-                            <div class="product-label new">
-                                <span>new</span>
+                            <!-- product tab content start -->
+                            <div class="tab-content">
+                                <?php
+                                $i = 1;
+                                $printedCategories = []; // Mảng theo dõi lại các danh mục đã hiển thị trong nội dung tab
+                                foreach ($listCateTopOrder as $category) {
+                                    // Chỉ hiển thị nếu danh mục chưa được in
+                                    if (!in_array($category["category_id"], $printedCategories)) {
+                                        $printedCategories[] = $category["category_id"]; // Lưu lại danh mục đã hiển thị
+                                ?>
+                                        <div class="tab-pane fade <?= ($i == 1) ? 'show active' : '' ?>" id="tab<?= $i ?>">
+                                            <div class="row">
+                                                <?php
+
+                                                $found = false; // Đặt cờ để kiểm soát việc hiển thị sản phẩm
+                                                foreach ($listProduct as $product) {
+                                                    $discountPercentage = (($product["price"] - $product["discount_price"]) / $product["price"]) * 100;
+                                                    // Hiển thị sản phẩm chỉ khi category_id khớp với id của danh mục hiện tại
+                                                    if ($product["category_id"] == $category["category_id"]) {
+                                                        $found = true; // Khi tìm thấy ít nhất một sản phẩm
+                                                ?>
+                                                        <div class="col-md-3 col-sm-6">
+                                                            <div class="product-item">
+                                                                <figure class="product-thumb">
+                                                                    <a href="?act=productDetail&id=<?= $product["id"] ?>">
+                                                                        <img class="pri-img" src="<?= $product["image"] ?>" alt="product">
+                                                                        <img class="sec-img" src="<?= $product["image"] ?>" alt="product">
+                                                                    </a>
+                                                                    <div class="product-badge">
+                                                                        <div class="product-label new">
+                                                                            <span>new</span>
+                                                                        </div>
+                                                                        <div class="product-label discount">
+                                                                            <span>
+                                                                                <script>
+                                                                                    var discountPercentage = <?= $discountPercentage ?>;
+                                                                                    document.write(Math.round(discountPercentage) + "%");
+                                                                                </script>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="button-group">
+                                                                        <a href="" style="" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist">
+                                                                            <i style="margin-top: 10px;" class="pe-7s-like"></i>
+                                                                        </a>
+                                                                        <a href="" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare">
+                                                                            <i style="margin-top: 10px;" class="pe-7s-refresh-2"></i>
+                                                                        </a>
+                                                                        <a href="" data-bs-toggle="modal" data-bs-target="#quick_view">
+                                                                            <span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View">
+                                                                                <i style="margin-top: 10px;" class="pe-7s-search"></i>
+                                                                            </span>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="cart-hover">
+                                                                        <button class="btn btn-cart">add to cart</button>
+                                                                    </div>
+                                                                </figure>
+                                                                <div class="product-caption text-center">
+                                                                    <h6 class="product-name">
+                                                                        <a href="?act=productDetail&id=<?= $product["id"] ?>"><?= $product["product_name"] ?></a>
+                                                                    </h6>
+                                                                    <div class="price-box">
+                                                                        <span class="price-regular"><?= $product["discount_price"] ?? $product["price"] ?>đ</span>
+                                                                        <?php if ($product["discount_price"]): ?>
+                                                                            <span class="price-old"><del><?= $product["price"] ?>đ</del></span>
+                                                                        <?php endif; ?>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                <?php
+                                                    } // end if 
+                                                } // end foreach products 
+
+                                                // Nếu không tìm thấy sản phẩm nào cho danh mục, thông báo
+                                                if (!$found) {
+                                                    echo "<p>Không có sản phẩm nào trong danh mục này.</p>";
+                                                }
+                                                ?>
+                                            </div>
+                                        </div>
+                                <?php $i++;
+                                    }
+                                } ?>
                             </div>
-                            <div class="product-label discount">
-                            <span>
-    <script>
-        var discountPercentage = <?= $discountPercentage ?>;
-        document.write(Math.round(discountPercentage) + "%");
-    </script>    
-</span>
-                            </div>
+
+
                         </div>
-                        <div class="button-group">
-                            <a href="" style="" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist">
-                                <i style="margin-top: 10px;" class="pe-7s-like"></i>
-                            </a>
-                            <a href="" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare">
-                                <i style="margin-top: 10px;" class="pe-7s-refresh-2"></i>
-                            </a>
-                            <a href="" data-bs-toggle="modal" data-bs-target="#quick_view">
-                                <span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View">
-                                    <i style="margin-top: 10px;" class="pe-7s-search"></i>
-                                </span>
-                            </a>
-                        </div>
-                        <div class="cart-hover">
-                            <button class="btn btn-cart">add to cart</button>
-                        </div>
-                    </figure>
-                    <div class="product-caption text-center">
-                        <h6 class="product-name">
-                            <a href="?act=productDetail&id=<?= $product["id"] ?>"><?= $product["product_name"] ?></a>
-                        </h6>
-                        <div class="price-box">
-                            <span class="price-regular"><?= $product["discount_price"] ?? $product["price"] ?>đ</span>
-                            <?php if ($product["discount_price"]): ?>
-                            <span class="price-old"><del><?= $product["price"] ?>đ</del></span>
-                            <?php endif; ?>
-                        </div>
+
+
+                        <!-- product tab content end -->
                     </div>
                 </div>
+
             </div>
-            <?php 
-                } // end if 
-            } // end foreach products 
 
-            // Nếu không tìm thấy sản phẩm nào cho danh mục, thông báo
-            if (!$found) {
-                echo "<p>Không có sản phẩm nào trong danh mục này.</p>";
-            }
-            ?>
-        </div>
-    </div>
-    <?php $i++; } } ?>
-</div>
-
-
-</div>
-
-
-        <!-- product tab content end -->
-    </div>
-</div>
-
-</div>
-
-                        </div>
-                    </div>
-                </div>
+            </div>
+            </div>
+            </div>
             </div>
         </section>
         <!-- product area end -->
@@ -302,18 +308,18 @@
                     <div class="col-12">
                         <div class="product-banner-carousel slick-row-10">
                             <!-- banner single slide start -->
-                             <?php foreach($listCate as $cate){?>
-                            <div class="banner-slide-item">
-                                <figure class="banner-statistics">
-                                    <a href="#">
-                                        <img src="./images/category/<?= $cate["image_category"]?>" alt="product banner">
-                                    </a>
-                                    <div class="banner-content banner-content_style2">
-                                        <!-- <h5 class="banner-text3"><a href="?act=listProductByCate&id=<?= $cate['id'] ?>"><?= $cate["category_name"]?></a></h5> -->
-                                    </div>
-                                </figure>
-                            </div>
-                            <?php }?>
+                            <?php foreach ($listCate as $cate) { ?>
+                                <div class="banner-slide-item">
+                                    <figure class="banner-statistics">
+                                        <a href="#">
+                                            <img src="./images/category/<?= $cate["image_category"] ?>" alt="product banner">
+                                        </a>
+                                        <div class="banner-content banner-content_style2">
+                                            <!-- <h5 class="banner-text3"><a href="?act=listProductByCate&id=<?= $cate['id'] ?>"><?= $cate["category_name"] ?></a></h5> -->
+                                        </div>
+                                    </figure>
+                                </div>
+                            <?php } ?>
                             <!-- banner single slide start -->
                         </div>
                     </div>
@@ -339,52 +345,52 @@
                     <div class="col-12">
                         <div class="product-carousel-4_2 slick-row-10 slick-arrow-style">
                             <!-- product item start -->
-                             <?php  foreach($productLimit20 as $row){
+                            <?php foreach ($productLimit20 as $row) {
                                 $discountPercentage = (($row["price"] - $row["discount_price"]) / $row["price"]) * 100;
-                                ?>
-                            <div class="product-item">
-                                <figure class="product-thumb">
-                                    <a href="product-details.html">
-                                        <img style="width:100%;" class="pri-img" src="<?=$row["image"]?>" alt="product">
-                                        <img class="sec-img" src="<?=$row["image"]?>" alt="product">
-                                    </a>
-                                    <div class="product-badge">
-                                        <div class="product-label new">
-                                            <span>new</span>
+                            ?>
+                                <div class="product-item">
+                                    <figure class="product-thumb">
+                                        <a href="product-details.html">
+                                            <img style="width:100%;" class="pri-img" src="<?= $row["image"] ?>" alt="product">
+                                            <img class="sec-img" src="<?= $row["image"] ?>" alt="product">
+                                        </a>
+                                        <div class="product-badge">
+                                            <div class="product-label new">
+                                                <span>new</span>
+                                            </div>
+                                            <div class="product-label discount">
+                                                <span>
+                                                    <script>
+                                                        var discountPercentage = <?= $discountPercentage ?>;
+                                                        document.write(Math.round(discountPercentage) + "%");
+                                                    </script>
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div class="product-label discount">
-                                        <span>
-    <script>
-        var discountPercentage = <?= $discountPercentage ?>;
-        document.write(Math.round(discountPercentage) + "%");
-    </script>    
-</span>
+                                        <div class="button-group">
+                                            <a href="" data-bs-toggle="tooltip" data-bs-placement="left"
+                                                title="Add to wishlist"><i class="pe-7s-like"></i></a>
+                                            <a href="" data-bs-toggle="tooltip" data-bs-placement="left"
+                                                title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
+                                            <a href="" data-bs-toggle="modal" data-bs-target="#quick_view"><span
+                                                    data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i
+                                                        class="pe-7s-search"></i></span></a>
                                         </div>
-                                    </div>
-                                    <div class="button-group">
-                                        <a href="" data-bs-toggle="tooltip" data-bs-placement="left"
-                                            title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                        <a href="" data-bs-toggle="tooltip" data-bs-placement="left"
-                                            title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#quick_view"><span
-                                                data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i
-                                                    class="pe-7s-search"></i></span></a>
-                                    </div>
-                                    <div class="cart-hover">
-                                        <button class="btn btn-cart">add to cart</button>
-                                    </div>
-                                </figure>
-                                <div class="product-caption text-center">
-                                    <h6 class="product-name">
-                                        <a href="?act=productDetail&id=<?= $row["id"] ?>"><?= $row["product_name"] ?></a>
-                                    </h6>
-                                    <div class="price-box">
-                                        <span class="price-regular"><?= $row["price"]?></span>
-                                        <span class="price-old"><del><?= $row["discount_price"]?></del></span>
+                                        <div class="cart-hover">
+                                            <button class="btn btn-cart">add to cart</button>
+                                        </div>
+                                    </figure>
+                                    <div class="product-caption text-center">
+                                        <h6 class="product-name">
+                                            <a href="?act=productDetail&id=<?= $row["id"] ?>"><?= $row["product_name"] ?></a>
+                                        </h6>
+                                        <div class="price-box">
+                                            <span class="price-regular"><?= $row["price"] ?></span>
+                                            <span class="price-old"><del><?= $row["discount_price"] ?></del></span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <?php }?>
+                            <?php } ?>
                             <!-- product item end -->
                         </div>
                     </div>
@@ -410,19 +416,19 @@
                     <div class="col-12">
                         <div class="testimonial-content-wrapper">
                             <div class="testimonial-content-carousel">
-                                <?php foreach($projectInfor as $row){?>
-                                <div class="testimonial-content">
-                                    <p><?= $row["message"]?></p>
-                                    <div class="ratings">
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
+                                <?php foreach ($projectInfor as $row) { ?>
+                                    <div class="testimonial-content">
+                                        <p><?= $row["message"] ?></p>
+                                        <div class="ratings">
+                                            <span><i class="fa fa-star-o"></i></span>
+                                            <span><i class="fa fa-star-o"></i></span>
+                                            <span><i class="fa fa-star-o"></i></span>
+                                            <span><i class="fa fa-star-o"></i></span>
+                                            <span><i class="fa fa-star-o"></i></span>
+                                        </div>
+                                        <h5 class="testimonial-author"><?= $row["project_name"] ?></h5>
                                     </div>
-                                    <h5 class="testimonial-author"><?= $row["project_name"]?></h5>
-                                </div>
-                                <?php }?>
+                                <?php } ?>
 
                             </div>
                         </div>
@@ -448,23 +454,23 @@
                     <div class="col-12">
                         <div class="blog-carousel-active slick-row-10 slick-arrow-style">
                             <!-- blog post item start -->
-                             <?php foreach($listBlog as $row){?>
-                            <div class="blog-post-item">
-                                <figure class="blog-thumb">
-                                    <a href="?act=blog&id=<?= $row["id"]?>">
-                                        <img src="<?= $row["thumbnail"]?>" alt="blog image">
-                                    </a>
-                                </figure>
-                                <div class="blog-content">
-                                    <div class="blog-meta">
-                                        <p><?=$row["created_at"]?> | Corano</p>
+                            <?php foreach ($listBlogs as $row) { ?>
+                                <div class="blog-post-item">
+                                    <figure class="blog-thumb">
+                                        <a href="?act=blog&id=<?= $row["id"] ?>">
+                                            <img src="<?= $row["thumbnail"] ?>" alt="blog image">
+                                        </a>
+                                    </figure>
+                                    <div class="blog-content">
+                                        <div class="blog-meta">
+                                            <p><?= $row["created_at"] ?> | Corano</p>
+                                        </div>
+                                        <h5 class="blog-title">
+                                            <a href="?act=blog&id=<?= $row["id"] ?>"><?= $row["title"] ?></a>
+                                        </h5>
                                     </div>
-                                    <h5 class="blog-title">
-                                        <a href="?act=blog&id=<?= $row["id"]?>"><?= $row["title"]?></a>
-                                    </h5>
                                 </div>
-                            </div>
-                            <?php }?>
+                            <?php } ?>
                             <!-- blog post item end -->
                         </div>
                     </div>

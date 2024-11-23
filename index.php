@@ -155,4 +155,8 @@ switch ($act) {
         $client->includeClient();
         $client->homeBlog();
         break;
+    case "productDetail":
+        $client->includeClient();
+        $client->productDetail($id);
+        break;
 }

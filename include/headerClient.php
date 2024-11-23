@@ -123,12 +123,12 @@
                                                     <?php }?>
                                                 </ul>
                                             </li>
-                                            <li><a href="contact-us.html">Contact us</a></li>
+                                            <li><a href="?act=contactUS">Contact us</a></li>
                                         </ul>
                                     </nav>
                                     <!-- main menu navbar end -->
                                 </div>
-                            </div>
+                            </div>8
                         </div>
                         <!-- main menu area end -->
 
