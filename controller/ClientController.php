@@ -42,7 +42,6 @@ session_start();
             $wishlist = $this->wishlistModel->getWishlistById($_SESSION["user_id"]);
             $listCart=$this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
             // var_dump($listCart);
-            }
     public function formLogin()
     {
         include "./views/client/login.php";
