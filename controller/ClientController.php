@@ -32,12 +32,18 @@ session_start();
             $listProduct=$this->productModel->getAllProduct();
             $projectInfor=$this->projectInforModel->getAllProjectInfor();
             // var_dump($listProduct);
-        
+       
             $productLimit20=$this->productModel->getProductLimit20();
             $listBlogs=$this->blogModel->getAllBlog();
             $listSlider=$this->slideModel->getAllSlider();
             if(isset($_SESSION["user_id"])){
             $wishlist = $this->wishlistModel->getWishlistById($_SESSION["user_id"]);
+            $listCart=$this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
+            // var_dump($listCart);
+
+        $cart=count($listCart);
+            $vouchers=$this->cartModel->getVoucherByIdUser($_SESSION["user_id"]);
+            $voucher=$this->cartModel->getVoucher($_SESSION["user_id"]);
 
             }
             
@@ -50,21 +56,21 @@ session_start();
             if($keyword==""){}
             $listProduct = $this->productModel->searchProduct($keyword); 
             $productsPerPage = 9; // Số sản phẩm hiển thị trên mỗi trang
-$totalProducts = count($listProduct); // Tổng số sản phẩm
-$totalPages = ceil($totalProducts / $productsPerPage); // Tổng số trang
+            $totalProducts = count($listProduct); // Tổng số sản phẩm
+            $totalPages = ceil($totalProducts / $productsPerPage); // Tổng số trang
 
-// Lấy trang hiện tại từ URL, mặc định là trang 1
-if (isset($_GET['page']) && is_numeric($_GET['page'])) {
-    $currentPage = (int) $_GET['page'];
-} else {
-    $currentPage = 1;
-}
+            // Lấy trang hiện tại từ URL, mặc định là trang 1
+            if (isset($_GET['page']) && is_numeric($_GET['page'])) {
+                $currentPage = (int) $_GET['page'];
+            } else {
+                $currentPage = 1;
+            }
 
-// Tính toán vị trí bắt đầu
-$startIndex = ($currentPage - 1) * $productsPerPage;
+            // Tính toán vị trí bắt đầu
+            $startIndex = ($currentPage - 1) * $productsPerPage;
 
-// Lấy danh sách sản phẩm cho trang hiện tại
-$productsToDisplay = array_slice($listProduct, $startIndex, $productsPerPage);// Gọi model để tìm kiếm sản phẩm
+            // Lấy danh sách sản phẩm cho trang hiện tại
+            $productsToDisplay = array_slice($listProduct, $startIndex, $productsPerPage);// Gọi model để tìm kiếm sản phẩm
             require_once './views/client/listProduct.php';
             // Hiển thị kết quả trong view
         }
@@ -75,23 +81,23 @@ $productsToDisplay = array_slice($listProduct, $startIndex, $productsPerPage);//
     {
         $listCate = $this->categoryModel->getAllCategory();
         $listProduct = $this->productModel->getAllProduct();
-// Giả sử bạn có danh sách sản phẩm từ cơ sở dữ liệu là $listProduct
-$productsPerPage = 9; // Số sản phẩm hiển thị trên mỗi trang
-$totalProducts = count($listProduct); // Tổng số sản phẩm
-$totalPages = ceil($totalProducts / $productsPerPage); // Tổng số trang
+        // Giả sử bạn có danh sách sản phẩm từ cơ sở dữ liệu là $listProduct
+        $productsPerPage = 9; // Số sản phẩm hiển thị trên mỗi trang
+        $totalProducts = count($listProduct); // Tổng số sản phẩm
+        $totalPages = ceil($totalProducts / $productsPerPage); // Tổng số trang
 
-// Lấy trang hiện tại từ URL, mặc định là trang 1
-if (isset($_GET['page']) && is_numeric($_GET['page'])) {
-    $currentPage = (int) $_GET['page'];
-} else {
-    $currentPage = 1;
-}
+        // Lấy trang hiện tại từ URL, mặc định là trang 1
+        if (isset($_GET['page']) && is_numeric($_GET['page'])) {
+            $currentPage = (int) $_GET['page'];
+        } else {
+            $currentPage = 1;
+        }
 
-// Tính toán vị trí bắt đầu
-$startIndex = ($currentPage - 1) * $productsPerPage;
+        // Tính toán vị trí bắt đầu
+        $startIndex = ($currentPage - 1) * $productsPerPage;
 
-// Lấy danh sách sản phẩm cho trang hiện tại
-$productsToDisplay = array_slice($listProduct, $startIndex, $productsPerPage);
+        // Lấy danh sách sản phẩm cho trang hiện tại
+        $productsToDisplay = array_slice($listProduct, $startIndex, $productsPerPage);
 
         include "./views/client/listProduct.php";
     }
@@ -120,27 +126,31 @@ $productsToDisplay = array_slice($listProduct, $startIndex, $productsPerPage);
     
         public function viewCart(){
             $listCart=$this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
-            // var_dump($listCart);
+           
             if(isset($_SESSION["user_id"])){
                 $vouchers=$this->cartModel->getVoucherByIdUser($_SESSION["user_id"]);
             $voucher=$this->cartModel->getVoucher($_SESSION["user_id"]);
 
-                // var_dump($voucher);
+              
             }
             include "./views/client/cart.php";
         }
         public function deleteCart($id){
-            if($id!==""){
-                $datadelete=$this->cartModel->deleteCart($id);
-                if($datadelete==="OK"){
-                    header("location: ?act=viewCart");
+            if($id !== ""){
+                $datadelete = $this->cartModel->deleteCart($id);
+                if($datadelete === "OK"){
+                    // Chuyển hướng về trang trước đó
+                    if(isset($_SERVER['HTTP_REFERER'])) {
+                        header("Location: " . $_SERVER['HTTP_REFERER']);
+                    } else {
+                        header("Location: ?act=viewCart"); // Dự phòng nếu không có HTTP_REFERER
+                    }
                 }
-                // chuyển hướng về trang danh sách
-               
-            }else{
-                echo "Không có thông tin id mời bạn kiểm tra lại";
+            } else {
+                echo "Không có thông tin id, mời bạn kiểm tra lại";
             }
-        } 
+        }
+        
         public function updateCart() {
             if (isset($_POST['cart_item_id']) && isset($_POST['quantity'])) {
                 $cartItemId = $_POST['cart_item_id'];
@@ -257,6 +267,11 @@ $productsToDisplay = array_slice($listProduct, $startIndex, $productsPerPage);
     {
         if(isset($_SESSION['user_id'])){
         $user= $this->userModel->getIdTK($_SESSION["user_id"]);
+        $listCart=$this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
+        $cart=count($listCart);
+
+        $vouchers=$this->cartModel->getVoucherByIdUser($_SESSION["user_id"]);
+        $voucher=$this->cartModel->getVoucher($_SESSION["user_id"]);
         }
         // Lấy tất cả danh mục và blog
         $listCate = $this->categoryModel->getAllCategory();
@@ -280,8 +295,67 @@ $productsToDisplay = array_slice($listProduct, $startIndex, $productsPerPage);
         $category = $this->categoryModel->getIdDM($id);
         $listCate = $this->categoryModel->getAllCategory();
         $listProductById = $this->productModel->getProductByCategoryId($id);
+        $productsPerPage = 9; // Số sản phẩm hiển thị trên mỗi trang
+        $totalProducts = count($listProductById); // Tổng số sản phẩm
+        $totalPages = ceil($totalProducts / $productsPerPage); // Tổng số trang
+
+        // Lấy trang hiện tại từ URL, mặc định là trang 1
+        if (isset($_GET['page']) && is_numeric($_GET['page'])) {
+            $currentPage = (int) $_GET['page'];
+        } else {
+            $currentPage = 1;
+        }
+
+        // Tính toán vị trí bắt đầu
+        $startIndex = ($currentPage - 1) * $productsPerPage;
+
+        // Lấy danh sách sản phẩm cho trang hiện tại
+        $productsToDisplay = array_slice($listProductById, $startIndex, $productsPerPage);
         include "./views/client/productByCategory.php";
     }
+    public function ProductByPrice()
+{
+    // Kiểm tra nếu có khoảng giá được gửi qua POST
+    if (isset($_POST['price_range']) && !empty($_POST['price_range'])) {
+        // Lấy khoảng giá từ input
+        $price_range = $_POST['price_range'];
+        $price_parts = explode(" - ", $price_range);
+
+        // Kiểm tra xem khoảng giá có hợp lệ không
+        if (count($price_parts) == 2 && is_numeric($price_parts[0]) && is_numeric($price_parts[1])) {
+            $min_price = (int) $price_parts[0];
+            $max_price = (int) $price_parts[1];
+
+            // Lấy danh sách sản phẩm trong khoảng giá (cập nhật logic SQL để lấy sản phẩm trực tiếp từ cơ sở dữ liệu)
+            $listCate = $this->categoryModel->getAllCategory();
+            $listProductByPrice = $this->productModel->getProductByPrice($min_price, $max_price);
+
+            // Phân trang sản phẩm
+            $productsPerPage = 9; // Số sản phẩm hiển thị trên mỗi trang
+            $totalProducts = count($listProductByPrice); // Tổng số sản phẩm
+            $totalPages = ceil($totalProducts / $productsPerPage); // Tổng số trang
+
+            // Lấy trang hiện tại từ URL, mặc định là trang 1
+            $currentPage = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
+
+            // Tính toán vị trí bắt đầu
+            $startIndex = ($currentPage - 1) * $productsPerPage;
+
+            // Lấy danh sách sản phẩm cho trang hiện tại
+            $productsToDisplay = array_slice($listProductByPrice, $startIndex, $productsPerPage);
+
+            // Bao gồm view để hiển thị sản phẩm
+            include "./views/client/listProduct.php";
+        } else {
+            echo "Invalid price range.";
+        }
+    } else {
+        echo "Please select a valid price range.";
+    }
+}
+
+
+    
     public function gioiThieu()
     {
         include "./views/client/gioiThieu.php";
@@ -334,4 +408,6 @@ $productsToDisplay = array_slice($listProduct, $startIndex, $productsPerPage);
             echo "Không có thông tin id, mời bạn kiểm tra lại";
         }
     }
+    
+    
 }

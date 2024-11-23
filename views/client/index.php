@@ -297,13 +297,13 @@ include "./include/headerClient.php";
                              <?php foreach($listCate as $cate){?>
                             <div class="banner-slide-item">
                                 <figure class="banner-statistics">
-                                    <a href="#">
+                                    <a href="?act=listProductByCate&id=<?= $cate["id"]?>">
                                         <img src="./images/category/<?= $cate["image_category"]?>" alt="product banner">
                                     </a>
                                     <div class="banner-content banner-content_style2">
                                         <!-- <h5 class="banner-text3"><a href="?act=listProductByCate&id=<?= $cate['id'] ?>"><?= $cate["category_name"]?></a></h5> -->
                                     </div>
-                                </figure>
+                                </figure> 
                             </div>
                             <?php }?>
                             <!-- banner single slide start -->
@@ -463,7 +463,7 @@ include "./include/headerClient.php";
         <i class="fa fa-angle-up"></i>
     </div>
     <!-- Scroll to Top End -->
-
+    
 
 
   

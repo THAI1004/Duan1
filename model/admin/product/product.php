@@ -215,4 +215,14 @@ class productModel
         $data = $this->pdo->query($sql)->fetchAll();
         return $data;
     }
+    public function getProductByPrice($min_price, $max_price)
+{
+    $sql = "SELECT * FROM products WHERE price BETWEEN :min_price AND :max_price";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindParam(':min_price', $min_price, PDO::PARAM_INT);
+    $stmt->bindParam(':max_price', $max_price, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 }

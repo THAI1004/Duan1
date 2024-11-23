@@ -154,7 +154,9 @@ ob_start(); // Bắt đầu output buffer
                                     <li>
                                         <a href="#" class="minicart-btn">
                                             <i class="pe-7s-shopbag"></i>
-                                            <div class="notification">2</div>
+                                            <div class="notification">
+                                                <?php echo isset($_SESSION["user_id"]) ? $cart : 0;?>
+                                            </div>
                                         </a>
                                     </li>
                                 </ul>
@@ -376,6 +378,69 @@ ob_start(); // Bắt đầu output buffer
     <!-- off-canvas menu end -->
     <!-- offcanvas mobile menu end -->
 </header>
+<div class="offcanvas-minicart-wrapper">
+        <div class="minicart-inner">
+            <div class="offcanvas-overlay"></div>
+            <div class="minicart-inner-content">
+                <div class="minicart-close">
+                    <i class="pe-7s-close"></i>
+                </div>
+                <div class="minicart-content-box">
+                    <div class="minicart-item-wrapper">
+                        <ul>
+                            <?php if(isset($_SESSION["user_id"])){
+                                    $totalAmount = 0;
+                                    foreach($listCart as $row){ 
+                                        $total=$row["price"]*$row["quantity"];
+                                        $totalAmount += $total;
+                                        ?>
+                            <li class="minicart-item">
+                                <div class="minicart-thumb">
+                                    <a href="?act=productDetail&id=<?=$row["id"]?>">
+                                        <img src="<?= $row["image_variant"]?>" alt="product">
+                                    </a>
+                                </div>
+                                <div class="minicart-content">
+                                    <h3 class="product-name">
+                                        <a href="?act=productDetail&id=<?=$row["id"]?>"><?=$row["product_name"]?></a>
+                                    </h3>
+                                    <p>
+                                        <span class="cart-quantity">Số Lượng: <?=$row["quantity"]?><strong></strong></span><br>
+                                        <span class="cart-price">Đơn giá: <?= $row["price"]?></span>
+                                    </p>
+                                </div>
+                                <a href="?act=deleteCart&id=<?=$row["cart_item_id"]?>"><i class="pe-7s-close"></i></a>
+                            </li>
+                            <?php }}?>                            
+                        </ul>
+                    </div>
+
+                    <div class="minicart-pricing-box">
+                        <ul>
+                            <li>
+                                <span>Tổng tiền</span>
+                                <span><strong><?=  isset($totalAmount) ? $totalAmount : 0?></strong></span>
+                            </li>
+                            <li>
+                                <span>Voucher</span>
+                                <span><strong><?= isset($voucher["voucher_code"]) ? $voucher["voucher_code"] : 0 ?></strong></span>
+                            </li>
+                            <li class="total">
+                                <span>Tổng thanh toán</span>
+                                <span><strong><?= 
+                                isset($totalAmount) ? $totalAmount-$voucher['voucher_code'] : 0
+                                 ?></strong></span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="minicart-button">
+                        <a href="?act=viewCart"><i class="fa fa-shopping-cart"></i> View Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <!-- end Header Area -->
 <?php
 ob_end_flush(); // Kết thúc output buffer và gửi ra trình duyệt
