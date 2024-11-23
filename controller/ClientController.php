@@ -32,7 +32,9 @@ session_start();
             $listProduct=$this->productModel->getAllProduct();
             $projectInfor=$this->projectInforModel->getAllProjectInfor();
             // var_dump($listProduct);
-       
+            if(isset($_SESSION['user_id'])){
+                $user= $this->userModel->getIdTK($_SESSION["user_id"]);
+            }
             $productLimit20=$this->productModel->getProductLimit20();
             $listBlogs=$this->blogModel->getAllBlog();
             $listSlider=$this->slideModel->getAllSlider();
