@@ -132,7 +132,8 @@
         background-color: #28a745;
     }
 
-    .btn-primary:hover { background-color: #218838;
+    .btn-primary:hover {
+        background-color: #218838;
     }
 
     @media (max-width: 768px) {
