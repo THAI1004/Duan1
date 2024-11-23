@@ -82,7 +82,7 @@
                             <div class="sidebar-body">
                                 <ul class="shop-categories">
                                     <?php foreach ($listCate as $listCate): ?>
-                                        <li><a href="#"><?= $listCate['category_name'] ?></a></li>
+                                        <li><a href="?act=listProductByCate&id=<?= $listCate['id'] ?>"><?= $listCate['category_name'] ?></a></li>
                                     <?php endforeach ?>
                                 </ul>
                             </div>
@@ -252,9 +252,7 @@
                                                 <div class="product-label discount"><span><?= $discountPercentage ?> %</span></div>
                                             </div>
                                             <div class="button-group">
-                                                <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                                <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                                <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
+                                                <a href="?act=addWishlist&id=<?= $product['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
                                             </div>
                                             <div class="cart-hover">
                                                 <button class="btn btn-cart">add to cart</button>

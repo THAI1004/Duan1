@@ -24,7 +24,7 @@ ob_start(); // Bắt đầu output buffer
     <!-- google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,900" rel="stylesheet">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="./corano//assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="./corano/assets/css/vendor/bootstrap.min.css">
     <!-- Pe-icon-7-stroke CSS -->
     <link rel="stylesheet" href="./corano/assets/css/vendor/pe-icon-7-stroke.css">
     <!-- Font-awesome CSS -->
@@ -113,102 +113,28 @@ ob_start(); // Bắt đầu output buffer
                     </div>
                     <!-- main menu area end -->
 
-                        <!-- main menu area start -->
-                        <div class="col-lg-6 position-static">
-                            <div class="main-menu-area">
-                                <div class="main-menu">
-                                    <!-- main menu navbar start -->
-                                    <nav class="desktop-menu">
-                                        <ul>
-                                            <li class="active"><a href="?act=homeClient">Home</a>
-                                            </li>
-                                            <li class="position-static"><a href="#">Sneaker <i class="fa fa-angle-down"></i></a>
-                                                <ul class="megamenu dropdown">
-                                                    <li class="mega-title">
-                                                        <ul>
-                                                        <?php 
-                                                            $count = 0;
-                                                            foreach($listCate as $row){ 
-                                                                if ($count % 4 == 0 && $count != 0) {
-                                                                    echo '</ul></li><li class="mega-title"><ul>'; // Đóng và mở cột mới sau mỗi 4 category
-                                                                }
-                                                            ?>
-                                                                <li><a href="?act=listProductByCate&id=<?= $row['id'] ?>"><?= $row['category_name'] ?></a></li>
-                        
-                                                            <?php 
-                                                                $count++; 
-                                                            } 
-                                                            ?>
-                                                        </ul>
-                                                    </li>
-                                                    
-                                                </ul>
-                                            </li>
-                                            <li><a href="shop.html">shop<i class="fa fa-angle-down"></i></a>
-                                                <ul class="dropdown">
-                                                    <li><a href="#">shop grid layout <i class="fa fa-angle-right"></i></a>
-                                                        <ul class="dropdown">
-                                                            <li><a href="shop.html">shop grid left sidebar</a></li>
-                                                            <li><a href="shop-grid-right-sidebar.html">shop grid right sidebar</a></li>
-                                                            <li><a href="shop-grid-full-3-col.html">shop grid full 3 col</a></li>
-                                                            <li><a href="shop-grid-full-4-col.html">shop grid full 4 col</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="#">shop list layout <i class="fa fa-angle-right"></i></a>
-                                                        <ul class="dropdown">
-                                                            <li><a href="shop-list-left-sidebar.html">shop list left sidebar</a></li>
-                                                            <li><a href="shop-list-right-sidebar.html">shop list right sidebar</a></li>
-                                                            <li><a href="shop-list-full-width.html">shop list full width</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="#">products details <i class="fa fa-angle-right"></i></a>
-                                                        <ul class="dropdown">
-                                                            <li><a href="product-details.html">product details</a></li>
-                                                            <li><a href="product-details-affiliate.html">product details affiliate</a></li>
-                                                            <li><a href="product-details-variable.html">product details variable</a></li>
-                                                            <li><a href="product-details-group.html">product details group</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="?act=homeBlog">Blog <i class="fa fa-angle-down"></i></a>
-                                                <ul class="dropdown">
-                                                    <?php foreach($listBlogs as $row){?>
-                                                    <li><a href="?act=blog&id=<?= $row["id"]?>"><?= $row["title"]?></a></li>
-                                                    <?php }?>
-                                                </ul>
-                                            </li>
-                                            <li><a href="?act=contactUS">Contact us</a></li>
-                                        </ul>
-                                    </nav>
-                                    <!-- main menu navbar end -->
-                                </div>
-                            </div>8
-                        </div>
-                        <!-- main menu area end -->
-
-                        <!-- mini cart area start -->
-                        <div class="col-lg-4">
-                            <div class="header-right d-flex align-items-center justify-content-xl-between justify-content-lg-end">
-                                <div class="header-search-container">
-                                    <button class="search-trigger d-xl-none d-lg-block"><i class="pe-7s-search"></i></button>
-                                    <form class="header-search-box d-lg-none d-xl-block">
-                                        <input type="text" placeholder="Search entire store hire" class="header-search-field">
-                                        <button class="header-search-btn"><i class="pe-7s-search"></i></button>
-                                    </form>
-                                </div>
-                                <div class="header-configure-area">
-                                    <ul class="nav justify-content-end">
-                                        <li class="user-hover">
-                                            <a href="#">
-                                                <i class="pe-7s-user"></i>
-                                            </a>
-                                            <ul class="dropdown-list">
-                                                <li><a href="login-register.html">login</a></li>
-                                                <li><a href="login-register.html">register</a></li>
-                                                <li><a href="my-account.html">my account</a></li>
+                    <!-- mini cart area start -->
+                    <div class="col-lg-4">
+                        <div class="header-right d-flex align-items-center justify-content-xl-between justify-content-lg-end">
+                            <div class="header-search-container">
+                                <button class="search-trigger d-xl-none d-lg-block"><i class="pe-7s-search"></i></button>
+                                <form action="?act=searchProductClient" method="post" class="header-search-box d-lg-none d-xl-block">
+                                    <input type="search" name="search" value="<?= isset($_POST['search']) ? htmlspecialchars($_POST['search']) : '' ?>" placeholder="Tên sản phẩm ..." class="header-search-field">
+                                    <button class="header-search-btn"><i class="pe-7s-search"></i></button>
+                                </form>
+                            </div>
+                            <div class="header-configure-area">
+                                <ul class="nav justify-content-end">
+                                    <li class="user-hover">
+                                        <a href="#">
+                                            <i class="pe-7s-user"></i>
+                                        </a>
+                                        <ul class="dropdown-list">
+                                            <?php if (isset($_SESSION['username'])) { ?>
+                                                <li><a href="?act=logout">logout</a></li>
+                                                <li><a href="?act=myAccount">my account</a></li>
                                                 <?php if(isset($user['role']) && $user['role'] == 1){ ?>
-                                                    <li><a href="?act=Trangchu">Login Admin</a></li>
+                                                    <li><a href="?act=Admin">Login Admin</a></li>
                                                     <?php } ?>
                                             <?php } else { ?>
                                                 <li><a href="?act=formLogin">login and register</a></li>

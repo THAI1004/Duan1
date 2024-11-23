@@ -169,4 +169,57 @@ switch ($act) {
         $client->includeClient();
         $client->homeBlog();
         break;
+    case "listProductByCate":
+        $client->includeClient();
+        $client->ProductByCategory($id);
+        break;
+    case "login":
+        $client->includeClient();
+        $client->login();
+        
+        break;
+    case "logout":
+        $client->logout();
+        break;
+    case "singup":
+        $client->singup();
+        break;
+    case "gioiThieu":
+        $client->includeClient();
+        $client->GioiThieu();
+        break;
+    case "addWishlist":
+        $client->addWishlist($id);
+        break;
+    case "wishlist":
+        $client->includeClient();
+        $client->listWishlist();
+        break;
+    case "deleteWishlist":
+        $client->deleteWishlist($id);
+        break;
+    case "deleteCart":
+        $client->deleteCart($id);
+        break;
+    case "viewCart":
+        $client->includeClient();
+        $client->viewCart();
+        break;
+    case "updateCart":
+        $client->updateCart();
+        break;
+    case "updateCartVoucher":
+        $client->updateCartVoucher();
+    case "listProductClient":
+        $client->includeClient();
+        $client->listProduct();
+        break;
+    case "myAccount":
+        $client->includeClient();
+        $client->myAccount();
+        break;
+    case "changeAccount":
+        $client->includeClient();
+        $client->updateAccount();
+        break;
 }

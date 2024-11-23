@@ -50,4 +50,13 @@ class AccountModel
             return "Failed";  // Trả về "Failed" nếu không có dòng nào bị ảnh hưởng
         }
     }
+    public function updateTaiKhoan($id,$username,$email, $phone, $address, $password){
+        $query = "UPDATE users SET username='$username',email='$email',phone='$phone',address='$address',password='$password' WHERE id=$id";
+        $stmt=$this->pdo->exec($query);
+        if ($stmt > 0) {
+            return "OK";  // Trả về "OK" nếu thành công
+        } else {
+            return "Failed";  // Trả về "Failed" nếu không có dòng nào bị ảnh hưởng
+        }
+    }
 }
