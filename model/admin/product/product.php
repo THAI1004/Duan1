@@ -6,11 +6,9 @@ class productModel
     public function __construct()
     {
         $this->pdo = connect();
-        $this->pdo = connect();
     }
     public function __destruct()
     {
-        $this->pdo = null;
         $this->pdo = null;
     }
 
@@ -24,7 +22,8 @@ LIMIT 20;
         $data = $this->pdo->query($sql)->fetchAll();
         return $data;
     }
-    public function getProductLimit20(){
+    public function getProductLimit20()
+    {
         $sql = "SELECT * FROM `products`";
         $data = $this->pdo->query($sql)->fetchAll();
         return $data;
@@ -44,7 +43,7 @@ LIMIT 20;
     public function getProductById($id)
     {
         $sql = "SELECT * FROM `products` where id=$id";
-        $data=$this->pdo->query($sql)->fetch();
+        $data = $this->pdo->query($sql)->fetchAll();
         return $data;
     }
     public function searchProduct($keyword)
@@ -144,10 +143,7 @@ LIMIT 20;
         Product_Sizes ps ON pv.size_id = ps.id
     WHERE 
         pv.product_id = $id";
-
-    
-
-        $data=$this->pdo->query($sql)->fetchAll();
+        $data = $this->pdo->query($sql)->fetchAll();
         return $data;
     }
     public function deleteProductVariant($idVariant)
@@ -213,5 +209,4 @@ LIMIT 20;
             echo "<hr>";
         }
     }
-
 }

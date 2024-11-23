@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,21 +12,17 @@
     align-items: center;
     flex-direction: column;
   }
-
   .container.main {
     margin: 0 auto; 
     max-width: 80%; 
   }
-
   .col-lg-9 {
     margin: 0 auto; 
     float: none; 
   }
 </style>
-
 <body>
     <?php foreach($listBlog as $listBlog): ?>
-
         
     <div class="breadcrumb-area">
         <div class="container">
@@ -46,7 +41,6 @@
         </div>
     </div>
     <!-- breadcrumb area end -->
-
     <!-- blog main wrapper start -->
     <div class="blog-main-wrapper section-padding">
         <div class="container main">
