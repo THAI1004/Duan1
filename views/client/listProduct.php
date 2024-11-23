@@ -50,24 +50,22 @@
 </head>
 
 <body>
-    <?php foreach ($category as $category): ?>
-        <div class="breadcrumb-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="breadcrumb-wrap">
-                            <nav aria-label="breadcrumb">
-                                <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Sneaker / <?= $category["category_name"] ?></li>
-                                </ul>
-                            </nav>
-                        </div>
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-wrap">
+                        <nav aria-label="breadcrumb">
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Sneaker </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
         </div>
-    <?php endforeach ?>
+    </div>
     <!-- breadcrumb area end -->
 
     <!-- page main wrapper start -->
@@ -239,29 +237,29 @@
                         <!-- product item list wrapper start -->
                         <div class="shop-product-wrap grid-view row mbn-30">
                             <!-- product single item start -->
-                            <?php foreach ($listProductById as $listProductById): ?>
-                                <?php $discountPercentage = (($listProductById["price"] - $listProductById["discount_price"]) / $listProductById["price"]) * 100 ?>
-
+                            <?php foreach ($listProduct as $product): ?>
+                                <?php $discountPercentage = (($product["price"] - $product["discount_price"]) / $product["price"]) * 100 ?>
                                 <div class="col-md-4 col-sm-6">
                                     <!-- product grid start -->
 
                                     <div class="product-item">
                                         <figure class="product-thumb">
                                             <a href="product-details.html">
-                                                <img class="pri-img" src="<?= $listProductById['image'] ?>" alt="product">
-                                                <img class="sec-img" src="<?= $listProductById['image'] ?>" alt="product">
+                                                <img class="pri-img" src="<?= $product['image'] ?>" alt="product">
+                                                <img class="sec-img" src="<?= $product['image'] ?>" alt="product">
                                             </a>
                                             <div class="product-badge">
                                                 <div class="product-label new">
                                                     <span>new</span>
                                                 </div>
                                                 <div class="product-label discount">
-                                                    <span><?= $discountPercentage ?>%</span>
+                                                    <span><?= $discountPercentage ?> %</span>
                                                 </div>
                                             </div>
                                             <div class="button-group">
                                                 <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                                
+                                                <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
                                             </div>
                                             <div class="cart-hover">
                                                 <button class="btn btn-cart">add to cart</button>
@@ -269,11 +267,11 @@
                                         </figure>
                                         <div class="product-caption text-center">
                                             <h6 class="product-name">
-                                                <a href="product-details.html"><?= $listProductById['product_name'] ?></a>
+                                                <a href="product-details.html"><?= $product['product_name'] ?></a>
                                             </h6>
                                             <div class="price-box">
-                                                <span class="price-regular"><?= $listProductById['discount_price'] ?></span>
-                                                <span class="price-old"><del><?= $listProductById['price'] ?></del></span>
+                                                <span class="price-regular"><?= $product['discount_price'] ?></span>
+                                                <span class="price-old"><del><?= $product['price'] ?></del></span>
                                             </div>
                                         </div>
                                     </div>
@@ -283,15 +281,15 @@
                                     <div class="product-list-item">
                                         <figure class="product-thumb">
                                             <a href="product-details.html">
-                                                <img class="pri-img" src="<?= $listProductById['image'] ?>" alt="product">
-                                                <img class="sec-img" src="<?= $listProductById['image'] ?>" alt="product">
+                                                <img class="pri-img" src="<?= $product['image'] ?>" alt="product">
+                                                <img class="sec-img" src="<?= $product['image'] ?>" alt="product">
                                             </a>
                                             <div class="product-badge">
                                                 <div class="product-label new">
                                                     <span>new</span>
                                                 </div>
                                                 <div class="product-label discount">
-                                                    <span>10%</span>
+                                                    <span><?= $discountPercentage = (($product["price"] - $product["discount_price"]) / $product["price"]) * 100; ?></span>
                                                 </div>
                                             </div>
                                             <div class="button-group">
@@ -304,12 +302,12 @@
                                             </div>
                                         </figure>
                                         <div class="product-content-list">
-                                            <h5 class="product-name"><a href="product-details.html"><?= $listProductById['product_name'] ?></a></h5>
+                                            <h5 class="product-name"><a href="product-details.html"><?= $product['product_name'] ?></a></h5>
                                             <div class="price-box">
-                                                <span class="price-regular"><?= $listProductById['discount_price'] ?></span>
-                                                <span class="price-old"><del><?= $listProductById['price'] ?></del></span>
+                                                <span class="price-regular"><?= $product['discount_price'] ?></span>
+                                                <span class="price-old"><del><?= $product['price'] ?></del></span>
                                             </div>
-                                            <p><?= $listProductById['description'] ?></p>
+                                            <p><?= $product['description'] ?></p>
                                         </div>
                                     </div>
                                     <!-- product list item end -->

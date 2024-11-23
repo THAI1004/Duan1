@@ -1,6 +1,3 @@
-<?php
-include "./include/headerClient.php"
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,6 +36,8 @@ include "./include/headerClient.php"
                     <div class="col-lg-6">
                         <div class="login-reg-form-wrap">
                             <h5>Sign In</h5>
+
+
                             <form action="?act=login" method="post">
                                 <div class="single-input-item">
                                     <input type="text" name="username" placeholder="Username" required />
@@ -54,6 +53,12 @@ include "./include/headerClient.php"
                                                 <label class="custom-control-label" for="rememberMe">Remember Me</label>
                                             </div>
                                         </div>
+                                        <?php
+                                        if (isset($_SESSION['login_error'])) {
+                                            echo "<p style='color: red;'>" . $_SESSION['login_error'] . "</p>";
+                                            unset($_SESSION['login_error']);
+                                        }
+                                        ?>
                                         <a href="#" class="forget-pwd">Forget Password?</a>
                                     </div>
                                 </div>
@@ -69,28 +74,45 @@ include "./include/headerClient.php"
                     <div class="col-lg-6">
                         <div class="login-reg-form-wrap sign-up-form">
                             <h5>Singup Form</h5>
+                            <?php
+                            if (isset($_SESSION['message'])) {
+                                // Tách loại thông báo và nội dung
+                                list($type, $message) = explode('|', $_SESSION['message']);
+                                unset($_SESSION['message']); // Xóa thông báo sau khi hiển thị
+
+                                echo "<script>
+        alert('$message');
+        </script>";
+                            }
+                            ?>
                             <form action="?act=singup" method="post">
                                 <div class="single-input-item">
                                     <input name="username" type="text" placeholder="Enter your Username" required />
+                                    <span class="error-message"><?php echo $usernameError ?? ''; ?></span>
                                 </div>
                                 <div class="single-input-item">
                                     <input name="email" type="email" placeholder="Enter your Email" required />
+                                    <span class="error-message"><?php echo $emailError ?? ''; ?></span>
                                 </div>
                                 <div class="single-input-item">
                                     <input name="phone" type="phone" placeholder="Enter your Phone" required />
+                                    <span class="error-message"><?php echo $phoneError ?? ''; ?></span>
                                 </div>
                                 <div class="single-input-item">
                                     <input name="address" type="address" placeholder="Enter your Address" required />
+                                    <span class="error-message"><?php echo $addressError ?? ''; ?></span>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="single-input-item">
                                             <input name="password" type="password" placeholder="Enter your Password" required />
+                                            <span class="error-message"><?php echo $passwordError ?? ''; ?></span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="single-input-item">
                                             <input name="repeatPassword" type="password" placeholder="Repeat your Password" required />
+                                            <span class="error-message"><?php echo $repeatPasswordError ?? ''; ?></span>
                                         </div>
                                     </div>
                                 </div>

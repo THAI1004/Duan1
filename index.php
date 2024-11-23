@@ -154,6 +154,7 @@ switch ($act) {
         $client->HomeClient($id);
         break;
     case "formLogin":
+        $client->includeClient();
         $client->formLogin();
         break;
     case "blog":
@@ -176,6 +177,7 @@ switch ($act) {
         break;
     case "singup":
         $client->singup();
+        break;
     case "gioiThieu":
         $client->includeClient();
         $client->GioiThieu();
@@ -202,5 +204,8 @@ switch ($act) {
         break;
     case "updateCartVoucher":
         $client->updateCartVoucher();
+    case "listProductClient":
+        $client->includeClient();
+        $client->listProduct();
         break;
 }
