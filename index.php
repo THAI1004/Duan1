@@ -26,6 +26,8 @@ if (isset($_GET["id"])) {
 }
 if (isset($_GET["idVariant"])) {
     $idVariant = $_GET["idVariant"];}
+if (isset($_GET["page"])) {
+    $page = $_GET["page"];}
 $productC = new productController();
 // 3. Kiểm tra giá trị "act" và gọi xuống controller tương ứng
 $categoryC = new categoryController();
@@ -83,6 +85,8 @@ switch ($act) {
         break;
     case "searchProductClient":
         $keyword = $_POST['search'] ?? '';
+        $client->includeClient();
+
         $client->searchProductClient($keyword);
         break;
     case "listReview":
@@ -170,7 +174,9 @@ switch ($act) {
         $client->ProductByCategory($id);
         break;
     case "login":
+        $client->includeClient();
         $client->login();
+        
         break;
     case "logout":
         $client->logout();

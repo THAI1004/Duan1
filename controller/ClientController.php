@@ -32,11 +32,14 @@ session_start();
             $listProduct=$this->productModel->getAllProduct();
             $projectInfor=$this->projectInforModel->getAllProjectInfor();
             // var_dump($listProduct);
-            $_SESSION["user_id"]=2;
+        
             $productLimit20=$this->productModel->getProductLimit20();
             $listBlogs=$this->blogModel->getAllBlog();
             $listSlider=$this->slideModel->getAllSlider();
+            if(isset($_SESSION["user_id"])){
             $wishlist = $this->wishlistModel->getWishlistById($_SESSION["user_id"]);
+
+            }
             
            
             require "./views/client/index.php";
@@ -45,8 +48,24 @@ session_start();
         public function searchProductClient($keyword) {
             $listCate=$this->categoryModel->getAllCategory();
             if($keyword==""){}
-            $listProductById = $this->productModel->searchProduct($keyword); // Gọi model để tìm kiếm sản phẩm
-            require_once './views/client/ProductByCategory.php';
+            $listProduct = $this->productModel->searchProduct($keyword); 
+            $productsPerPage = 9; // Số sản phẩm hiển thị trên mỗi trang
+$totalProducts = count($listProduct); // Tổng số sản phẩm
+$totalPages = ceil($totalProducts / $productsPerPage); // Tổng số trang
+
+// Lấy trang hiện tại từ URL, mặc định là trang 1
+if (isset($_GET['page']) && is_numeric($_GET['page'])) {
+    $currentPage = (int) $_GET['page'];
+} else {
+    $currentPage = 1;
+}
+
+// Tính toán vị trí bắt đầu
+$startIndex = ($currentPage - 1) * $productsPerPage;
+
+// Lấy danh sách sản phẩm cho trang hiện tại
+$productsToDisplay = array_slice($listProduct, $startIndex, $productsPerPage);// Gọi model để tìm kiếm sản phẩm
+            require_once './views/client/listProduct.php';
             // Hiển thị kết quả trong view
         }
         public function formLogin(){
@@ -56,6 +75,24 @@ session_start();
     {
         $listCate = $this->categoryModel->getAllCategory();
         $listProduct = $this->productModel->getAllProduct();
+// Giả sử bạn có danh sách sản phẩm từ cơ sở dữ liệu là $listProduct
+$productsPerPage = 9; // Số sản phẩm hiển thị trên mỗi trang
+$totalProducts = count($listProduct); // Tổng số sản phẩm
+$totalPages = ceil($totalProducts / $productsPerPage); // Tổng số trang
+
+// Lấy trang hiện tại từ URL, mặc định là trang 1
+if (isset($_GET['page']) && is_numeric($_GET['page'])) {
+    $currentPage = (int) $_GET['page'];
+} else {
+    $currentPage = 1;
+}
+
+// Tính toán vị trí bắt đầu
+$startIndex = ($currentPage - 1) * $productsPerPage;
+
+// Lấy danh sách sản phẩm cho trang hiện tại
+$productsToDisplay = array_slice($listProduct, $startIndex, $productsPerPage);
+
         include "./views/client/listProduct.php";
     }
     
@@ -65,16 +102,22 @@ session_start();
             $username = $_POST['username'];
             $password = $_POST['password'];
             $account = $this->userModel->getAccount($username, $password);
+    
             if ($account === false) {
                 $_SESSION['login_error'] = "Sai tài khoản hoặc mật khẩu!";
                 include "./views/client/login.php";
             } else {
                 $_SESSION['user_id'] = $account['id'];  // Lưu ID người dùng
                 $_SESSION['username'] = $account['username'];  // Lưu tên người dùng
-                header('Location: index.php');
-                exit();
+                $_SESSION['login_success'] = "Đăng nhập thành công mời bạn bắt đầu mua hàng!";  // Lưu thông báo thành công
+    
+                // Chuyển hướng sau khi nhấn OK vào alert
+                include "./views/client/login.php";  // Chuyển sang trang redirect
             }
-        }}
+        }
+    }
+    
+    
         public function viewCart(){
             $listCart=$this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
             // var_dump($listCart);
@@ -146,7 +189,7 @@ session_start();
         
         
         public function logout(){
-            session_unset();
+            session_destroy();
             header('location: index.php');
         }
     public function singup()
@@ -259,6 +302,8 @@ session_start();
     {
         if (isset($_SESSION["user_id"])) {
             $wishlist = $this->wishlistModel->getAllWishlist($_SESSION["user_id"]);
+            // var_dump($wishlist);
+
         }
         include "./views/client/wishlist.php";
     }

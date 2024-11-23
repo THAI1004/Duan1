@@ -1,3 +1,8 @@
+<?php
+ob_start(); // Bắt đầu output buffer
+// Nội dung của bạn
+?>
+
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -114,7 +119,7 @@
                             <div class="header-search-container">
                                 <button class="search-trigger d-xl-none d-lg-block"><i class="pe-7s-search"></i></button>
                                 <form action="?act=searchProductClient" method="post" class="header-search-box d-lg-none d-xl-block">
-                                    <input type="text" placeholder="Tên sản phẩm ..." class="header-search-field">
+                                    <input type="search" name="search" value="<?= isset($_POST['search']) ? htmlspecialchars($_POST['search']) : '' ?>" placeholder="Tên sản phẩm ..." class="header-search-field">
                                     <button class="header-search-btn"><i class="pe-7s-search"></i></button>
                                 </form>
                             </div>
@@ -138,12 +143,13 @@
                                         </ul>
                                     </li>
                                     <li>
-                                            <a href="?act=wishlist">
-                                                <i class="pe-7s-like"></i>
-                                                <div class="notification"><?php if(isset($wishlist)){?>
-                                                    <?php $wishlist ?>
-                                                <?php } ?></div>
-                                            </a>
+                                    <a href="?act=wishlist">
+                                        <i class="pe-7s-like"></i>
+                                        <div class="notification">
+                                            <?php echo isset($_SESSION["user_id"]) ? $wishlist : 0;?>
+                                        </div>
+                                    </a>
+
                                         </li>
                                     <li>
                                         <a href="#" class="minicart-btn">
@@ -371,3 +377,6 @@
     <!-- offcanvas mobile menu end -->
 </header>
 <!-- end Header Area -->
+<?php
+ob_end_flush(); // Kết thúc output buffer và gửi ra trình duyệt
+?>
