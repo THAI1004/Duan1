@@ -1,12 +1,21 @@
-<? include "./include/headerClient.php"; ?>
+<!doctype html>
+<html class="no-js" lang="zxx">
 
-<!DOCTYPE html>
-<html lang="en">
+
+<!-- Mirrored from htmldemo.net/corano/corano/product-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 29 Jun 2024 09:54:00 GMT -->
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Corano - Jewelry Shop eCommerce Bootstrap 5 Template</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+
+    <!-- CSS
+	============================================ -->
     <!-- google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,900" rel="stylesheet">
     <!-- Bootstrap CSS -->
@@ -28,8 +37,8 @@
 
 </head>
 
-
 <body>
+
 
 
     <main>
@@ -60,139 +69,92 @@
                     <!-- product details wrapper start -->
                     <div class="col-lg-12 order-1 order-lg-2">
                         <!-- product details inner end -->
-
                         <div class="product-details-inner">
                             <div class="row">
-                                 <?php foreach ($listProductById as $listProductById): ?>
-                                  
-                                    <div class="col-lg-5">
-                                        <div class="product-large-slider">
-                                        <?php foreach ($getAllProductImage as $getAllProductImage): ?>
-                                            <div class="pro-large-img img-zoom">
-                                                    <img src="<?= $getAllProductImage["image_variant"] ?>" alt="product-details" />
-                                                </div>
+                                <div class="col-lg-5">
+                                    <div class="product-large-slider">
+                                        <div class="pro-large-img img-zoom">
+                                            <img src="<?= $listProductById["image"] ?>" alt="product-details" />
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                    <div class="pro-nav slick-row-10 slick-arrow-style">
+                                    <?php foreach($getAllProductImage as $row){?>
+                                        <div class="pro-nav-thumb">
+                                            <img src="<?= $row["image_variant"]?>" alt="product-details" />
+                                        </div>
+                                        <?php }?>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="product-details-des">
+                                        <h3 class="product-name"> <?= $listProductById["product_name"] ?> </h3>
+                                        <div class="ratings d-flex">
+                                            <span><i class="fa fa-star-o"></i></span>
+                                            <span><i class="fa fa-star-o"></i></span>
+                                            <span><i class="fa fa-star-o"></i></span>
+                                            <span><i class="fa fa-star-o"></i></span>
+                                            <span><i class="fa fa-star-o"></i></span>
+                                            <div class="pro-review">
+                                                <span>1 Reviews</span>
+                                            </div>
+                                        </div>
+                                        <div class="price-box">
+                                            <span class="price-regular"><?= $listProductById["price"] ?></span>
+                                            <span class="price-old"><del><?= $listProductById["discount_price"] ?></del></span>
+                                        </div>
+                                        <div class="availability">
+                                            <i class="fa fa-check-circle"></i>
+                                            <span>200 in stock</span>
+                                        </div>
+                                        <p class="pro-desc">
+                                        <p>
+                                        <h6>Mô tả: </h6>
+                                        </p> <?= $listProductById["description"] ?></p>
+                                        <div class="quantity-cart-box d-flex align-items-center">
+                                            <h6 class="option-title">qty:</h6>
+                                            <div class="quantity">
+                                                <div class="pro-qty"><input type="text" value="1"></div>
+                                            </div>
+                                            <div class="action_link">
+                                                <a class="btn btn-cart2" href="#">Add to cart</a>
+                                            </div>
+                                        </div>
+                                        <div class="pro-size">
+                                            <h6 class="option-title">size :</h6>
+                                            <select class="nice-select">
+                                                <?php foreach ($getAllSize as $getAllSize): ?>
+                                                    <option><?= $getAllSize["size_name"] ?></option>
                                                 <?php endforeach ?>
-                                            <!-- <div class="pro-large-img img-zoom">
-                                                <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                            </div>
-                                            <div class="pro-large-img img-zoom">
-                                                <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                            </div>
-                                            <div class="pro-large-img img-zoom">
-                                                <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
-                                            </div>
-                                            <div class="pro-large-img img-zoom">
-                                                <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
-                                            </div> -->
+                                            </select>
                                         </div>
-                                        
-                                        <div class="pro-nav slick-row-10 slick-arrow-style">
-                                        <?php foreach ($getAllProductImagePhu as $getAllProductImagePhu): ?>
-                                            <div class="pro-nav-thumb">
-                                                <img src="<?= $getAllProductImagePhu["image_variant"] ?>" alt="product-details"   />
-                                            </div>
-                                            <!-- <div class="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                            </div>
-                                            <div class="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                            </div>
-                                            <div class="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
-                                            </div>
-                                            <div class="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
-                                            </div> -->
-                                            <?php endforeach ?>
+                                        <div class="color-option">
+                                            <h6 class="option-title">color :</h6>
+                                            <ul class="color-categories">
+                                                <?php foreach ($getAllColor as $color):?>
+                                                    <li>
+                                                        <a style="background-color: <?= $color["color_code"] ?>" href="#" title="LightSteelblue"></a>
+                                                    </li>
+                                                <?php endforeach ?>
+                                            </ul>
                                         </div>
-                                        
-                                    </div>
-                                    <div class="col-lg-7">
-                                        <div class="product-details-des">
-                                          
-                                            <h3 class="product-name"><?= $listProductById["product_name"] ?></h3>
-                                            <div class="ratings d-flex">
-                                                <span><i class="fa fa-star-o"></i></span>
-                                                <span><i class="fa fa-star-o"></i></span>
-                                                <span><i class="fa fa-star-o"></i></span>
-                                                <span><i class="fa fa-star-o"></i></span>
-                                                <span><i class="fa fa-star-o"></i></span>
-                                                <div class="pro-review">
-                                                    <span>1 Reviews</span>
-                                                </div>
-                                            </div>
-                                            <div class="price-box">
-                                                <span class="price-regular"><?= $listProductById["price"] ?></span>
-                                                <span class="price-old"><del>$90.00</del></span>
-                                            </div>
-                                         
-                                         
-                                            <div class="availability">
-                                                <i class="fa fa-check-circle"></i>
-                                                <span>200 in stock</span>
-                                            </div>
-                                            <p class="pro-desc"><h6>Description : <span><?= $listProductById["description"] ?></p> </h4></p>
-                                            <div class="quantity-cart-box d-flex align-items-center">
-                                                <h6 class="option-title">qty:</h6>
-                                                <div class="quantity">
-                                                    <div class="pro-qty"><input type="text" value="1"></div>
-                                                </div>
-                                                <div class="action_link">
-                                                    <a class="btn btn-cart2" href="#">Add to cart</a>
-                                                </div>
-                                            </div>
-                                            <div class="pro-size">
-                                                <h6 class="option-title">size :</h6>
-                                                <select class="nice-select">
-                                                    <?php foreach ($getAllProductSize as $getAllProductSize): ?>
-                                                    <option><?= $getAllProductSize["size_name"] ?></option>
-                                                    <!-- <option>M</option>
-                                                    <option>L</option>
-                                                    <option>XL</option> -->
-                                                    <?php endforeach ?>        
-                                                </select>
-
-                                            </div>
-                                            <div class="color-option">
-                                                <h6 class="option-title">color :</h6>
-                                                <ul class="color-categories">
-                                                    <?php foreach ($getAllProductColor as $color): 
-                                                       
-                                                        ?>
-                                                    
-                                                    <li>
-                                                        <a style= "background-color: <?= $color["color_code"] ?>"  href="#" title="LightSteelblue"></a>
-                                                    </li>
-                                                    <!-- <li>
-                                                        <a class="c-darktan" href="#" title="Darktan"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="c-grey" href="#" title="Grey"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="c-brown" href="#" title="Brown"></a>
-                                                    </li> -->
-                                                    <?php endforeach ?>   
-                                                </ul>
-                                            </div>
-                                            <div class="useful-links">
-                                                <a href="#" data-bs-toggle="tooltip" title="Compare"><i
-                                                        class="pe-7s-refresh-2"></i>compare</a>
-                                                <a href="#" data-bs-toggle="tooltip" title="Wishlist"><i
-                                                        class="pe-7s-like"></i>wishlist</a>
-                                            </div>
-                                            <div class="like-icon">
-                                                <a class="facebook" href="#"><i class="fa fa-facebook"></i>like</a>
-                                                <a class="twitter" href="#"><i class="fa fa-twitter"></i>tweet</a>
-                                                <a class="pinterest" href="#"><i class="fa fa-pinterest"></i>save</a>
-                                                <a class="google" href="#"><i class="fa fa-google-plus"></i>share</a>
-                                            </div>
+                                        <div class="useful-links">
+                                            <a href="#" data-bs-toggle="tooltip" title="Compare"><i
+                                                    class="pe-7s-refresh-2"></i>compare</a>
+                                            <a href="#" data-bs-toggle="tooltip" title="Wishlist"><i
+                                                    class="pe-7s-like"></i>wishlist</a>
+                                        </div>
+                                        <div class="like-icon">
+                                            <a class="facebook" href="#"><i class="fa fa-facebook"></i>like</a>
+                                            <a class="twitter" href="#"><i class="fa fa-twitter"></i>tweet</a>
+                                            <a class="pinterest" href="#"><i class="fa fa-pinterest"></i>save</a>
+                                            <a class="google" href="#"><i class="fa fa-google-plus"></i>share</a>
                                         </div>
                                     </div>
-                                <?php endforeach ?>
+                                </div>
                             </div>
                         </div>
-
                         <!-- product details inner end -->
 
                         <!-- product details reviews start -->
@@ -332,8 +294,8 @@
                     <div class="col-12">
                         <!-- section title start -->
                         <div class="section-title text-center">
-                            <h2 class="title">Related Products</h2>
-                            <p class="sub-title">Add related products to weekly lineup</p>
+                            <h2 class="title">Sản phẩm mới nhất</h2>
+                            <p class="sub-title"></p>
                         </div>
                         <!-- section title start -->
                     </div>
@@ -342,56 +304,58 @@
                     <div class="col-12">
                         <div class="product-carousel-4 slick-row-10 slick-arrow-style">
                             <!-- product item start -->
-                            <div class="product-item">
-                                <figure class="product-thumb">
-                                    <a href="product-details.html">
-                                        <img class="pri-img" src="assets/img/product/product-11.jpg" alt="product">
-                                        <img class="sec-img" src="assets/img/product/product-8.jpg" alt="product">
-                                    </a>
-                                    <div class="product-badge">
-                                        <div class="product-label new">
-                                            <span>new</span>
+                            <?php foreach ($listProduct as $listProduct) {
+                                  $discountPercentage = (($listProduct["price"] - $listProduct["discount_price"]) / $listProduct["price"]) * 100;
+                                ?>
+                                <div class="product-item">
+                                    <figure class="product-thumb">
+                                        <a href="product-details.html">
+                                            <img class="pri-img" src="<?= $listProduct["image"] ?>" alt="product" style="height: 250px; width: 100%; object-fit: cover;" >
+                                          
+                                        </a>
+                                        <div class="product-badge">
+                                            <div class="product-label new">
+                                                <span>new</span>
+                                            </div>
+                                            <div class="product-label discount">
+                                            <?=$discountPercentage?>
+                                            </div>
                                         </div>
-                                        <div class="product-label discount">
-                                            <span>10%</span>
+                                        <div class="button-group">
+                                            <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
+                                            <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
                                         </div>
-                                    </div>
-                                    <div class="button-group">
-                                        <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                        <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
-                                    </div>
-                                    <div class="cart-hover">
-                                        <button class="btn btn-cart">add to cart</button>
-                                    </div>
-                                </figure>
-                                <div class="product-caption text-center">
-                                    <div class="product-identity">
-                                        <p class="manufacturer-name"><a href="product-details.html">Gold</a></p>
-                                    </div>
-                                    <ul class="color-categories">
-                                        <li>
-                                            <a class="c-lightblue" href="#" title="LightSteelblue"></a>
-                                        </li>
-                                        <li>
-                                            <a class="c-darktan" href="#" title="Darktan"></a>
-                                        </li>
-                                        <li>
-                                            <a class="c-grey" href="#" title="Grey"></a>
-                                        </li>
-                                        <li>
-                                            <a class="c-brown" href="#" title="Brown"></a>
-                                        </li>
-                                    </ul>
-                                    <h6 class="product-name">
-                                        <a href="product-details.html">Perfect Diamond Jewelry</a>
-                                    </h6>
-                                    <div class="price-box">
-                                        <span class="price-regular">$60.00</span>
-                                        <span class="price-old"><del>$70.00</del></span>
+                                        <div class="cart-hover">
+                                            <button class="btn btn-cart">add to cart</button>
+                                        </div>
+                                    </figure>
+                                    <div class="product-caption text-center">
+                                        
+                                        <!-- <ul class="color-categories">
+                                            <li>
+                                                <a class="c-lightblue" href="#" title="LightSteelblue"></a>
+                                            </li>
+                                            <li>
+                                                <a class="c-darktan" href="#" title="Darktan"></a>
+                                            </li>
+                                            <li>
+                                                <a class="c-grey" href="#" title="Grey"></a>
+                                            </li>
+                                            <li>
+                                                <a class="c-brown" href="#" title="Brown"></a>
+                                            </li>
+                                        </ul> -->
+                                        <h6 class="product-name">
+                                            <a href="product-details.html"><?= $listProduct["product_name"] ?></a>
+                                        </h6>
+                                        <div class="price-box">
+                                            <span class="price-regular"><?= $listProduct["discount_price"] ?></span>
+                                            <span class="price-old"><del><?= $listProduct["price"] ?></del></span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            <?php } ?>
                             <!-- product item end -->
 
                             <!-- product item start -->
@@ -610,6 +574,16 @@
         <!-- related products area end -->
     </main>
 
+    <!-- Scroll to top start -->
+    <div class="scroll-top not-visible">
+        <i class="fa fa-angle-up"></i>
+    </div>
+    <!-- Scroll to Top End -->
+
+
+    <!-- JS
+============================================ -->
+
     <!-- Modernizer JS -->
     <script src="./corano/assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <!-- jQuery JS -->
@@ -638,10 +612,7 @@
     <script src="./corano/assets/js/plugins/google-map.js"></script>
     <!-- Main JS -->
     <script src="./corano/assets/js/main.js"></script>
-
-
 </body>
 
 </html>
-
-<?php include "./include/footerClient.php"; ?>
+<?php include "./include/footerClient.php" ?>

@@ -1,83 +1,113 @@
 <?php
-session_start();
-    class clientController{
-        public $productModel;
-        public $userModel;
-        public $oderModel;
-        public $categoryModel;
-        public $slideModel;
-        public $reviewModel;
-        public $blogModel;
-        public $projectInforModel;
-        public $wishlistModel;
-        public $cartModel;
-        
-        public function __construct()
-        {
-            $this->productModel=new productModel();
-            $this->userModel=new AccountModel();
-            $this->oderModel=new oderModel();
-            $this->categoryModel=new categoryModel();
-            $this->slideModel=new sliderModel();
-            $this->reviewModel=new reviewModel();
-            $this->blogModel=new blogModel();
-            $this->projectInforModel=new projectInforModel();
-            $this->wishlistModel=new WishlistModel();
-            $this->cartModel=new cartModel();
-        }
-        public function HomeClient(){
-            $listCate=$this->categoryModel->getAllCategory();
-            $listCateTop=$this->categoryModel->getCategoryTop();
-            $listCateTopOrder=$this->categoryModel->getCategoryTopOrder();
-            $listProduct=$this->productModel->getAllProduct();
-            $projectInfor=$this->projectInforModel->getAllProjectInfor();
-            // var_dump($listProduct);
-       
-            $productLimit20=$this->productModel->getProductLimit20();
-            $listBlogs=$this->blogModel->getAllBlog();
-            $listSlider=$this->slideModel->getAllSlider();
-            if(isset($_SESSION["user_id"])){
-            $wishlist = $this->wishlistModel->getWishlistById($_SESSION["user_id"]);
-            $listCart=$this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
-            // var_dump($listCart);
+class clientController
+{
+    public $productModel;
+    public $userModel;
+    public $oderModel;
+    public $categoryModel;
+    public $slideModel;
+    public $reviewModel;
+    public $blogModel;
+    public $projectInforModel;
+    public $wishlistModel;
+    public $cartModel;
 
-        $cart=count($listCart);
-            $vouchers=$this->cartModel->getVoucherByIdUser($_SESSION["user_id"]);
-            $voucher=$this->cartModel->getVoucher($_SESSION["user_id"]);
+    public function __construct()
+    {
+        $this->productModel = new productModel();
+        $this->userModel = new AccountModel();
+        $this->oderModel = new oderModel();
+        $this->categoryModel = new categoryModel();
+        $this->slideModel = new sliderModel();
+        $this->reviewModel = new reviewModel();
+        $this->blogModel = new blogModel();
+        $this->projectInforModel = new projectInforModel();
+    }
 
-            }
-            
-           
-            require "./views/client/index.php";
-            
-        }
-        public function searchProductClient($keyword) {
-            $listCate=$this->categoryModel->getAllCategory();
-            if($keyword==""){}
-            $listProduct = $this->productModel->searchProduct($keyword); 
-            $productsPerPage = 9; // Số sản phẩm hiển thị trên mỗi trang
-            $totalProducts = count($listProduct); // Tổng số sản phẩm
-            $totalPages = ceil($totalProducts / $productsPerPage); // Tổng số trang
 
-            // Lấy trang hiện tại từ URL, mặc định là trang 1
-            if (isset($_GET['page']) && is_numeric($_GET['page'])) {
-                $currentPage = (int) $_GET['page'];
-            } else {
-                $currentPage = 1;
-            }
-
-            // Tính toán vị trí bắt đầu
-            $startIndex = ($currentPage - 1) * $productsPerPage;
-
-            // Lấy danh sách sản phẩm cho trang hiện tại
-            $productsToDisplay = array_slice($listProduct, $startIndex, $productsPerPage);// Gọi model để tìm kiếm sản phẩm
-            require_once './views/client/listProduct.php';
-            // Hiển thị kết quả trong view
-        }
     public function formLogin()
     {
         include "./views/client/login.php";
     }
+    public function blog($id)
+    {
+        $listBlog = $this->blogModel->getBlogById($id);
+
+        include "./views/client/blog_detail.php";
+    }
+    public function homeBlog()
+    {
+        $listBlogs = $this->blogModel->getAllBlog();
+        include "./views/client/homeBlog.php";
+    }
+    public function contactUS()
+    {
+
+        include "./views/client/contactUS.php";
+    }
+    public function productDetail($id)
+    {
+        $listProductById = $this->productModel->getProductById($id);
+        $getAllProductImage = $this->productModel->getAllProductVariant($id);
+        $getAllProductImagePhu = $this->productModel->getAllProductVariant($id);
+        $getAllColor = $this->productModel->getAllColor();
+        $getAllSize = $this->productModel->getAllSize();
+        $listProduct = $this->productModel->getAllProduct();
+        var_dump($getAllProductImage);
+        include "./views/client/product_detail.php";
+    }
+
+    public function HomeClient()
+    {
+        $listCate = $this->categoryModel->getAllCategory();
+        $listCateTop = $this->categoryModel->getCategoryTop();
+        $listCateTopOrder = $this->categoryModel->getCategoryTopOrder();
+        $listProduct = $this->productModel->getAllProduct();
+        $projectInfor = $this->projectInforModel->getAllProjectInfor();
+        // var_dump($listProduct);
+
+        $productLimit20 = $this->productModel->getProductLimit20();
+        $listBlogs = $this->blogModel->getAllBlog();
+        $listSlider = $this->slideModel->getAllSlider();
+        if (isset($_SESSION["user_id"])) {
+            $wishlist = $this->wishlistModel->getWishlistById($_SESSION["user_id"]);
+            $listCart = $this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
+            // var_dump($listCart);
+
+            $cart = count($listCart);
+            $vouchers = $this->cartModel->getVoucherByIdUser($_SESSION["user_id"]);
+            $voucher = $this->cartModel->getVoucher($_SESSION["user_id"]);
+        }
+
+
+        require "./views/client/index.php";
+    }
+    public function searchProductClient($keyword)
+    {
+        $listCate = $this->categoryModel->getAllCategory();
+        if ($keyword == "") {
+        }
+        $listProduct = $this->productModel->searchProduct($keyword);
+        $productsPerPage = 9; // Số sản phẩm hiển thị trên mỗi trang
+        $totalProducts = count($listProduct); // Tổng số sản phẩm
+        $totalPages = ceil($totalProducts / $productsPerPage); // Tổng số trang
+
+        // Lấy trang hiện tại từ URL, mặc định là trang 1
+        if (isset($_GET['page']) && is_numeric($_GET['page'])) {
+            $currentPage = (int) $_GET['page'];
+        } else {
+            $currentPage = 1;
+        }
+
+        // Tính toán vị trí bắt đầu
+        $startIndex = ($currentPage - 1) * $productsPerPage;
+
+        // Lấy danh sách sản phẩm cho trang hiện tại
+        $productsToDisplay = array_slice($listProduct, $startIndex, $productsPerPage); // Gọi model để tìm kiếm sản phẩm
+        require_once './views/client/listProduct.php';
+        // Hiển thị kết quả trong view
+    }
+
     public function listProduct()
     {
         $listCate = $this->categoryModel->getAllCategory();
@@ -347,20 +377,16 @@ session_start();
             }
         }
     }
-    public function blog($id)
-    {
-        $listBlog = $this->blogModel->getBlogById($id);
-        include "./views/client/blog_detail.php";
-    }
+    
     public function includeClient()
     {
-        if(isset($_SESSION['user_id'])){
-        $user= $this->userModel->getIdTK($_SESSION["user_id"]);
-        $listCart=$this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
-        $cart=count($listCart);
+        if (isset($_SESSION['user_id'])) {
+            $user = $this->userModel->getIdTK($_SESSION["user_id"]);
+            $listCart = $this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
+            $cart = count($listCart);
 
-        $vouchers=$this->cartModel->getVoucherByIdUser($_SESSION["user_id"]);
-        $voucher=$this->cartModel->getVoucher($_SESSION["user_id"]);
+            $vouchers = $this->cartModel->getVoucherByIdUser($_SESSION["user_id"]);
+            $voucher = $this->cartModel->getVoucher($_SESSION["user_id"]);
         }
         // Lấy tất cả danh mục và blog
         $listCate = $this->categoryModel->getAllCategory();
@@ -374,11 +400,6 @@ session_start();
         include "./include/headerClient.php";
     }
 
-    public function homeBlog()
-    {
-        $listBlogs = $this->blogModel->getAllBlog();
-        include "./views/client/homeBlog.php";
-    }
     public function ProductByCategory($id)
     {
         $category = $this->categoryModel->getIdDM($id);
@@ -403,48 +424,48 @@ session_start();
         include "./views/client/productByCategory.php";
     }
     public function ProductByPrice()
-{
-    // Kiểm tra nếu có khoảng giá được gửi qua POST
-    if (isset($_POST['price_range']) && !empty($_POST['price_range'])) {
-        // Lấy khoảng giá từ input
-        $price_range = $_POST['price_range'];
-        $price_parts = explode(" - ", $price_range);
+    {
+        // Kiểm tra nếu có khoảng giá được gửi qua POST
+        if (isset($_POST['price_range']) && !empty($_POST['price_range'])) {
+            // Lấy khoảng giá từ input
+            $price_range = $_POST['price_range'];
+            $price_parts = explode(" - ", $price_range);
 
-        // Kiểm tra xem khoảng giá có hợp lệ không
-        if (count($price_parts) == 2 && is_numeric($price_parts[0]) && is_numeric($price_parts[1])) {
-            $min_price = (int) $price_parts[0];
-            $max_price = (int) $price_parts[1];
+            // Kiểm tra xem khoảng giá có hợp lệ không
+            if (count($price_parts) == 2 && is_numeric($price_parts[0]) && is_numeric($price_parts[1])) {
+                $min_price = (int) $price_parts[0];
+                $max_price = (int) $price_parts[1];
 
-            // Lấy danh sách sản phẩm trong khoảng giá (cập nhật logic SQL để lấy sản phẩm trực tiếp từ cơ sở dữ liệu)
-            $listCate = $this->categoryModel->getAllCategory();
-            $listProductByPrice = $this->productModel->getProductByPrice($min_price, $max_price);
+                // Lấy danh sách sản phẩm trong khoảng giá (cập nhật logic SQL để lấy sản phẩm trực tiếp từ cơ sở dữ liệu)
+                $listCate = $this->categoryModel->getAllCategory();
+                $listProductByPrice = $this->productModel->getProductByPrice($min_price, $max_price);
 
-            // Phân trang sản phẩm
-            $productsPerPage = 9; // Số sản phẩm hiển thị trên mỗi trang
-            $totalProducts = count($listProductByPrice); // Tổng số sản phẩm
-            $totalPages = ceil($totalProducts / $productsPerPage); // Tổng số trang
+                // Phân trang sản phẩm
+                $productsPerPage = 9; // Số sản phẩm hiển thị trên mỗi trang
+                $totalProducts = count($listProductByPrice); // Tổng số sản phẩm
+                $totalPages = ceil($totalProducts / $productsPerPage); // Tổng số trang
 
-            // Lấy trang hiện tại từ URL, mặc định là trang 1
-            $currentPage = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
+                // Lấy trang hiện tại từ URL, mặc định là trang 1
+                $currentPage = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
 
-            // Tính toán vị trí bắt đầu
-            $startIndex = ($currentPage - 1) * $productsPerPage;
+                // Tính toán vị trí bắt đầu
+                $startIndex = ($currentPage - 1) * $productsPerPage;
 
-            // Lấy danh sách sản phẩm cho trang hiện tại
-            $productsToDisplay = array_slice($listProductByPrice, $startIndex, $productsPerPage);
+                // Lấy danh sách sản phẩm cho trang hiện tại
+                $productsToDisplay = array_slice($listProductByPrice, $startIndex, $productsPerPage);
 
-            // Bao gồm view để hiển thị sản phẩm
-            include "./views/client/listProduct.php";
+                // Bao gồm view để hiển thị sản phẩm
+                include "./views/client/listProduct.php";
+            } else {
+                echo "Invalid price range.";
+            }
         } else {
-            echo "Invalid price range.";
+            echo "Please select a valid price range.";
         }
-    } else {
-        echo "Please select a valid price range.";
     }
-}
 
 
-    
+
     public function gioiThieu()
     {
         include "./views/client/gioiThieu.php";
