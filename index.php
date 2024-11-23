@@ -214,4 +214,12 @@ switch ($act) {
         $client->includeClient();
         $client->listProduct();
         break;
+    case "myAccount":
+        $client->includeClient();
+        $client->myAccount();
+        break;
+    case "changeAccount":
+        $client->includeClient();
+        $client->updateAccount();
+        break;
 }

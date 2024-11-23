@@ -38,6 +38,11 @@ class oderModel{
         $this->pdo->exec($query);
     }
 }
+public function getOrderUser($id){
+    $sql = "SELECT * FROM orders WHERE id=$id";
+    $data= $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    return $data;
+}
     public function getOrderById($id){
        
         $sql = "SELECT orders.id AS order_id, 
