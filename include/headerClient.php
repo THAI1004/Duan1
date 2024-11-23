@@ -69,8 +69,7 @@ ob_start(); // Bắt đầu output buffer
                             <div class="main-menu">
                                 <!-- main menu navbar start -->
                                 <nav class="desktop-menu">
-                                    <ul>
-                                        <li class="active"><a href="?act=homeClient">Home</a>
+                                    <ul> <li class="active"><a href="?act=homeClient">Home</a>
                                         </li>
                                         <li class="position-static"><a href="?act=listProductClient">Sneaker <i class="fa fa-angle-down"></i></a>
                                             <ul class="megamenu dropdown">
@@ -104,7 +103,7 @@ ob_start(); // Bắt đầu output buffer
                                                 <?php } ?>
                                             </ul>
                                         </li>
-                                        <li><a href="contact-us.html">Contact us</a></li>
+                                        <li><a href="?act=contactUS">contactUS</a></li>
                                     </ul>
                                 </nav>
                                 <!-- main menu navbar end -->
@@ -115,8 +114,7 @@ ob_start(); // Bắt đầu output buffer
 
                     <!-- mini cart area start -->
                     <div class="col-lg-4">
-                        <div class="header-right d-flex align-items-center justify-content-xl-between justify-content-lg-end">
-                            <div class="header-search-container">
+                        <div class="header-right d-flex align-items-center justify-content-xl-between justify-content-lg-end"> <div class="header-search-container">
                                 <button class="search-trigger d-xl-none d-lg-block"><i class="pe-7s-search"></i></button>
                                 <form action="?act=searchProductClient" method="post" class="header-search-box d-lg-none d-xl-block">
                                     <input type="search" name="search" value="<?= isset($_POST['search']) ? htmlspecialchars($_POST['search']) : '' ?>" placeholder="Tên sản phẩm ..." class="header-search-field">
@@ -158,8 +156,7 @@ ob_start(); // Bắt đầu output buffer
                                             </div>
                                         </a>
                                     </li>
-                                </ul>
-                </div>
+                                </ul> </div>
             </div>
         </div>
         <!-- header middle area end -->
@@ -230,8 +227,7 @@ ob_start(); // Bắt đầu output buffer
                                 <ul class="dropdown">
                                     <li><a href="index.html">Home version 01</a></li>
                                     <li><a href="index-2.html">Home version 02</a></li>
-                                    <li><a href="index-3.html">Home version 03</a></li>
-                                    <li><a href="index-4.html">Home version 04</a></li>
+                                    <li><a href="index-3.html">Home version 03</a></li> <li><a href="index-4.html">Home version 04</a></li>
                                     <li><a href="index-5.html">Home version 05</a></li>
                                     <li><a href="index-6.html">Home version 06</a></li>
                                 </ul>
@@ -266,8 +262,7 @@ ob_start(); // Bắt đầu output buffer
                                         <ul class="dropdown">
                                             <li><a href="my-account.html">my-account</a></li>
                                             <li><a href="login-register.html">login-register</a></li>
-                                            <li><a href="about-us.html">about us</a></li>
-                                            <li><a href="contact-us.html">contact us</a></li>
+                                            <li><a href="about-us.html">about us</a></li> <li><a href="contact-us.html">contact us</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -303,8 +298,7 @@ ob_start(); // Bắt đầu output buffer
                                 <ul class="dropdown">
                                     <li><a href="blog-left-sidebar.html">blog left sidebar</a></li>
                                     <li><a href="blog-list-left-sidebar.html">blog list left sidebar</a></li>
-                                    <li><a href="blog-right-sidebar.html">blog right sidebar</a></li>
-                                    <li><a href="blog-list-right-sidebar.html">blog list right sidebar</a></li>
+                                    <li><a href="blog-right-sidebar.html">blog right sidebar</a></li> <li><a href="blog-list-right-sidebar.html">blog list right sidebar</a></li>
                                     <li><a href="blog-grid-full-width.html">blog grid full width</a></li>
                                     <li><a href="blog-details.html">blog details</a></li>
                                     <li><a href="blog-details-left-sidebar.html">blog details left sidebar</a></li>
@@ -352,8 +346,7 @@ ob_start(); // Bắt đầu output buffer
 
                 <!-- offcanvas widget area start -->
                 <div class="offcanvas-widget-area">
-                    <div class="off-canvas-contact-widget">
-                        <ul>
+                    <div class="off-canvas-contact-widget"> <ul>
                             <li><i class="fa fa-mobile"></i>
                                 <a href="#">0123456789</a>
                             </li>
@@ -408,8 +401,7 @@ ob_start(); // Bắt đầu output buffer
                                         <span class="cart-price">Đơn giá: <?= $row["price"]?></span>
                                     </p>
                                 </div>
-                                <a href="?act=deleteCart&id=<?=$row["cart_item_id"]?>"><i class="pe-7s-close"></i></a>
-                            </li>
+                                <a href="?act=deleteCart&id=<?=$row["cart_item_id"]?>"><i class="pe-7s-close"></i></a> </li>
                             <?php }}?>                            
                         </ul>
                     </div>

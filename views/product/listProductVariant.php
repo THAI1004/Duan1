@@ -144,7 +144,7 @@ include './include/header.php';
 @media (max-width: 768px) {
     .single-product-area {
         flex-direction: column;
-        align-items: center;
+align-items: center;
     }
 
     .col-xl-4, .col-xl-7 {
@@ -214,7 +214,7 @@ include './include/header.php';
                                 <h2>Tên sản phẩm: <?=$Product['product_name']?></h2>
                                 <div class="price-box">
                                     <span class="new-price">Giá: <?=$Product['price']?></span>
-                                    <span class="old-price"><?= $Product['discount_price']?></span>
+<span class="old-price"><?= $Product['discount_price']?></span>
                                 </div>
                                 <p>Mô tả: <?= $Product["description"]?></p>
                             </div>

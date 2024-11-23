@@ -95,7 +95,7 @@ LIMIT 20;
             if ($data === 1) {
                 return "OK";
             }
-        } catch (Exception $er) {
+} catch (Exception $er) {
             echo "Lỗi hàm insert :" . $er->getMessage();
             echo "<hr>";
         }
@@ -187,7 +187,7 @@ LIMIT 20;
     }
     public function getVariantById($idVariant)
     {
-        $sql = "SELECT * FROM `product_variants` where id=$idVariant   ";
+$sql = "SELECT * FROM `product_variants` where id=$idVariant   ";
         $data = $this->pdo->query($sql)->fetch();
         return $data;
     }
