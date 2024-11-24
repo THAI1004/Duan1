@@ -39,7 +39,7 @@ class oderModel{
     }
 }
 public function getOrderUser($id){
-    $sql = "SELECT * FROM orders WHERE id=$id";
+    $sql = "SELECT * FROM orders WHERE user_id =$id";
     $data= $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     return $data;
 }

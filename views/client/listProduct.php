@@ -163,7 +163,7 @@
                                                 <a href="?act=addWishlist&id=<?= $product['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
                                             </div>
                                             <div class="cart-hover">
-                                                <button class="btn btn-cart">add to cart</button>
+                                                <a href="?act=productDetail&id=<?=$product["id"]?>" class="btn btn-cart">Xem chi tiết</a>
                                             </div>
                                         </figure>
                                         <div class="product-caption text-center">
