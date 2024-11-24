@@ -1,55 +1,56 @@
 <?php
 session_start();
-    class clientController{
-        public $productModel;
-        public $userModel;
-        public $oderModel;
-        public $categoryModel;
-        public $slideModel;
-        public $reviewModel;
-        public $blogModel;
-        public $projectInforModel;
-        public $wishlistModel;
-        public $cartModel;
-        
-        public function __construct()
-        {
-            $this->productModel=new productModel();
-            $this->userModel=new AccountModel();
-            $this->oderModel=new oderModel();
-            $this->categoryModel=new categoryModel();
-            $this->slideModel=new sliderModel();
-            $this->reviewModel=new reviewModel();
-            $this->blogModel=new blogModel();
-            $this->projectInforModel=new projectInforModel();
-            $this->wishlistModel=new WishlistModel();
-            $this->cartModel=new cartModel();
-        }
-        public function HomeClient(){
-            $listCate=$this->categoryModel->getAllCategory();
-            $listCateTop=$this->categoryModel->getCategoryTop();
-            $listCateTopOrder=$this->categoryModel->getCategoryTopOrder();
-            $listProduct=$this->productModel->getAllProduct();
-            $projectInfor=$this->projectInforModel->getAllProjectInfor();
-            // var_dump($listProduct);
-            
-            $productLimit20=$this->productModel->getProductLimit20();
-            $listBlogs=$this->blogModel->getAllBlog();
-            $listSlider=$this->slideModel->getAllSlider();
-            if(isset($_SESSION["user_id"])){
+class clientController
+{
+    public $productModel;
+    public $userModel;
+    public $oderModel;
+    public $categoryModel;
+    public $slideModel;
+    public $reviewModel;
+    public $blogModel;
+    public $projectInforModel;
+    public $wishlistModel;
+    public $cartModel;
+
+    public function __construct()
+    {
+        $this->productModel = new productModel();
+        $this->userModel = new AccountModel();
+        $this->oderModel = new oderModel();
+        $this->categoryModel = new categoryModel();
+        $this->slideModel = new sliderModel();
+        $this->reviewModel = new reviewModel();
+        $this->blogModel = new blogModel();
+        $this->projectInforModel = new projectInforModel();
+        $this->wishlistModel = new WishlistModel();
+        $this->cartModel = new cartModel();
+    }
+    public function HomeClient()
+    {
+        $listCate = $this->categoryModel->getAllCategory();
+        $listCateTop = $this->categoryModel->getCategoryTop();
+        $listCateTopOrder = $this->categoryModel->getCategoryTopOrder();
+        $listProduct = $this->productModel->getAllProduct();
+        $projectInfor = $this->projectInforModel->getAllProjectInfor();
+        // var_dump($listProduct);
+
+        $productLimit20 = $this->productModel->getProductLimit20();
+        $listBlogs = $this->blogModel->getAllBlog();
+        $listSlider = $this->slideModel->getAllSlider();
+        if (isset($_SESSION["user_id"])) {
             $wishlist = $this->wishlistModel->getWishlistById($_SESSION["user_id"]);
-            $listCart=$this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
+            $listCart = $this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
             // var_dump($listCart);
-            $user= $this->userModel->getIdTK($_SESSION["user_id"]);
+            $user = $this->userModel->getIdTK($_SESSION["user_id"]);
 
 
-            $cart=count($listCart);
-            $vouchers=$this->cartModel->getVoucherByIdUser($_SESSION["user_id"]);
-            $voucher=$this->cartModel->getVoucher($_SESSION["user_id"]);
-
-            }
-            include "./views/client/index.php";
+            $cart = count($listCart);
+            $vouchers = $this->cartModel->getVoucherByIdUser($_SESSION["user_id"]);
+            $voucher = $this->cartModel->getVoucher($_SESSION["user_id"]);
         }
+        include "./views/client/index.php";
+    }
     public function formLogin()
     {
         include "./views/client/login.php";
@@ -65,7 +66,7 @@ session_start();
         $listBlogs = $this->blogModel->getAllBlog();
         include "./views/client/homeBlog.php";
     }
-    
+
     public function searchProductClient($keyword)
     {
         $listCate = $this->categoryModel->getAllCategory();
@@ -361,7 +362,7 @@ session_start();
             }
         }
     }
-    
+
     public function includeClient()
     {
         if (isset($_SESSION['user_id'])) {
@@ -514,8 +515,11 @@ session_start();
     }
     public function contactUS()
     {
-
         include "./views/client/contactUS.php";
+    }
+    public function checkout()
+    {
+        include "./views/client/checkout.php";
     }
     public function productDetail($id)
     {
@@ -526,8 +530,8 @@ session_start();
         $getAllSize = $this->productModel->getAllSize();
         $listProduct = $this->productModel->getAllProduct();
         $productLimit20 = $this->productModel->getProductLimit20();
-        $listReview=$this->reviewModel->getReviewById($id);
-        $countReview=count($listReview);
+        $listReview = $this->reviewModel->getReviewById($id);
+        $countReview = count($listReview);
         $totalRating = 0;  // Biến lưu tổng điểm rating
         $countReview = count($listReview);  // Đếm số lượng review
 
@@ -541,6 +545,4 @@ session_start();
         // var_dump($productLimit20);
         include "./views/client/product_detail.php";
     }
-
-    
 }
