@@ -34,7 +34,9 @@ class clientController
         $listProduct = $this->productModel->getAllProduct();
         $projectInfor = $this->projectInforModel->getAllProjectInfor();
         // var_dump($listProduct);
-
+        if (isset($_SESSION['user_id'])) {
+            $user = $this->userModel->getIdTK($_SESSION["user_id"]);
+        }
         $productLimit20 = $this->productModel->getProductLimit20();
         $listBlogs = $this->blogModel->getAllBlog();
         $listSlider = $this->slideModel->getAllSlider();
@@ -66,7 +68,11 @@ class clientController
         $listBlogs = $this->blogModel->getAllBlog();
         include "./views/client/homeBlog.php";
     }
+    public function contactUS()
+    {
 
+        include "./views/client/contactUS.php";
+    }
     public function searchProductClient($keyword)
     {
         $listCate = $this->categoryModel->getAllCategory();
@@ -306,6 +312,7 @@ class clientController
         session_destroy();
         header('location: index.php');
     }
+
     public function singup()
     {
         $thongBaoLoi = "";
@@ -323,6 +330,8 @@ class clientController
             $addressError = "";
             $passwordError = "";
             $repeatPasswordError = "";
+
+            // Kiểm tra các điều kiện
             if (empty($username)) {
                 $usernameError = "Username is required.";
             }
@@ -349,17 +358,45 @@ class clientController
             } elseif ($password !== $repeatPassword) {
                 $repeatPasswordError = "Passwords do not match.";
             }
-            $result = $this->userModel->insertTaiKhoan($username, $email, $phone, $address, $password);
-            if ($result === "OK") {
-                // Gửi thông báo đăng ký thành công
-                $_SESSION['message'] = "success|Đăng ký thành công! Mời bạn đăng nhập.";
-                header('Location: ?act=formLogin'); // Chuyển về trang đăng nhập
-                exit();
+
+            // Kiểm tra nếu có bất kỳ lỗi nào
+            if (empty($usernameError) && empty($emailError) && empty($phoneError) && empty($addressError) && empty($passwordError) && empty($repeatPasswordError)) {
+
+                $result = $this->userModel->insertTaiKhoan($username, $email, $phone, $address, $password);
+                if ($result === "OK") {
+                    // Gửi thông báo đăng ký thành công
+                    $_SESSION['message'] = "success|Đăng ký thành công! Mời bạn đăng nhập.";
+                    header('Location: ?act=formLogin'); // Chuyển về trang đăng nhập
+                    exit();
+                } else {
+                    $_SESSION['message'] = "error|Lỗi khi thêm tài khoản. Vui lòng thử lại.";
+                    header('Location: ?act=formLogin'); // Quay lại trang đăng ký
+                    exit();
+                }
             } else {
-                $_SESSION['message'] = "error|Lỗi khi thêm tài khoản. Vui lòng thử lại.";
-                header('Location: ?act=formLogin'); // Quay lại trang đăng ký
-                exit();
+                if (isset($_SESSION['user_id'])) {
+                    $user = $this->userModel->getIdTK($_SESSION["user_id"]);
+                    $listCart = $this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
+                    $cart = count($listCart);
+
+                    $vouchers = $this->cartModel->getVoucherByIdUser($_SESSION["user_id"]);
+                    $voucher = $this->cartModel->getVoucher($_SESSION["user_id"]);
+                }
+                // Lấy tất cả danh mục và blog
+                $listCate = $this->categoryModel->getAllCategory();
+                $listBlogs = $this->blogModel->getAllBlog();
+
+                // Kiểm tra xem session đã có user_id chưa, nếu chưa gán giá trị mặc định
+                // Lấy danh sách wishlist của người dùng
+                if (isset($_SESSION["user_id"])) {
+                    $wishlist = $this->wishlistModel->getWishlistById($_SESSION["user_id"]);
+                }
+                include "./include/headerClient.php";
+                include "./views/client/login.php";
             }
+
+            // Nếu không có lỗi, tiến hành gọi hàm insertTaiKhoan
+
         }
     }
 
@@ -512,14 +549,6 @@ class clientController
             $orders = $this->oderModel->getOrderUser($_SESSION['user_id']);
         }
         include './views/client/account.php';
-    }
-    public function contactUS()
-    {
-        include "./views/client/contactUS.php";
-    }
-    public function checkout()
-    {
-        include "./views/client/checkout.php";
     }
     public function productDetail($id)
     {

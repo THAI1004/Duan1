@@ -42,6 +42,9 @@ class AccountModel
         return $result ? $result : false;
     }
     public function insertTaiKhoan($username, $email, $phone, $address, $password){
+        if (strlen($phone) > 11) {
+            return "Error: Phone number exceeds allowed length.";
+        }
         $sql = "INSERT INTO users(username, email, phone, address,password) VALUES ('$username', '$email', '$phone', '$address', '$password')";
         $stmt=$this->pdo->exec($sql);
         if ($stmt > 0) {
