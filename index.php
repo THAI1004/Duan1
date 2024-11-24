@@ -8,11 +8,13 @@ include "./model/admin/oder/oder.php";
 include "./model/admin/cart/cart.php";
 include_once "./model/admin/taiKhoan/taiKhoan.php";
 include_once "./model/admin/product/product.php";
+include_once "./model/admin/product/wishlist.php";
 include_once "./model/admin/category/category.php";
 include_once "./model/admin/review/review.php";
 include_once "./model/admin/slider/slider.php";
 include_once "./model/admin/oder/oder.php";
 include_once "./model/admin/blog/blog.php";
+include_once "./model/admin/cart/cart.php";
 include_once "./model/admin/projectInfo/projectInfo.php";
 include_once "./controller/product.php";
 include_once "./controller/review.php";
@@ -20,7 +22,8 @@ include_once "./controller/slider.php";
 include_once "./controller/oder.php";
 include_once "./controller/home.php";
 include_once "./controller/ClientController.php";
-$act = $_GET['act'] ?? 'Trangchu';
+
+$act = $_GET['act'] ?? 'homeClient';
 $id = "";
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
@@ -40,6 +43,9 @@ $home=new homeController();
 $client=new clientController();
 switch ($act) {
     case "Trangchu":
+        $client->HomeClient();
+        break;
+    case "Admin":
         $home->home();
         break;
     case "listProduct":
@@ -81,6 +87,12 @@ switch ($act) {
     case "searchProduct":
         $keyword = $_POST['search'] ?? '';
         $productC->searchProduct($keyword);
+        break;
+    case "searchProductClient":
+        $keyword = $_POST['search'] ?? '';
+        $client->includeClient();
+
+        $client->searchProductClient($keyword);
         break;
     case "listReview":
         $review = new reviewController();
@@ -150,7 +162,8 @@ switch ($act) {
     case "homeClient":
         $client->HomeClient($id);
         break;
-    case "login":
+    case "formLogin":
+        $client->includeClient();
         $client->formLogin();
         break;
     case "blog":
@@ -161,15 +174,6 @@ switch ($act) {
         $client->includeClient();
         $client->homeBlog();
         break;
-    case "productDetail":
-        $client->includeClient();
-        $client->productDetail($id);
-        break;
-    case "contactUS":
-        $client->includeClient();
-        $client->contactUS();
-        break;
-
     case "listProductByCate":
         $client->includeClient();
         $client->ProductByCategory($id);
@@ -211,6 +215,7 @@ switch ($act) {
         break;
     case "updateCartVoucher":
         $client->updateCartVoucher();
+        break;
     case "listProductClient":
         $client->includeClient();
         $client->listProduct();
@@ -226,5 +231,13 @@ switch ($act) {
     case "changeAccount":
         $client->includeClient();
         $client->updateAccount();
+        break;
+    case "productDetail":
+        $client->includeClient();
+        $client->productDetail($id);
+        break;
+    case "contactUS":
+        $client->includeClient();
+        $client->contactUS();
         break;
 }

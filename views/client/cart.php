@@ -73,8 +73,7 @@
                         <div class="breadcrumb-wrap">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="shop.html">shop</a></li>
+                                    <li class="breadcrumb-item"><a href="?act=homeClient"><i class="fa fa-home"></i></a></li>
                                     <li class="breadcrumb-item active" aria-current="page">cart</li>
                                 </ul>
                             </nav>
@@ -113,8 +112,8 @@
                                         $totalAmount += $total;
                                         ?>
                                         <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="<?=$row["image_variant"]?>" alt="Product" /></a></td>
-                                            <td class="pro-title"><a href="#"><?=$row["product_name"]?></a></td>
+                                            <td class="pro-thumbnail"><a href="?act=productDetail&id=<?=$row["product_id"]?>"><img class="img-fluid" src="<?=$row["image_variant"]?>" alt="Product" /></a></td>
+                                            <td class="pro-title"><a href="?act=productDetail&id=<?=$row["product_id"]?>"><?=$row["product_name"]?></a></td>
                                             <td class="pro-price"><span><?= $row["price"]?></span></td>
                                             <td class="pro-quantity">
                                                 
