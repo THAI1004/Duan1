@@ -72,17 +72,6 @@ session_start();
 
         include "./views/client/contactUS.php";
     }
-    public function productDetail($id)
-    {
-        $listProductById = $this->productModel->getProductById($id);
-        $getAllProductImage = $this->productModel->getAllProductVariant($id);
-        $getAllProductImagePhu = $this->productModel->getAllProductVariant($id);
-        $getAllColor = $this->productModel->getAllColor();
-        $getAllSize = $this->productModel->getAllSize();
-        $listProduct = $this->productModel->getAllProduct();
-        var_dump($getAllProductImage);
-        include "./views/client/product_detail.php";
-    }
     public function searchProductClient($keyword)
     {
         $listCate = $this->categoryModel->getAllCategory();
@@ -528,11 +517,6 @@ session_start();
             $orders = $this->oderModel->getOrderUser($_SESSION['user_id']);
         }
         include './views/client/account.php';
-    }
-    public function contactUS()
-    {
-
-        include "./views/client/contactUS.php";
     }
     public function productDetail($id)
     {
