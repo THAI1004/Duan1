@@ -57,7 +57,7 @@
                     <div class="breadcrumb-wrap">
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="?act=homeClient"><i class="fa fa-home"></i></a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Sneaker </li>
                             </ul>
                         </nav>
@@ -151,7 +151,7 @@
                                     <div class="product-item">
                                         <!-- Hiển thị sản phẩm -->
                                         <figure class="product-thumb">
-                                            <a href="product-details.html">
+                                            <a href="?act=productDetail&id=<?=$product["id"]?>">
                                                 <img class="pri-img" src="<?= $product['image'] ?>" alt="product">
                                                 <img class="sec-img" src="<?= $product['image'] ?>" alt="product">
                                             </a>
@@ -167,7 +167,7 @@
                                             </div>
                                         </figure>
                                         <div class="product-caption text-center">
-                                            <h6 class="product-name"><a href="product-details.html"><?= $product['product_name'] ?></a></h6>
+                                            <h6 class="product-name"><a href="?act=productDetail&id=<?=$product["id"]?>"><?= $product['product_name'] ?></a></h6>
                                             <div class="price-box">
                                                 <span class="price-regular"><?= $product['discount_price'] ?></span>
                                                 <span class="price-old"><del><?= $product['price'] ?></del></span>
@@ -176,7 +176,7 @@
                                     </div>
                                     <div class="product-list-item">
                                         <figure class="product-thumb">
-                                            <a href="product-details.html">
+                                            <a href="?act=productDetail&id=<?=$product["id"]?>">
                                                 <img class="pri-img" src="<?= $product['image'] ?>" alt="product">
                                                 <img class="sec-img" src="<?= $product['image'] ?>" alt="product">
                                             </a>
@@ -189,7 +189,7 @@
                                                 </div>
                                             </div>
                                             <div class="button-group">
-                                                <a href="?act=addWishlist" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
+                                                <a href="?act=addWishlist&id=<?= $product['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
                                 
                                             </div>
                                             <div class="cart-hover">

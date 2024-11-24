@@ -1,30 +1,55 @@
 <?php
-class clientController
-{
-    public $productModel;
-    public $userModel;
-    public $oderModel;
-    public $categoryModel;
-    public $slideModel;
-    public $reviewModel;
-    public $blogModel;
-    public $projectInforModel;
-    public $wishlistModel;
-    public $cartModel;
+session_start();
+    class clientController{
+        public $productModel;
+        public $userModel;
+        public $oderModel;
+        public $categoryModel;
+        public $slideModel;
+        public $reviewModel;
+        public $blogModel;
+        public $projectInforModel;
+        public $wishlistModel;
+        public $cartModel;
+        
+        public function __construct()
+        {
+            $this->productModel=new productModel();
+            $this->userModel=new AccountModel();
+            $this->oderModel=new oderModel();
+            $this->categoryModel=new categoryModel();
+            $this->slideModel=new sliderModel();
+            $this->reviewModel=new reviewModel();
+            $this->blogModel=new blogModel();
+            $this->projectInforModel=new projectInforModel();
+            $this->wishlistModel=new WishlistModel();
+            $this->cartModel=new cartModel();
+        }
+        public function HomeClient(){
+            $listCate=$this->categoryModel->getAllCategory();
+            $listCateTop=$this->categoryModel->getCategoryTop();
+            $listCateTopOrder=$this->categoryModel->getCategoryTopOrder();
+            $listProduct=$this->productModel->getAllProduct();
+            $projectInfor=$this->projectInforModel->getAllProjectInfor();
+            // var_dump($listProduct);
+            
+            $productLimit20=$this->productModel->getProductLimit20();
+            $listBlogs=$this->blogModel->getAllBlog();
+            $listSlider=$this->slideModel->getAllSlider();
+            if(isset($_SESSION["user_id"])){
+            $wishlist = $this->wishlistModel->getWishlistById($_SESSION["user_id"]);
+            $listCart=$this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
+            // var_dump($listCart);
+            $user= $this->userModel->getIdTK($_SESSION["user_id"]);
 
-    public function __construct()
-    {
-        $this->productModel = new productModel();
-        $this->userModel = new AccountModel();
-        $this->oderModel = new oderModel();
-        $this->categoryModel = new categoryModel();
-        $this->slideModel = new sliderModel();
-        $this->reviewModel = new reviewModel();
-        $this->blogModel = new blogModel();
-        $this->projectInforModel = new projectInforModel();
-    }
 
+            $cart=count($listCart);
+            $vouchers=$this->cartModel->getVoucherByIdUser($_SESSION["user_id"]);
+            $voucher=$this->cartModel->getVoucher($_SESSION["user_id"]);
 
+            }
+            include "./views/client/index.php";
+        }
     public function formLogin()
     {
         include "./views/client/login.php";
@@ -40,48 +65,7 @@ class clientController
         $listBlogs = $this->blogModel->getAllBlog();
         include "./views/client/homeBlog.php";
     }
-    public function contactUS()
-    {
-
-        include "./views/client/contactUS.php";
-    }
-    public function productDetail($id)
-    {
-        $listProductById = $this->productModel->getProductById($id);
-        $getAllProductImage = $this->productModel->getAllProductVariant($id);
-        $getAllProductImagePhu = $this->productModel->getAllProductVariant($id);
-        $getAllColor = $this->productModel->getAllColor();
-        $getAllSize = $this->productModel->getAllSize();
-        $listProduct = $this->productModel->getAllProduct();
-        var_dump($getAllProductImage);
-        include "./views/client/product_detail.php";
-    }
-
-    public function HomeClient()
-    {
-        $listCate = $this->categoryModel->getAllCategory();
-        $listCateTop = $this->categoryModel->getCategoryTop();
-        $listCateTopOrder = $this->categoryModel->getCategoryTopOrder();
-        $listProduct = $this->productModel->getAllProduct();
-        $projectInfor = $this->projectInforModel->getAllProjectInfor();
-        // var_dump($listProduct);
-
-        $productLimit20 = $this->productModel->getProductLimit20();
-        $listBlogs = $this->blogModel->getAllBlog();
-        $listSlider = $this->slideModel->getAllSlider();
-        if (isset($_SESSION["user_id"])) {
-            $wishlist = $this->wishlistModel->getWishlistById($_SESSION["user_id"]);
-            $listCart = $this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
-            // var_dump($listCart);
-
-            $cart = count($listCart);
-            $vouchers = $this->cartModel->getVoucherByIdUser($_SESSION["user_id"]);
-            $voucher = $this->cartModel->getVoucher($_SESSION["user_id"]);
-        }
-
-
-        require "./views/client/index.php";
-    }
+    
     public function searchProductClient($keyword)
     {
         $listCate = $this->categoryModel->getAllCategory();
@@ -528,4 +512,35 @@ class clientController
         }
         include './views/client/account.php';
     }
+    public function contactUS()
+    {
+
+        include "./views/client/contactUS.php";
+    }
+    public function productDetail($id)
+    {
+        $Product = $this->productModel->getProductById($id);
+        $listProducVariant = $this->productModel->getAllProductVariant($id);
+        $getAllProductImagePhu = $this->productModel->getAllProductVariant($id);
+        $getAllColor = $this->productModel->getAllColor();
+        $getAllSize = $this->productModel->getAllSize();
+        $listProduct = $this->productModel->getAllProduct();
+        $productLimit20 = $this->productModel->getProductLimit20();
+        $listReview=$this->reviewModel->getReviewById($id);
+        $countReview=count($listReview);
+        $totalRating = 0;  // Biến lưu tổng điểm rating
+        $countReview = count($listReview);  // Đếm số lượng review
+
+        // Duyệt qua tất cả các review và cộng dồn rating
+        foreach ($listReview as $row) {
+            $totalRating += $row['rating'];
+        }
+
+        // Nếu có ít nhất một review, tính điểm trung bình
+        $averageRating = ($countReview > 0) ? $totalRating / $countReview : 0;  // Tránh chia cho 0
+        // var_dump($productLimit20);
+        include "./views/client/product_detail.php";
+    }
+
+    
 }

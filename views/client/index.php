@@ -83,9 +83,10 @@ include "./include/headerClient.php";
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="hero-slider-content slide-1"> <h2 class="slide-title"><?= $row["content"]?></span></h2>
+                                    <div class="hero-slider-content slide-1">
+                                        <h2 class="slide-title"><?= $row["content"]?></span></h2>
                                         <h4 class="slide-desc"><?= $row["description"]?></h4>
-                                        <a href="shop.html" class="btn btn-hero">Read More</a>
+                                        <a href="<?=$row["link"]?>" class="btn btn-hero">Read More</a>
                                     </div>
                                 </div>
                             </div>
@@ -237,7 +238,7 @@ include "./include/headerClient.php";
                             </a>
                         </div>
                         <div class="cart-hover">
-                            <button class="btn btn-cart">add to cart</button>
+                            <a href="?act=productDetail&id=<?=$product["id"]?>" class="btn btn-cart">Xem chi tiết</a>
                         </div>
                     </figure>
                     <div class="product-caption text-center">
@@ -332,7 +333,7 @@ include "./include/headerClient.php";
                                 ?>
                             <div class="product-item">
                                 <figure class="product-thumb">
-                                    <a href="product-details.html">
+                                    <a href="?act=productDetail&id=<?=$row["id"]?>">
                                         <img style="width:100%;" class="pri-img" src="<?=$row["image"]?>" alt="product">
                                         <img class="sec-img" src="<?=$row["image"]?>" alt="product">
                                     </a>
@@ -346,11 +347,11 @@ include "./include/headerClient.php";
                                         </div>
                                     </div>
                                     <div class="button-group">
-                                        <a href="?act=addWishlist&id=<?=$product["id"]?>" data-bs-toggle="tooltip" data-bs-placement="left"
+                                        <a href="?act=addWishlist&id=<?=$row["id"]?>" data-bs-toggle="tooltip" data-bs-placement="left"
                                             title="Add to wishlist"><i class="pe-7s-like"></i></a>
                                     </div>
                                     <div class="cart-hover">
-                                        <button class="btn btn-cart">add to cart</button>
+                                    <a href="?act=productDetail&id=<?=$row["id"]?>" class="btn btn-cart">Xem chi tiết</a>
                                     </div>
                                 </figure>
                                 <div class="product-caption text-center">
@@ -394,7 +395,8 @@ include "./include/headerClient.php";
                                     <p><?= $row["message"]?></p>
                                     <div class="ratings">
                                         <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span> <span><i class="fa fa-star-o"></i></span>
+                                        <span><i class="fa fa-star-o"></i></span>
+                                        <span><i class="fa fa-star-o"></i></span>
                                         <span><i class="fa fa-star-o"></i></span>
                                         <span><i class="fa fa-star-o"></i></span>
                                     </div>
