@@ -43,6 +43,7 @@ session_start();
             $listCart=$this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
             // var_dump($listCart);
             }
+            include "./views/client/index.php";
         }
     public function formLogin()
     {
