@@ -3,9 +3,6 @@
 include "./controller/product.php";
 include "./controller/category.php";
 include "./controller/taiKhoan.php";
-include "./model/admin/product/wishlist.php";
-include "./model/admin/oder/oder.php";
-include "./model/admin/cart/cart.php";
 include_once "./model/admin/taiKhoan/taiKhoan.php";
 include_once "./model/admin/product/product.php";
 include_once "./model/admin/product/wishlist.php";
