@@ -1,30 +1,49 @@
 <?php
-class clientController
-{
-    public $productModel;
-    public $userModel;
-    public $oderModel;
-    public $categoryModel;
-    public $slideModel;
-    public $reviewModel;
-    public $blogModel;
-    public $projectInforModel;
-    public $wishlistModel;
-    public $cartModel;
-
-    public function __construct()
-    {
-        $this->productModel = new productModel();
-        $this->userModel = new AccountModel();
-        $this->oderModel = new oderModel();
-        $this->categoryModel = new categoryModel();
-        $this->slideModel = new sliderModel();
-        $this->reviewModel = new reviewModel();
-        $this->blogModel = new blogModel();
-        $this->projectInforModel = new projectInforModel();
-    }
-
-
+session_start();
+    class clientController{
+        public $productModel;
+        public $userModel;
+        public $oderModel;
+        public $categoryModel;
+        public $slideModel;
+        public $reviewModel;
+        public $blogModel;
+        public $projectInforModel;
+        public $wishlistModel;
+        public $cartModel;
+        
+        public function __construct()
+        {
+            $this->productModel=new productModel();
+            $this->userModel=new AccountModel();
+            $this->oderModel=new oderModel();
+            $this->categoryModel=new categoryModel();
+            $this->slideModel=new sliderModel();
+            $this->reviewModel=new reviewModel();
+            $this->blogModel=new blogModel();
+            $this->projectInforModel=new projectInforModel();
+            $this->wishlistModel=new WishlistModel();
+            $this->cartModel=new cartModel();
+        }
+        public function HomeClient(){
+            $listCate=$this->categoryModel->getAllCategory();
+            $listCateTop=$this->categoryModel->getCategoryTop();
+            $listCateTopOrder=$this->categoryModel->getCategoryTopOrder();
+            $listProduct=$this->productModel->getAllProduct();
+            $projectInfor=$this->projectInforModel->getAllProjectInfor();
+            // var_dump($listProduct);
+            if(isset($_SESSION['user_id'])){
+                $user= $this->userModel->getIdTK($_SESSION["user_id"]);
+            }
+            $productLimit20=$this->productModel->getProductLimit20();
+            $listBlogs=$this->blogModel->getAllBlog();
+            $listSlider=$this->slideModel->getAllSlider();
+            if(isset($_SESSION["user_id"])){
+            $wishlist = $this->wishlistModel->getWishlistById($_SESSION["user_id"]);
+            $listCart=$this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
+            // var_dump($listCart);
+            }
+        }
     public function formLogin()
     {
         include "./views/client/login.php";
@@ -55,32 +74,6 @@ class clientController
         $listProduct = $this->productModel->getAllProduct();
         var_dump($getAllProductImage);
         include "./views/client/product_detail.php";
-    }
-
-    public function HomeClient()
-    {
-        $listCate = $this->categoryModel->getAllCategory();
-        $listCateTop = $this->categoryModel->getCategoryTop();
-        $listCateTopOrder = $this->categoryModel->getCategoryTopOrder();
-        $listProduct = $this->productModel->getAllProduct();
-        $projectInfor = $this->projectInforModel->getAllProjectInfor();
-        // var_dump($listProduct);
-
-        $productLimit20 = $this->productModel->getProductLimit20();
-        $listBlogs = $this->blogModel->getAllBlog();
-        $listSlider = $this->slideModel->getAllSlider();
-        if (isset($_SESSION["user_id"])) {
-            $wishlist = $this->wishlistModel->getWishlistById($_SESSION["user_id"]);
-            $listCart = $this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
-            // var_dump($listCart);
-
-            $cart = count($listCart);
-            $vouchers = $this->cartModel->getVoucherByIdUser($_SESSION["user_id"]);
-            $voucher = $this->cartModel->getVoucher($_SESSION["user_id"]);
-        }
-
-
-        require "./views/client/index.php";
     }
     public function searchProductClient($keyword)
     {

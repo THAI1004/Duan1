@@ -1,7 +1,11 @@
+
 <?php
 include "./controller/product.php";
 include "./controller/category.php";
 include "./controller/taiKhoan.php";
+include "./model/admin/product/wishlist.php";
+include "./model/admin/oder/oder.php";
+include "./model/admin/cart/cart.php";
 include_once "./model/admin/taiKhoan/taiKhoan.php";
 include_once "./model/admin/product/product.php";
 include_once "./model/admin/category/category.php";
@@ -215,8 +219,6 @@ switch ($act) {
         $client->includeClient();
         $client->ProductByprice($id);
         break;
-        
-    
     case "myAccount":
         $client->includeClient();
         $client->myAccount();
