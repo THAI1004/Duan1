@@ -25,8 +25,7 @@
                         <div class="breadcrumb-wrap">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="shop.html">shop</a></li>
+                                    <li class="breadcrumb-item"><a href="?act=homeClient"><i class="fa fa-home"></i></a></li>
                                     <li class="breadcrumb-item active" aria-current="page">wishlist</li>
                                 </ul>
                             </nav>
@@ -53,19 +52,18 @@
                                             <th class="pro-title">Product</th>
                                             <th class="pro-price">Price</th>
                                             <th class="pro-quantity">Stock Status</th>
-                                            <th class="pro-subtotal">Add to Cart</th>
+                                            <th class="pro-subtotal">Chi tiết</th>
                                             <th class="pro-remove">Remove</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php if(isset($wishlist)){ foreach($wishlist as $row){?>
                                         <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="<?= $row["product_image"]?>" alt="Product" /></a></td>
-                                            <td class="pro-title"><a href="#"><?= $row["product_name"]?></a></td>
+                                            <td class="pro-thumbnail"><a href="?act=productDetail&id=<?=$row["product_id"]?>"><img class="img-fluid" src="<?= $row["product_image"]?>" alt="Product" /></a></td>
+                                            <td class="pro-title"><a href="?act=productDetail&id=<?=$row["product_id"]?>"><?= $row["product_name"]?></a></td>
                                             <td class="pro-price"><span><?= $row["product_price"]?></span></td>
                                             <td class="pro-quantity"><span class="text-success">In Stock</span></td>
-                                            <td class="pro-subtotal"><a href="cart.html" class="btn btn-sqr">Add to
-                                                    Cart</a></td>
+                                            <td class="pro-subtotal"><a href="?act=productDetail&id=<?=$row["product_id"]?>" class="btn btn-sqr">Chi tiết sản phẩm</a></td>
                                             <td class="pro-remove"><a href="?act=deleteWishlist&id=<?=$row["product_id"]?>"><i class="fa fa-trash-o"></i></a></td>
                                         </tr>
                                         <?php }}?>

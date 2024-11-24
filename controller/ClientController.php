@@ -32,7 +32,7 @@ session_start();
             $listProduct=$this->productModel->getAllProduct();
             $projectInfor=$this->projectInforModel->getAllProjectInfor();
             // var_dump($listProduct);
-       
+            
             $productLimit20=$this->productModel->getProductLimit20();
             $listBlogs=$this->blogModel->getAllBlog();
             $listSlider=$this->slideModel->getAllSlider();
@@ -40,8 +40,10 @@ session_start();
             $wishlist = $this->wishlistModel->getWishlistById($_SESSION["user_id"]);
             $listCart=$this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
             // var_dump($listCart);
+            $user= $this->userModel->getIdTK($_SESSION["user_id"]);
 
-        $cart=count($listCart);
+
+            $cart=count($listCart);
             $vouchers=$this->cartModel->getVoucherByIdUser($_SESSION["user_id"]);
             $voucher=$this->cartModel->getVoucher($_SESSION["user_id"]);
 
@@ -507,4 +509,35 @@ session_start();
         }
         include './views/client/account.php';
     }
+    public function contactUS()
+    {
+
+        include "./views/client/contactUS.php";
+    }
+    public function productDetail($id)
+    {
+        $Product = $this->productModel->getProductById($id);
+        $listProducVariant = $this->productModel->getAllProductVariant($id);
+        $getAllProductImagePhu = $this->productModel->getAllProductVariant($id);
+        $getAllColor = $this->productModel->getAllColor();
+        $getAllSize = $this->productModel->getAllSize();
+        $listProduct = $this->productModel->getAllProduct();
+        $productLimit20 = $this->productModel->getProductLimit20();
+        $listReview=$this->reviewModel->getReviewById($id);
+        $countReview=count($listReview);
+        $totalRating = 0;  // Biến lưu tổng điểm rating
+        $countReview = count($listReview);  // Đếm số lượng review
+
+        // Duyệt qua tất cả các review và cộng dồn rating
+        foreach ($listReview as $row) {
+            $totalRating += $row['rating'];
+        }
+
+        // Nếu có ít nhất một review, tính điểm trung bình
+        $averageRating = ($countReview > 0) ? $totalRating / $countReview : 0;  // Tránh chia cho 0
+        // var_dump($productLimit20);
+        include "./views/client/product_detail.php";
+    }
+
+    
 }

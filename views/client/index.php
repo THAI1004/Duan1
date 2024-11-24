@@ -39,37 +39,36 @@ include "./include/headerClient.php";
     <link rel="stylesheet" href="./corano/assets/css/style.css">
     <style>
         .product-item {
-            position: relative;
-            margin-bottom: 30px;
-        }
+    position: relative;
+    margin-bottom: 30px;
+}
 
-        .product-thumb {
-            position: relative;
-            overflow: hidden;
-        }
+.product-thumb {
+    position: relative;
+    overflow: hidden;
+}
 
-        .product-thumb img {
-            width: 100%;
-            height: 300px;
-            /* Đặt chiều cao cố định cho hình ảnh */
-            object-fit: cover;
-            /* Đảm bảo hình ảnh được cắt vừa khung mà không bị méo */
-        }
+.product-thumb img {
+    width: 100%;
+    height: 300px; /* Đặt chiều cao cố định cho hình ảnh */
+    object-fit: cover; /* Đảm bảo hình ảnh được cắt vừa khung mà không bị méo */
+}
 
-        .product-caption {
-            padding: 15px;
-        }
+.product-caption {
+    padding: 15px;
+}
 
-        .price-box {
-            margin-top: 10px;
-        }
+.price-box {
+    margin-top: 10px;
+}
+
     </style>
 </head>
 
 <body>
+    
 
-
-
+        
 
 
     <main>
@@ -77,25 +76,25 @@ include "./include/headerClient.php";
         <section class="slider-area">
             <div class="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">
                 <!-- single slider item start -->
-                <?php foreach ($listSlider as $row) { ?>
-                    <div class="hero-single-slide hero-overlay">
-
-                        <div class="hero-slider-item bg-img" data-bg="<?= $row["image_url"] ?>">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="hero-slider-content slide-1">
-                                            <h2 class="slide-title"><?= $row["content"] ?></span></h2>
-                                            <h4 class="slide-desc"><?= $row["description"] ?></h4>
-                                            <a href="shop.html" class="btn btn-hero">Read More</a>
-                                        </div>
+                <?php foreach($listSlider as $row){?>
+                <div class="hero-single-slide hero-overlay">
+                    
+                    <div class="hero-slider-item bg-img" data-bg="<?= $row["image_url"]?>">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="hero-slider-content slide-1">
+                                        <h2 class="slide-title"><?= $row["content"]?></span></h2>
+                                        <h4 class="slide-desc"><?= $row["description"]?></h4>
+                                        <a href="<?=$row["link"]?>" class="btn btn-hero">Read More</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                <?php } ?>
+                   
+                </div>
+                <?php }?>
                 <!-- single slider item start -->
             </div>
         </section>
@@ -157,7 +156,7 @@ include "./include/headerClient.php";
         <!-- service policy area end -->
 
         <!-- banner statistics area start -->
-
+       
         <!-- banner statistics area end -->
 
         <!-- product area start -->
@@ -174,30 +173,28 @@ include "./include/headerClient.php";
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12">
-                        <div class="product-container">
-                            <!-- product tab menu start -->
-                            <div class="product-tab-menu">
-                                <ul class="nav justify-content-center">
-                                    <?php
-                                    $i = 1;
-                                    $printedCategories = []; // Mảng để lưu các danh mục đã in
-                                    foreach ($listCateTopOrder as $category) {
-                                        // Kiểm tra nếu danh mục chưa được in
-                                        if (!in_array($category["category_id"], $printedCategories)) {
-                                            $printedCategories[] = $category["category_id"]; // Lưu danh mục đã in
-                                    ?>
-                                            <li>
-                                                <a href="#tab<?= $i ?>" class="<?= ($i == 1) ? 'active' : '' ?>" data-bs-toggle="tab">
-                                                    <?= $category["category_name"] ?>
-                                                </a>
-                                            </li>
-                                    <?php $i++;
-                                        }
-                                    } ?>
-                                </ul>
-                            </div>
-                            <!-- product tab menu end -->
+    <div class="col-12">
+    <div class="product-container">
+        <!-- product tab menu start -->
+        <div class="product-tab-menu">
+    <ul class="nav justify-content-center">
+        <?php 
+        $i = 1; 
+        $printedCategories = []; // Mảng để lưu các danh mục đã in
+        foreach($listCateTopOrder as $category) {
+            // Kiểm tra nếu danh mục chưa được in
+            if (!in_array($category["category_id"], $printedCategories)) {
+                $printedCategories[] = $category["category_id"]; // Lưu danh mục đã in
+        ?>
+        <li>
+            <a href="#tab<?= $i ?>" class="<?= ($i == 1) ? 'active' : '' ?>" data-bs-toggle="tab">
+                <?= $category["category_name"] ?>
+            </a>
+        </li>
+        <?php $i++; } } ?>
+    </ul>
+</div>
+<!-- product tab menu end -->
 
 <!-- product tab content start -->
 <div class="tab-content">
@@ -243,7 +240,7 @@ include "./include/headerClient.php";
                             </a>
                         </div>
                         <div class="cart-hover">
-                            <button class="btn btn-cart">add to cart</button>
+                            <a href="?act=productDetail&id=<?=$product["id"]?>" class="btn btn-cart">Xem chi tiết</a>
                         </div>
                     </figure>
                     <div class="product-caption text-center">
@@ -263,31 +260,29 @@ include "./include/headerClient.php";
                 } // end if 
             } // end foreach products 
 
-                                                // Nếu không tìm thấy sản phẩm nào cho danh mục, thông báo
-                                                if (!$found) {
-                                                    echo "<p>Không có sản phẩm nào trong danh mục này.</p>";
-                                                }
-                                                ?>
-                                            </div>
-                                        </div>
-                                <?php $i++;
-                                    }
-                                } ?>
-                            </div>
+            // Nếu không tìm thấy sản phẩm nào cho danh mục, thông báo
+            if (!$found) {
+                echo "<p>Không có sản phẩm nào trong danh mục này.</p>";
+            }
+            ?>
+        </div>
+    </div>
+    <?php $i++; } } ?>
+</div>
 
+
+</div>
+
+
+        <!-- product tab content end -->
+    </div>
+</div>
+
+</div>
 
                         </div>
-
-
-                        <!-- product tab content end -->
                     </div>
                 </div>
-
-            </div>
-
-            </div>
-            </div>
-            </div>
             </div>
         </section>
         <!-- product area end -->
@@ -336,12 +331,12 @@ include "./include/headerClient.php";
                     <div class="col-12">
                         <div class="product-carousel-4_2 slick-row-10 slick-arrow-style">
                             <!-- product item start -->
-                            <?php foreach ($productLimit20 as $row) {
+                             <?php  foreach($productLimit20 as $row){
                                 $discountPercentage = (($row["price"] - $row["discount_price"]) / $row["price"]) * 100;
                                 ?>
                             <div class="product-item">
                                 <figure class="product-thumb">
-                                    <a href="product-details.html">
+                                    <a href="?act=productDetail&id=<?=$row["id"]?>">
                                         <img style="width:100%;" class="pri-img" src="<?=$row["image"]?>" alt="product">
                                         <img class="sec-img" src="<?=$row["image"]?>" alt="product">
                                     </a>
@@ -356,11 +351,11 @@ include "./include/headerClient.php";
                                         </div>
                                     </div>
                                     <div class="button-group">
-                                        <a href="?act=addWishlist&id=<?=$product["id"]?>" data-bs-toggle="tooltip" data-bs-placement="left"
+                                        <a href="?act=addWishlist&id=<?=$row["id"]?>" data-bs-toggle="tooltip" data-bs-placement="left"
                                             title="Add to wishlist"><i class="pe-7s-like"></i></a>
                                     </div>
                                     <div class="cart-hover">
-                                        <button class="btn btn-cart">add to cart</button>
+                                    <a href="?act=productDetail&id=<?=$row["id"]?>" class="btn btn-cart">Xem chi tiết</a>
                                     </div>
                                 </figure>
                                 <div class="product-caption text-center">
@@ -372,7 +367,8 @@ include "./include/headerClient.php";
                                         <span class="price-old"><del><?= $row["discount_price"]?></del></span>
                                     </div>
                                 </div>
-                            <?php } ?>
+                            </div>
+                            <?php }?>
                             <!-- product item end -->
                         </div>
                     </div>
@@ -398,19 +394,19 @@ include "./include/headerClient.php";
                     <div class="col-12">
                         <div class="testimonial-content-wrapper">
                             <div class="testimonial-content-carousel">
-                                <?php foreach ($projectInfor as $row) { ?>
-                                    <div class="testimonial-content">
-                                        <p><?= $row["message"] ?></p>
-                                        <div class="ratings">
-                                            <span><i class="fa fa-star-o"></i></span>
-                                            <span><i class="fa fa-star-o"></i></span>
-                                            <span><i class="fa fa-star-o"></i></span>
-                                            <span><i class="fa fa-star-o"></i></span>
-                                            <span><i class="fa fa-star-o"></i></span>
-                                        </div>
-                                        <h5 class="testimonial-author"><?= $row["project_name"] ?></h5>
+                                <?php foreach($projectInfor as $row){?>
+                                <div class="testimonial-content">
+                                    <p><?= $row["message"]?></p>
+                                    <div class="ratings">
+                                        <span><i class="fa fa-star-o"></i></span>
+                                        <span><i class="fa fa-star-o"></i></span>
+                                        <span><i class="fa fa-star-o"></i></span>
+                                        <span><i class="fa fa-star-o"></i></span>
+                                        <span><i class="fa fa-star-o"></i></span>
                                     </div>
-                                <?php } ?>
+                                    <h5 class="testimonial-author"><?= $row["project_name"]?></h5>
+                                </div>
+                                <?php }?>
 
                             </div>
                         </div>
@@ -447,8 +443,12 @@ include "./include/headerClient.php";
                                     <div class="blog-meta">
                                         <p><?=$row["created_at"]?> | Corano</p>
                                     </div>
+                                    <h5 class="blog-title">
+                                        <a href="?act=blog&id=<?= $row["id"]?>"><?= $row["title"]?></a>
+                                    </h5>
                                 </div>
-                            <?php } ?>
+                            </div>
+                            <?php }?>
                             <!-- blog post item end -->
                         </div>
                     </div>

@@ -56,7 +56,7 @@
                         <div class="breadcrumb-wrap">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="?act=homeClient"><i class="fa fa-home"></i></a></li>
                                     <li class="breadcrumb-item active" aria-current="page">blog left sidebar</li>
                                 </ul>
                             </nav>
@@ -81,7 +81,7 @@
                                     <!-- blog post item start -->
                                     <div class="blog-post-item mb-30">
                                         <figure class="blog-thumb">
-                                            <a href="blog-details.html">
+                                            <a href="?act=blog&id=<?= $listBlogs['id'] ?>">
                                                 <img src="<?= $listBlogs['thumbnail'] ?>" alt="blog image">
                                             </a>
                                         </figure>

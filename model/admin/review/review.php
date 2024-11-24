@@ -29,4 +29,12 @@ LEFT JOIN products ON reviews.product_id = products.id";
         $query = "DELETE FROM reviews WHERE id =$id";
         $this->pdo->exec($query);
     }
+    public function getReviewById($id) {
+        $query = "SELECT reviews.*, users.username
+FROM reviews
+JOIN users ON reviews.user_id = users.id
+WHERE reviews.product_id = $id;";
+        $data=$this->pdo->query($query)->fetchAll();
+        return $data;
+    }
 }

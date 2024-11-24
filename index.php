@@ -211,6 +211,7 @@ switch ($act) {
         break;
     case "updateCartVoucher":
         $client->updateCartVoucher();
+        break;
     case "listProductClient":
         $client->includeClient();
         $client->listProduct();
@@ -219,8 +220,6 @@ switch ($act) {
         $client->includeClient();
         $client->ProductByprice($id);
         break;
-        
-    
     case "myAccount":
         $client->includeClient();
         $client->myAccount();
@@ -228,5 +227,13 @@ switch ($act) {
     case "changeAccount":
         $client->includeClient();
         $client->updateAccount();
+        break;
+    case "productDetail":
+        $client->includeClient();
+        $client->productDetail($id);
+        break;
+    case "contactUs":
+        $client->includeClient();
+        $client->contactUS();
         break;
 }

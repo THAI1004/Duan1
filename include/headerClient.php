@@ -104,7 +104,7 @@ ob_start(); // Bắt đầu output buffer
                                                 <?php } ?>
                                             </ul>
                                         </li>
-                                        <li><a href="contact-us.html">Contact us</a></li>
+                                        <li><a href="?act=contactUs">Contact us</a></li>
                                     </ul>
                                 </nav>
                                 <!-- main menu navbar end -->

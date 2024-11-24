@@ -1,12 +1,20 @@
-<? include "./include/headerClient.php"; ?>
+<!doctype html>
+<html class="no-js" lang="zxx">
 
-<!DOCTYPE html>
-<html lang="en">
 
+<!-- Mirrored from htmldemo.net/corano/corano/product-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 29 Jun 2024 09:54:00 GMT -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Corano - Jewelry Shop eCommerce Bootstrap 5 Template</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
+
+    <!-- CSS
+	============================================ -->
     <!-- google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,900" rel="stylesheet">
     <!-- Bootstrap CSS -->
@@ -25,13 +33,17 @@
     <link rel="stylesheet" href="./corano/assets/css/plugins/jqueryui.min.css">
     <!-- main style css -->
     <link rel="stylesheet" href="./corano/assets/css/style.css">
+    <style>
+        .product-thumb img {
+    width: 100%; /* Đảm bảo ảnh có chiều rộng 100% */
+    height: 250px; /* Đặt chiều cao cố định cho tất cả ảnh */
+    object-fit: cover; /* Giữ tỷ lệ ảnh nhưng làm đầy khung */
+}
 
+    </style>
 </head>
 
-
 <body>
-
-
     <main>
         <!-- breadcrumb area start -->
         <div class="breadcrumb-area">
@@ -41,9 +53,8 @@
                         <div class="breadcrumb-wrap">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="shop.html">shop</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">product details</li>
+                                    <li class="breadcrumb-item"><a href="?act=homeClient"><i class="fa fa-home"></i></a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Chi tiết sản phẩm</li>
                                 </ul>
                             </nav>
                         </div>
@@ -60,139 +71,90 @@
                     <!-- product details wrapper start -->
                     <div class="col-lg-12 order-1 order-lg-2">
                         <!-- product details inner end -->
-
                         <div class="product-details-inner">
                             <div class="row">
-                                 <?php foreach ($listProductById as $listProductById): ?>
-                                  
-                                    <div class="col-lg-5">
-                                        <div class="product-large-slider">
-                                        <?php foreach ($getAllProductImage as $getAllProductImage): ?>
-                                            <div class="pro-large-img img-zoom">
-                                                    <img src="<?= $getAllProductImage["image_variant"] ?>" alt="product-details" />
-                                                </div>
-                                                <?php endforeach ?>
-                                            <!-- <div class="pro-large-img img-zoom">
-                                                <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                            </div>
-                                            <div class="pro-large-img img-zoom">
-                                                <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                            </div>
-                                            <div class="pro-large-img img-zoom">
-                                                <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
-                                            </div>
-                                            <div class="pro-large-img img-zoom">
-                                                <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
-                                            </div> -->
+                                <div class="col-lg-5">
+                                    <div class="product-large-slider">
+                                        <div class="pro-large-img img-zoom">
+                                            <img src="<?= $Product["image"]?>" alt="product-details" />
                                         </div>
-                                        
-                                        <div class="pro-nav slick-row-10 slick-arrow-style">
-                                        <?php foreach ($getAllProductImagePhu as $getAllProductImagePhu): ?>
-                                            <div class="pro-nav-thumb">
-                                                <img src="<?= $getAllProductImagePhu["image_variant"] ?>" alt="product-details"   />
-                                            </div>
-                                            <!-- <div class="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                            </div>
-                                            <div class="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                            </div>
-                                            <div class="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
-                                            </div>
-                                            <div class="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
-                                            </div> -->
-                                            <?php endforeach ?>
+                                    </div>
+                                    <div class="pro-nav slick-row-10 slick-arrow-style">
+                                    <?php foreach($listProducVariant as $row){?>
+                                        <div class="pro-nav-thumb">
+                                            <img src="<?=$row["image_variant"]?>" alt="product-details" />
                                         </div>
+                                        <?php }?>
                                         
                                     </div>
-                                    <div class="col-lg-7">
-                                        <div class="product-details-des">
-                                          
-                                            <h3 class="product-name"><?= $listProductById["product_name"] ?></h3>
-                                            <div class="ratings d-flex">
-                                                <span><i class="fa fa-star-o"></i></span>
-                                                <span><i class="fa fa-star-o"></i></span>
-                                                <span><i class="fa fa-star-o"></i></span>
-                                                <span><i class="fa fa-star-o"></i></span>
-                                                <span><i class="fa fa-star-o"></i></span>
-                                                <div class="pro-review">
-                                                    <span>1 Reviews</span>
-                                                </div>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="product-details-des">
+                                        
+                                        <h3 class="product-name"><?=$Product["product_name"]?></h3>
+                                        <div class="ratings d-flex">
+                                        <?php
+                                                                    // In ra số sao đầy
+                                                                    for ($i = 0; $i < $averageRating; $i++) {
+                                                                        echo '<span class="good"><i class="fa fa-star"></i></span>';
+                                                                    }
+                                                                   
+                                                                ?>
+                                            <div class="pro-review">
+                                                <span><?=$countReview?> Reviews</span>
                                             </div>
-                                            <div class="price-box">
-                                                <span class="price-regular"><?= $listProductById["price"] ?></span>
-                                                <span class="price-old"><del>$90.00</del></span>
+                                        </div>
+                                        <div class="price-box">
+                                            <span class="price-regular"><?=$Product["discount_price"]?></span>
+                                            <span class="price-old"><del><?=$Product["price"]?></del></span>
+                                        </div>
+                                        <div class="availability">
+                                            <i class="fa fa-check-circle"></i>
+                                            <span>200 in stock</span>
+                                        </div>
+                                        <p class="pro-desc"><?=$Product["description"]?></p>
+                                        <form action="">
+                                        <div class="quantity-cart-box d-flex align-items-center">
+                                            <h6 class="option-title">Số lượng:</h6>
+                                            <div class="quantity">
+                                                <input style="width:50px" min=0 name='quantity' type="number" value="1">
                                             </div>
-                                         
-                                         
-                                            <div class="availability">
-                                                <i class="fa fa-check-circle"></i>
-                                                <span>200 in stock</span>
+                                            <div class="action_link">
+                                                <a class="btn btn-cart2" href="#">Add to cart</a>
                                             </div>
-                                            <p class="pro-desc"><h6>Description : <span><?= $listProductById["description"] ?></p> </h4></p>
-                                            <div class="quantity-cart-box d-flex align-items-center">
-                                                <h6 class="option-title">qty:</h6>
-                                                <div class="quantity">
-                                                    <div class="pro-qty"><input type="text" value="1"></div>
-                                                </div>
-                                                <div class="action_link">
-                                                    <a class="btn btn-cart2" href="#">Add to cart</a>
-                                                </div>
-                                            </div>
-                                            <div class="pro-size">
-                                                <h6 class="option-title">size :</h6>
-                                                <select class="nice-select">
-                                                    <?php foreach ($getAllProductSize as $getAllProductSize): ?>
-                                                    <option><?= $getAllProductSize["size_name"] ?></option>
-                                                    <!-- <option>M</option>
-                                                    <option>L</option>
-                                                    <option>XL</option> -->
-                                                    <?php endforeach ?>        
-                                                </select>
+                                        </div>
+                                        <div class="pro-size">
+                                            <h6 class="option-title">size :</h6>
+                                            <select class="nice-select" name="size_name">
+                                                <?php foreach($getAllSize as $row){?>
+                                                <option value="<?=$row['id']?>"><?=$row["size_name"]?></option>
+                                                <?php }?>
+                                            </select>
+                                        </div>
+                                        <div class="color-option">
+                                        <h6 class="option-title">Màu :</h6>
+                                        <select class="nice-select" name="color_name">
+                                            <?php foreach($getAllColor as $row){ ?>
+                                                <option value="<?=$row['id']?>"><?=$row['color_name']?></option>
+                                            <?php } ?>
+                                        </select>
 
-                                            </div>
-                                            <div class="color-option">
-                                                <h6 class="option-title">color :</h6>
-                                                <ul class="color-categories">
-                                                    <?php foreach ($getAllProductColor as $color): 
-                                                       
-                                                        ?>
-                                                    
-                                                    <li>
-                                                        <a style= "background-color: <?= $color["color_code"] ?>"  href="#" title="LightSteelblue"></a>
-                                                    </li>
-                                                    <!-- <li>
-                                                        <a class="c-darktan" href="#" title="Darktan"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="c-grey" href="#" title="Grey"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="c-brown" href="#" title="Brown"></a>
-                                                    </li> -->
-                                                    <?php endforeach ?>   
-                                                </ul>
-                                            </div>
-                                            <div class="useful-links">
-                                                <a href="#" data-bs-toggle="tooltip" title="Compare"><i
-                                                        class="pe-7s-refresh-2"></i>compare</a>
-                                                <a href="#" data-bs-toggle="tooltip" title="Wishlist"><i
-                                                        class="pe-7s-like"></i>wishlist</a>
-                                            </div>
-                                            <div class="like-icon">
-                                                <a class="facebook" href="#"><i class="fa fa-facebook"></i>like</a>
-                                                <a class="twitter" href="#"><i class="fa fa-twitter"></i>tweet</a>
-                                                <a class="pinterest" href="#"><i class="fa fa-pinterest"></i>save</a>
-                                                <a class="google" href="#"><i class="fa fa-google-plus"></i>share</a>
-                                            </div>
+                                        </div>
+                                        </form>
+                                        <div class="useful-links">
+                                            <a href="?act=addWishlist&id=<?=$Product["id"]?>" data-bs-toggle="tooltip" title="Wishlist"><i
+                                                    class="pe-7s-like"></i>wishlist</a>
+                                        </div>
+                                        <div class="like-icon">
+                                            <a class="facebook" href="#"><i class="fa fa-facebook"></i>like</a>
+                                            <a class="twitter" href="#"><i class="fa fa-twitter"></i>tweet</a>
+                                            <a class="pinterest" href="#"><i class="fa fa-pinterest"></i>save</a>
+                                            <a class="google" href="#"><i class="fa fa-google-plus"></i>share</a>
                                         </div>
                                     </div>
-                                <?php endforeach ?>
+                                </div>
                             </div>
                         </div>
-
                         <!-- product details inner end -->
 
                         <!-- product details reviews start -->
@@ -202,28 +164,20 @@
                                     <div class="product-review-info">
                                         <ul class="nav review-tab">
                                             <li>
-                                                <a class="active" data-bs-toggle="tab" href="#tab_one">description</a>
+                                                <a class="active" data-bs-toggle="tab" href="#tab_one">Mô tả</a>
                                             </li>
                                             <li>
-                                                <a data-bs-toggle="tab" href="#tab_two">information</a>
+                                                <a data-bs-toggle="tab" href="#tab_two">Chi tiết</a>
                                             </li>
                                             <li>
-                                                <a data-bs-toggle="tab" href="#tab_three">reviews (1)</a>
+                                                <a data-bs-toggle="tab" href="#tab_three">reviews <?=$countReview
+                                                    ?></a>
                                             </li>
                                         </ul>
                                         <div class="tab-content reviews-tab">
                                             <div class="tab-pane fade show active" id="tab_one">
                                                 <div class="tab-one">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-                                                        fringilla augue nec est tristique auctor. Ipsum metus feugiat
-                                                        sem, quis fermentum turpis eros eget velit. Donec ac tempus
-                                                        ante. Fusce ultricies massa massa. Fusce aliquam, purus eget
-                                                        sagittis vulputate, sapien libero hendrerit est, sed commodo
-                                                        augue nisi non neque.Cras neque metus, consequat et blandit et,
-                                                        luctus a nunc. Etiam gravida vehicula tellus, in imperdiet
-                                                        ligula euismod eget. Pellentesque habitant morbi tristique
-                                                        senectus et netus et malesuada fames ac turpis egestas. Nam
-                                                        erat mi, rutrum at sollicitudin rhoncus</p>
+                                                    <p><?=$Product["description"]?></p>
                                                 </div>
                                             </div>
                                             <div class="tab-pane fade" id="tab_two">
@@ -231,52 +185,65 @@
                                                     <tbody>
                                                         <tr>
                                                             <td>color</td>
-                                                            <td>black, blue, red</td>
+                                                            <td style="display: flex; gap: 10px;">
+    <?php foreach($getAllColor as $row) { ?>
+        
+        <a style="background-color: <?=$row["color_code"]?>;display: block; width: 20px; height: 20px; margin: 0;"></a>
+    <?php } ?>
+</td>
+
                                                         </tr>
                                                         <tr>
                                                             <td>size</td>
-                                                            <td>L, M, S</td>
+                                                            <td style="display: flex; gap: 10px;">
+    <?php foreach($getAllSize as $row) { ?>
+        
+        <p><?=$row["size_name"]?></p>
+    <?php } ?>
+</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
                                             <div class="tab-pane fade" id="tab_three">
-                                                <form action="#" class="review-form">
-                                                    <h5>1 review for <span>Chaz Kangeroo</span></h5>
+
+                                                    <h5><?=$countReview
+                                                    ?> review </h5>
                                                     <div class="total-reviews">
-                                                        <div class="rev-avatar">
-                                                            <img src="assets/img/about/avatar.jpg" alt="">
-                                                        </div>
+                                                    <?php
+                                                    $totalRating = 0;
+                                                    
+                                                     foreach($listReview as $row){
+                                                        $totalRating += $row['rating'];
+                                                        ?>
                                                         <div class="review-box">
-                                                            <div class="ratings">
-                                                                <span class="good"><i class="fa fa-star"></i></span>
-                                                                <span class="good"><i class="fa fa-star"></i></span>
-                                                                <span class="good"><i class="fa fa-star"></i></span>
-                                                                <span class="good"><i class="fa fa-star"></i></span>
-                                                                <span><i class="fa fa-star"></i></span>
+                                                        <div class="ratings">
+                                                                <?php
+                                                                    // Lấy giá trị rating từ $row
+                                                                    $rating = $row['rating'];
+                                                                    
+                                                                    // In ra số sao đầy
+                                                                    for ($i = 0; $i < $rating; $i++) {
+                                                                        echo '<span class="good"><i class="fa fa-star"></i></span>';
+                                                                    }
+                                                                   
+                                                                ?>
                                                             </div>
+
                                                             <div class="post-author">
-                                                                <p><span>admin -</span> 30 Mar, 2019</p>
+                                                                <p><span><?php echo $row['username']; ?> -</span> <?php echo date('d M, Y', strtotime($row['created_at'])); ?></p>
                                                             </div>
-                                                            <p>Aliquam fringilla euismod risus ac bibendum. Sed sit
-                                                                amet sem varius ante feugiat lacinia. Nunc ipsum nulla,
-                                                                vulputate ut venenatis vitae, malesuada ut mi. Quisque
-                                                                iaculis, dui congue placerat pretium, augue erat
-                                                                accumsan lacus</p>
+                                                            <p><?php echo htmlspecialchars($row['review_text']); ?></p>
                                                         </div>
+                                                    <?php } ?>
+
                                                     </div>
+                                                <form action="#" class="review-form">
                                                     <div class="form-group row">
                                                         <div class="col">
                                                             <label class="col-form-label"><span class="text-danger">*</span>
                                                                 Your Name</label>
-                                                            <input type="text" class="form-control" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col">
-                                                            <label class="col-form-label"><span class="text-danger">*</span>
-                                                                Your Email</label>
-                                                            <input type="email" class="form-control" required>
+                                                            <input name="username" type="text" class="form-control" required>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -284,10 +251,6 @@
                                                             <label class="col-form-label"><span class="text-danger">*</span>
                                                                 Your Review</label>
                                                             <textarea class="form-control" required></textarea>
-                                                            <div class="help-block pt-10"><span
-                                                                    class="text-danger">Note:</span>
-                                                                HTML is not translated!
-                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -332,8 +295,8 @@
                     <div class="col-12">
                         <!-- section title start -->
                         <div class="section-title text-center">
-                            <h2 class="title">Related Products</h2>
-                            <p class="sub-title">Add related products to weekly lineup</p>
+                            <h2 class="title">Top bán chạy</h2>
+                            <p class="sub-title">tổng hợp sản phẩm bán chạy nhất</p>
                         </div>
                         <!-- section title start -->
                     </div>
@@ -342,266 +305,43 @@
                     <div class="col-12">
                         <div class="product-carousel-4 slick-row-10 slick-arrow-style">
                             <!-- product item start -->
+                             <?php foreach($productLimit20 as $product){
+                                $discountPercentage = (($product["price"] - $product["discount_price"]) / $product["price"]) * 100;?>
                             <div class="product-item">
                                 <figure class="product-thumb">
-                                    <a href="product-details.html">
-                                        <img class="pri-img" src="assets/img/product/product-11.jpg" alt="product">
-                                        <img class="sec-img" src="assets/img/product/product-8.jpg" alt="product">
+                                    <a href="?act=productDetail&id=<?=$product["id"]?>">
+                                        <img class="pri-img" src="<?= $product["image"]?>" alt="product">
+                                        <img class="sec-img" src="<?= $product["image"]?>" alt="product">
                                     </a>
                                     <div class="product-badge">
                                         <div class="product-label new">
                                             <span>new</span>
                                         </div>
                                         <div class="product-label discount">
-                                            <span>10%</span>
+                                            <span><?= $discountPercentage?>%</span>
                                         </div>
                                     </div>
                                     <div class="button-group">
-                                        <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                        <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
+                                        <a href="?act=addWishlist&id=<?= $product["id"]?>" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
+                                        
                                     </div>
                                     <div class="cart-hover">
-                                        <button class="btn btn-cart">add to cart</button>
+                                        <a class="btn btn-cart" href="?act=productDetail&id=<?=$product["id"]?>">Chi tiết sản phẩm</a>
                                     </div>
                                 </figure>
                                 <div class="product-caption text-center">
-                                    <div class="product-identity">
-                                        <p class="manufacturer-name"><a href="product-details.html">Gold</a></p>
-                                    </div>
-                                    <ul class="color-categories">
-                                        <li>
-                                            <a class="c-lightblue" href="#" title="LightSteelblue"></a>
-                                        </li>
-                                        <li>
-                                            <a class="c-darktan" href="#" title="Darktan"></a>
-                                        </li>
-                                        <li>
-                                            <a class="c-grey" href="#" title="Grey"></a>
-                                        </li>
-                                        <li>
-                                            <a class="c-brown" href="#" title="Brown"></a>
-                                        </li>
-                                    </ul>
                                     <h6 class="product-name">
-                                        <a href="product-details.html">Perfect Diamond Jewelry</a>
+                                        <a href="?act=productDetail&id=<?=$product["id"]?>"><?=$product["product_name"]?></a>
                                     </h6>
                                     <div class="price-box">
-                                        <span class="price-regular">$60.00</span>
-                                        <span class="price-old"><del>$70.00</del></span>
+                                        <span class="price-regular"><?=$product["discount_price"]?></span>
+                                        <span class="price-old"><del><?=$product["price"]?></del></span>
                                     </div>
                                 </div>
                             </div>
+                            <?php }?>
                             <!-- product item end -->
 
-                            <!-- product item start -->
-                            <div class="product-item">
-                                <figure class="product-thumb">
-                                    <a href="product-details.html">
-                                        <img class="pri-img" src="assets/img/product/product-12.jpg" alt="product">
-                                        <img class="sec-img" src="assets/img/product/product-7.jpg" alt="product">
-                                    </a>
-                                    <div class="product-badge">
-                                        <div class="product-label new">
-                                            <span>sale</span>
-                                        </div>
-                                        <div class="product-label discount">
-                                            <span>new</span>
-                                        </div>
-                                    </div>
-                                    <div class="button-group">
-                                        <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                        <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
-                                    </div>
-                                    <div class="cart-hover">
-                                        <button class="btn btn-cart">add to cart</button>
-                                    </div>
-                                </figure>
-                                <div class="product-caption text-center">
-                                    <div class="product-identity">
-                                        <p class="manufacturer-name"><a href="product-details.html">mony</a></p>
-                                    </div>
-                                    <ul class="color-categories">
-                                        <li>
-                                            <a class="c-lightblue" href="#" title="LightSteelblue"></a>
-                                        </li>
-                                        <li>
-                                            <a class="c-darktan" href="#" title="Darktan"></a>
-                                        </li>
-                                        <li>
-                                            <a class="c-grey" href="#" title="Grey"></a>
-                                        </li>
-                                        <li>
-                                            <a class="c-brown" href="#" title="Brown"></a>
-                                        </li>
-                                    </ul>
-                                    <h6 class="product-name">
-                                        <a href="product-details.html">Handmade Golden Necklace</a>
-                                    </h6>
-                                    <div class="price-box">
-                                        <span class="price-regular">$50.00</span>
-                                        <span class="price-old"><del>$80.00</del></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- product item end -->
-
-                            <!-- product item start -->
-                            <div class="product-item">
-                                <figure class="product-thumb">
-                                    <a href="product-details.html">
-                                        <img class="pri-img" src="assets/img/product/product-13.jpg" alt="product">
-                                        <img class="sec-img" src="assets/img/product/product-6.jpg" alt="product">
-                                    </a>
-                                    <div class="product-badge">
-                                        <div class="product-label new">
-                                            <span>new</span>
-                                        </div>
-                                    </div>
-                                    <div class="button-group">
-                                        <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                        <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
-                                    </div>
-                                    <div class="cart-hover">
-                                        <button class="btn btn-cart">add to cart</button>
-                                    </div>
-                                </figure>
-                                <div class="product-caption text-center">
-                                    <div class="product-identity">
-                                        <p class="manufacturer-name"><a href="product-details.html">Diamond</a></p>
-                                    </div>
-                                    <ul class="color-categories">
-                                        <li>
-                                            <a class="c-lightblue" href="#" title="LightSteelblue"></a>
-                                        </li>
-                                        <li>
-                                            <a class="c-darktan" href="#" title="Darktan"></a>
-                                        </li>
-                                        <li>
-                                            <a class="c-grey" href="#" title="Grey"></a>
-                                        </li>
-                                        <li>
-                                            <a class="c-brown" href="#" title="Brown"></a>
-                                        </li>
-                                    </ul>
-                                    <h6 class="product-name">
-                                        <a href="product-details.html">Perfect Diamond Jewelry</a>
-                                    </h6>
-                                    <div class="price-box">
-                                        <span class="price-regular">$99.00</span>
-                                        <span class="price-old"><del></del></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- product item end -->
-
-                            <!-- product item start -->
-                            <div class="product-item">
-                                <figure class="product-thumb">
-                                    <a href="product-details.html">
-                                        <img class="pri-img" src="assets/img/product/product-14.jpg" alt="product">
-                                        <img class="sec-img" src="assets/img/product/product-5.jpg" alt="product">
-                                    </a>
-                                    <div class="product-badge">
-                                        <div class="product-label new">
-                                            <span>sale</span>
-                                        </div>
-                                        <div class="product-label discount">
-                                            <span>15%</span>
-                                        </div>
-                                    </div>
-                                    <div class="button-group">
-                                        <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                        <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
-                                    </div>
-                                    <div class="cart-hover">
-                                        <button class="btn btn-cart">add to cart</button>
-                                    </div>
-                                </figure>
-                                <div class="product-caption text-center">
-                                    <div class="product-identity">
-                                        <p class="manufacturer-name"><a href="product-details.html">silver</a></p>
-                                    </div>
-                                    <ul class="color-categories">
-                                        <li>
-                                            <a class="c-lightblue" href="#" title="LightSteelblue"></a>
-                                        </li>
-                                        <li>
-                                            <a class="c-darktan" href="#" title="Darktan"></a>
-                                        </li>
-                                        <li>
-                                            <a class="c-grey" href="#" title="Grey"></a>
-                                        </li>
-                                        <li>
-                                            <a class="c-brown" href="#" title="Brown"></a>
-                                        </li>
-                                    </ul>
-                                    <h6 class="product-name">
-                                        <a href="product-details.html">Diamond Exclusive Ornament</a>
-                                    </h6>
-                                    <div class="price-box">
-                                        <span class="price-regular">$55.00</span>
-                                        <span class="price-old"><del>$75.00</del></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- product item end -->
-
-                            <!-- product item start -->
-                            <div class="product-item">
-                                <figure class="product-thumb">
-                                    <a href="product-details.html">
-                                        <img class="pri-img" src="assets/img/product/product-15.jpg" alt="product">
-                                        <img class="sec-img" src="assets/img/product/product-4.jpg" alt="product">
-                                    </a>
-                                    <div class="product-badge">
-                                        <div class="product-label new">
-                                            <span>new</span>
-                                        </div>
-                                        <div class="product-label discount">
-                                            <span>20%</span>
-                                        </div>
-                                    </div>
-                                    <div class="button-group">
-                                        <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                        <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
-                                    </div>
-                                    <div class="cart-hover">
-                                        <button class="btn btn-cart">add to cart</button>
-                                    </div>
-                                </figure>
-                                <div class="product-caption text-center">
-                                    <div class="product-identity">
-                                        <p class="manufacturer-name"><a href="product-details.html">mony</a></p>
-                                    </div>
-                                    <ul class="color-categories">
-                                        <li>
-                                            <a class="c-lightblue" href="#" title="LightSteelblue"></a>
-                                        </li>
-                                        <li>
-                                            <a class="c-darktan" href="#" title="Darktan"></a>
-                                        </li>
-                                        <li>
-                                            <a class="c-grey" href="#" title="Grey"></a>
-                                        </li>
-                                        <li>
-                                            <a class="c-brown" href="#" title="Brown"></a>
-                                        </li>
-                                    </ul>
-                                    <h6 class="product-name">
-                                        <a href="product-details.html">Citygold Exclusive Ring</a>
-                                    </h6>
-                                    <div class="price-box">
-                                        <span class="price-regular">$60.00</span>
-                                        <span class="price-old"><del>$70.00</del></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- product item end -->
                         </div>
                     </div>
                 </div>
@@ -610,8 +350,21 @@
         <!-- related products area end -->
     </main>
 
-    <!-- Modernizer JS -->
-    <script src="./corano/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <!-- Scroll to top start -->
+    <div class="scroll-top not-visible">
+        <i class="fa fa-angle-up"></i>
+    </div>
+    <!-- Scroll to Top End -->
+
+   
+
+
+
+    <!-- JS
+============================================ -->
+    
+   <!-- Modernizer JS -->
+   <script src="./corano/assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <!-- jQuery JS -->
     <script src="./corano/assets/js/vendor/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap JS -->
@@ -638,10 +391,26 @@
     <script src="./corano/assets/js/plugins/google-map.js"></script>
     <!-- Main JS -->
     <script src="./corano/assets/js/main.js"></script>
+    <script>
+        $(document).ready(function(){
+    $('.pro-nav-thumb img').on('click', function(){
+        var newImage = $(this).attr('src'); // Lấy URL ảnh từ thumbnail được click
+        $('.product-large-slider .pro-large-img img').attr('src', newImage); // Đổi ảnh lớn
+    });
+});
+document.querySelectorAll('.pro-nav-thumb img').forEach(function(thumbnail) {
+    thumbnail.addEventListener('click', function() {
+        var newImage = thumbnail.getAttribute('src'); // Lấy URL ảnh từ thumbnail
+        document.querySelector('.product-large-slider .pro-large-img img').setAttribute('src', newImage); // Đổi ảnh lớn
+    });
+});
 
-
+    </script>
 </body>
 
-</html>
 
-<?php include "./include/footerClient.php"; ?>
+<!-- Mirrored from htmldemo.net/corano/corano/product-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 29 Jun 2024 09:54:00 GMT -->
+</html>
+<?php 
+include "./include/footerClient.php";
+?>
