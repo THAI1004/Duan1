@@ -6,12 +6,10 @@ class productModel
     public function __construct()
     {
         $this->pdo = connect();
-        
     }
     public function __destruct()
     {
         $this->pdo = null;
-        
     }
 
     public function getAllProduct()
@@ -19,16 +17,16 @@ class productModel
         $sql = "SELECT * FROM `products`";
         $data = $this->pdo->query($sql)->fetchAll();
         return $data;
-        
     }
-    public function getProductLimit20(){
+    public function getProductLimit20()
+    {
         $sql = "SELECT * 
             FROM products 
             ORDER BY created_at DESC 
             LIMIT 20;
             ";
-            $data = $this->pdo->query($sql)->fetchAll();
-            return $data;
+        $data = $this->pdo->query($sql)->fetchAll();
+        return $data;
     }
     public function getAllColor()
     {
@@ -45,7 +43,7 @@ class productModel
     public function getProductById($id)
     {
         $sql = "SELECT * FROM `products` where id=$id";
-        $data=$this->pdo->query($sql)->fetch();
+        $data = $this->pdo->query($sql)->fetch();
         return $data;
     }
     public function searchProduct($keyword)
@@ -96,7 +94,7 @@ class productModel
             if ($data === 1) {
                 return "OK";
             }
-} catch (Exception $er) {
+        } catch (Exception $er) {
             echo "Lỗi hàm insert :" . $er->getMessage();
             echo "<hr>";
         }
@@ -146,9 +144,9 @@ class productModel
     WHERE 
         pv.product_id = $id";
 
-    
 
-        $data=$this->pdo->query($sql)->fetchAll();
+
+        $data = $this->pdo->query($sql)->fetchAll();
         return $data;
     }
     public function deleteProductVariant($idVariant)
@@ -188,7 +186,7 @@ class productModel
     }
     public function getVariantById($idVariant)
     {
-$sql = "SELECT * FROM `product_variants` where id=$idVariant   ";
+        $sql = "SELECT * FROM `product_variants` where id=$idVariant   ";
         $data = $this->pdo->query($sql)->fetch();
         return $data;
     }
@@ -237,4 +235,24 @@ $sql = "SELECT * FROM `product_variants` where id=$idVariant   ";
         $data=$this->pdo->query($sql)->fetch();
         return $data;
     }
+
+    public function checkUserOrder($userId, $productId)
+    {
+        $sql = "SELECT order_items.id
+                FROM orders
+                JOIN order_items ON orders.id = order_items.order_id
+                JOIN product_variants ON order_items.variant_id = product_variants.id
+                WHERE orders.user_id = :user_id
+                  AND product_variants.product_id = :product_id
+                  AND orders.payment_status = 'completed'";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            ':user_id' => $userId,
+            ':product_id' => $productId
+        ]);
+
+        return $stmt->rowCount() > 0; // Trả về true nếu có kết quả
+    }
+    
 }

@@ -41,25 +41,59 @@ class AccountModel
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result ? $result : false;
     }
-    public function insertTaiKhoan($username, $email, $phone, $address, $password){
+    public function insertTaiKhoan($username, $email, $phone, $address, $password)
+    {
         if (strlen($phone) > 11) {
             return "Error: Phone number exceeds allowed length.";
         }
         $sql = "INSERT INTO users(username, email, phone, address,password) VALUES ('$username', '$email', '$phone', '$address', '$password')";
-        $stmt=$this->pdo->exec($sql);
+        $stmt = $this->pdo->exec($sql);
         if ($stmt > 0) {
             return "OK";  // Trả về "OK" nếu thành công
         } else {
             return "Failed";  // Trả về "Failed" nếu không có dòng nào bị ảnh hưởng
         }
     }
-    public function updateTaiKhoan($id,$username,$email, $phone, $address, $password){
+    public function updateTaiKhoan($id, $username, $email, $phone, $address, $password)
+    {
         $query = "UPDATE users SET username='$username',email='$email',phone='$phone',address='$address',password='$password' WHERE id=$id";
-        $stmt=$this->pdo->exec($query);
+        $stmt = $this->pdo->exec($query);
         if ($stmt > 0) {
             return "OK";  // Trả về "OK" nếu thành công
         } else {
             return "Failed";  // Trả về "Failed" nếu không có dòng nào bị ảnh hưởng
         }
+    }
+    public function findUserByEmail($email)
+    {
+        $query = "SELECT * FROM users WHERE email = :email";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function addtempPassword($email, $tempPassword, $expiry)
+    {
+        $query = "UPDATE users SET temp_password ='$tempPassword',temp_password_expiry='$expiry' WHERE email = '$email'";
+        $result = $this->pdo->prepare($query)->execute();
+        return $result;
+    }
+    public function verifyTempPassword($email, $tempPassword)
+    {
+        // Truy vấn kiểm tra email và mật khẩu tạm thời
+        $query = "SELECT temp_password, temp_password_expiry FROM users WHERE email = :email";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function updatePassword($email, $newPassword)
+    {
+        $query = "UPDATE users SET password = '$newPassword', temp_password = NULL,temp_password_expiry = NULL WHERE email = '$email'";
+        $result = $this->pdo->prepare($query)->execute();
+        return $result;
     }
 }

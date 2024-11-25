@@ -1,50 +1,54 @@
 <?php
-class oderModel{
-    public $pdo=null;
+class oderModel
+{
+    public $pdo = null;
     public function __construct()
     {
-        $this->pdo=connect();
+        $this->pdo = connect();
     }
     public function __destruct()
     {
-        $this->pdo=null;
+        $this->pdo = null;
     }
-    public function getAllOder(){
+    public function getAllOder()
+    {
         $sql = "SELECT orders.*, users.username, vouchers.code, users.email, users.phone, users.address
         FROM orders 
         JOIN users ON orders.user_id = users.id
         JOIN vouchers ON orders.voucher_id = vouchers.voucher_id";
-        $data=$this->pdo->query($sql)->fetchAll();
+        $data = $this->pdo->query($sql)->fetchAll();
         return $data;
     }
     public function updateOrder($id, $payment_status = null, $shipping_status = null)
-{
-    // Khởi tạo mảng để lưu các trường cần cập nhật
-    $fields = [];
+    {
+        // Khởi tạo mảng để lưu các trường cần cập nhật
+        $fields = [];
 
-    // Nếu có cập nhật payment_status
-    if ($payment_status && in_array($payment_status, ["pending", "completed", "failed"])) {
-        $fields[] = "payment_status = '$payment_status'";
-    }
+        // Nếu có cập nhật payment_status
+        if ($payment_status && in_array($payment_status, ["pending", "completed", "failed"])) {
+            $fields[] = "payment_status = '$payment_status'";
+        }
 
-    // Nếu có cập nhật shipping_status
-    if ($shipping_status && in_array($shipping_status, ["pending", "shipped", "delivered"])) {
-        $fields[] = "shipping_status = '$shipping_status'";
-    }
+        // Nếu có cập nhật shipping_status
+        if ($shipping_status && in_array($shipping_status, ["pending", "shipped", "delivered"])) {
+            $fields[] = "shipping_status = '$shipping_status'";
+        }
 
-    // Chỉ thực hiện truy vấn nếu có dữ liệu để cập nhật
-    if (!empty($fields)) {
-        $query = "UPDATE orders SET " . implode(', ', $fields) . " WHERE id = $id";
-        $this->pdo->exec($query);
+        // Chỉ thực hiện truy vấn nếu có dữ liệu để cập nhật
+        if (!empty($fields)) {
+            $query = "UPDATE orders SET " . implode(', ', $fields) . " WHERE id = $id";
+            $this->pdo->exec($query);
+        }
     }
-}
-public function getOrderUser($id){
-    $sql = "SELECT * FROM orders WHERE user_id =$id";
-    $data= $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-    return $data;
-}
-    public function getOrderById($id){
-       
+    public function getOrderUser($id)
+    {
+        $sql = "SELECT * FROM orders WHERE user_id =$id";
+        $data = $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
+    public function getOrderById($id)
+    {
+
         $sql = "SELECT orders.id AS order_id, 
         orders.created_at AS order_date,
         users.username AS customer_name, 
@@ -59,18 +63,18 @@ public function getOrderUser($id){
  JOIN products ON product_variants.product_id = products.id
  WHERE orders.id = $id
  GROUP BY orders.id";
-    $data=$this->pdo->query($sql)->fetch();
-    return $data;
-}
-    public function getThongKe(){
-        $sql="SELECT DATE(created_at) AS order_day, COUNT(*) AS total_orders
+        $data = $this->pdo->query($sql)->fetch();
+        return $data;
+    }
+    public function getThongKe()
+    {
+        $sql = "SELECT DATE(created_at) AS order_day, COUNT(*) AS total_orders
 FROM orders
 GROUP BY DATE(created_at)
 ORDER BY order_day;
 ";
-$data=$this->pdo->query($sql)->fetchAll();
-    return $data;
+        $data = $this->pdo->query($sql)->fetchAll();
+        return $data;
     }
+    
 }
-
-?>

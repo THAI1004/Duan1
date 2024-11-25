@@ -26,18 +26,20 @@ if (isset($_GET["id"])) {
     $id = $_GET["id"];
 }
 if (isset($_GET["idVariant"])) {
-    $idVariant = $_GET["idVariant"];}
+    $idVariant = $_GET["idVariant"];
+}
 if (isset($_GET["page"])) {
-    $page = $_GET["page"];}
+    $page = $_GET["page"];
+}
 
 $productC = new productController();
 // 3. Kiểm tra giá trị "act" và gọi xuống controller tương ứng
 $categoryC = new categoryController();
 $taiKhoan = new AccountController();
 $productC = new productController();
-$oder=new oderController();
-$home=new homeController();
-$client=new clientController();
+$oder = new oderController();
+$home = new homeController();
+$client = new clientController();
 switch ($act) {
     case "Trangchu":
         $client->HomeClient();
@@ -65,7 +67,7 @@ switch ($act) {
         break;
     case "listProductVariant":
         $productC->listProductVariant($id);
-         break;
+        break;
     case "addVariant":
         $productC->showFormAddVariant($id);
         break;
@@ -73,13 +75,13 @@ switch ($act) {
         $productC->addProductVariant($id);
         break;
     case "updateVariant":
-        $productC->showFormEditVariant($id,$idVariant);
+        $productC->showFormEditVariant($id, $idVariant);
         break;
     case "submitEditProductVariant":
-        $productC->submitEditVariant($id,$idVariant);
+        $productC->submitEditVariant($id, $idVariant);
         break;
     case "deleteVariant":
-        $productC->deleteVariant($id,$idVariant);
+        $productC->deleteVariant($id, $idVariant);
         break;
     case "searchProduct":
         $keyword = $_POST['search'] ?? '';
@@ -155,7 +157,7 @@ switch ($act) {
         break;
     case 'chitietorder':
         $oder->chitietOrder($id);
-        break;   
+        break;
     case "homeClient":
         $client->HomeClient($id);
         break;
@@ -178,7 +180,7 @@ switch ($act) {
     case "login":
         $client->includeClient();
         $client->login();
-        
+
         break;
     case "logout":
         $client->logout();
@@ -240,5 +242,24 @@ switch ($act) {
     case "addCart":
         $client->includeClient();
         $client->addCart($id);
+    case "formForgetPass":
+        $client->includeClient();
+        $client->formEmail();
+        break;
+    case "sendPass":
+        $client->sendPass();
+        break;
+    case "formResetPass":
+        $client->includeClient(); 
+        $client->formReset();
+        break;
+    case "resetPassword":
+        $client->resetPassword();
+        break;
+    case "review":
+        $client->review();
+    case "checkout":
+        $client->includeClient();
+        $client->checkout();
         break;
 }

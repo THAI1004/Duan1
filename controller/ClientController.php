@@ -1,5 +1,10 @@
 <?php
 session_start();
+require 'vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 class clientController
 {
     public $productModel;
@@ -642,6 +647,12 @@ public function deleteWishlist($id)
     }
     public function productDetail($id)
     {
+        if (isset($_SESSION['user_id'])) {
+            $user = $this->userModel->getIdTK($_SESSION["user_id"]);
+            $checkOrder = $this->productModel->checkUserOrder($_SESSION['user_id'], $id);
+        } else {
+            $checkOrder = false;  // Nếu chưa đăng nhập
+        }
         $Product = $this->productModel->getProductById($id);
         $listProducVariant = $this->productModel->getAllProductVariant($id);
         $getAllProductImagePhu = $this->productModel->getAllProductVariant($id);
@@ -754,4 +765,109 @@ public function deleteWishlist($id)
     
     
 
+    public function formEmail()
+    {
+
+        include "./views/client/forgetPassword.php";
+    }
+    public function sendPass()
+    {
+        if (isset($_POST['sendPass'])) {
+            $email = $_POST['email'];
+            $user = $this->userModel->findUserByEmail($email);
+            if ($user) {
+                $tempPassword = bin2hex(random_bytes(4));
+                $expiry = date("Y-m-d H:i:s", strtotime("5 minutes"));
+                $this->userModel->addTempPassword($email, $tempPassword, $expiry);
+                $this->sendEmail($email, $tempPassword);
+                echo "<script>
+                    alert('Mật khẩu tạm thời đã được gửi đến email của bạn.');
+                    window.location.href = '?act=formResetPass';
+                  </script>";
+                exit();
+            } else {
+                echo "<script>
+                alert('Email không tìm thấy.');
+                window.location.href = '?act=formForgetPass';
+              </script>";  // Quay lại trang nhập email
+                exit();
+            }
+        }
+    }
+    public function formReset()
+    {
+        include "./views/client/resetPassword.php";
+    }
+    private function sendEmail($email, $tempPassword)
+    {
+        $mail = new PHPMailer(true);
+
+        try {
+            // Cấu hình gửi email qua SMTP
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';  // Thay smtp.example.com bằng smtp.gmail.com
+            $mail->SMTPAuth = true;
+            $mail->Username = 'kimphong102005@gmail.com';  // Địa chỉ email của bạn
+            $mail->Password = 'wjbt ywvp pfva wxbe';  // Thay mật khẩu ứng dụng ở đây
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Đảm bảo đang sử dụng STARTTLS
+            $mail->Port = 587;  // Cổng SMTP cho STARTTLS
+
+            // Cấu hình người gửi
+            $mail->setFrom('kimphong102005@gmail.com', 'phongdz');
+            $mail->addAddress($email);  // Thêm địa chỉ email người nhận
+
+            // Nội dung email
+            $mail->isHTML(true);
+            $mail->Subject = 'Your Temporary Password';
+            $mail->Body    = "Your temporary password is: <b>$tempPassword</b> It is valid for 10 minutes.";
+
+            // Gửi email
+            $mail->send();
+        } catch (Exception $e) {
+        }
+    }
+
+    public function resetPassword()
+    {
+        if (isset($_POST['email'], $_POST['temp_password'], $_POST['new_password'])) {
+            $email = $_POST['email'];
+            $tempPassword = $_POST['temp_password'];
+            $newPassword = $_POST['new_password'];
+            $user = $this->userModel->verifyTempPassword($email, $tempPassword);
+            if ($user) {
+                // Cập nhật mật khẩu mới
+                $this->userModel->updatePassword($email, $newPassword);
+                echo "<script>
+                    alert('Lấy lại mật khẩu thành công.');
+                    window.location.href = '?act=formLogin';
+                  </script>";
+            } else {
+                echo "<script>
+                    alert('Email hoặc mật khẩu tạm thời không đúng');
+                    window.location.href = '?act=formResetPass';
+                  </script>";  // Quay lại trang nhập mật khẩu tạm thời
+                exit();
+            }
+        }
+    }
+    public function review() {
+        if (isset($_SESSION['user_id'])) {
+            $userId = $_SESSION['user_id'];
+            $productId = $_POST['product_id'];
+            $reviewText = $_POST['review_text'];
+            $rating = $_POST['rating'];
+    
+            // Lưu review vào cơ sở dữ liệu
+            $this->reviewModel->addReview($userId, $productId, $rating, $reviewText);
+    
+            // Chuyển hướng lại trang chi tiết sản phẩm
+            header('Location: ?act=productDetail&id=' . $productId);
+        } else {
+            // Nếu người dùng chưa đăng nhập, chuyển hướng về trang đăng nhập
+            header('Location: login.php');
+        }
+    }
+    public function checkout(){
+        
+    }
 }

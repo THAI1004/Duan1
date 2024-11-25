@@ -92,7 +92,7 @@ if (isset($_SESSION['login_success'])) {
                                             unset($_SESSION['login_error']);
                                         }
                                         ?>
-                                        <a href="#" class="forget-pwd">Forget Password?</a>
+                                        <a href="?act=formForgetPass" class="forget-pwd">Forget Password?</a>
                                     </div>
                                 </div>
                                 <div class="single-input-item">
