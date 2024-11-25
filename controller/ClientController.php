@@ -687,4 +687,7 @@ class clientController
             header('Location: login.php');
         }
     }
+    public function checkout(){
+        
+    }
 }
