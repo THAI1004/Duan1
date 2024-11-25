@@ -27,6 +27,16 @@ class productModel
             ";
         $data = $this->pdo->query($sql)->fetchAll();
         return $data;
+        
+    }
+    public function getProductLimit20(){
+        $sql = "SELECT * 
+            FROM products 
+            ORDER BY created_at DESC 
+            LIMIT 20;
+            ";
+            $data = $this->pdo->query($sql)->fetchAll();
+            return $data;
     }
     public function getAllColor()
     {
