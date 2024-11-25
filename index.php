@@ -237,4 +237,21 @@ switch ($act) {
         $client->includeClient();
         $client->contactUS();
         break;
+    case "formForgetPass":
+        $client->includeClient();
+        $client->formEmail();
+        break;
+    case "sendPass":
+        $client->sendPass();
+        break;
+    case "formResetPass":
+        $client->includeClient(); 
+        $client->formReset();
+        break;
+    case "resetPassword":
+        $client->resetPassword();
+        break;
+    case "review":
+        $client->review();
+        break;
 }

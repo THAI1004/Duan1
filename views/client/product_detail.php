@@ -3,6 +3,7 @@
 
 
 <!-- Mirrored from htmldemo.net/corano/corano/product-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 29 Jun 2024 09:54:00 GMT -->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -35,11 +36,13 @@
     <link rel="stylesheet" href="./corano/assets/css/style.css">
     <style>
         .product-thumb img {
-    width: 100%; /* Đảm bảo ảnh có chiều rộng 100% */
-    height: 250px; /* Đặt chiều cao cố định cho tất cả ảnh */
-    object-fit: cover; /* Giữ tỷ lệ ảnh nhưng làm đầy khung */
-}
-
+            width: 100%;
+            /* Đảm bảo ảnh có chiều rộng 100% */
+            height: 250px;
+            /* Đặt chiều cao cố định cho tất cả ảnh */
+            object-fit: cover;
+            /* Giữ tỷ lệ ảnh nhưng làm đầy khung */
+        }
     </style>
 </head>
 
@@ -76,73 +79,73 @@
                                 <div class="col-lg-5">
                                     <div class="product-large-slider">
                                         <div class="pro-large-img img-zoom">
-                                            <img src="<?= $Product["image"]?>" alt="product-details" />
+                                            <img src="<?= $Product["image"] ?>" alt="product-details" />
                                         </div>
                                     </div>
                                     <div class="pro-nav slick-row-10 slick-arrow-style">
-                                    <?php foreach($listProducVariant as $row){?>
-                                        <div class="pro-nav-thumb">
-                                            <img src="<?=$row["image_variant"]?>" alt="product-details" />
-                                        </div>
-                                        <?php }?>
-                                        
+                                        <?php foreach ($listProducVariant as $row) { ?>
+                                            <div class="pro-nav-thumb">
+                                                <img src="<?= $row["image_variant"] ?>" alt="product-details" />
+                                            </div>
+                                        <?php } ?>
+
                                     </div>
                                 </div>
                                 <div class="col-lg-7">
                                     <div class="product-details-des">
-                                        
-                                        <h3 class="product-name"><?=$Product["product_name"]?></h3>
+
+                                        <h3 class="product-name"><?= $Product["product_name"] ?></h3>
                                         <div class="ratings d-flex">
-                                        <?php
-                                                                    // In ra số sao đầy
-                                                                    for ($i = 0; $i < $averageRating; $i++) {
-                                                                        echo '<span class="good"><i class="fa fa-star"></i></span>';
-                                                                    }
-                                                                   
-                                                                ?>
+                                            <?php
+                                            // In ra số sao đầy
+                                            for ($i = 0; $i < $averageRating; $i++) {
+                                                echo '<span class="good"><i class="fa fa-star"></i></span>';
+                                            }
+
+                                            ?>
                                             <div class="pro-review">
-                                                <span><?=$countReview?> Reviews</span>
+                                                <span><?= $countReview ?> Reviews</span>
                                             </div>
                                         </div>
                                         <div class="price-box">
-                                            <span class="price-regular"><?=$Product["discount_price"]?></span>
-                                            <span class="price-old"><del><?=$Product["price"]?></del></span>
+                                            <span class="price-regular"><?= $Product["discount_price"] ?></span>
+                                            <span class="price-old"><del><?= $Product["price"] ?></del></span>
                                         </div>
                                         <div class="availability">
                                             <i class="fa fa-check-circle"></i>
                                             <span>200 in stock</span>
                                         </div>
-                                        <p class="pro-desc"><?=$Product["description"]?></p>
+                                        <p class="pro-desc"><?= $Product["description"] ?></p>
                                         <form action="">
-                                        <div class="quantity-cart-box d-flex align-items-center">
-                                            <h6 class="option-title">Số lượng:</h6>
-                                            <div class="quantity">
-                                                <input style="width:50px" min=0 name='quantity' type="number" value="1">
+                                            <div class="quantity-cart-box d-flex align-items-center">
+                                                <h6 class="option-title">Số lượng:</h6>
+                                                <div class="quantity">
+                                                    <input style="width:50px" min=0 name='quantity' type="number" value="1">
+                                                </div>
+                                                <div class="action_link">
+                                                    <a class="btn btn-cart2" href="#">Add to cart</a>
+                                                </div>
                                             </div>
-                                            <div class="action_link">
-                                                <a class="btn btn-cart2" href="#">Add to cart</a>
+                                            <div class="pro-size">
+                                                <h6 class="option-title">size :</h6>
+                                                <select class="nice-select" name="size_name">
+                                                    <?php foreach ($getAllSize as $row) { ?>
+                                                        <option value="<?= $row['id'] ?>"><?= $row["size_name"] ?></option>
+                                                    <?php } ?>
+                                                </select>
                                             </div>
-                                        </div>
-                                        <div class="pro-size">
-                                            <h6 class="option-title">size :</h6>
-                                            <select class="nice-select" name="size_name">
-                                                <?php foreach($getAllSize as $row){?>
-                                                <option value="<?=$row['id']?>"><?=$row["size_name"]?></option>
-                                                <?php }?>
-                                            </select>
-                                        </div>
-                                        <div class="color-option">
-                                        <h6 class="option-title">Màu :</h6>
-                                        <select class="nice-select" name="color_name">
-                                            <?php foreach($getAllColor as $row){ ?>
-                                                <option value="<?=$row['id']?>"><?=$row['color_name']?></option>
-                                            <?php } ?>
-                                        </select>
+                                            <div class="color-option">
+                                                <h6 class="option-title">Màu :</h6>
+                                                <select class="nice-select" name="color_name">
+                                                    <?php foreach ($getAllColor as $row) { ?>
+                                                        <option value="<?= $row['id'] ?>"><?= $row['color_name'] ?></option>
+                                                    <?php } ?>
+                                                </select>
 
-                                        </div>
+                                            </div>
                                         </form>
                                         <div class="useful-links">
-                                            <a href="?act=addWishlist&id=<?=$Product["id"]?>" data-bs-toggle="tooltip" title="Wishlist"><i
+                                            <a href="?act=addWishlist&id=<?= $Product["id"] ?>" data-bs-toggle="tooltip" title="Wishlist"><i
                                                     class="pe-7s-like"></i>wishlist</a>
                                         </div>
                                         <div class="like-icon">
@@ -170,14 +173,14 @@
                                                 <a data-bs-toggle="tab" href="#tab_two">Chi tiết</a>
                                             </li>
                                             <li>
-                                                <a data-bs-toggle="tab" href="#tab_three">reviews <?=$countReview
-                                                    ?></a>
+                                                <a data-bs-toggle="tab" href="#tab_three">reviews <?= $countReview
+                                                                                                    ?></a>
                                             </li>
                                         </ul>
                                         <div class="tab-content reviews-tab">
                                             <div class="tab-pane fade show active" id="tab_one">
                                                 <div class="tab-one">
-                                                    <p><?=$Product["description"]?></p>
+                                                    <p><?= $Product["description"] ?></p>
                                                 </div>
                                             </div>
                                             <div class="tab-pane fade" id="tab_two">
@@ -186,47 +189,47 @@
                                                         <tr>
                                                             <td>color</td>
                                                             <td style="display: flex; gap: 10px;">
-    <?php foreach($getAllColor as $row) { ?>
-        
-        <a style="background-color: <?=$row["color_code"]?>;display: block; width: 20px; height: 20px; margin: 0;"></a>
-    <?php } ?>
-</td>
+                                                                <?php foreach ($getAllColor as $row) { ?>
+
+                                                                    <a style="background-color: <?= $row["color_code"] ?>;display: block; width: 20px; height: 20px; margin: 0;"></a>
+                                                                <?php } ?>
+                                                            </td>
 
                                                         </tr>
                                                         <tr>
                                                             <td>size</td>
                                                             <td style="display: flex; gap: 10px;">
-    <?php foreach($getAllSize as $row) { ?>
-        
-        <p><?=$row["size_name"]?></p>
-    <?php } ?>
-</td>
+                                                                <?php foreach ($getAllSize as $row) { ?>
+
+                                                                    <p><?= $row["size_name"] ?></p>
+                                                                <?php } ?>
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
                                             <div class="tab-pane fade" id="tab_three">
 
-                                                    <h5><?=$countReview
+                                                <h5><?= $countReview
                                                     ?> review </h5>
-                                                    <div class="total-reviews">
+                                                <div class="total-reviews">
                                                     <?php
                                                     $totalRating = 0;
-                                                    
-                                                     foreach($listReview as $row){
+
+                                                    foreach ($listReview as $row) {
                                                         $totalRating += $row['rating'];
-                                                        ?>
+                                                    ?>
                                                         <div class="review-box">
-                                                        <div class="ratings">
+                                                            <div class="ratings">
                                                                 <?php
-                                                                    // Lấy giá trị rating từ $row
-                                                                    $rating = $row['rating'];
-                                                                    
-                                                                    // In ra số sao đầy
-                                                                    for ($i = 0; $i < $rating; $i++) {
-                                                                        echo '<span class="good"><i class="fa fa-star"></i></span>';
-                                                                    }
-                                                                   
+                                                                // Lấy giá trị rating từ $row
+                                                                $rating = $row['rating'];
+
+                                                                // In ra số sao đầy
+                                                                for ($i = 0; $i < $rating; $i++) {
+                                                                    echo '<span class="good"><i class="fa fa-star"></i></span>';
+                                                                }
+
                                                                 ?>
                                                             </div>
 
@@ -237,43 +240,43 @@
                                                         </div>
                                                     <?php } ?>
 
+                                                </div>
+                                                <?php if (isset($_SESSION['user_id']) && ($checkOrder)): ?>
+                                                <form action="?act=review" method="POST" class="review-form">
+                                                <div class="form-group row">
+                                                    <div class="col">
+                                                        <label class="col-form-label"><span class="text-danger">*</span>
+                                                            Your Review</label>
+                                                        <textarea name="review_text" class="form-control" required></textarea>
                                                     </div>
-                                                <form action="#" class="review-form">
-                                                    <div class="form-group row">
-                                                        <div class="col">
-                                                            <label class="col-form-label"><span class="text-danger">*</span>
-                                                                Your Name</label>
-                                                            <input name="username" type="text" class="form-control" required>
-                                                        </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col">
+                                                        <label class="col-form-label"><span class="text-danger">*</span>
+                                                            Rating</label>
+                                                        &nbsp;&nbsp;&nbsp; Bad&nbsp;
+                                                        <input type="radio" value="1" name="rating">
+                                                        &nbsp;
+                                                        <input type="radio" value="2" name="rating">
+                                                        &nbsp;
+                                                        <input type="radio" value="3" name="rating">
+                                                        &nbsp;
+                                                        <input type="radio" value="4" name="rating">
+                                                        &nbsp;
+                                                        <input type="radio" value="5" name="rating" checked>
+                                                        &nbsp;Good
                                                     </div>
-                                                    <div class="form-group row">
-                                                        <div class="col">
-                                                            <label class="col-form-label"><span class="text-danger">*</span>
-                                                                Your Review</label>
-                                                            <textarea class="form-control" required></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col">
-                                                            <label class="col-form-label"><span class="text-danger">*</span>
-                                                                Rating</label>
-                                                            &nbsp;&nbsp;&nbsp; Bad&nbsp;
-                                                            <input type="radio" value="1" name="rating">
-                                                            &nbsp;
-                                                            <input type="radio" value="2" name="rating">
-                                                            &nbsp;
-                                                            <input type="radio" value="3" name="rating">
-                                                            &nbsp;
-                                                            <input type="radio" value="4" name="rating">
-                                                            &nbsp;
-                                                            <input type="radio" value="5" name="rating" checked>
-                                                            &nbsp;Good
-                                                        </div>
-                                                    </div>
-                                                    <div class="buttons">
-                                                        <button class="btn btn-sqr" type="submit">Continue</button>
-                                                    </div>
-                                                </form> <!-- end of review-form -->
+                                                </div>
+                                                <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
+                                                <input type="hidden" name="product_id" value="<?php echo $Product["id"] ?>">
+                                                <div class="buttons">
+                                                    <button class="btn btn-sqr" type="submit">Continue</button>
+                                                </div>
+                                            </form>
+                                            <?php else: ?>                                        
+                                                <p> Bạn đăng nhập và mua hàng để đánh giá được sản phẩm</p>
+                                                <?php endif; ?>
+                                                 <!-- end of review-form -->
                                             </div>
                                         </div>
                                     </div>
@@ -305,41 +308,41 @@
                     <div class="col-12">
                         <div class="product-carousel-4 slick-row-10 slick-arrow-style">
                             <!-- product item start -->
-                             <?php foreach($productLimit20 as $product){
-                                $discountPercentage = (($product["price"] - $product["discount_price"]) / $product["price"]) * 100;?>
-                            <div class="product-item">
-                                <figure class="product-thumb">
-                                    <a href="?act=productDetail&id=<?=$product["id"]?>">
-                                        <img class="pri-img" src="<?= $product["image"]?>" alt="product">
-                                        <img class="sec-img" src="<?= $product["image"]?>" alt="product">
-                                    </a>
-                                    <div class="product-badge">
-                                        <div class="product-label new">
-                                            <span>new</span>
+                            <?php foreach ($productLimit20 as $product) {
+                                $discountPercentage = (($product["price"] - $product["discount_price"]) / $product["price"]) * 100; ?>
+                                <div class="product-item">
+                                    <figure class="product-thumb">
+                                        <a href="?act=productDetail&id=<?= $product["id"] ?>">
+                                            <img class="pri-img" src="<?= $product["image"] ?>" alt="product">
+                                            <img class="sec-img" src="<?= $product["image"] ?>" alt="product">
+                                        </a>
+                                        <div class="product-badge">
+                                            <div class="product-label new">
+                                                <span>new</span>
+                                            </div>
+                                            <div class="product-label discount">
+                                                <span><?= $discountPercentage ?>%</span>
+                                            </div>
                                         </div>
-                                        <div class="product-label discount">
-                                            <span><?= $discountPercentage?>%</span>
+                                        <div class="button-group">
+                                            <a href="?act=addWishlist&id=<?= $product["id"] ?>" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
+
                                         </div>
-                                    </div>
-                                    <div class="button-group">
-                                        <a href="?act=addWishlist&id=<?= $product["id"]?>" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                        
-                                    </div>
-                                    <div class="cart-hover">
-                                        <a class="btn btn-cart" href="?act=productDetail&id=<?=$product["id"]?>">Chi tiết sản phẩm</a>
-                                    </div>
-                                </figure>
-                                <div class="product-caption text-center">
-                                    <h6 class="product-name">
-                                        <a href="?act=productDetail&id=<?=$product["id"]?>"><?=$product["product_name"]?></a>
-                                    </h6>
-                                    <div class="price-box">
-                                        <span class="price-regular"><?=$product["discount_price"]?></span>
-                                        <span class="price-old"><del><?=$product["price"]?></del></span>
+                                        <div class="cart-hover">
+                                            <a class="btn btn-cart" href="?act=productDetail&id=<?= $product["id"] ?>">Chi tiết sản phẩm</a>
+                                        </div>
+                                    </figure>
+                                    <div class="product-caption text-center">
+                                        <h6 class="product-name">
+                                            <a href="?act=productDetail&id=<?= $product["id"] ?>"><?= $product["product_name"] ?></a>
+                                        </h6>
+                                        <div class="price-box">
+                                            <span class="price-regular"><?= $product["discount_price"] ?></span>
+                                            <span class="price-old"><del><?= $product["price"] ?></del></span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <?php }?>
+                            <?php } ?>
                             <!-- product item end -->
 
                         </div>
@@ -356,15 +359,15 @@
     </div>
     <!-- Scroll to Top End -->
 
-   
+
 
 
 
     <!-- JS
 ============================================ -->
-    
-   <!-- Modernizer JS -->
-   <script src="./corano/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+
+    <!-- Modernizer JS -->
+    <script src="./corano/assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <!-- jQuery JS -->
     <script src="./corano/assets/js/vendor/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap JS -->
@@ -392,25 +395,25 @@
     <!-- Main JS -->
     <script src="./corano/assets/js/main.js"></script>
     <script>
-        $(document).ready(function(){
-    $('.pro-nav-thumb img').on('click', function(){
-        var newImage = $(this).attr('src'); // Lấy URL ảnh từ thumbnail được click
-        $('.product-large-slider .pro-large-img img').attr('src', newImage); // Đổi ảnh lớn
-    });
-});
-document.querySelectorAll('.pro-nav-thumb img').forEach(function(thumbnail) {
-    thumbnail.addEventListener('click', function() {
-        var newImage = thumbnail.getAttribute('src'); // Lấy URL ảnh từ thumbnail
-        document.querySelector('.product-large-slider .pro-large-img img').setAttribute('src', newImage); // Đổi ảnh lớn
-    });
-});
-
+        $(document).ready(function() {
+            $('.pro-nav-thumb img').on('click', function() {
+                var newImage = $(this).attr('src'); // Lấy URL ảnh từ thumbnail được click
+                $('.product-large-slider .pro-large-img img').attr('src', newImage); // Đổi ảnh lớn
+            });
+        });
+        document.querySelectorAll('.pro-nav-thumb img').forEach(function(thumbnail) {
+            thumbnail.addEventListener('click', function() {
+                var newImage = thumbnail.getAttribute('src'); // Lấy URL ảnh từ thumbnail
+                document.querySelector('.product-large-slider .pro-large-img img').setAttribute('src', newImage); // Đổi ảnh lớn
+            });
+        });
     </script>
 </body>
 
 
 <!-- Mirrored from htmldemo.net/corano/corano/product-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 29 Jun 2024 09:54:00 GMT -->
+
 </html>
-<?php 
+<?php
 include "./include/footerClient.php";
 ?>
