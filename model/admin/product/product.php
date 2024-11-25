@@ -229,5 +229,12 @@ $sql = "SELECT * FROM `product_variants` where id=$idVariant   ";
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
+    public function checkVariant($id,$size_id,$color_id,$quantity)
+    {
+        $sql = "SELECT * FROM `product_variants` where product_id =$id AND size_id =$size_id 
+              AND color_id =$color_id
+              AND stock_quantity >= $quantity";
+        $data=$this->pdo->query($sql)->fetch();
+        return $data;
+    }
 }

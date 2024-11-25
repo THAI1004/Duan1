@@ -106,7 +106,9 @@
                                     <tbody>
                                     
                                     <?php 
-                                    $totalAmount = 0;
+                                     $totalAmount = 0;
+                                    if(isset($_SESSION["user_id"])){
+                                   
                                     foreach($listCart as $row){ 
                                         $total=$row["price"]*$row["quantity"];
                                         $totalAmount += $total;
@@ -132,7 +134,7 @@
                                                 <a href="?act=deleteCart&id=<?=$row["cart_item_id"]?>" class="btn-cart btn-cart-delete ml-2">Xóa</a>
                                             </td>
                                         </tr>
-                                    <?php } ?>
+                                    <?php }} ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -171,7 +173,7 @@
                                             </tr>
                                             <tr class="total">
                                                 <td>Tổng thanh toán</td>
-                                                <td class="total-amount"><?=$totalAmount-$voucher['voucher_code'] ?></td>
+                                                <td class="total-amount"><?= isset($totalAmount) && isset($voucher["voucher_code"]) ? $totalAmount - $voucher["voucher_code"] : 0 ?></td>
                                             </tr>
                                         </table>
                                     </div>

@@ -143,9 +143,23 @@ ob_start(); // Bắt đầu output buffer
                                     <a href="?act=wishlist">
                                         <i class="pe-7s-like"></i>
                                         <div class="notification">
-                                            <?php echo isset($_SESSION["user_id"]) ? $wishlist : 0;?>
+                                            <?php 
+                                            if (isset($_SESSION["user_id"])) {
+                                                // Nếu người dùng đã đăng nhập, hiển thị số lượng sản phẩm trong wishlist từ cơ sở dữ liệu
+                                                echo isset($wishlist) ? $wishlist : 0;  // $wishlist là mảng danh sách sản phẩm yêu thích
+                                            } else {
+                                                // Nếu chưa đăng nhập, kiểm tra cookie và đếm số lượng sản phẩm trong wishlist
+                                                if (isset($_COOKIE['wishlist'])) {
+                                                    $wishlist = json_decode($_COOKIE['wishlist'], true); // Giải mã cookie thành mảng PHP
+                                                    echo count($wishlist); // Đếm số lượng sản phẩm trong wishlist
+                                                } else {
+                                                    echo 0; // Nếu không có wishlist trong cookie
+                                                }
+                                            }
+                                            ?>
                                         </div>
                                     </a>
+
 
                                         </li>
                                     <li>
@@ -370,7 +384,7 @@ ob_start(); // Bắt đầu output buffer
                     <div class="minicart-item-wrapper">
                         <ul>
                         <?php if (isset($_SESSION["user_id"])) {
-    $totalAmount = 0;
+  
     
     // Kiểm tra nếu $listCart là mảng và có dữ liệu
     if (is_array($listCart) && !empty($listCart)) {
@@ -380,13 +394,13 @@ ob_start(); // Bắt đầu output buffer
             ?>
             <li class="minicart-item">
                 <div class="minicart-thumb">
-                    <a href="?act=productDetail&id=<?=$row["id"]?>">
+                    <a href="?act=productDetail&id=<?=$row["product_id"]?>">
                         <img src="<?= $row["image_variant"]?>" alt="product">
                     </a>
                 </div>
                 <div class="minicart-content">
                     <h3 class="product-name">
-                        <a href="?act=productDetail&id=<?=$row["id"]?>"><?=$row["product_name"]?></a>
+                        <a href="?act=productDetail&id=<?=$row["product_id"]?>"><?=$row["product_name"]?></a>
                     </h3>
                     <p>
                         <span class="cart-quantity">Số Lượng: <?=$row["quantity"]?><strong></strong></span><br>
@@ -415,7 +429,7 @@ ob_start(); // Bắt đầu output buffer
         </li>
         <li class="total">
             <span>Tổng thanh toán</span>
-            <span><strong><?= isset($totalAmount) && isset($voucher["voucher_code"]) ? $totalAmount - $voucher["voucher_code"] : $totalAmount ?></strong></span>
+            <span><strong><?= isset($totalAmount) && isset($voucher["voucher_code"]) ? $totalAmount - $voucher["voucher_code"] : 0 ?></strong></span>
         </li>
     </ul>
 </div>
