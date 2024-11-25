@@ -11,7 +11,8 @@ class cartModel{
     }
     public function getAllCartItemByIdUser($id){
         $sql = "
-        SELECT 
+        SELECT
+             products.id,
             products.product_name,           -- Lấy tên sản phẩm
             products.price,                   -- Lấy giá sản phẩm từ bảng products
             carts.total_price,                -- Lấy tổng tiền từ giỏ hàng
@@ -91,6 +92,33 @@ public function updateCartVoucher($id, $voucher) {
         $data=$this->pdo->query($sql)->fetch();
         return $data;
     }
+    public function getCartByIdUser($id){
+        $sql = "SELECT * FROM `carts` where user_id=$id";
+        $data=$this->pdo->query($sql)->fetch();
+        return $data;
+    }
+    public function addCart($cart_id, $variant_id, $quantity, $price)
+    {
+        try {
+            // Tạo câu lệnh SQL
+            $sql = "INSERT INTO cart_items (cart_id , variant_id , quantity, unit_price) 
+                    VALUES ('$cart_id', '$variant_id', '$quantity', '$price')";
+
+            // Thực thi câu lệnh SQL
+            $stmt = $this->pdo->exec($sql);
+
+            // Kiểm tra nếu câu lệnh thực thi thành công
+            if ($stmt > 0) {
+                return "OK";  // Trả về "OK" nếu thành công
+            } else {
+                return "Failed";  // Trả về "Failed" nếu không có dòng nào bị ảnh hưởng
+            }
+        } catch (Exception $e) {
+            // In ra lỗi nếu có lỗi xảy ra
+            echo "Error: " . $e->getMessage();
+            return "Error";
+        }
+}
 }
 
 ?>

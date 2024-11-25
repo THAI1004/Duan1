@@ -115,32 +115,35 @@
                                             <i class="fa fa-check-circle"></i>
                                             <span>200 in stock</span>
                                         </div>
-                                        <p class="pro-desc"><?= $Product["description"] ?></p>
-                                        <form action="">
-                                            <div class="quantity-cart-box d-flex align-items-center">
-                                                <h6 class="option-title">Số lượng:</h6>
-                                                <div class="quantity">
-                                                    <input style="width:50px" min=0 name='quantity' type="number" value="1">
-                                                </div>
-                                                <div class="action_link">
-                                                    <a class="btn btn-cart2" href="#">Add to cart</a>
-                                                </div>
+                                        <p class="pro-desc"><?=$Product["description"]?></p>
+                                        <form action="?act=addCart&id=<?= $Product["id"] ?>" method="post">
+                                        <div class="quantity-cart-box d-flex align-items-center">
+                                            <h6 class="option-title">Số lượng:</h6>
+                                            <div class="quantity">  
+                                                <input style="width:50px" min=1 name='quantity' type="number" >
+                                                <input type="hidden" value="<?=$Product["discount_price"]?>" name="price">
+                                                <input type="hidden" value="<?=$cartUser["id"]?>" name="cart_id">
+
                                             </div>
-                                            <div class="pro-size">
-                                                <h6 class="option-title">size :</h6>
-                                                <select class="nice-select" name="size_name">
-                                                    <?php foreach ($getAllSize as $row) { ?>
-                                                        <option value="<?= $row['id'] ?>"><?= $row["size_name"] ?></option>
-                                                    <?php } ?>
-                                                </select>
+                                            <div class="action_link">
+                                                <button name="submit" type="submit" class="btn btn-cart2" >Add to cart</button>
                                             </div>
-                                            <div class="color-option">
-                                                <h6 class="option-title">Màu :</h6>
-                                                <select class="nice-select" name="color_name">
-                                                    <?php foreach ($getAllColor as $row) { ?>
-                                                        <option value="<?= $row['id'] ?>"><?= $row['color_name'] ?></option>
-                                                    <?php } ?>
-                                                </select>
+                                        </div>
+                                        <div class="pro-size">
+                                            <h6 class="option-title">size :</h6>
+                                            <select class="nice-select" name="size_id">
+                                                <?php foreach($getAllSize as $row){?>
+                                                <option value="<?=$row['id']?>"><?=$row["size_name"]?></option>
+                                                <?php }?>
+                                            </select>
+                                        </div>
+                                        <div class="color-option">
+                                        <h6 class="option-title">Màu :</h6>
+                                        <select class="nice-select" name="color_id">
+                                            <?php foreach($getAllColor as $row){ ?>
+                                                <option value="<?=$row['id']?>"><?=$row['color_name']?></option>
+                                            <?php } ?>
+                                        </select>
 
                                             </div>
                                         </form>
@@ -189,9 +192,9 @@
                                                         <tr>
                                                             <td>color</td>
                                                             <td style="display: flex; gap: 10px;">
-                                                                <?php foreach ($getAllColor as $row) { ?>
-
-                                                                    <a style="background-color: <?= $row["color_code"] ?>;display: block; width: 20px; height: 20px; margin: 0;"></a>
+                                                                <?php foreach($getAllColor as $row) { ?>
+                                                                    
+                                                                    <a style="background-color: <?=$row["color_code"]?>;display: block; width: 20px; height: 20px; margin: 0;"></a>
                                                                 <?php } ?>
                                                             </td>
 
@@ -199,9 +202,9 @@
                                                         <tr>
                                                             <td>size</td>
                                                             <td style="display: flex; gap: 10px;">
-                                                                <?php foreach ($getAllSize as $row) { ?>
-
-                                                                    <p><?= $row["size_name"] ?></p>
+                                                                <?php foreach($getAllSize as $row) { ?>
+                                                                    
+                                                                    <p><?=$row["size_name"]?></p>
                                                                 <?php } ?>
                                                             </td>
                                                         </tr>

@@ -193,7 +193,7 @@ switch ($act) {
         $client->GioiThieu();
         break;
     case "addWishlist":
-        $client->addWishlist($id);
+        $client->addToWishlist($id);
         break;
     case "wishlist":
         $client->includeClient();
@@ -239,6 +239,9 @@ switch ($act) {
         $client->includeClient();
         $client->contactUS();
         break;
+    case "addCart":
+        $client->includeClient();
+        $client->addCart($id);
     case "formForgetPass":
         $client->includeClient();
         $client->formEmail();
