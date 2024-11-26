@@ -228,7 +228,7 @@ include "./include/headerClient.php";
                             </div>
                             <div class="product-label discount">
                             <span>
-                                <?=$discountPercentage?>
+                                <?=$discountPercentage?> %
                             </span>
                             </div>
                         </div>
@@ -343,7 +343,7 @@ include "./include/headerClient.php";
                                         </div>
                                         <div class="product-label discount">
                                         <span id="giamGia">
-                                            <?= $discountPercentage?>% </span>
+                                            <?= $discountPercentage?> % </span>
                                         </div>
                                     </div>
                                     <div class="button-group">
