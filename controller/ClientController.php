@@ -850,16 +850,17 @@ public function deleteWishlist($id)
             }
         }
     }
-    public function review() {
+    public function review()
+    {
         if (isset($_SESSION['user_id'])) {
             $userId = $_SESSION['user_id'];
             $productId = $_POST['product_id'];
             $reviewText = $_POST['review_text'];
             $rating = $_POST['rating'];
-    
+
             // Lưu review vào cơ sở dữ liệu
             $this->reviewModel->addReview($userId, $productId, $rating, $reviewText);
-    
+
             // Chuyển hướng lại trang chi tiết sản phẩm
             header('Location: ?act=productDetail&id=' . $productId);
         } else {
@@ -867,7 +868,8 @@ public function deleteWishlist($id)
             header('Location: login.php');
         }
     }
-    public function checkout(){
-        
+    public function checkout()
+    {
+        include "./views/client/checkout.php";
     }
 }
