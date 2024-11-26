@@ -1,6 +1,5 @@
 <?php
 ob_start(); // Bắt đầu output buffer
-// Nội dung của bạn
 ?>
 
 <!doctype html>
