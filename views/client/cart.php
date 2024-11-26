@@ -176,7 +176,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <a href="checkout.html" class="btn btn-sqr d-block">Bắt đầu thanh toán</a>
+                                <a href="?act=checkout" class="btn btn-sqr d-block">Bắt đầu thanh toán</a>
                             </div>
                         </div>
                     </div>
