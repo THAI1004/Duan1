@@ -101,7 +101,7 @@
                             <h5 class="sidebar-title">price</h5>
                             <div class="sidebar-body">
                                 <div class="price-range-wrap">
-                                    <div class="price-range" data-min="50000" data-max="5000000"></div>
+                                    <div class="price-range" data-min="0" data-max="5000000"></div>
                                     <div class="range-slider">
                                         <form action="?act=productByPrice" method="post" class="d-flex align-items-center justify-content-between">
                                             <div class="price-input">
@@ -275,9 +275,9 @@
         $(document).ready(function() {
             $(".price-range").slider({
                 range: true,
-                min: 50000,
+                min: 0,
                 max: 5000000, // Giới hạn giá trị tối đa, bạn có thể thay đổi nếu cần
-                values: [50000, 5000000], // Giá trị mặc định
+                values: [0, 5000000], // Giá trị mặc định
                 slide: function(event, ui) {
                     // Cập nhật giá trị của input mỗi khi slider thay đổi
                     $("#amount").val(ui.values[0] + " - " + ui.values[1]);
