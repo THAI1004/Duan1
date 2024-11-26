@@ -258,6 +258,7 @@ switch ($act) {
         break;
     case "review":
         $client->review();
+        break;
     case "checkout":
         $client->includeClient();
         $client->checkout();

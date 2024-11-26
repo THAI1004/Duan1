@@ -1,9 +1,9 @@
-
 <!doctype html>
 <html class="no-js" lang="zxx">
 
 
 <!-- Mirrored from htmldemo.net/corano/corano/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 29 Jun 2024 09:54:00 GMT -->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -36,30 +36,34 @@
     <link rel="stylesheet" href="./corano/assets/css/style.css">
     <style>
         .btn-cart {
-    display: inline-block;
-    padding: 8px 16px;
-    font-size: 14px;
-    color: #fff;
-    background-color: #007bff; /* Màu nền của nút */
-    border: none;
-    border-radius: 4px;
-    text-align: center;
-    cursor: pointer;
-    text-decoration: none; /* Bỏ gạch chân cho thẻ <a> */
-}
+            display: inline-block;
+            padding: 8px 16px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #007bff;
+            /* Màu nền của nút */
+            border: none;
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            /* Bỏ gạch chân cho thẻ <a> */
+        }
 
-.btn-cart:hover {
-    background-color: #0056b3; /* Màu nền khi hover */
-}
+        .btn-cart:hover {
+            background-color: #0056b3;
+            /* Màu nền khi hover */
+        }
 
-.btn-cart-delete {
-    background-color: #dc3545; /* Màu đỏ cho nút Xóa */
-}
+        .btn-cart-delete {
+            background-color: #dc3545;
+            /* Màu đỏ cho nút Xóa */
+        }
 
-.btn-cart-delete:hover {
-    background-color: #c82333; /* Màu khi hover nút Xóa */
-}
-
+        .btn-cart-delete:hover {
+            background-color: #c82333;
+            /* Màu khi hover nút Xóa */
+        }
     </style>
 </head>
 
@@ -104,54 +108,43 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    
-                                    <?php 
-                                     $totalAmount = 0;
-                                    if(isset($_SESSION["user_id"])){
-                                   
-                                    foreach($listCart as $row){ 
-                                        $total=$row["price"]*$row["quantity"];
-                                        $totalAmount += $total;
-                                        ?>
-                                        <tr>
-                                            <td class="pro-thumbnail"><a href="?act=productDetail&id=<?=$row["product_id"]?>"><img class="img-fluid" src="<?=$row["image_variant"]?>" alt="Product" /></a></td>
-                                            <td class="pro-title"><a href="?act=productDetail&id=<?=$row["product_id"]?>"><?=$row["product_name"]?></a></td>
-                                            <td class="pro-price"><span><?= $row["price"]?></span></td>
-                                            <td class="pro-quantity">
-                                                
-                                                    <input type="number" name="quantity" id="quantity-<?=$row['cart_item_id']?>" value="<?=$row["quantity"]?>" min="1" class="form-control">
-                                                
-                                            </td>
-                                            <td class="pro-subtotal"><span><?=$total?></span></td>
-                                            <td class="pro-remove">
-                                                <!-- Form cập nhật giỏ hàng -->
-                                                <form action="?act=updateCart" method="post" class="d-inline">
-                                            <input type="hidden" name="cart_item_id" value="<?=$row["cart_item_id"]?>">
-                                            <input type="hidden" name="quantity" id="hidden-quantity-<?=$row['cart_item_id']?>" value="<?=$row['quantity']?>">
-                                            <button type="submit" class="btn-cart">Update</button>
-                                        </form>
 
-                                                <a href="?act=deleteCart&id=<?=$row["cart_item_id"]?>" class="btn-cart btn-cart-delete ml-2">Xóa</a>
-                                            </td>
-                                        </tr>
-                                    <?php }} ?>
+                                        <?php
+                                        $totalAmount = 0;
+                                        if (isset($_SESSION["user_id"])) {
+
+                                            foreach ($listCart as $row) {
+                                                $total = $row["price"] * $row["quantity"];
+                                                $totalAmount += $total;
+                                        ?>
+                                                <tr>
+                                                    <td class="pro-thumbnail"><a href="?act=productDetail&id=<?= $row["product_id"] ?>"><img class="img-fluid" src="<?= $row["image_variant"] ?>" alt="Product" /></a></td>
+                                                    <td class="pro-title"><a href="?act=productDetail&id=<?= $row["product_id"] ?>"><?= $row["product_name"] ?><p><?= $row["color_name"] ?> - <?= $row["size_name"] ?></p></a></td>
+                                                    <td class="pro-price"><span><?= $row["price"] ?></span></td>
+                                                    <td class="pro-quantity">
+
+                                                        <input type="number" name="quantity" id="quantity-<?= $row['cart_item_id'] ?>" value="<?= $row["quantity"] ?>" min="1" class="form-control">
+
+                                                    </td>
+                                                    <td class="pro-subtotal"><span><?= $total ?></span></td>
+                                                    <td class="pro-remove">
+                                                        <!-- Form cập nhật giỏ hàng -->
+                                                        <form action="?act=updateCart" method="post" class="d-inline">
+                                                            <input type="hidden" name="cart_item_id" value="<?= $row["cart_item_id"] ?>">
+                                                            <input type="hidden" name="quantity" id="hidden-quantity-<?= $row['cart_item_id'] ?>" value="<?= $row['quantity'] ?>">
+                                                            <button type="submit" class="btn-cart">Update</button>
+                                                        </form>
+
+                                                        <a href="?act=deleteCart&id=<?= $row["cart_item_id"] ?>" class="btn-cart btn-cart-delete ml-2">Xóa</a>
+                                                    </td>
+                                                </tr>
+                                        <?php }
+                                        } ?>
                                     </tbody>
                                 </table>
                             </div>
                             <!-- Cart Update Option -->
-                            <div class="cart-update-option d-block d-md-flex justify-content-between">
-                                <div class="apply-coupon-wrapper">
-                                <form action="?act=updateCartVoucher" method="post" class="d-block d-md-flex">
-                                        <select name="voucher" id="voucher">
-                                            <option value="0">Chọn voucher của bạn</option>
-                                            <?php foreach($vouchers as $row){ ?>
-                                                <option value="<?= $row["discount_amount"] ?>"><?= $row["code"] ?></option>
-                                            <?php } ?>
-                                        </select>
-                                        <button type="submit" class="btn btn-sqr">Áp dụng voucher</button>
-                                    </form>
-                                </div>  
-                            </div>
+
                         </div>
                     </div>
                     <div class="row">
@@ -164,21 +157,14 @@
                                         <table class="table">
                                             <tr>
                                                 <td>Tổng tiền</td>
-                                                <td><?=$totalAmount?> đ</td>
+                                                <td><?= $totalAmount ?> đ</td>
                                             </tr>
                                             <tr>
-                                                <td>Mã giảm giá</td>
-                                                <td><?= isset($voucher["voucher_code"]) ? $voucher["voucher_code"] : 0 ?>
-                                                </td>
-                                            </tr>
-                                            <tr class="total">
-                                                <td>Tổng thanh toán</td>
-                                                <td class="total-amount"><?= isset($totalAmount) && isset($voucher["voucher_code"]) ? $totalAmount - $voucher["voucher_code"] : 0 ?></td>
-                                            </tr>
+
                                         </table>
                                     </div>
                                 </div>
-                                <a href="checkout.html" class="btn btn-sqr d-block">Bắt đầu thanh toán</a>
+                                <a href="?act=checkout" class="btn btn-sqr d-block">Bắt đầu thanh toán</a>
                             </div>
                         </div>
                     </div>
@@ -281,9 +267,9 @@
                                     </div>
                                     <div class="useful-links">
                                         <a href="#" data-bs-toggle="tooltip" title="Compare"><i
-                                            class="pe-7s-refresh-2"></i>compare</a>
+                                                class="pe-7s-refresh-2"></i>compare</a>
                                         <a href="#" data-bs-toggle="tooltip" title="Wishlist"><i
-                                            class="pe-7s-like"></i>wishlist</a>
+                                                class="pe-7s-like"></i>wishlist</a>
                                     </div>
                                     <div class="like-icon">
                                         <a class="facebook" href="#"><i class="fa fa-facebook"></i>like</a>
@@ -301,7 +287,7 @@
     </div>
     <!-- Quick view modal end -->
 
-   
+
 
     <!-- JS
 ============================================ -->
@@ -334,28 +320,28 @@
     <script src="./corano/assets/js/plugins/google-map.js"></script>
     <!-- Main JS -->
     <script src="./corano/assets/js/main.js"></script>
-    
-<script>
-    document.querySelectorAll('input[type="number"]').forEach(input => {
-    input.addEventListener('input', function() {
-        const cartItemId = this.id.split('-')[1]; // Lấy ID sản phẩm từ ID của input
-        const hiddenInput = document.getElementById('hidden-quantity-' + cartItemId);
-        hiddenInput.value = this.value; // Cập nhật giá trị hidden input bằng giá trị mới nhập
-    });
-});
 
-</script>
-   
+    <script>
+        document.querySelectorAll('input[type="number"]').forEach(input => {
+            input.addEventListener('input', function() {
+                const cartItemId = this.id.split('-')[1]; // Lấy ID sản phẩm từ ID của input
+                const hiddenInput = document.getElementById('hidden-quantity-' + cartItemId);
+                hiddenInput.value = this.value; // Cập nhật giá trị hidden input bằng giá trị mới nhập
+            });
+        });
+    </script>
+
 
 </body>
 
 
 <!-- Mirrored from htmldemo.net/corano/corano/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 29 Jun 2024 09:54:00 GMT -->
+
 </html>
 
 
 
 
-<?php 
+<?php
 include "./include/footerClient.php";
 ?>

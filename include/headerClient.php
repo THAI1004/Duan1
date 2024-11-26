@@ -383,7 +383,7 @@ ob_start(); // Bắt đầu output buffer
                 <div class="minicart-content-box">
                     <div class="minicart-item-wrapper">
                         <ul>
-                        <?php if (isset($_SESSION["user_id"])) {
+                        <?php $totalAmount=0; if (isset($_SESSION["user_id"])) {
   
     
     // Kiểm tra nếu $listCart là mảng và có dữ liệu
