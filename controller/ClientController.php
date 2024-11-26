@@ -757,7 +757,7 @@ class clientController
                     // Nếu không có biến thể sản phẩm hoặc không đủ số lượng
                     echo "<script>
                             alert('Sản phẩm này đã hết hàng hoặc không đủ số lượng. Vui lòng chọn sản phẩm khác.');
-                            window.history.back();  // Quay lại trang trước
+                            window.location.href='?act=productDetail&id=$id';  // Quay lại trang trước
                           </script>";
                 }
             } else {
