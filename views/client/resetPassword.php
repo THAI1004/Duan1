@@ -76,7 +76,7 @@ if (isset($_SESSION['login_success'])) {
                                         <input type="email" name="email" placeholder="Email" required />
                                     </div>
                                     <div class="single-input-item">
-                                        <input type="text" name="temp_password" placeholder="Enter temporary password" required>
+                                        <input type="password" name="temp_password" placeholder="Enter temporary password" required>
                                     </div>
                                     <div class="single-input-item">
                                         <input type="password" name="new_password" placeholder="Enter new password" required>
