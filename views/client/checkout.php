@@ -3,21 +3,21 @@
 <!-- google fonts -->
 <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,900" rel="stylesheet">
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="./cẩnoassets/css/vendor/bootstrap.min.css">
+<link rel="stylesheet" href="./corano/assets/css/vendor/bootstrap.min.css">
 <!-- Pe-icon-7-stroke CSS -->
-<link rel="stylesheet" href="./cẩnoassets/css/vendor/pe-icon-7-stroke.css">
+<link rel="stylesheet" href="./corano/assets/css/vendor/pe-icon-7-stroke.css">
 <!-- Font-awesome CSS -->
-<link rel="stylesheet" href="./cẩnoassets/css/vendor/font-awesome.min.css">
+<link rel="stylesheet" href="./corano/assets/css/vendor/font-awesome.min.css">
 <!-- Slick slider css -->
-<link rel="stylesheet" href="./cẩnoassets/css/plugins/slick.min.css">
+<link rel="stylesheet" href="./corano/assets/css/plugins/slick.min.css">
 <!-- animate css -->
-<link rel="stylesheet" href="./cẩnoassets/css/plugins/animate.css">
+<link rel="stylesheet" href="./corano/assets/css/plugins/animate.css">
 <!-- Nice Select css -->
-<link rel="stylesheet" href="./cẩnoassets/css/plugins/nice-select.css">
+<link rel="stylesheet" href="./corano/assets/css/plugins/nice-select.css">
 <!-- jquery UI css -->
-<link rel="stylesheet" href="./cẩnoassets/css/plugins/jqueryui.min.css">
+<link rel="stylesheet" href="./corano/assets/css/plugins/jqueryui.min.css">
 <!-- main style css -->
-<link rel="stylesheet" href="./cẩnoassets/css/style.css">
+<link rel="stylesheet" href="./corano/assets/css/style.css">
 <main>
     <!-- breadcrumb area start -->
     <div class="breadcrumb-area">
@@ -50,151 +50,138 @@
                 <!-- Checkout Billing Details -->
                 <div class="col-lg-6">
                     <div class="checkout-billing-details-wrap">
-                        <h5 class="checkout-title">Billing Details</h5>
+                        <h5 class="checkout-title">Thông tin đơn hàng</h5>
                         <div class="billing-form-wrap">
-                            <form action="#">
+                            <?php
+                            // session_start();
+
+                            // Kiểm tra nếu có dữ liệu POST được gửi từ form
+                            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                                // Lưu thông tin người dùng vào session
+                                $_SESSION['user_data'] = [
+                                    'name' => $_POST['name'] ?? '',
+                                    'email' => $_POST['email'] ?? '',
+                                    'phone' => $_POST['phone'] ?? '',
+                                    'address' => $_POST['address'] ?? '',
+                                    'city' => $_POST['city'] ?? '',
+                                    'huyen' => $_POST['huyen'] ?? '',
+                                    'road' => $_POST['road'] ?? '',
+                                    'number' => $_POST['number'] ?? '',
+                                    'note' => $_POST['ordernote'] ?? '',
+                                    'voucher_code' => $_POST['voucher_code'] ?? '',
+                                    'voucher_discount' => $_POST['voucher'] ?? 0,
+                                    'shipping' => $_POST['shipping'] ?? 0,  // Giả sử voucher là giá trị giảm giá
+                                    // Giả sử voucher là giá trị giảm giá
+                                ];
+                            }
+
+                            // Lấy dữ liệu từ session để điền vào form
+                            $user_data = $_SESSION['user_data'] ?? [];
+
+                            ?>
+
+                            <form action="" method="post">
                                 <div class="row">
                                     <div class="col-md-6">
                                     </div>
                                 </div>
                                 <div class="single-input-item">
-                                    <label for="name" class="required">Name</label>
-                                    <input type="text" id="name" placeholder="Name" required />
+                                    <label for="name" class="required">Vui lòng nhập tên:</label>
+                                    <input type="text" id="name" name="name" placeholder="Enter Name" value="<?= $user_data['name'] ?? '' ?>" required />
                                 </div>
 
                                 <div class="single-input-item">
-                                    <label for="email" class="required">Email Address</label>
-                                    <input type="email" id="email" placeholder="Email Address" required />
+                                    <label for="email" class="required">Email:</label>
+                                    <input type="email" id="email" name="email" placeholder="Enter Email" value="<?= $user_data['email'] ?? '' ?>" required />
                                 </div>
 
                                 <div class="single-input-item">
-                                    <label for="phone">Phone</label>
-                                    <input type="text" id="phone" placeholder="Phone" />
+                                    <label for="phone">Số điện thoại:</label>
+                                    <input type="text" id="phone" name="phone" placeholder="Enter Phone" value="<?= $user_data['phone'] ?? '' ?>" required />
                                 </div>
 
                                 <div class="single-input-item">
-                                    <label for="street-address" class="required mt-20">Street address</label>
-                                    <input type="text" id="street-address" placeholder="Street address Line " required />
+                                    <label for="street-address" class="required mt-20">Địa chỉ:</label>
+                                    <input type="text" id="street-address" name="address" placeholder="Enter Street address Line" value="<?= $user_data['address'] ?? '' ?>" required />
                                 </div>
 
                                 <div class="single-input-item">
-                                    <label for="town" class="required">Town / City</label>
-                                    <input type="text" id="town" placeholder="Town / City" required />
+                                    <label for="town" class="required ">Thành phố:</label>
+                                    <input type="text" id="town" name="city" placeholder="City" value="<?= $user_data['city'] ?? '' ?>" required />
                                 </div>
 
                                 <div class="single-input-item">
-                                    <label for="state">State / Divition</label>
-                                    <input type="text" id="state" placeholder="State / Divition" />
+                                    <label for="huyen" class="required ">Tên Huyện:</label>
+                                    <input type="text" id="huyen" name="huyen" placeholder="Enter District" value="<?= $user_data['huyen'] ?? '' ?>" />
                                 </div>
 
                                 <div class="single-input-item">
-                                    <label for="postcode" class="required">Postcode / ZIP</label>
-                                    <input type="text" id="postcode" placeholder="Postcode / ZIP" required />
+                                    <label for="road" class="required ">Tên đường:</label>
+                                    <input type="text" id="road" name="road" placeholder="Enter Road" value="<?= $user_data['road'] ?? '' ?>" />
                                 </div>
 
-
-
-                                <div class="checkout-box-wrap">
-                                    <div class="single-input-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="create_pwd">
-                                            <label class="custom-control-label" for="create_pwd">Create an
-                                                account?</label>
-                                        </div>
-                                    </div>
-                                    <div class="account-create single-form-row">
-                                        <p>Create an account by entering the information below. If you are a
-                                            returning customer please login at the top of the page.</p>
-                                        <div class="single-input-item">
-                                            <label for="pwd" class="required">Account Password</label>
-                                            <input type="password" id="pwd" placeholder="Account Password" required />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="checkout-box-wrap">
-                                    <div class="single-input-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="ship_to_different">
-                                            <label class="custom-control-label" for="ship_to_different">Ship to a
-                                                different address?</label>
-                                        </div>
-                                    </div>
-                                    <div class="ship-to-different single-form-row">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="single-input-item">
-                                                    <label for="f_name_2" class="required">First Name</label>
-                                                    <input type="text" id="f_name_2" placeholder="First Name" required />
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="single-input-item">
-                                                    <label for="l_name_2" class="required">Last Name</label>
-                                                    <input type="text" id="l_name_2" placeholder="Last Name" required />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="single-input-item">
-                                            <label for="email_2" class="required">Email Address</label>
-                                            <input type="email" id="email_2" placeholder="Email Address" required />
-                                        </div>
-
-                                        <div class="single-input-item">
-                                            <label for="com-name_2">Company Name</label>
-                                            <input type="text" id="com-name_2" placeholder="Company Name" />
-                                        </div>
-
-                                        <div class="single-input-item">
-                                            <label for="country_2" class="required">Country</label>
-                                            <select name="country" id="country_2">
-                                                <option value="Bangladesh">Bangladesh</option>
-                                                <option value="India">India</option>
-                                                <option value="Pakistan">Pakistan</option>
-                                                <option value="England">England</option>
-                                                <option value="London">London</option>
-                                                <option value="London">London</option>
-                                                <option value="Chaina">Chaina</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="single-input-item">
-                                            <label for="street-address_2" class="required mt-20">Street address</label>
-                                            <input type="text" id="street-address_2" placeholder="Street address Line 1" required />
-                                        </div>
-
-                                        <div class="single-input-item">
-                                            <input type="text" placeholder="Street address Line 2 (Optional)" />
-                                        </div>
-
-                                        <div class="single-input-item">
-                                            <label for="town_2" class="required">Town / City</label>
-                                            <input type="text" id="town_2" placeholder="Town / City" required />
-                                        </div>
-
-                                        <div class="single-input-item">
-                                            <label for="state_2">State / Divition</label>
-                                            <input type="text" id="state_2" placeholder="State / Divition" />
-                                        </div>
-
-                                        <div class="single-input-item">
-                                            <label for="postcode_2" class="required">Postcode / ZIP</label>
-                                            <input type="text" id="postcode_2" placeholder="Postcode / ZIP" required />
-                                        </div>
-                                    </div>
+                                <div class="single-input-item">
+                                    <label for="number" class="required">Số nhà:</label>
+                                    <input type="text" id="number" name="number" placeholder="Enter Number" value="<?= $user_data['number'] ?? '' ?>" required />
                                 </div>
 
                                 <div class="single-input-item">
                                     <label for="ordernote">Order Note</label>
-                                    <textarea name="ordernote" id="ordernote" cols="30" rows="3" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                    <textarea name="ordernote" id="ordernote" cols="30" rows="3" placeholder="Notes about your order, e.g. special notes for delivery."><?= $user_data['note'] ?? '' ?></textarea>
                                 </div>
-                                <form action="#" method="post" class=" d-block d-md-flex ">
-                                    <input type="text" placeholder="Enter Your Coupon Code" required />
-                                    <button class="btn btn-sqr">Apply Coupon</button>
+
+                                <form action="?act=updateCartVoucher" method="post" class="d-block d-md-flex">
+                                    <?php if (isset($_SESSION["user_data"])) { ?> <td>
+                                            <label for="shipping">Mã giảm giá:</label>
+                                            <select name="voucher" id="voucher">
+                                                <!-- Nếu voucher discount là 0, hiển thị option mặc định -->
+                                                <option value="0" <?= $_SESSION["user_data"]["voucher_discount"] == 0 ? 'selected' : '' ?>>Chọn voucher của bạn</option>
+
+                                                <?php foreach ($vouchers as $row) { ?>
+                                                    <option value="<?= $row["discount_amount"] ?>" <?= $_SESSION["user_data"]["voucher_discount"] == $row["discount_amount"] ? 'selected' : '' ?>>
+                                                        <?= $row["code"] ?>
+                                                    </option>
+                                                <?php } ?>
+                                            </select>
+                                        </td>
+                                        <div class="single-input-item">
+                                            <label for="shipping">Phương thức vận chuyển:</label>
+                                            <select name="shipping" id="shipping">
+                                                <option value="50000" <?= $_SESSION['user_data']['shipping'] == 50000 ? 'selected' : '' ?>>Hỏa tốc: 50000đ</option>
+                                                <option value="0" <?= $_SESSION['user_data']['shipping'] == 0 ? 'selected' : '' ?>>Free Shipping</option>
+                                            </select>
+                                        </div>
+                                    <?php } else { ?>
+                                        <td>
+                                            <label for="shipping">Mã giảm giá:</label>
+                                            <select name="voucher" id="voucher">
+                                                <!-- Nếu voucher discount là 0, hiển thị option mặc định -->
+                                                <option value="0">Chọn voucher của bạn</option>
+
+                                                <?php foreach ($vouchers as $row) { ?>
+                                                    <option value="<?= $row["discount_amount"] ?>">
+                                                        <?= $row["code"] ?>
+                                                    </option>
+                                                <?php } ?>
+                                            </select>
+                                        </td>
+                                        <div class="single-input-item">
+                                            <label for="shipping">Phương thức vận chuyển:</label>
+                                            <select name="shipping" id="shipping">
+                                                <option value="50000">Hỏa tốc: 50000đ</option>
+                                                <option value="0">Free Shipping</option>
+                                            </select>
+                                        </div>
+                                    <?php } ?>
+
+
+
+                                    <td>
+                                        <button type="submit" name="submit" class="btn btn-sqr">Áp dụng voucher</button>
+                                    </td>
                                 </form>
                             </form>
+
                         </div>
                     </div>
                 </div>
@@ -208,59 +195,43 @@
                             <div class="order-summary-table table-responsive text-center">
                                 <table class="table table-bordered">
                                     <thead>
-                                        <tr>
-                                            <th>Products</th>
-                                            <th>Total</th>
-                                        </tr>
+
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><a href="product-details.html">Suscipit Vestibulum <strong> × 1</strong></a>
-                                            </td>
-                                            <td>$165.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="product-details.html">Ami Vestibulum suscipit <strong> × 4</strong></a>
-                                            </td>
-                                            <td>$165.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="product-details.html">Vestibulum suscipit <strong> × 2</strong></a>
-                                            </td>
-                                            <td>$165.00</td>
-                                        </tr>
+                                        <?php
+                                        foreach ($listCart as $product) {
+                                            $total = $product["unit_price"] * $product["quantity"];
+                                        ?>
+                                            <tr>
+                                                <td><a href="?act=productDetail&id=<?= $product["id"] ?>"> <?= $product["product_name"] ?><strong> × <?= $product["quantity"] ?></strong>
+                                                        <p><?= $product["color_name"] ?> - <?= $product["size_name"] ?></p>
+                                                    </a></td>
+                                                <td><?= $total ?>đ</td>
+                                            </tr>
+                                        <?php } ?>
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td>Sub Total</td>
-                                            <td><strong>$400</strong></td>
+                                            <td>Tổng tiền thanh toán</td>
+                                            <td><strong><?= $subTotal ?>đ</strong></td>
                                         </tr>
+                                        <tr>
+                                            <td>Voucher</td>
+                                            <td><strong><?= $voucherDiscount ?>đ</strong></td>
+                                        </tr>
+
                                         <tr>
                                             <td>Shipping</td>
-                                            <td class="d-flex justify-content-center">
-                                                <ul class="shipping-type">
-                                                    <li>
-                                                        <div class="custom-control custom-radio">
-                                                            <input type="radio" id="flatrate" name="shipping" class="custom-control-input" checked />
-                                                            <label class="custom-control-label" for="flatrate">Flat
-                                                                Rate: $70.00</label>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="custom-control custom-radio">
-                                                            <input type="radio" id="freeshipping" name="shipping" class="custom-control-input" />
-                                                            <label class="custom-control-label" for="freeshipping">Free
-                                                                Shipping</label>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </td>
+
+                                            <td><strong><?= isset($_SESSION["user_data"]) ? $_SESSION["user_data"]["shipping"] : 0 ?>đ</strong></td>
+
                                         </tr>
                                         <tr>
-                                            <td>Total Amount</td>
-                                            <td><strong>$470</strong></td>
+                                            <td>Tổng phí thanh toán</td>
+                                            <td><strong><?= $totalAmount ?>đ</strong></td>
                                         </tr>
                                     </tfoot>
+
                                 </table>
                             </div>
                             <!-- Order Payment Method -->
@@ -335,32 +306,32 @@
 ============================================ -->
 
     <!-- Modernizer JS -->
-    <script src="./cẩnoassets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="./corano/assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <!-- jQuery JS -->
-    <script src="./cẩnoassets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="./corano/assets/js/vendor/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap JS -->
-    <script src="./cẩnoassets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="./corano/assets/js/vendor/bootstrap.bundle.min.js"></script>
     <!-- slick Slider JS -->
-    <script src="./cẩnoassets/js/plugins/slick.min.js"></script>
+    <script src="./corano/assets/js/plugins/slick.min.js"></script>
     <!-- Countdown JS -->
-    <script src="./cẩnoassets/js/plugins/countdown.min.js"></script>
+    <script src="./corano/assets/js/plugins/countdown.min.js"></script>
     <!-- Nice Select JS -->
-    <script src="./cẩnoassets/js/plugins/nice-select.min.js"></script>
+    <script src="./corano/assets/js/plugins/nice-select.min.js"></script>
     <!-- jquery UI JS -->
-    <script src="./cẩnoassets/js/plugins/jqueryui.min.js"></script>
+    <script src="./corano/assets/js/plugins/jqueryui.min.js"></script>
     <!-- Image zoom JS -->
-    <script src="./cẩnoassets/js/plugins/image-zoom.min.js"></script>
+    <script src="./corano/assets/js/plugins/image-zoom.min.js"></script>
     <!-- Images loaded JS -->
-    <script src="./cẩnoassets/js/plugins/imagesloaded.pkgd.min.js"></script>
+    <script src="./corano/assets/js/plugins/imagesloaded.pkgd.min.js"></script>
     <!-- mail-chimp active js -->
-    <script src="./cẩnoassets/js/plugins/ajaxchimp.js"></script>
+    <script src="./corano/assets/js/plugins/ajaxchimp.js"></script>
     <!-- contact form dynamic js -->
-    <script src="./cẩnoassets/js/plugins/ajax-mail.js"></script>
+    <script src="./corano/assets/js/plugins/ajax-mail.js"></script>
     <!-- google map api -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfmCVTjRI007pC1Yk2o2d_EhgkjTsFVN8"></script>
     <!-- google map active js -->
-    <script src="./cẩnoassets/js/plugins/google-map.js"></script>
+    <script src="./corano/assets/js/plugins/google-map.js"></script>
     <!-- Main JS -->
-    <script src="./cẩnoassets/js/main.js"></script>
+    <script src="./corano/assets/js/main.js"></script>
 </main>
 <?php include "./include/footerClient.php"; ?>

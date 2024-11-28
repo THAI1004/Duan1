@@ -111,24 +111,22 @@
                                             <span class="price-regular"><?= $Product["discount_price"] ?></span>
                                             <span class="price-old"><del><?= $Product["price"] ?></del></span>
                                         </div>
-                                        <div class="availability">
-                                            <i class="fa fa-check-circle"></i>
-                                            <span>200 in stock</span>
-                                        </div>
-                                        <p class="pro-desc"><?= $Product["description"] ?></p>
-                                        <form action="">
+                                        <form action="?act=addCart&id=<?= $Product["id"] ?>" method="post">
                                             <div class="quantity-cart-box d-flex align-items-center">
                                                 <h6 class="option-title">Số lượng:</h6>
                                                 <div class="quantity">
-                                                    <input style="width:50px" min=0 name='quantity' type="number" value="1">
+                                                    <input style="width:50px" min=1 name='quantity' type="number">
+                                                    <input type="hidden" value="<?= $Product["discount_price"] ?>" name="price">
+                                                    <input type="hidden" value="<?= $cartUser["id"] ?>" name="cart_id">
+
                                                 </div>
                                                 <div class="action_link">
-                                                    <a class="btn btn-cart2" href="#">Add to cart</a>
+                                                    <button name="submit" type="submit" class="btn btn-cart2">Add to cart</button>
                                                 </div>
                                             </div>
                                             <div class="pro-size">
                                                 <h6 class="option-title">size :</h6>
-                                                <select class="nice-select" name="size_name">
+                                                <select class="nice-select" name="size_id">
                                                     <?php foreach ($getAllSize as $row) { ?>
                                                         <option value="<?= $row['id'] ?>"><?= $row["size_name"] ?></option>
                                                     <?php } ?>
@@ -136,7 +134,7 @@
                                             </div>
                                             <div class="color-option">
                                                 <h6 class="option-title">Màu :</h6>
-                                                <select class="nice-select" name="color_name">
+                                                <select class="nice-select" name="color_id">
                                                     <?php foreach ($getAllColor as $row) { ?>
                                                         <option value="<?= $row['id'] ?>"><?= $row['color_name'] ?></option>
                                                     <?php } ?>
@@ -242,41 +240,41 @@
 
                                                 </div>
                                                 <?php if (isset($_SESSION['user_id']) && ($checkOrder)): ?>
-                                                <form action="?act=review" method="POST" class="review-form">
-                                                <div class="form-group row">
-                                                    <div class="col">
-                                                        <label class="col-form-label"><span class="text-danger">*</span>
-                                                            Your Review</label>
-                                                        <textarea name="review_text" class="form-control" required></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <div class="col">
-                                                        <label class="col-form-label"><span class="text-danger">*</span>
-                                                            Rating</label>
-                                                        &nbsp;&nbsp;&nbsp; Bad&nbsp;
-                                                        <input type="radio" value="1" name="rating">
-                                                        &nbsp;
-                                                        <input type="radio" value="2" name="rating">
-                                                        &nbsp;
-                                                        <input type="radio" value="3" name="rating">
-                                                        &nbsp;
-                                                        <input type="radio" value="4" name="rating">
-                                                        &nbsp;
-                                                        <input type="radio" value="5" name="rating" checked>
-                                                        &nbsp;Good
-                                                    </div>
-                                                </div>
-                                                <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
-                                                <input type="hidden" name="product_id" value="<?php echo $Product["id"] ?>">
-                                                <div class="buttons">
-                                                    <button class="btn btn-sqr" type="submit">Continue</button>
-                                                </div>
-                                            </form>
-                                            <?php else: ?>                                        
-                                                <p> Bạn đăng nhập và mua hàng để đánh giá được sản phẩm</p>
+                                                    <form action="?act=review" method="POST" class="review-form">
+                                                        <div class="form-group row">
+                                                            <div class="col">
+                                                                <label class="col-form-label"><span class="text-danger">*</span>
+                                                                    Your Review</label>
+                                                                <textarea name="review_text" class="form-control" required></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col">
+                                                                <label class="col-form-label"><span class="text-danger">*</span>
+                                                                    Rating</label>
+                                                                &nbsp;&nbsp;&nbsp; Bad&nbsp;
+                                                                <input type="radio" value="1" name="rating">
+                                                                &nbsp;
+                                                                <input type="radio" value="2" name="rating">
+                                                                &nbsp;
+                                                                <input type="radio" value="3" name="rating">
+                                                                &nbsp;
+                                                                <input type="radio" value="4" name="rating">
+                                                                &nbsp;
+                                                                <input type="radio" value="5" name="rating" checked>
+                                                                &nbsp;Good
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
+                                                        <input type="hidden" name="product_id" value="<?php echo $Product["id"] ?>">
+                                                        <div class="buttons">
+                                                            <button class="btn btn-sqr" type="submit">Continue</button>
+                                                        </div>
+                                                    </form>
+                                                <?php else: ?>
+                                                    <p> Bạn đăng nhập và mua hàng để đánh giá được sản phẩm</p>
                                                 <?php endif; ?>
-                                                 <!-- end of review-form -->
+                                                <!-- end of review-form -->
                                             </div>
                                         </div>
                                     </div>
