@@ -63,6 +63,7 @@ include "./include/headerClient.php";
         .price-box {
             margin-top: 10px;
         }
+
         .hero-slider-content .slide-title {
             margin-top: 150px;
             font-family: 'Oswald', sans-serif;
@@ -98,9 +99,9 @@ include "./include/headerClient.php";
                         <div class="hero-slider-item bg-img" data-bg="<?= $row["image_url"] ?>">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-md-12 ">
-                                        <div class="hero-slider-content slide-1 ">
-                                            <h3 class="slide-title" style="font-size: 30px; "><?= $row["content"] ?></span></h3>
+                                    <div class="col-md-12">
+                                        <div class="hero-slider-content slide-1">
+                                            <h2 class="slide-title"><?= $row["content"] ?></span></h2>
                                             <h4 class="slide-desc"><?= $row["description"] ?></h4>
                                             <a href="<?= $row["link"] ?>" class="btn btn-hero">Read More</a>
                                         </div>
@@ -246,7 +247,7 @@ include "./include/headerClient.php";
                                                                         </div>
                                                                         <div class="product-label discount">
                                                                             <span>
-                                                                                <?= $discountPercentage ?>
+                                                                                <?= $discountPercentage ?> %
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -363,7 +364,7 @@ include "./include/headerClient.php";
                                             </div>
                                             <div class="product-label discount">
                                                 <span id="giamGia">
-                                                    <?= $discountPercentage ?>% </span>
+                                                    <?= $discountPercentage ?> % </span>
                                             </div>
                                         </div>
                                         <div class="button-group">
@@ -381,68 +382,32 @@ include "./include/headerClient.php";
                                         <div class="price-box">
                                             <span class="price-regular"><?= $row["price"] ?></span>
                                             <span class="price-old"><del><?= $row["discount_price"] ?></del></span>
-                                        <div class="product-label discount">
-                                        <span id="giamGia">
-                                            <?= $discountPercentage?> % </span>
+                                            <div class="product-label discount">
+                                                <span id="giamGia">
+                                                    <?= $discountPercentage ?> % </span>
+                                            </div>
                                         </div>
                                     </div>
+                                <?php } ?>
+                                <!-- product item end -->
                                 </div>
-                            <?php } ?>
-                            <!-- product item end -->
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
         <!-- featured product area end -->
 
         <!-- testimonial area start -->
-        <section class="testimonial-area section-padding bg-img" data-bg="./corano/assets/img/testimonial/testimonials-bg.jpg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <!-- section title start -->
-                        <div class="section-title text-center">
-                            <h2 class="title">Đánh giá và góp ý</h2>
-                            <p class="sub-title">Những điều cần lưu ý</p>
-                        </div>
-                        <!-- section title start -->
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="testimonial-content-wrapper">
-                            <div class="testimonial-content-carousel">
-                                <?php foreach ($projectInfor as $row) { ?>
-                                    <div class="testimonial-content">
-                                        <p><?= $row["message"] ?></p>
-                                        <div class="ratings">
-                                            <span><i class="fa fa-star-o"></i></span>
-                                            <span><i class="fa fa-star-o"></i></span>
-                                            <span><i class="fa fa-star-o"></i></span>
-                                            <span><i class="fa fa-star-o"></i></span>
-                                            <span><i class="fa fa-star-o"></i></span>
-                                        </div>
-                                        <h5 class="testimonial-author"><?= $row["project_name"] ?></h5>
-                                    </div>
-                                <?php } ?>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- testimonial area end -->
-        <!-- latest blog area start -->
+
         <section class="mt-3 latest-blog-area section-padding pt-0">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <!-- section title start -->
                         <div class="section-title text-center">
-                            <h2 class="title">latest blogs</h2>
-                            <p class="sub-title">There are latest blog posts</p>
+                            <h2 class="title">Blog tin tức</h2>
+                            <p class="sub-title">Tổng hợp tin tức</p>
                         </div>
                         <!-- section title start -->
                     </div>

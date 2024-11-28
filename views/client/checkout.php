@@ -53,133 +53,157 @@
                         <h5 class="checkout-title">Thông tin đơn hàng</h5>
                         <div class="billing-form-wrap">
                             <?php
-                            // session_start();
-
-                            // Kiểm tra nếu có dữ liệu POST được gửi từ form
-                            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                                // Lưu thông tin người dùng vào session
-                                $_SESSION['user_data'] = [
-                                    'name' => $_POST['name'] ?? '',
-                                    'email' => $_POST['email'] ?? '',
-                                    'phone' => $_POST['phone'] ?? '',
-                                    'address' => $_POST['address'] ?? '',
-                                    'city' => $_POST['city'] ?? '',
-                                    'huyen' => $_POST['huyen'] ?? '',
-                                    'road' => $_POST['road'] ?? '',
-                                    'number' => $_POST['number'] ?? '',
-                                    'note' => $_POST['ordernote'] ?? '',
-                                    'voucher_code' => $_POST['voucher_code'] ?? '',
-                                    'voucher_discount' => $_POST['voucher'] ?? 0,
-                                    'shipping' => $_POST['shipping'] ?? 0,  // Giả sử voucher là giá trị giảm giá
-                                    // Giả sử voucher là giá trị giảm giá
-                                ];
-                            }
 
                             // Lấy dữ liệu từ session để điền vào form
                             $user_data = $_SESSION['user_data'] ?? [];
 
                             ?>
 
-                            <form action="" method="post">
+                            <form action="?act=updateCartVoucher" method="post">
                                 <div class="row">
                                     <div class="col-md-6">
                                     </div>
                                 </div>
                                 <div class="single-input-item">
                                     <label for="name" class="required">Vui lòng nhập tên:</label>
-                                    <input type="text" id="name" name="name" placeholder="Enter Name" value="<?= $user_data['name'] ?? '' ?>" required />
+                                    <input type="text" id="name" name="name" placeholder="Enter Name" value="<?= $user_data['name'] ?? '' ?>" require />
+                                    <div>
+                                        <?php if (isset($thongBaoLoiName) && !empty($thongBaoLoiName)): ?>
+                                            <span class="text-danger"><?= $thongBaoLoiName ?></span>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
+
 
                                 <div class="single-input-item">
                                     <label for="email" class="required">Email:</label>
-                                    <input type="email" id="email" name="email" placeholder="Enter Email" value="<?= $user_data['email'] ?? '' ?>" required />
+                                    <input type="email" id="email" name="email" placeholder="Enter Email" value="<?= $user_data['email'] ?? '' ?>" require />
+                                    <div>
+                                        <?php if (isset($thongBaoLoiEmail) && !empty($thongBaoLoiEmail)): ?>
+                                            <span class="text-danger"><?= $thongBaoLoiEmail ?></span>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
 
                                 <div class="single-input-item">
                                     <label for="phone">Số điện thoại:</label>
-                                    <input type="text" id="phone" name="phone" placeholder="Enter Phone" value="<?= $user_data['phone'] ?? '' ?>" required />
+                                    <input type="text" id="phone" name="phone" placeholder="Enter Phone" value="<?= $user_data['phone'] ?? '' ?>" require />
+                                    <div>
+                                        <?php if (isset($thongBaoLoiPhone) && !empty($thongBaoLoiPhone)): ?>
+                                            <span class="text-danger"><?= $thongBaoLoiPhone ?></span>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
 
                                 <div class="single-input-item">
                                     <label for="street-address" class="required mt-20">Địa chỉ:</label>
-                                    <input type="text" id="street-address" name="address" placeholder="Enter Street address Line" value="<?= $user_data['address'] ?? '' ?>" required />
+                                    <input type="text" id="street-address" name="address" placeholder="Enter Street address Line" value="<?= $user_data['address'] ?? '' ?>" require />
+                                    <div>
+                                        <?php if (isset($thongBaoLoiAddress) && !empty($thongBaoLoiAddress)): ?>
+                                            <span class="text-danger"><?= $thongBaoLoiAddress ?></span>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
 
                                 <div class="single-input-item">
                                     <label for="town" class="required ">Thành phố:</label>
-                                    <input type="text" id="town" name="city" placeholder="City" value="<?= $user_data['city'] ?? '' ?>" required />
+                                    <input type="text" id="town" name="city" placeholder="City" value="<?= $user_data['city'] ?? '' ?>" require />
+                                    <div>
+                                        <?php if (isset($thongBaoLoiCity) && !empty($thongBaoLoiCity)): ?>
+                                            <span class="text-danger"><?= $thongBaoLoiCity ?></span>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
 
                                 <div class="single-input-item">
                                     <label for="huyen" class="required ">Tên Huyện:</label>
-                                    <input type="text" id="huyen" name="huyen" placeholder="Enter District" value="<?= $user_data['huyen'] ?? '' ?>" />
+                                    <input type="text" id="huyen" name="huyen" placeholder="Enter District" value="<?= $user_data['huyen'] ?? '' ?>" require />
+                                    <div>
+                                        <?php if (isset($thongBaoLoiHuyen) && !empty($thongBaoLoiHuyen)): ?>
+                                            <span class="text-danger"><?= $thongBaoLoiHuyen ?></span>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
 
                                 <div class="single-input-item">
                                     <label for="road" class="required ">Tên đường:</label>
-                                    <input type="text" id="road" name="road" placeholder="Enter Road" value="<?= $user_data['road'] ?? '' ?>" />
+                                    <input type="text" id="road" name="road" placeholder="Enter Road" value="<?= $user_data['road'] ?? '' ?>" require />
+                                    <div>
+                                        <?php if (isset($thongBaoLoiRoad) && !empty($thongBaoLoiRoad)): ?>
+                                            <span class="text-danger"><?= $thongBaoLoiRoad ?></span>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
 
                                 <div class="single-input-item">
                                     <label for="number" class="required">Số nhà:</label>
-                                    <input type="text" id="number" name="number" placeholder="Enter Number" value="<?= $user_data['number'] ?? '' ?>" required />
+                                    <input type="text" id="number" name="number" placeholder="Enter Number" value="<?= $user_data['number'] ?? '' ?>" require />
+                                    <div>
+                                        <?php if (isset($thongBaoLoiNumber) && !empty($thongBaoLoiNumber)): ?>
+                                            <span class="text-danger"><?= $thongBaoLoiNumber ?></span>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
 
                                 <div class="single-input-item">
                                     <label for="ordernote">Order Note</label>
-                                    <textarea name="ordernote" id="ordernote" cols="30" rows="3" placeholder="Notes about your order, e.g. special notes for delivery."><?= $user_data['note'] ?? '' ?></textarea>
+                                    <textarea name="ordernote" id="ordernote" cols="30" rows="3" placeholder="Notes about your order, e.g. special notes for delivery."><?= $user_data['ordernote'] ?? '' ?></textarea>
+                                    <div>
+                                        <?php if (isset($thongBaoLoiName) && !empty($thongBaoLoiName)): ?>
+                                            <span class="text-danger"><?= $thongBaoLoiName ?></span>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
 
-                                <form action="?act=updateCartVoucher" method="post" class="d-block d-md-flex">
-                                    <?php if (isset($_SESSION["user_data"])) { ?> <td>
-                                            <label for="shipping">Mã giảm giá:</label>
-                                            <select name="voucher" id="voucher">
-                                                <!-- Nếu voucher discount là 0, hiển thị option mặc định -->
-                                                <option value="0" <?= $_SESSION["user_data"]["voucher_discount"] == 0 ? 'selected' : '' ?>>Chọn voucher của bạn</option>
 
-                                                <?php foreach ($vouchers as $row) { ?>
-                                                    <option value="<?= $row["discount_amount"] ?>" <?= $_SESSION["user_data"]["voucher_discount"] == $row["discount_amount"] ? 'selected' : '' ?>>
-                                                        <?= $row["code"] ?>
-                                                    </option>
-                                                <?php } ?>
-                                            </select>
-                                        </td>
-                                        <div class="single-input-item">
-                                            <label for="shipping">Phương thức vận chuyển:</label>
-                                            <select name="shipping" id="shipping">
-                                                <option value="50000" <?= $_SESSION['user_data']['shipping'] == 50000 ? 'selected' : '' ?>>Hỏa tốc: 50000đ</option>
-                                                <option value="0" <?= $_SESSION['user_data']['shipping'] == 0 ? 'selected' : '' ?>>Free Shipping</option>
-                                            </select>
-                                        </div>
-                                    <?php } else { ?>
-                                        <td>
-                                            <label for="shipping">Mã giảm giá:</label>
-                                            <select name="voucher" id="voucher">
-                                                <!-- Nếu voucher discount là 0, hiển thị option mặc định -->
-                                                <option value="0">Chọn voucher của bạn</option>
+                                <?php if (isset($_SESSION["user_data"]["voucher_discount"])) { ?> <td>
+                                        <label for="shipping">Mã giảm giá:</label>
+                                        <select name="voucher" id="voucher">
+                                            <!-- Nếu voucher discount là 0, hiển thị option mặc định -->
+                                            <option value="0" <?= $_SESSION["user_data"]["voucher_discount"] == 0 ? 'selected' : '' ?>>Chọn voucher của bạn</option>
 
-                                                <?php foreach ($vouchers as $row) { ?>
-                                                    <option value="<?= $row["discount_amount"] ?>">
-                                                        <?= $row["code"] ?>
-                                                    </option>
-                                                <?php } ?>
-                                            </select>
-                                        </td>
-                                        <div class="single-input-item">
-                                            <label for="shipping">Phương thức vận chuyển:</label>
-                                            <select name="shipping" id="shipping">
-                                                <option value="50000">Hỏa tốc: 50000đ</option>
-                                                <option value="0">Free Shipping</option>
-                                            </select>
-                                        </div>
-                                    <?php } ?>
-
-
-
-                                    <td>
-                                        <button type="submit" name="submit" class="btn btn-sqr">Áp dụng voucher</button>
+                                            <?php foreach ($vouchers as $row) { ?>
+                                                <option value="<?= $row["discount_amount"] ?>" <?= $_SESSION["user_data"]["voucher_discount"] == $row["discount_amount"] ? 'selected' : '' ?>>
+                                                    <?= $row["code"] ?>
+                                                </option>
+                                                <input type="hidden" name="voucher_id" value="<?= $row["voucher_id"] ?>">
+                                            <?php } ?>
+                                        </select>
                                     </td>
-                                </form>
+                                    <div class="single-input-item">
+                                        <label for="shipping">Phương thức vận chuyển:</label>
+                                        <select name="shipping" id="shipping">
+                                            <option value="50000" <?= $_SESSION['user_data']['shipping'] == 50000 ? 'selected' : '' ?>>Hỏa tốc: 50000đ</option>
+                                            <option value="0" <?= $_SESSION['user_data']['shipping'] == 0 ? 'selected' : '' ?>>Free Shipping</option>
+                                        </select>
+                                    </div>
+                                <?php } else { ?>
+                                    <td>
+                                        <label for="shipping">Mã giảm giá:</label>
+                                        <select name="voucher" id="voucher">
+                                            <!-- Nếu voucher discount là 0, hiển thị option mặc định -->
+                                            <option value="0">Chọn voucher của bạn</option>
+
+                                            <?php foreach ($vouchers as $row) { ?>
+                                                <option value="<?= $row["discount_amount"] ?>">
+                                                    <?= $row["code"] ?>
+                                                </option>
+                                                <input type="hidden" name="voucher_id" value="<?= $row["voucher_id"] ?>">
+                                            <?php } ?>
+                                        </select>
+                                    </td>
+                                    <div class="single-input-item">
+                                        <label for="shipping">Phương thức vận chuyển:</label>
+                                        <select name="shipping" id="shipping">
+                                            <option value="50000">Hỏa tốc: 50000đ</option>
+                                            <option value="0">Free Shipping</option>
+                                        </select>
+                                    </div>
+                                <?php } ?>
+                                <td>
+                                    <button type="submit" name="submit_user" class="btn btn-sqr">Áp dụng voucher</button>
+                                </td>
+
                             </form>
 
                         </div>
@@ -203,9 +227,11 @@
                                             $total = $product["unit_price"] * $product["quantity"];
                                         ?>
                                             <tr>
-                                                <td><a href="?act=productDetail&id=<?= $product["id"] ?>"> <?= $product["product_name"] ?><strong> × <?= $product["quantity"] ?></strong>
-                                                        <p><?= $product["color_name"] ?> - <?= $product["size_name"] ?></p>
-                                                    </a></td>
+                                                <td>
+                                                    <p> <?= $product["product_name"] ?><strong> × <?= $product["quantity"] ?></strong>
+                                                    <p><?= $product["color_name"] ?> - <?= $product["size_name"] ?></p>
+                                                    </p>
+                                                </td>
                                                 <td><?= $total ?>đ</td>
                                             </tr>
                                         <?php } ?>
@@ -217,7 +243,7 @@
                                         </tr>
                                         <tr>
                                             <td>Voucher</td>
-                                            <td><strong><?= $voucherDiscount ?>đ</strong></td>
+                                            <td><strong><?= $voucherDiscount = $_SESSION["user_data"]["voucher_discount"] ?? 0 ?>đ</strong></td>
                                         </tr>
 
                                         <tr>
@@ -236,63 +262,39 @@
                             </div>
                             <!-- Order Payment Method -->
                             <div class="order-payment-method">
-                                <div class="single-payment-method show">
-                                    <div class="payment-method-name">
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="cashon" name="paymentmethod" value="cash" class="custom-control-input" checked />
-                                            <label class="custom-control-label" for="cashon">Cash On Delivery</label>
+                                <form action="?act=order" method="post">
+                                    <div class="single-payment-method show">
+                                        <div class="payment-method-name">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="cashon" name="paymentmethod" value="cash" class="custom-control-input" checked />
+                                                <input type="hidden" id="cashon" name="total" value="<?= $totalAmount ?>" class="custom-control-input" />
+                                                <input type="hidden" id="cashon" name="voucher" value="<?= $voucher_id ?>" class="custom-control-input" />
+                                                <label class="custom-control-label" for="cashon">Thanh toán khi nhận hàng</label>
+                                            </div>
+                                        </div>
+                                        <div class="payment-method-details" data-method="cash">
+                                            <p>Hoàn thành thanh toán sau khi nhận hàng.</p>
                                         </div>
                                     </div>
-                                    <div class="payment-method-details" data-method="cash">
-                                        <p>Pay with cash upon delivery.</p>
-                                    </div>
-                                </div>
-                                <div class="single-payment-method">
-                                    <div class="payment-method-name">
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="directbank" name="paymentmethod" value="bank" class="custom-control-input" />
-                                            <label class="custom-control-label" for="directbank">Direct Bank
-                                                Transfer</label>
+                                    <div class="single-payment-method">
+                                        <div class="payment-method-name">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="directbank" name="paymentmethod" value="bank" class="custom-control-input" />
+                                                <label class="custom-control-label" for="directbank">Thanh toán thẻ</label>
+                                            </div>
+                                        </div>
+                                        <div class="payment-method-details" data-method="bank">
+                                            <p>Hoàn thành thanh toán qua Vnpay hoặc Momo</p>
                                         </div>
                                     </div>
-                                    <div class="payment-method-details" data-method="bank">
-                                        <p>Make your payment directly into our bank account. Please use your Order
-                                            ID as the payment reference. Your order will not be shipped until the
-                                            funds have cleared in our account..</p>
-                                    </div>
-                                </div>
-                                <div class="single-payment-method">
-                                    <div class="payment-method-name">
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="checkpayment" name="paymentmethod" value="check" class="custom-control-input" />
-                                            <label class="custom-control-label" for="checkpayment">Pay with
-                                                Check</label>
+                                    <div class="summary-footer-area">
+                                        <div class="custom-control custom-checkbox mb-20">
+                                            <input type="checkbox" class="custom-control-input" id="terms" required />
+                                            <label class="custom-control-label" for="terms">Tôi hoàn toàn đồng ý với điều khoản của nhà bán hàng</label>
                                         </div>
                                     </div>
-                                    <div class="payment-method-details" data-method="check">
-                                        <p>Please send a check to Store Name, Store Street, Store Town, Store State
-                                            / County, Store Postcode.</p>
-                                    </div>
-                                </div>
-                                <div class="single-payment-method">
-                                    <div class="payment-method-name">
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="paypalpayment" name="paymentmethod" value="paypal" class="custom-control-input" />
-                                        </div>
-                                    </div>
-                                    <div class="payment-method-details" data-method="paypal">
-                                        <p>Pay via PayPal; you can pay with your credit card if you don’t have a
-                                            PayPal account.</p>
-                                    </div>
-                                </div>
-                                <div class="summary-footer-area">
-                                    <div class="custom-control custom-checkbox mb-20">
-                                        <input type="checkbox" class="custom-control-input" id="terms" required />
-                                        <label class="custom-control-label" for="terms">I have read and agree to
-                                            the website <a href="index.html">terms and conditions.</a></label>
-                                    </div>
-                                    <button type="submit" class="btn btn-sqr">Place Order</button>
-                                </div>
+                                    <button type="submit" name="submitOrder" class="btn btn-sqr">Đặt hàng</button>
+                                </form>
                             </div>
                         </div>
                     </div>

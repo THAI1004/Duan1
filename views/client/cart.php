@@ -164,7 +164,12 @@
                                         </table>
                                     </div>
                                 </div>
-                                <a href="?act=checkout" class="btn btn-sqr d-block">Bắt đầu thanh toán</a>
+                                <?php if (isset($_SESSION["user_id"]) && !empty($listCart)) {  ?>
+                                    <a href="?act=checkout" class="btn btn-sqr d-block">Bắt đầu thanh toán</a>
+                                <?php } else { ?>
+                                    <a href="?act=Er404" class="btn btn-sqr d-block">Bắt đầu thanh toán</a>
+
+                                <?php } ?>
                             </div>
                         </div>
                     </div>

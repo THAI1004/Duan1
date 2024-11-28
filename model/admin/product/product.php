@@ -27,7 +27,6 @@ class productModel
             ";
         $data = $this->pdo->query($sql)->fetchAll();
         return $data;
-        
     }
     public function getAllColor()
     {
@@ -122,6 +121,7 @@ class productModel
             echo "<hr>";
         }
     }
+
     public function getAllProductVariant($id)
     {
         $sql = "
@@ -220,20 +220,20 @@ class productModel
         return $data;
     }
     public function getProductByPrice($min_price, $max_price)
-{
-    $sql = "SELECT * FROM products WHERE price BETWEEN :min_price AND :max_price";
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->bindParam(':min_price', $min_price, PDO::PARAM_INT);
-    $stmt->bindParam(':max_price', $max_price, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-    public function checkVariant($id,$size_id,$color_id,$quantity)
+    {
+        $sql = "SELECT * FROM products WHERE price BETWEEN :min_price AND :max_price";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':min_price', $min_price, PDO::PARAM_INT);
+        $stmt->bindParam(':max_price', $max_price, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function checkVariant($id, $size_id, $color_id, $quantity)
     {
         $sql = "SELECT * FROM `product_variants` where product_id =$id AND size_id =$size_id 
               AND color_id =$color_id
               AND stock_quantity >= $quantity";
-        $data=$this->pdo->query($sql)->fetch();
+        $data = $this->pdo->query($sql)->fetch();
         return $data;
     }
 
@@ -255,5 +255,4 @@ class productModel
 
         return $stmt->rowCount() > 0; // Trả về true nếu có kết quả
     }
-    
 }
