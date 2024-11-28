@@ -137,5 +137,22 @@ ORDER BY order_day;
         } catch (Exception $er) {
             echo "Lỗi hàm insertOrderItem " . $er->getMessage();
         }
+    public function getActiveOrdersByUser($userId)
+    {
+        // Tạo câu lệnh SQL
+        $sql = "SELECT * FROM orders WHERE user_id = :user_id AND payment_status = 'completed' 
+                AND shipping_status IN ('pending', 'shipped')";
+
+        // Chuẩn bị câu lệnh
+        $stmt = $this->pdo->prepare($sql);
+
+        // Gán giá trị cho tham số
+        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+
+        // Thực thi câu lệnh SQL
+        $stmt->execute();
+
+        // Trả về kết quả dưới dạng mảng
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
