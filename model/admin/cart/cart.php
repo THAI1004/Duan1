@@ -39,6 +39,15 @@ WHERE carts.user_id = $id;
         $data = $this->pdo->query($sql)->fetchAll();
         return $data;
     }
+    public function getCartBy($id)
+    {
+        $sql = "SELECT * from carts where user_id=$id      ";
+
+
+
+        $data = $this->pdo->query($sql)->fetch();
+        return $data;
+    }
     public function deleteCart($id)
     {
         try {
@@ -52,6 +61,30 @@ WHERE carts.user_id = $id;
             echo "<hr>";
         }
     }
+    public function deleteCartItemsByCartId($cart_id)
+    {
+        try {
+            // Xóa tất cả các sản phẩm trong giỏ hàng theo `cart_id`
+            $sql = "DELETE FROM cart_items WHERE cart_id = :cart_id";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(':cart_id', $cart_id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            // Kiểm tra nếu có sản phẩm nào bị xóa
+            $affectedRows = $stmt->rowCount();
+            if ($affectedRows > 0) {
+                return "OK";
+            } else {
+                return "No items to delete";
+            }
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+            return "Error";
+        }
+    }
+
+
+
     public function updateCart($cartItemId, $newQuantity)
     {
 
@@ -88,13 +121,12 @@ WHERE
         $stmt->bindParam(':user_id', $id);
 
         // Thực thi câu lệnh SQL
-        $stmt->execute();
-
-        // Kiểm tra kết quả thực thi
-        if ($stmt->rowCount() > 0) {
-            return true;  // Cập nhật thành công
+        if ($stmt->execute()) {
+            // Lấy ID của đơn hàng vừa được thêm vào
+            $order_id = $this->pdo->lastInsertId();
+            return $order_id;  // Trả về ID đơn hàng vừa được thêm
         } else {
-            return false; // Không có thay đổi
+            return false;  // Trả về false nếu có lỗi
         }
     }
     public function getVoucher($id)
@@ -127,7 +159,29 @@ WHERE
             }
         } catch (Exception $e) {
             // In ra lỗi nếu có lỗi xảy ra
-            echo "Error: " . $e->getMessage();
+            echo "lỗi: " . $e->getMessage();
+            return "Error";
+        }
+    }
+    public function insertCart($user_id, $total, $voucher, $created_at, $updated_at)
+    {
+        try {
+            // Tạo câu lệnh SQL
+            $sql = "INSERT INTO carts (user_id, total_price, voucher_code, created_at, updated_at) 
+                VALUES ('$user_id', '$total', '$voucher', '$created_at', '$updated_at')";
+
+            // Chuẩn bị câu lệnh SQL
+            $stmt = $this->pdo->exec($sql);
+
+            // Kiểm tra nếu câu lệnh thực thi thành công
+            if ($stmt > 0) {
+                return "OK";  // Trả về "OK" nếu thành công
+            } else {
+                return "Failed";  // Trả về "Failed" nếu không có dòng nào bị ảnh hưởng
+            }
+        } catch (Exception $e) {
+            // In ra lỗi nếu có lỗi xảy ra
+            echo "lỗi: " . $e->getMessage();
             return "Error";
         }
     }

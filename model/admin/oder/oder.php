@@ -76,6 +76,68 @@ ORDER BY order_day;
         $data = $this->pdo->query($sql)->fetchAll();
         return $data;
     }
+    public function insertOrder($user_id, $guest_name, $guest_email, $guest_phone, $shipping_address, $total_price, $created_at, $updated_at, $voucher_id, $thanh_pho, $huyen, $ten_duong, $so_nha, $ordernote)
+    {
+        try {
+            // Nếu voucher_id không hợp lệ (ví dụ: 0), thì set thành NULL
+            $voucher_id = ($voucher_id > 0) ? $voucher_id : NULL;
+
+            // Câu lệnh SQL chuẩn, voucher_id có thể là NULL
+            $sql = "INSERT INTO `orders` 
+                (`user_id`, `guest_name`, `guest_email`, `guest_phone`, `shipping_address`, `total_price`, `created_at`, `updated_at`, `voucher_id`, `thanh_pho`, `huyen`, `ten_duong`, `so_nha`, `ordernote`)
+                VALUES 
+                (:user_id, :guest_name, :guest_email, :guest_phone, :shipping_address, :total_price, :created_at, :updated_at, :voucher_id, :thanh_pho, :huyen, :ten_duong, :so_nha, :ordernote)";
+
+            // Chuẩn bị câu lệnh SQL
+            $stmt = $this->pdo->prepare($sql);
+
+            // Liên kết tham số với câu lệnh SQL
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->bindParam(':guest_name', $guest_name, PDO::PARAM_STR);
+            $stmt->bindParam(':guest_email', $guest_email, PDO::PARAM_STR);
+            $stmt->bindParam(':guest_phone', $guest_phone, PDO::PARAM_STR);
+            $stmt->bindParam(':shipping_address', $shipping_address, PDO::PARAM_STR);
+            $stmt->bindParam(':total_price', $total_price, PDO::PARAM_STR);
+            $stmt->bindParam(':created_at', $created_at, PDO::PARAM_STR);
+            $stmt->bindParam(':updated_at', $updated_at, PDO::PARAM_STR);
+            $stmt->bindParam(':voucher_id', $voucher_id, PDO::PARAM_INT); // voucher_id có thể là NULL
+            $stmt->bindParam(':thanh_pho', $thanh_pho, PDO::PARAM_STR);
+            $stmt->bindParam(':huyen', $huyen, PDO::PARAM_STR);
+            $stmt->bindParam(':ten_duong', $ten_duong, PDO::PARAM_STR);
+            $stmt->bindParam(':so_nha', $so_nha, PDO::PARAM_STR);
+            $stmt->bindParam(':ordernote', $ordernote, PDO::PARAM_STR);
+
+            // Thực thi câu lệnh SQL
+            if ($stmt->execute()) {
+                // Lấy ID của đơn hàng vừa được thêm vào
+                $order_id = $this->pdo->lastInsertId();
+                return $order_id;  // Trả về ID đơn hàng vừa được thêm
+            } else {
+                return false;  // Trả về false nếu có lỗi
+            }
+        } catch (Exception $er) {
+            echo "Lỗi insertOrder: " . $er->getMessage();
+            return false;
+        }
+    }
+
+    public function insertOrderItem($order_id, $variant_id, $quantity, $unit_price)
+    {
+        try {
+            $sql = "INSERT INTO order_items (order_id , variant_id , quantity, unit_price) 
+                    VALUES ('$order_id', '$variant_id', '$quantity', '$unit_price')";
+            $stmt = $this->pdo->exec($sql);
+
+            // Kiểm tra nếu câu lệnh thực thi thành công
+            if ($stmt > 0) {
+                return "OK";  // Trả về "OK" nếu thành công
+            } else {
+                return "Failed";  // Trả về "Failed" nếu không có dòng nào bị ảnh hưởng
+            }
+        } catch (Exception $er) {
+            echo "Lỗi hàm insertOrderItem " . $er->getMessage();
+        }
+    }
     public function getActiveOrdersByUser($userId)
     {
         // Tạo câu lệnh SQL
