@@ -127,7 +127,7 @@
                                             <div class="pro-size">
                                                 <h6 class="option-title">size :</h6>
                                                 <select class="nice-select" name="size_id">
-                                                    <?php foreach ($getAllSize as $row) { ?>
+                                                    <?php foreach ($getAllSizeById as $row) { ?>
                                                         <option value="<?= $row['id'] ?>"><?= $row["size_name"] ?></option>
                                                     <?php } ?>
                                                 </select>
@@ -135,7 +135,7 @@
                                             <div class="color-option">
                                                 <h6 class="option-title">Màu :</h6>
                                                 <select class="nice-select" name="color_id">
-                                                    <?php foreach ($getAllColor as $row) { ?>
+                                                    <?php foreach ($getAllColorById as $row) { ?>
                                                         <option value="<?= $row['id'] ?>"><?= $row['color_name'] ?></option>
                                                     <?php } ?>
                                                 </select>

@@ -168,7 +168,7 @@ include "./include/headerClient.php";
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>/-strong/-heart:>:o:-((:-h
         </div> <!-- service policy area end -->
 
         <!-- banner statistics area start -->
@@ -237,8 +237,7 @@ include "./include/headerClient.php";
                                                 ?>
                                                         <div class="col-md-3 col-sm-6">
                                                             <div class="product-item">
-                                                                <figure class="product-thumb">
-                                                                    <a href="?act=productDetail&id=<?= $product["id"] ?>"> <img class="pri-img" src="<?= $product["image"] ?>" alt="product">
+                                                                <figure class="product-thumb"><a href="?act=productDetail&id=<?= $product["id"] ?>"> <img class="pri-img" src="<?= $product["image"] ?>" alt="product">
                                                                         <img class="sec-img" src="<?= $product["image"] ?>" alt="product">
                                                                     </a>
                                                                     <div class="product-badge">
@@ -247,7 +246,7 @@ include "./include/headerClient.php";
                                                                         </div>
                                                                         <div class="product-label discount">
                                                                             <span>
-                                                                                <?= $discountPercentage ?> %
+                                                                                <?= $discountPercentage ?>
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -312,8 +311,7 @@ include "./include/headerClient.php";
                 <div class="row">
                     <div class="col-12">
                         <div class="product-banner-carousel slick-row-10">
-                            <!-- banner single slide start -->
-                            <?php foreach ($listCate as $cate) { ?> <div class="banner-slide-item">
+                            <!-- banner single slide start --><?php foreach ($listCate as $cate) { ?> <div class="banner-slide-item">
                                     <figure class="banner-statistics">
                                         <a href="?act=listProductByCate&id=<?= $cate["id"] ?>">
                                             <img src="./images/category/<?= $cate["image_category"] ?>" alt="product banner">
@@ -363,8 +361,7 @@ include "./include/headerClient.php";
                                                 <span>new</span>
                                             </div>
                                             <div class="product-label discount">
-                                                <span id="giamGia">
-                                                    <?= $discountPercentage ?> % </span>
+                                                <span id="giamGia"><?= $discountPercentage ?>% </span>
                                             </div>
                                         </div>
                                         <div class="button-group">
@@ -384,26 +381,28 @@ include "./include/headerClient.php";
                                             <span class="price-old"><del><?= $row["discount_price"] ?></del></span>
                                         </div>
                                     </div>
-                                <?php } ?>
-                                <!-- product item end -->
                                 </div>
+                            <?php } ?>
+                            <!-- product item end -->
                         </div>
                     </div>
                 </div>
+            </div>
         </section>
         <!-- featured product area end -->
 
         <!-- testimonial area start -->
 
-
+        <!-- testimonial area end -->
+        <!-- latest blog area start -->
         <section class="mt-3 latest-blog-area section-padding pt-0">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <!-- section title start -->
                         <div class="section-title text-center">
-                            <h2 class="title">Blog tin tức</h2>
-                            <p class="sub-title">Tổng hợp tin tức</p>
+                            <h2 class="title">latest blogs</h2>
+                            <p class="sub-title">There are latest blog posts</p>
                         </div>
                         <!-- section title start -->
                     </div>
@@ -452,8 +451,7 @@ include "./include/headerClient.php";
 
 
     <!-- Modernizer JS -->
-    <script src="./corano/assets/js/vendor/modernizr-3.6.0.min.js"></script>
-    <!-- jQuery JS -->
+    <script src="./corano/assets/js/vendor/modernizr-3.6.0.min.js"></script> <!-- jQuery JS -->
     <script src="./corano/assets/js/vendor/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap JS -->
     <script src="./corano/assets/js/vendor/bootstrap.bundle.min.js"></script>
