@@ -44,7 +44,9 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <!-- Wishlist Table Area -->
-                            <div class="cart-table table-responsive">
+                             <?php
+                             if(count($wishlist)!=0){?>
+                                <div class="cart-table table-responsive">
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
@@ -70,6 +72,8 @@
                                     </tbody>
                                 </table>
                             </div>
+                             <?php }else{ echo ("Chưa có sản phẩm yêu thích nào mời bạn thêm sản phẩm yêu thích!!!"); }?>
+                            
                         </div>
                     </div>
                 </div>

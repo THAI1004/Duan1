@@ -37,6 +37,7 @@
             height: 200px;
             /* Đảm bảo ảnh không bị méo */
         }
+
         .product-item .product-thumb {
             display: flex;
             justify-content: center;
@@ -78,11 +79,13 @@
                     <aside class="sidebar-wrapper">
                         <!-- single sidebar start -->
                         <div class="sidebar-single">
-                            <h5 class="sidebar-title">categories</h5>
+                            <a href="?act=listProductClient">
+                                <h5 class="sidebar-title">categories</h5>
+                            </a>
                             <div class="sidebar-body">
                                 <ul class="shop-categories">
                                     <?php foreach ($listCate as $listCate): ?>
-                                        <li><a href="?act=listProductByCate&id=<?=$listCate["id"]?>"><?= $listCate['category_name'] ?></a></li>
+                                        <li><a href="?act=listProductByCate&id=<?= $listCate["id"] ?>"><?= $listCate['category_name'] ?></a></li>
                                     <?php endforeach ?>
                                 </ul>
                             </div>
@@ -96,7 +99,7 @@
                             <h5 class="sidebar-title">price</h5>
                             <div class="sidebar-body">
                                 <div class="price-range-wrap">
-                                    <div class="price-range" data-min="50000" data-max="5000000"></div>
+                                    <div class="price-range" data-min="0" data-max="5000000"></div>
                                     <div class="range-slider">
                                         <form action="?act=productByPrice" method="post" class="d-flex align-items-center justify-content-between">
                                             <div class="price-input">
@@ -111,7 +114,7 @@
                         </div>
 
 
-                       
+
                         <div class="sidebar-banner">
                             <div class="img-container">
                                 <a href="#">
@@ -143,7 +146,7 @@
                         <!-- shop product top wrap start -->
 
                         <!-- product item list wrapper start -->
-                       <!-- product item list wrapper start -->
+                        <!-- product item list wrapper start -->
                         <div class="shop-product-wrap grid-view row mbn-30">
                             <?php foreach ($productsToDisplay as $product): ?>
                                 <?php $discountPercentage = (($product["price"] - $product["discount_price"]) / $product["price"]) * 100 ?>
@@ -151,7 +154,7 @@
                                     <div class="product-item">
                                         <!-- Hiển thị sản phẩm -->
                                         <figure class="product-thumb">
-                                            <a href="?act=productDetail&id=<?=$product["id"]?>">
+                                            <a href="?act=productDetail&id=<?= $product["id"] ?>">
                                                 <img class="pri-img" src="<?= $product['image'] ?>" alt="product">
                                                 <img class="sec-img" src="<?= $product['image'] ?>" alt="product">
                                             </a>
@@ -163,11 +166,11 @@
                                                 <a href="?act=addWishlist&id=<?= $product['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
                                             </div>
                                             <div class="cart-hover">
-                                                <a href="?act=productDetail&id=<?=$product["id"]?>" class="btn btn-cart">Xem chi tiết</a>
+                                                <a href="?act=productDetail&id=<?= $product["id"] ?>" class="btn btn-cart">Xem chi tiết</a>
                                             </div>
                                         </figure>
                                         <div class="product-caption text-center">
-                                            <h6 class="product-name"><a href="?act=productDetail&id=<?=$product["id"]?>"><?= $product['product_name'] ?></a></h6>
+                                            <h6 class="product-name"><a href="?act=productDetail&id=<?= $product["id"] ?>"><?= $product['product_name'] ?></a></h6>
                                             <div class="price-box">
                                                 <span class="price-regular"><?= $product['discount_price'] ?></span>
                                                 <span class="price-old"><del><?= $product['price'] ?></del></span>
@@ -176,7 +179,7 @@
                                     </div>
                                     <div class="product-list-item">
                                         <figure class="product-thumb">
-                                            <a href="?act=productDetail&id=<?=$product["id"]?>">
+                                            <a href="?act=productDetail&id=<?= $product["id"] ?>">
                                                 <img class="pri-img" src="<?= $product['image'] ?>" alt="product">
                                                 <img class="sec-img" src="<?= $product['image'] ?>" alt="product">
                                             </a>
@@ -190,46 +193,47 @@
                                             </div>
                                             <div class="button-group">
                                                 <a href="?act=addWishlist&id=<?= $product['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                
+
                                             </div>
                                             <div class="cart-hover">
-                                                <button class="btn btn-cart">add to cart</button>
+                                                <a href="?act=productDetail&id=<?= $product["id"] ?>" class="btn btn-cart">Xem chi tiết</a>
+
                                             </div>
                                         </figure>
                                         <div class="product-content-list">
-                                            <h5 class="product-name"><a href="?act=productDetail&id=<?=$product["id"]?>"></a><?= $product['product_name'] ?></h5>
+                                            <h5 class="product-name"><a href="?act=productDetail&id=<?= $product["id"] ?>"></a><?= $product['product_name'] ?></h5>
                                             <div class="price-box">
                                                 <span class="price-regular"><?= $product['discount_price'] ?></span>
                                                 <span class="price-old"><del><?= $product['price'] ?></del></span>
                                             </div>
-                                            <p><?=$product["description"]?></p>
+                                            <p><?= $product["description"] ?></p>
                                         </div>
                                     </div>
                                 </div>
                             <?php endforeach ?>
                         </div>
-<!-- product item list wrapper end -->
+                        <!-- product item list wrapper end -->
 
                         <!-- product item list wrapper end -->
 
                         <!-- start pagination area -->
                         <!-- start pagination area -->
-                            <div class="paginatoin-area text-center">
-                                <ul class="pagination-box">
-                                    <?php if ($currentPage > 1): ?>
-                                        <li><a class="previous" href="?act=listProductClient&page=<?= $currentPage - 1 ?>"><i class="pe-7s-angle-left"></i></a></li>
-                                    <?php endif; ?>
+                        <div class="paginatoin-area text-center">
+                            <ul class="pagination-box">
+                                <?php if ($currentPage > 1): ?>
+                                    <li><a class="previous" href="?act=listProductClient&page=<?= $currentPage - 1 ?>"><i class="pe-7s-angle-left"></i></a></li>
+                                <?php endif; ?>
 
-                                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                                        <li class="<?= $i == $currentPage ? 'active' : '' ?>"><a href="?act=listProductClient&page=<?= $i ?>"><?= $i ?></a></li>
-                                    <?php endfor; ?>
+                                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                                    <li class="<?= $i == $currentPage ? 'active' : '' ?>"><a href="?act=listProductClient&page=<?= $i ?>"><?= $i ?></a></li>
+                                <?php endfor; ?>
 
-                                    <?php if ($currentPage < $totalPages): ?>
-                                        <li><a class="next" href="?act=listProductClient&page=<?= $currentPage + 1 ?>"><i class="pe-7s-angle-right"></i></a></li>
-                                    <?php endif; ?>
-                                </ul>
-                            </div>
-<!-- end pagination area -->
+                                <?php if ($currentPage < $totalPages): ?>
+                                    <li><a class="next" href="?act=listProductClient&page=<?= $currentPage + 1 ?>"><i class="pe-7s-angle-right"></i></a></li>
+                                <?php endif; ?>
+                            </ul>
+                        </div>
+                        <!-- end pagination area -->
 
                         <!-- end pagination area -->
                     </div>
@@ -271,24 +275,23 @@
     <script src="./corano/assets/js/plugins/google-map.js"></script>
     <!-- Main JS -->
     <script src="./corano/assets/js/main.js"></script>
-   <script>
-    $(document).ready(function() {
-    $(".price-range").slider({
-        range: true,
-        min: 50000,
-        max: 5000000, // Giới hạn giá trị tối đa, bạn có thể thay đổi nếu cần
-        values: [50000, 5000000], // Giá trị mặc định
-        slide: function(event, ui) {
-            // Cập nhật giá trị của input mỗi khi slider thay đổi
-            $("#amount").val(ui.values[0] + " - " + ui.values[1]);
-        }
-    });
+    <script>
+        $(document).ready(function() {
+            $(".price-range").slider({
+                range: true,
+                min: 0,
+                max: 5000000, // Giới hạn giá trị tối đa, bạn có thể thay đổi nếu cần
+                values: [0, 5000000], // Giá trị mặc định
+                slide: function(event, ui) {
+                    // Cập nhật giá trị của input mỗi khi slider thay đổi
+                    $("#amount").val(ui.values[0] + " - " + ui.values[1]);
+                }
+            });
 
-    // Đảm bảo input được cập nhật đúng khi trang được tải lại (nếu có giá trị đã chọn trước đó)
-    $("#amount").val($(".price-range").slider("values", 0) + " - " + $(".price-range").slider("values", 1));
-});
-
-   </script>
+            // Đảm bảo input được cập nhật đúng khi trang được tải lại (nếu có giá trị đã chọn trước đó)
+            $("#amount").val($(".price-range").slider("values", 0) + " - " + $(".price-range").slider("values", 1));
+        });
+    </script>
 </body>
 
 </html>
