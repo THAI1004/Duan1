@@ -80,7 +80,7 @@ class productController
             }
 
             // Nếu không có lỗi, thực hiện thêm sản phẩm
-if (empty($thongBaoLoiProductName) && empty($thongBaoLoiUpload)  && empty($thongBaoLoiDescription) && empty($thongBaoLoiCategory) && empty($thongBaoLoiPrice)) {
+            if (empty($thongBaoLoiProductName) && empty($thongBaoLoiUpload)  && empty($thongBaoLoiDescription) && empty($thongBaoLoiCategory) && empty($thongBaoLoiPrice)) {
                 // Kiểm tra hợp lệ và gọi model để thêm sản phẩm
                 $date = new DateTime('now', new DateTimeZone('Asia/Ho_Chi_Minh'));
                 $created_at = $date->format('Y-m-d H:i:s');
@@ -155,7 +155,7 @@ if (empty($thongBaoLoiProductName) && empty($thongBaoLoiUpload)  && empty($thong
             require_once './views/product/editProduct.php';
             return;
         }
-// Khởi tạo thông báo
+        // Khởi tạo thông báo
         $thongBaoLoiProductName = "";
         $thongBaoLoiDescription = "";
         $thongBaoLoiCategory = "";
@@ -220,7 +220,7 @@ if (empty($thongBaoLoiProductName) && empty($thongBaoLoiUpload)  && empty($thong
                     }
                     exit;
                 } else {
-$thongBaoLoi = "Có lỗi xảy ra trong quá trình sửa sản phẩm.";
+                    $thongBaoLoi = "Có lỗi xảy ra trong quá trình sửa sản phẩm.";
                 }
             }
         }
@@ -296,7 +296,7 @@ $thongBaoLoi = "Có lỗi xảy ra trong quá trình sửa sản phẩm.";
             $thamSo2 = "./images/imgs" . $_FILES["image_variant"]["name"]; //đường dẫn để di chuyển file từ bộ nhớ tạm vào
 
             if (move_uploaded_file($thamSo1, $thamSo2)) {
-$image_variant = "./images/imgs" . $_FILES["image_variant"]["name"];
+                $image_variant = "./images/imgs" . $_FILES["image_variant"]["name"];
             } else {
                 $thongBaoLoiUploadVariant = "upload thất bại";
             }
@@ -311,13 +311,13 @@ $image_variant = "./images/imgs" . $_FILES["image_variant"]["name"];
 
                 $result = $this->productModel->addProductVariant($product_id, $color_id, $size_id, $stock_quantity, $image_variant, $created_at, $updated_at);
 
-                if ($result === "OK") {
-                    $thongBaoTC = "Tạo mới thành công, mời bạn tiếp tục tạo mới hoặc quay lại trang danh sách";
-                    // Reset form fields sau khi thêm thành công
-                    $color_id = $size_id = $stock_quantity = $image_variant = "";
-                } else {
-                    $thongBaoLoi = "Có lỗi xảy ra trong quá trình tạo biến thể.";
-                }
+                // if ($result === "OK") {
+                //     $thongBaoTC = "Tạo mới thành công, mời bạn tiếp tục tạo mới hoặc quay lại trang danh sách";
+                //     // Reset form fields sau khi thêm thành công
+                //     $color_id = $size_id = $stock_quantity = $image_variant = "";
+                // } else {
+                //     $thongBaoLoi = "Có lỗi xảy ra trong quá trình tạo biến thể.";
+                // }
             }
         }
 
@@ -363,7 +363,7 @@ $image_variant = "./images/imgs" . $_FILES["image_variant"]["name"];
 
         // Khởi tạo các biến từ dữ liệu của biến thể
         $product_name = trim($product["product_name"]);
-$color_name = trim($color["color_name"]);
+        $color_name = trim($color["color_name"]);
         $size_name = trim($size["size_name"]);
         $stock_quantity = trim($variant["stock_quantity"]);
         $image_variant = trim($variant["image_variant"]);
@@ -424,7 +424,7 @@ $color_name = trim($color["color_name"]);
             if (empty($thongBaoLoiColor) && empty($thongBaoLoiSize) && empty($thongBaoLoiQuantity) && empty($thongBaoLoiUploadVariant)) {
                 $date = new DateTime('now', new DateTimeZone('Asia/Ho_Chi_Minh'));
                 $updated_at = $date->format('Y-m-d H:i:s');
-$result = $this->productModel->editProductVariant($idVariant, $product_id, $color_id, $size_id, $stock_quantity, $image_variant, $created_at, $updated_at);
+                $result = $this->productModel->editProductVariant($idVariant, $product_id, $color_id, $size_id, $stock_quantity, $image_variant, $created_at, $updated_at);
 
                 if ($result === "OK") {
                     echo "<script>

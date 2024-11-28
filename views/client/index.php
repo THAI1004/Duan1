@@ -90,8 +90,7 @@ include "./include/headerClient.php";
 
     <main>
         <!-- hero slider area start -->
-        <section class="slider-area">
-            <div class="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">
+        <section class="slider-area"> <div class="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">
                 <!-- single slider item start -->
                 <?php foreach ($listSlider as $row) { ?>
                     <div class="hero-single-slide hero-overlay">
@@ -153,8 +152,7 @@ include "./include/headerClient.php";
                             <div class="policy-content">
                                 <h6>Money Return</h6>
                                 <p>30 days for free return</p>
-                            </div>
-                        </div>
+                            </div> </div>
                     </div>
                     <div class="col-sm-6 col-lg-3">
                         <div class="policy-item">
@@ -212,9 +210,7 @@ include "./include/headerClient.php";
                                     } ?>
                                 </ul>
                             </div>
-                            <!-- product tab menu end -->
-
-                            <!-- product tab content start -->
+                            <!-- product tab menu end --> <!-- product tab content start -->
                             <div class="tab-content">
                                 <?php
                                 $i = 1;
@@ -237,8 +233,7 @@ include "./include/headerClient.php";
                                                 ?>
                                                         <div class="col-md-3 col-sm-6">
                                                             <div class="product-item">
-                                                                <figure class="product-thumb">
-                                                                    <a href="?act=productDetail&id=<?= $product["id"] ?>"> <img class="pri-img" src="<?= $product["image"] ?>" alt="product">
+                                                                <figure class="product-thumb"><a href="?act=productDetail&id=<?= $product["id"] ?>"> <img class="pri-img" src="<?= $product["image"] ?>" alt="product">
                                                                         <img class="sec-img" src="<?= $product["image"] ?>" alt="product">
                                                                     </a>
                                                                     <div class="product-badge">
@@ -247,8 +242,7 @@ include "./include/headerClient.php";
                                                                         </div>
                                                                         <div class="product-label discount">
                                                                             <span>
-                                                                                <?= $discountPercentage ?> %
-                                                                            </span>
+                                                                                <?= $discountPercentage ?> </span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="button-group">
@@ -280,8 +274,7 @@ include "./include/headerClient.php";
                                                 // Nếu không tìm thấy sản phẩm nào cho danh mục, thông báo
                                                 if (!$found) {
                                                     echo "<p>Không có sản phẩm nào trong danh mục này.</p>";
-                                                }
-                                                ?>
+                                                } ?>
                                             </div>
                                         </div>
                                 <?php $i++;
@@ -312,8 +305,7 @@ include "./include/headerClient.php";
                 <div class="row">
                     <div class="col-12">
                         <div class="product-banner-carousel slick-row-10">
-                            <!-- banner single slide start -->
-                            <?php foreach ($listCate as $cate) { ?> <div class="banner-slide-item">
+                            <!-- banner single slide start --><?php foreach ($listCate as $cate) { ?> <div class="banner-slide-item">
                                     <figure class="banner-statistics">
                                         <a href="?act=listProductByCate&id=<?= $cate["id"] ?>">
                                             <img src="./images/category/<?= $cate["image_category"] ?>" alt="product banner">
@@ -349,8 +341,7 @@ include "./include/headerClient.php";
                     <div class="col-12">
                         <div class="product-carousel-4_2 slick-row-10 slick-arrow-style">
                             <!-- product item start -->
-                            <?php foreach ($productLimit20 as $row) {
-                                $discountPercentage = (($row["price"] - $row["discount_price"]) / $row["price"]) * 100;
+                            <?php foreach ($productLimit20 as $row) { $discountPercentage = (($row["price"] - $row["discount_price"]) / $row["price"]) * 100;
                             ?>
                                 <div class="product-item">
                                     <figure class="product-thumb">
@@ -363,8 +354,7 @@ include "./include/headerClient.php";
                                                 <span>new</span>
                                             </div>
                                             <div class="product-label discount">
-                                                <span id="giamGia">
-                                                    <?= $discountPercentage ?> % </span>
+                                                <span id="giamGia"><?= $discountPercentage ?>% </span>
                                             </div>
                                         </div>
                                         <div class="button-group">
@@ -384,26 +374,27 @@ include "./include/headerClient.php";
                                             <span class="price-old"><del><?= $row["discount_price"] ?></del></span>
                                         </div>
                                     </div>
-                                <?php } ?>
-                                <!-- product item end -->
                                 </div>
+                            <?php } ?>
+                            <!-- product item end -->
                         </div>
                     </div>
                 </div>
+            </div>
         </section>
         <!-- featured product area end -->
 
         <!-- testimonial area start -->
 
-
-        <section class="mt-3 latest-blog-area section-padding pt-0">
-            <div class="container">
+        <!-- testimonial area end -->
+        <!-- latest blog area start -->
+        <section class="mt-3 latest-blog-area section-padding pt-0"> <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <!-- section title start -->
                         <div class="section-title text-center">
-                            <h2 class="title">Blog tin tức</h2>
-                            <p class="sub-title">Tổng hợp tin tức</p>
+                            <h2 class="title">latest blogs</h2>
+                            <p class="sub-title">There are latest blog posts</p>
                         </div>
                         <!-- section title start -->
                     </div>
@@ -452,8 +443,7 @@ include "./include/headerClient.php";
 
 
     <!-- Modernizer JS -->
-    <script src="./corano/assets/js/vendor/modernizr-3.6.0.min.js"></script>
-    <!-- jQuery JS -->
+    <script src="./corano/assets/js/vendor/modernizr-3.6.0.min.js"></script> <!-- jQuery JS -->
     <script src="./corano/assets/js/vendor/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap JS -->
     <script src="./corano/assets/js/vendor/bootstrap.bundle.min.js"></script>
@@ -467,8 +457,7 @@ include "./include/headerClient.php";
     <script src="./corano/assets/js/plugins/jqueryui.min.js"></script>
     <!-- Image zoom JS -->
     <script src="./corano/assets/js/plugins/image-zoom.min.js"></script>
-    <!-- Images loaded JS -->
-    <script src="./corano/assets/js/plugins/imagesloaded.pkgd.min.js"></script>
+    <!-- Images loaded JS --> <script src="./corano/assets/js/plugins/imagesloaded.pkgd.min.js"></script>
     <!-- mail-chimp active js -->
     <script src="./corano/assets/js/plugins/ajaxchimp.js"></script>
     <!-- contact form dynamic js -->
