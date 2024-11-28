@@ -163,38 +163,25 @@ WHERE
             return "Error";
         }
     }
-    public function insertCart($user_id, $total, $voucher, $create_at, $updated_at)
+    public function insertCart($user_id, $total, $voucher, $created_at, $updated_at)
     {
         try {
             // Tạo câu lệnh SQL
-            $sql = "INSERT INTO carts (user_id, total_price, voucher_code, create_at, updated_at) 
-                VALUES (:user_id, :total_price, :voucher_code, :created_at, :updated_at)";
+            $sql = "INSERT INTO carts (user_id, total_price, voucher_code, created_at, updated_at) 
+                VALUES ('$user_id', '$total', '$voucher', '$created_at', '$updated_at')";
 
             // Chuẩn bị câu lệnh SQL
-            $stmt = $this->pdo->prepare($sql);
+            $stmt = $this->pdo->exec($sql);
 
-            // Gán giá trị cho các tham số
-            $stmt->bindParam(':user_id', $user_id);
-            $stmt->bindParam(':total_price', $total);
-            $stmt->bindParam(':voucher_code', $voucher);
-            $stmt->bindParam(':create_at', $created_at);
-            $stmt->bindParam(':updated_at', $updated_at);
-
-            // Thực thi câu lệnh SQL
-            $stmt->execute();
-
-            // Lấy ID của giỏ hàng vừa được tạo
-            $lastInsertId = $this->pdo->lastInsertId();
-
-            // Kiểm tra nếu có giá trị lastInsertId hợp lệ
-            if ($lastInsertId) {
-                return $lastInsertId;  // Trả về ID của giỏ hàng vừa được chèn
+            // Kiểm tra nếu câu lệnh thực thi thành công
+            if ($stmt > 0) {
+                return "OK";  // Trả về "OK" nếu thành công
             } else {
-                return "Failed";  // Trả về "Failed" nếu không có ID nào được chèn
+                return "Failed";  // Trả về "Failed" nếu không có dòng nào bị ảnh hưởng
             }
         } catch (Exception $e) {
             // In ra lỗi nếu có lỗi xảy ra
-            echo "Error: " . $e->getMessage();
+            echo "lỗi: " . $e->getMessage();
             return "Error";
         }
     }

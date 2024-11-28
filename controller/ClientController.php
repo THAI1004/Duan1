@@ -145,7 +145,15 @@ class clientController
                 $_SESSION['user_id'] = $account['id'];  // Lưu ID người dùng
                 $_SESSION['username'] = $account['username'];  // Lưu tên người dùng
                 $_SESSION['login_success'] = "Đăng nhập thành công mời bạn bắt đầu mua hàng!";  // Lưu thông báo thành công
-
+                if (isset($_SESSION["user_id"])) {
+                    $id = $_SESSION["user_id"];
+                    $total = 0;
+                    $voucher = 0;
+                    $date = new DateTime('now', new DateTimeZone('Asia/Ho_Chi_Minh'));
+                    $created_at = $date->format('Y-m-d H:i:s');
+                    $updated_at = $created_at;
+                    $abc = $this->cartModel->insertCart($id, $total, $voucher, $created_at, $updated_at);
+                }
                 // Chuyển hướng sau khi nhấn OK vào alert
                 include "./views/client/login.php";  // Chuyển sang trang redirect
             }

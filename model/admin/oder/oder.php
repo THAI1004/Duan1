@@ -137,6 +137,7 @@ ORDER BY order_day;
         } catch (Exception $er) {
             echo "Lỗi hàm insertOrderItem " . $er->getMessage();
         }
+    }
     public function getActiveOrdersByUser($userId)
     {
         // Tạo câu lệnh SQL
