@@ -34,6 +34,27 @@ class productModel
         $data = $this->pdo->query($sql)->fetchAll();
         return $data;
     }
+    public function getAllColorByid($id)
+    {
+        $sql = "SELECT product_colors.id, product_colors.color_name
+        FROM product_variants
+        JOIN product_colors ON product_variants.color_id = product_colors.id
+        WHERE product_variants.product_id = $id;";
+
+        $data = $this->pdo->query($sql)->fetchAll();
+        return $data;
+    }
+    public function getAllSizeByid($id)
+    {
+        $sql = "SELECT DISTINCT product_sizes.id, product_sizes.size_name
+                FROM product_variants
+                JOIN product_sizes ON product_variants.size_id = product_sizes.id
+                WHERE product_variants.product_id = $id;";
+
+        $data = $this->pdo->query($sql)->fetchAll();
+        return $data;
+    }
+
     public function getAllSize()
     {
         $sql = "SELECT * FROM `product_sizes`";

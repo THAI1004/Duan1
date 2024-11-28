@@ -312,9 +312,9 @@ class clientController
                     // Lưu lại thông tin người dùng vào session
                     $_SESSION['user_data']["number"] = $_POST["number"];
                 } // Lưu lại dữ liệu người dùng
-
-                $_SESSION["user_data"]["voucher_id"] = $_POST['voucher_id']; // Update voucher ID in session
-
+                if (isset($_POST['voucher_id'])) {
+                    $_SESSION["user_data"]["voucher_id"] = $_POST['voucher_id']; // Update voucher ID in session
+                }
                 $_SESSION['user_data']["ordernote"] = $_POST["ordernote"];
                 $_SESSION["user_data"]["voucher_discount"] = $_POST['voucher']; // Lưu voucher discount
                 $voucherDiscount = $_SESSION["user_data"]["voucher_discount"] ?? 0;
@@ -763,6 +763,9 @@ class clientController
         $listProducVariant = $this->productModel->getAllProductVariant($id);
         $getAllProductImagePhu = $this->productModel->getAllProductVariant($id);
         $getAllColor = $this->productModel->getAllColor();
+        $getAllColorById = $this->productModel->getAllColorByid($id);
+        $getAllSizeById = $this->productModel->getAllSizeByid($id);
+        // var_dump($getAllSizeById);
         $getAllSize = $this->productModel->getAllSize();
         $listProduct = $this->productModel->getAllProduct();
         $productLimit20 = $this->productModel->getProductLimit20();
