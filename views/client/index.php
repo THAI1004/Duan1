@@ -382,10 +382,6 @@ include "./include/headerClient.php";
                                         <div class="price-box">
                                             <span class="price-regular"><?= $row["price"] ?></span>
                                             <span class="price-old"><del><?= $row["discount_price"] ?></del></span>
-                                            <div class="product-label discount">
-                                                <span id="giamGia">
-                                                    <?= $discountPercentage ?> % </span>
-                                            </div>
                                         </div>
                                     </div>
                                 <?php } ?>
