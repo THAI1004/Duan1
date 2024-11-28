@@ -50,7 +50,7 @@
                 <!-- Checkout Billing Details -->
                 <div class="col-lg-6">
                     <div class="checkout-billing-details-wrap">
-                        <h5 class="checkout-title">Billing Details</h5>
+                        <h5 class="checkout-title">zip_entry_compressedsize</h5>
                         <div class="billing-form-wrap">
                             <form action="#">
                                 <div class="row">

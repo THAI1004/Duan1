@@ -69,7 +69,7 @@ ob_start(); // Bắt đầu output buffer
                             <div class="main-menu">
                                 <!-- main menu navbar start -->
                                 <nav class="desktop-menu">
-                                    <ul> <li class="active"><a href="?act=homeClient">Home</a>
+                                    <ul> <li class="active"><a href="?act=homeClient">Trang chủ</a>
                                         </li>
                                         <li class="position-static"><a href="?act=listProductClient">Sneaker <i class="fa fa-angle-down"></i></a>
                                             <ul class="megamenu dropdown">
@@ -103,10 +103,10 @@ ob_start(); // Bắt đầu output buffer
                                                 <?php } ?>
                                             </ul>
                                         </li>
-                                        <li><a href="?act=contactUS">contactUS</a></li>
+                                        <li><a href="?act=contactUS">Liên hệ</a></li>
                                     </ul>
                                 </nav>
-                                <!-- main menu navbar end -->
+                                <!-- main menu navbar end -->   
                             </div>
                         </div>
                     </div>
@@ -226,14 +226,8 @@ ob_start(); // Bắt đầu output buffer
                     <!-- mobile menu navigation start -->
                     <nav>
                         <ul class="mobile-menu">
-                            <li class="menu-item-has-children"><a href="index.html">Home</a>
-                                <ul class="dropdown">
-                                    <li><a href="index.html">Home version 01</a></li>
-                                    <li><a href="index-2.html">Home version 02</a></li>
-                                    <li><a href="index-3.html">Home version 03</a></li> <li><a href="index-4.html">Home version 04</a></li>
-                                    <li><a href="index-5.html">Home version 05</a></li>
-                                    <li><a href="index-6.html">Home version 06</a></li>
-                                </ul>
+                            <li class="menu-item-has-children"><a href="index.html">Trang chủ</a>
+
                             </li>
                             <li class="menu-item-has-children"><a href="#">pages</a>
                                 <ul class="megamenu dropdown">

@@ -237,7 +237,7 @@ switch ($act) {
         break;
     case "contactUS":
         $client->includeClient();
-        $client->contactUS();
+        $client->getContactUS();
         break;
     case "addCart":
         $client->includeClient();
@@ -250,7 +250,7 @@ switch ($act) {
         $client->sendPass();
         break;
     case "formResetPass":
-        $client->includeClient(); 
+        $client->includeClient();
         $client->formReset();
         break;
     case "resetPassword":
