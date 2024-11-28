@@ -34,6 +34,27 @@ class productModel
         $data = $this->pdo->query($sql)->fetchAll();
         return $data;
     }
+    public function getAllColorByid($id)
+    {
+        $sql = "SELECT product_colors.id, product_colors.color_name
+        FROM product_variants
+        JOIN product_colors ON product_variants.color_id = product_colors.id
+        WHERE product_variants.product_id = $id;";
+
+        $data = $this->pdo->query($sql)->fetchAll();
+        return $data;
+    }
+    public function getAllSizeByid($id)
+    {
+        $sql = "SELECT DISTINCT product_sizes.id, product_sizes.size_name
+                FROM product_variants
+                JOIN product_sizes ON product_variants.size_id = product_sizes.id
+                WHERE product_variants.product_id = $id;";
+
+        $data = $this->pdo->query($sql)->fetchAll();
+        return $data;
+    }
+
     public function getAllSize()
     {
         $sql = "SELECT * FROM `product_sizes`";
@@ -121,35 +142,46 @@ class productModel
             echo "<hr>";
         }
     }
-
     public function getAllProductVariant($id)
     {
+        // Tính toán giá trị OFFSET
+
+
+        // Truy vấn SQL có phân trang
         $sql = "
-    SELECT
-        pv.id AS variant_id, 
-        pv.product_id,  
-        p.product_name, 
-        pc.color_name, 
-        pc.color_code,
-        ps.size_name, 
-        pv.stock_quantity,
-        pv.image_variant
-    FROM 
-        Product_Variants pv
-    JOIN 
-        Products p ON pv.product_id = p.id
-    JOIN 
-        Product_Colors pc ON pv.color_id = pc.id
-    JOIN 
-        Product_Sizes ps ON pv.size_id = ps.id
-    WHERE 
-        pv.product_id = $id";
+        SELECT
+            pv.id AS variant_id, 
+            pv.product_id,  
+            p.product_name, 
+            pc.color_name, 
+            pc.color_code,
+            ps.size_name, 
+            pv.stock_quantity,
+            pv.image_variant
+        FROM 
+            Product_Variants pv
+        JOIN 
+            Products p ON pv.product_id = p.id
+        JOIN 
+            Product_Colors pc ON pv.color_id = pc.id
+        JOIN 
+            Product_Sizes ps ON pv.size_id = ps.id
+        WHERE 
+            pv.product_id = :product_id";
 
+        // Chuẩn bị câu lệnh truy vấn
+        $stmt = $this->pdo->prepare($sql);
 
+        // Liên kết tham số vào truy vấn
+        $stmt->bindValue(':product_id', $id, PDO::PARAM_INT);
 
-        $data = $this->pdo->query($sql)->fetchAll();
+        // Thực thi và trả về kết quả
+        $stmt->execute();
+        $data = $stmt->fetchAll();
         return $data;
     }
+
+
     public function deleteProductVariant($idVariant)
     {
         try {

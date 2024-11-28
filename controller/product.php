@@ -230,12 +230,36 @@ class productController
     }
     public function listProductVariant($id)
     {
-        $i = 1;
+        // Xác định trang hiện tại từ query string (nếu không có thì mặc định là trang 1)
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+        // Xác định số lượng biến thể hiển thị trên mỗi trang
+        $limit = 5;
+
+        // Lấy thông tin sản phẩm
         $Product = $this->productModel->getProductById($id);
-        $productVariant = $this->productModel->getAllProductVariant($id);
-        // var_dump($productVariant);
+
+        // Lấy toàn bộ biến thể sản phẩm (không cần giới hạn trang ở đây)
+        $allProductVariants = $this->productModel->getAllProductVariant($id);
+
+        // Tính tổng số biến thể
+        $total_variants = count($allProductVariants);
+
+        // Tính toán tổng số trang
+        $total_pages = ceil($total_variants / $limit);
+        // var_dump($total_variants);
+
+        // Tính toán offset (vị trí bắt đầu) cho trang hiện tại
+        $offset = ($page - 1) * $limit;
+
+        // Lấy các biến thể sản phẩm theo trang (chỉ lấy một phần từ mảng tổng)
+        $productVariantOnPage = array_slice($allProductVariants, $offset, $limit);
+
+        // Load view và truyền các biến cần thiết
         require_once './views/product/listProductVariant.php';
     }
+
+
     public function deleteVariant($id, $idVariant)
     {
         if ($idVariant !== "") {

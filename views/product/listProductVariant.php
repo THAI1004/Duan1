@@ -203,7 +203,7 @@ include './include/header.php';
                                     <br>
                                     <div class="single-zoom-thumb">
                                         <ul class="s-tab-zoom single-product-active owl-carousel" id="gallery_01">
-                                            <?php foreach ($productVariant as $row) { ?>
+                                            <?php foreach ($allProductVariants as $row) { ?>
                                                 <li>
                                                     <a href="#" class="elevatezoom-gallery active" data-image="<?= $row['image_variant'] ?>" data-zoom-image="<?= $row['image_variant'] ?>">
                                                         <img src="<?= $row['image_variant'] ?>" alt="zo-th-1" />
@@ -234,6 +234,7 @@ include './include/header.php';
     </div>
 
     <h3>Danh sách biến thể</h3>
+    <!-- Hiển thị danh sách biến thể -->
     <table class="table table-striped table-hover table-bordered table-sm text-center custom-table">
         <thead class="table-dark">
             <tr>
@@ -246,8 +247,8 @@ include './include/header.php';
             </tr>
         </thead>
         <tbody>
-            <?php $i = 1;
-            foreach ($productVariant as $row) { ?>
+            <?php $i = $offset + 1;
+            foreach ($productVariantOnPage as $row) { ?>
                 <tr>
                     <td><?= $i++ ?></td>
                     <td><?= $row["color_name"] ?></td>
@@ -262,6 +263,50 @@ include './include/header.php';
             <?php } ?>
         </tbody>
     </table>
+
+    <!-- Hiển thị các nút chuyển trang -->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <!-- Trang trước -->
+            <?php if ($page > 1): ?>
+                <li class="page-item">
+                    <a class="page-link" href="?act=listProductVariant&id=<?= $id ?>&page=<?= $page - 1 ?>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            <?php endif; ?>
+
+            <!-- Trang đầu -->
+            <?php if ($page > 3): ?>
+                <li class="page-item"><a class="page-link" href="?act=listProductVariant&id=<?= $id ?>&page=1">1</a></li>
+                <li class="page-item"><span class="page-link dots">...</span></li>
+            <?php endif; ?>
+
+            <!-- Hiển thị các trang xung quanh trang hiện tại -->
+            <?php for ($i = max(1, $page - 2); $i <= min($total_pages, $page + 2); $i++): ?>
+                <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
+                    <a class="page-link" href="?act=listProductVariant&id=<?= $id ?>&page=<?= $i ?>"><?= $i ?></a>
+                </li>
+            <?php endfor; ?>
+
+            <!-- Trang cuối -->
+            <?php if ($page < $total_pages - 2): ?>
+                <li class="page-item"><span class="page-link dots">...</span></li>
+                <li class="page-item"><a class="page-link" href="?act=listProductVariant&id=<?= $id ?>&page=<?= $total_pages ?>"><?= $total_pages ?></a></li>
+            <?php endif; ?>
+
+            <!-- Trang sau -->
+            <?php if ($page < $total_pages): ?>
+                <li class="page-item">
+                    <a class="page-link" href="?act=listProductVariant&id=<?= $id ?>&page=<?= $page + 1 ?>" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </nav>
+
+
 
     <a class="btn btn-primary" href="?act=addVariant&id=<?= $Product['id'] ?>">Thêm biến thể</a>
 

@@ -166,7 +166,7 @@ include "./include/headerClient.php";
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>/-strong/-heart:>:o:-((:-h
         </div> <!-- service policy area end -->
 
         <!-- banner statistics area start -->
@@ -242,7 +242,8 @@ include "./include/headerClient.php";
                                                                         </div>
                                                                         <div class="product-label discount">
                                                                             <span>
-                                                                                <?= $discountPercentage ?> </span>
+                                                                                <?= $discountPercentage ?>
+                                                                            </span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="button-group">
@@ -388,7 +389,8 @@ include "./include/headerClient.php";
 
         <!-- testimonial area end -->
         <!-- latest blog area start -->
-        <section class="mt-3 latest-blog-area section-padding pt-0"> <div class="container">
+        <section class="mt-3 latest-blog-area section-padding pt-0">
+            <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <!-- section title start -->
