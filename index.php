@@ -213,6 +213,7 @@ switch ($act) {
         $client->updateCart();
         break;
     case "updateCartVoucher":
+        $client->includeClient();
         $client->updateCartVoucher();
         break;
     case "listProductClient":
@@ -239,8 +240,8 @@ switch ($act) {
         $client->contactUS();
         break;
     case "addCart":
-        $client->includeClient();
         $client->addCart($id);
+        break;
     case "formForgetPass":
         $client->includeClient();
         $client->formEmail();
@@ -249,7 +250,7 @@ switch ($act) {
         $client->sendPass();
         break;
     case "formResetPass":
-        $client->includeClient(); 
+        $client->includeClient();
         $client->formReset();
         break;
     case "resetPassword":
@@ -261,5 +262,11 @@ switch ($act) {
     case "checkout":
         $client->includeClient();
         $client->checkout();
+        break;
+    case "order":
+        $client->order();
+        break;
+    case "Er404":
+        $client->Er404();
         break;
 }
