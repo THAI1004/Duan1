@@ -63,6 +63,22 @@ include "./include/headerClient.php";
         .price-box {
             margin-top: 10px;
         }
+
+        .hero-slider-content .slide-title {
+            margin-top: 150px;
+            font-family: 'Oswald', sans-serif;
+            /* Thay bằng font bạn chọn */
+            font-size: 36px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .hero-slider-content .slide-desc {
+            font-family: 'Roboto', sans-serif;
+            /* Font dễ đọc cho mô tả */
+            font-size: 18px;
+            color: white;
+        }
     </style>
 </head>
 
