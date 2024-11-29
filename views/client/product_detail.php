@@ -322,7 +322,7 @@
                                                 <span>new</span>
                                             </div>
                                             <div class="product-label discount">
-                                                <span><?= $discountPercentage ?>%</span>
+                                            <span id="giamGia"><?= floor($discountPercentage) ?>%</span>
                                             </div>
                                         </div>
                                         <div class="button-group">
