@@ -18,6 +18,18 @@
                             </p>
                         </div>
                     </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="widget-item">
+                            <h6 class="widget-title">Thông tin</h6>
+                            <div class="widget-body">
+                                <ul class="info-list">
+                                    <li><a href="#">Liên lạc</a></li>
+                                    <li><a href="#">Giao hàng</a></li>
+                                    <li><a href="#">Chính sách</a></li>
+                                    <li><a href="#">Điều khoản</a></li>
+                                    <li><a href="#">Liên hệ với chúng tôi</a></li>
+                                    <li><a href="#">Địa chỉ</a></li>
+
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="widget-item">
@@ -28,6 +40,7 @@
                                     <li><i class="pe-7s-home"></i> Tòa nhà FPT Polytechnic, Phố Trịnh Văn Bô, Nam Từ Liêm, Hà Nội.</li>
                                     <li><i class="pe-7s-mail"></i> <a href="mailto:demo@plazathemes.com"> caodang@fpt.edu.vn </a></li>
                                     <li><i class="pe-7s-call"></i> <a href="tel:(012)800456789987">(024) 7300 1955</a></li>
+
                                 </ul>
                             </address>
                         </div>
