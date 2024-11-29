@@ -134,26 +134,6 @@ if (!empty($thongBaoTC)) {
                 <?php endif; ?>
             </div>
 
-            <!-- Nội dung -->
-            <div class="form-group">
-                <label for="content">Nội dung:</label>
-                <input type="text" id="content" name="content" 
-                    value="<?= isset($_POST['content']) ? htmlspecialchars($_POST['content']) : '' ?>" required>
-                <?php if (!empty($thongBaoLoiContent)): ?>
-                    <div class="alert alert-danger"><?= htmlspecialchars($thongBaoLoiContent) ?></div>
-                <?php endif; ?>
-            </div>
-
-            <!-- Mô tả -->            
-            <div class="form-group">
-                <label for="description">Mô tả:</label>
-                <input type="text" id="description" name="description" 
-                    value="<?= isset($_POST['description']) ? htmlspecialchars($_POST['description']) : '' ?>" required>
-                <?php if (!empty($thongBaoLoiDescription)): ?>                
-                    <div class="alert alert-danger"><?= htmlspecialchars($thongBaoLoiDescription) ?></div>
-                <?php endif; ?>
-            </div>
-
             <!-- Link -->
             <div class="form-group">
                 <label for="link">Link ảnh:</label>

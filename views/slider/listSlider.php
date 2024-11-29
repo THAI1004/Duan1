@@ -168,8 +168,6 @@
             <tr>
                 <th scope="col">STT</th>
                 <th scope="col">Ảnh</th>
-                <th scope="col">Nội dung</th>
-                <th scope="col">Mô tả</th>
                 <th scope="col">Link</th>
                 <th scope="col">Ngày tạo</th>
                 <th scope="col">Ngày sửa</th>
@@ -183,8 +181,6 @@
                 <tr>
                     <td><?= $i++ ?></td>
                     <td><img src="<?= $listSlider['image_url'] ?>" alt="" width="200px"></td>
-                    <td><?= $listSlider['content'] ?></td>
-                    <td><?= $listSlider['description'] ?></td>
                     <td><?= $listSlider['link'] ?></td>
                     <td><?= $listSlider['created_at'] ?></td>
                     <td><?= $listSlider['updated_at'] ?></td>

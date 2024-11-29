@@ -20,22 +20,6 @@
       <div class="alert alert-danger"><?= htmlspecialchars($thongBaoLoiUpload) ?></div>
     <?php endif; ?>
   </div>
-
-  <div class="mb-3">
-    <label for="content" class="form-label">Nội dung:</label>
-    <input type="text" class="form-control" id="content" name="content"  value="<?=$slider["content"]?>" required>
-    <?php if (!empty($thongBaoLoiContent)): ?>
-      <div class="alert alert-danger"><?= htmlspecialchars($thongBaoLoiContent) ?></div>
-    <?php endif; ?>
-  </div>
-    
-  <div class="mb-3">
-    <label for="description" class="form-label">Mô tả:</label>
-    <input type="text" class="form-control" id="description" name="description"  value="<?=$slider["description"]?>" required>
-    <?php if (!empty($thongBaoLoiDescription)): ?>
-      <div class="alert alert-danger"><?= htmlspecialchars($thongBaoLoiDescription) ?></div>
-    <?php endif; ?>
-  </div>
   
   <div class="mb-3">
     <label for="link" class="form-label">Link:</label>
