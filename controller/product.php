@@ -47,12 +47,14 @@ class productController
             $description = trim($_POST['description']);
             $category_id = trim($_POST['category_id']);
             $price = trim($_POST['price']);
+            $discount_price = trim($_POST['discount_price']);
 
             // Biến thông báo lỗi cho từng trường
             $thongBaoLoiProductName = "";
             $thongBaoLoiDescription = "";
             $thongBaoLoiCategory = "";
             $thongBaoLoiPrice = "";
+            $thongBaoLoidiscount_price = "";
 
             // Kiểm tra lỗi cho từng trường
             if (empty($product_name)) {
@@ -70,6 +72,9 @@ class productController
             if (empty($price)) {
                 $thongBaoLoiPrice = "Vui lòng nhập giá sản phẩm.";
             }
+            if (empty($discount_price)) {
+                $thongBaoLoidiscount_price = "Vui lòng nhập giá giảm.";
+            }
             $thamSo1 = $_FILES["image"]["tmp_name"];
             $thamSo2 = "./images/imgs" . $_FILES["image"]["name"]; //đường dẫn để di chuyển file từ bộ nhớ tạm vào
 
@@ -80,18 +85,18 @@ class productController
             }
 
             // Nếu không có lỗi, thực hiện thêm sản phẩm
-            if (empty($thongBaoLoiProductName) && empty($thongBaoLoiUpload)  && empty($thongBaoLoiDescription) && empty($thongBaoLoiCategory) && empty($thongBaoLoiPrice)) {
+            if (empty($thongBaoLoiProductName) && empty($thongBaoLoiUpload)  && empty($thongBaoLoiDescription) && empty($thongBaoLoiCategory) && empty($thongBaoLoiPrice) && empty($thongBaoLoidiscount_price)) {
                 // Kiểm tra hợp lệ và gọi model để thêm sản phẩm
                 $date = new DateTime('now', new DateTimeZone('Asia/Ho_Chi_Minh'));
                 $created_at = $date->format('Y-m-d H:i:s');
                 $updated_at = $created_at;
 
-                $result = $this->productModel->addProduct($product_name, $description, $category_id, $price, $created_at, $updated_at, $image);
+                $result = $this->productModel->addProduct($product_name, $description, $category_id, $price, $discount_price, $created_at, $updated_at, $image);
 
                 if ($result === "OK") {
                     $thongBaoTC = "Tạo mới thành công, mời bạn tiếp tục tạo mới hoặc quay lại trang danh sách";
                     // Reset form fields sau khi thêm thành công
-                    $product_name = $description = $category_id = $price = "";
+                    $product_name = $description = $category_id = $price = $discount_price = "";
                 } else {
                     $thongBaoLoi = "Có lỗi xảy ra trong quá trình tạo sản phẩm.";
                 }
@@ -160,12 +165,13 @@ class productController
         $thongBaoLoiDescription = "";
         $thongBaoLoiCategory = "";
         $thongBaoLoiPrice = "";
+        $thongBaoLoidiscount_price = "";
         $thongBaoLoi = "";
         $thongBaoTC = "";
 
         // Lấy sản phẩm hiện tại
         $product = $this->productModel->getProductById($id);
-        $image = $product['image']; 
+        $image = $product['image'];
 
         if (isset($_POST['submit'])) {
             // Lấy giá trị từ form
@@ -173,6 +179,7 @@ class productController
             $description = trim($_POST['description']);
             $category_id = trim($_POST['category_id']);
             $price = trim($_POST['price']);
+            $discount_price = trim($_POST['discount_price']);
 
             // Kiểm tra lỗi cho từng trường
             if (empty($product_name)) {
@@ -190,6 +197,9 @@ class productController
             if (empty($price)) {
                 $thongBaoLoiPrice = "Vui lòng nhập giá sản phẩm.";
             }
+            if (empty($discount_price)) {
+                $thongBaoLoidiscount_price = "Vui lòng nhập giá sản phẩm.";
+            }
             $thamSo1 = $_FILES["image"]["tmp_name"];
             $thamSo2 = "./images/imgs" . $_FILES["image"]["name"]; //đường dẫn để di chuyển file từ bộ nhớ tạm vào
             if (!empty($thamSo1) && !empty($thamSo2)) {
@@ -198,17 +208,18 @@ class productController
                 } else {
                     $thongBaoLoiUpload = "upload thất bại";
                 }
-            }else{
-                $thamSo1 = $thamSo2= null;
+            } else {
+                $thamSo1 = $thamSo2 = null;
             }
             // Nếu không có lỗi, thực hiện cập nhật sản phẩm
-            if (empty($thongBaoLoiProductName) && empty($thongBaoLoiUpload) && empty($thongBaoLoiDescription) && empty($thongBaoLoiCategory) && empty($thongBaoLoiPrice)) {
+            if (empty($thongBaoLoiProductName) && empty($thongBaoLoiUpload) && empty($thongBaoLoiDescription) && empty($thongBaoLoiCategory) && empty($thongBaoLoiPrice) && empty($thongBaoLoidiscount_price)) {
                 $date = new DateTime('now', new DateTimeZone('Asia/Ho_Chi_Minh'));
                 $updated_at = $date->format('Y-m-d H:i:s');
 
 
                 $created_at = $product["created_at"]; // Giữ nguyên created_at từ sản phẩm cũ
-                $result = $this->productModel->update($id, $product_name, $description, $category_id, $price, $created_at, $updated_at, $image);
+                $result = $this->productModel->update($id, $product_name, $description, $category_id, $price, $discount_price, $created_at, $updated_at, $image);
+                // var_dump($result);
                 if ($result === "OK") {
                     $thongBaoTC = "Sửa sản phẩm thành công. Mời bạn tiếp tục tạo mới hoặc quay lại trang danh sách.";
                     // Chuyển hướng hoặc hiển thị thông báo thành công

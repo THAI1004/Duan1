@@ -11,12 +11,12 @@ ob_start(); // Bắt đầu output buffer
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Corano - Jewelry Shop eCommerce Bootstrap 5 Template</title>
+    <title>1 Sneakers - Đẳng cấp giày hiệu</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="./corano/assets/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="./images/imgs/logo.png">
 
     <!-- CSS
 	============================================ -->
@@ -55,8 +55,8 @@ ob_start(); // Bắt đầu output buffer
                     <!-- start logo area -->
                     <div class="col-lg-2">
                         <div class="logo">
-                            <a href="?act=Trangchu">
-                                <img src="./corano/assets/img/logo/logo.png" alt="Brand Logo">
+                            <a class="m-5" href="?act=Trangchu">
+                                <img style="width:100px" src="./images/imgs/logo.png" alt="Brand Logo">
                             </a>
                         </div>
                     </div>

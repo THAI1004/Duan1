@@ -18,9 +18,23 @@ if (!empty($thongBaoTC)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thêm Banner</title>
     <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --success-bg: #d4edda;
+            --success-text: #155724;
+            --danger-bg: #f8d7da;
+            --danger-text: #721c24;
+            --border-color: #ddd;
+            --focus-color: #4CAF50;
+            --background-color: #f4f4f9;
+            --text-color: #333;
+            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+            background-color: var(--background-color);
             margin: 0;
             padding: 0;
         }
@@ -31,12 +45,13 @@ if (!empty($thongBaoTC)) {
             background: #fff;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--box-shadow);
         }
 
         h1 {
             text-align: center;
-            color: #333;
+            color: var(--text-color);
+            margin-bottom: 20px;
         }
 
         .form-group {
@@ -47,21 +62,22 @@ if (!empty($thongBaoTC)) {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
-            color: #555;
+            color: var(--text-color);
         }
 
         .form-group input {
             width: 100%;
             padding: 10px;
             font-size: 16px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             border-radius: 4px;
             box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .form-group input:focus {
             outline: none;
-            border-color: #4CAF50;
+            border-color: var(--focus-color);
             box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
         }
 
@@ -73,15 +89,15 @@ if (!empty($thongBaoTC)) {
         }
 
         .alert-danger {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+            background-color: var(--danger-bg);
+            color: var(--danger-text);
+            border: 1px solid var(--danger-bg);
         }
 
         .alert-success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
+            background-color: var(--success-bg);
+            color: var(--success-text);
+            border: 1px solid var(--success-bg);
         }
 
         .button-group {
@@ -98,24 +114,27 @@ if (!empty($thongBaoTC)) {
             border-radius: 4px;
             text-decoration: none;
             cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         .button-group a {
-            background-color: #6c757d;
+            background-color: var(--secondary-color);
             color: #fff;
         }
 
         .button-group a:hover {
             background-color: #5a6268;
+            transform: translateY(-2px);
         }
 
         .button-group button {
-            background-color: #007bff;
+            background-color: var(--primary-color);
             color: #fff;
         }
 
         .button-group button:hover {
             background-color: #0056b3;
+            transform: translateY(-2px);
         }
     </style>
 </head>
@@ -131,6 +150,26 @@ if (!empty($thongBaoTC)) {
                 <input type="file" id="image_url" name="image_url" accept="image/*" required>
                 <?php if (!empty($thongBaoLoiUpload)): ?>
                     <div class="alert alert-danger"><?= htmlspecialchars($thongBaoLoiUpload) ?></div>
+                <?php endif; ?>
+            </div>
+
+            <!-- Nội dung -->
+            <div class="form-group">
+                <label for="content">Nội dung:</label>
+                <input type="text" id="content" name="content" 
+                    value="<?= isset($_POST['content']) ? htmlspecialchars($_POST['content']) : '' ?>" required>
+                <?php if (!empty($thongBaoLoiContent)): ?>
+                    <div class="alert alert-danger"><?= htmlspecialchars($thongBaoLoiContent) ?></div>
+                <?php endif; ?>
+            </div>
+
+            <!-- Mô tả -->
+            <div class="form-group">
+                <label for="description">Mô tả:</label>
+                <input type="text" id="description" name="description" 
+                    value="<?= isset($_POST['description']) ? htmlspecialchars($_POST['description']) : '' ?>" required>
+                <?php if (!empty($thongBaoLoiDescription)): ?>                
+                    <div class="alert alert-danger"><?= htmlspecialchars($thongBaoLoiDescription) ?></div>
                 <?php endif; ?>
             </div>
 

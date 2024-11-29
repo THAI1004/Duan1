@@ -10,7 +10,7 @@ include "./include/headerClient.php";
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Corano - Jewelry Shop eCommerce Bootstrap 5 Template</title>
+    <title></title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -249,9 +249,7 @@ include "./include/headerClient.php";
                                                                             <span>new</span>
                                                                         </div>
                                                                         <div class="product-label discount">
-                                                                            <span>
-                                                                                <?= $discountPercentage ?>
-                                                                            </span>
+                                                                            <span id="giamGia"><?= floor($discountPercentage) ?>%</span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="button-group">
@@ -364,7 +362,8 @@ include "./include/headerClient.php";
                                                 <span>new</span>
                                             </div>
                                             <div class="product-label discount">
-                                                <span id="giamGia"><?= $discountPercentage ?>% </span>
+                                                <span id="giamGia"><?= floor($discountPercentage) ?>%</span>
+
                                             </div>
                                         </div>
                                         <div class="button-group">
@@ -423,7 +422,7 @@ include "./include/headerClient.php";
                                     </figure>
                                     <div class="blog-content">
                                         <div class="blog-meta">
-                                            <p><?= $row["created_at"] ?> | Corano</p>
+                                            <p><?= $row["created_at"] ?> | 1 Sneakers</p>
                                         </div>
                                         <h5 class="blog-title">
                                             <a href="?act=blog&id=<?= $row["id"] ?>"><?= $row["title"] ?></a>
