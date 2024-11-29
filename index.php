@@ -213,6 +213,7 @@ switch ($act) {
         $client->updateCart();
         break;
     case "updateCartVoucher":
+        $client->includeClient();
         $client->updateCartVoucher();
         break;
     case "listProductClient":
@@ -228,7 +229,6 @@ switch ($act) {
         $client->myAccount();
         break;
     case "changeAccount":
-        $client->includeClient();
         $client->updateAccount();
         break;
     case "productDetail":
@@ -240,8 +240,8 @@ switch ($act) {
         $client->getContactUS();
         break;
     case "addCart":
-        $client->includeClient();
         $client->addCart($id);
+        break;
     case "formForgetPass":
         $client->includeClient();
         $client->formEmail();
@@ -258,8 +258,15 @@ switch ($act) {
         break;
     case "review":
         $client->review();
+        break;
     case "checkout":
         $client->includeClient();
         $client->checkout();
+        break;
+    case "order":
+        $client->order();
+        break;
+    case "Er404":
+        $client->Er404();
         break;
 }

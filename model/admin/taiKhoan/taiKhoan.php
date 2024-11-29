@@ -12,11 +12,17 @@ class AccountModel
     }
     public function getAllTaiKhoan($role)
     {
-        $query = "SELECT users.*, GROUP_CONCAT(vouchers.code SEPARATOR '\n \n ') AS vouchers FROM users JOIN user_vouchers ON users.id = user_vouchers.user_id 
-        JOIN vouchers ON user_vouchers.voucher_id = vouchers.voucher_id GROUP BY users.id";
+        $query = "SELECT users.*, 
+                     GROUP_CONCAT(vouchers.code SEPARATOR '\n \n ') AS vouchers 
+              FROM users 
+              LEFT JOIN user_vouchers ON users.id = user_vouchers.user_id 
+              LEFT JOIN vouchers ON user_vouchers.voucher_id = vouchers.voucher_id 
+              WHERE users.role = '$role' 
+              GROUP BY users.id";
         $results = $this->pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
         return $results;
     }
+
     public function getIdTK($id)
     {
         $query = "SELECT * FROM users WHERE id=$id";

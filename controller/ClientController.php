@@ -38,7 +38,7 @@ class clientController
         $listCateTopOrder = $this->categoryModel->getCategoryTopOrder();
         $listProduct = $this->productModel->getAllProduct();
         $projectInfor = $this->projectInforModel->getAllProjectInfor();
-        
+
         // var_dump($listProduct);
         if (isset($_SESSION['user_id'])) {
             $user = $this->userModel->getIdTK($_SESSION["user_id"]);
@@ -145,7 +145,15 @@ class clientController
                 $_SESSION['user_id'] = $account['id'];  // Lưu ID người dùng
                 $_SESSION['username'] = $account['username'];  // Lưu tên người dùng
                 $_SESSION['login_success'] = "Đăng nhập thành công mời bạn bắt đầu mua hàng!";  // Lưu thông báo thành công
-
+                if (isset($_SESSION["user_id"])) {
+                    $id = $_SESSION["user_id"];
+                    $total = 0;
+                    $voucher = 0;
+                    $date = new DateTime('now', new DateTimeZone('Asia/Ho_Chi_Minh'));
+                    $created_at = $date->format('Y-m-d H:i:s');
+                    $updated_at = $created_at;
+                    $abc = $this->cartModel->insertCart($id, $total, $voucher, $created_at, $updated_at);
+                }
                 // Chuyển hướng sau khi nhấn OK vào alert
                 include "./views/client/login.php";  // Chuyển sang trang redirect
             }
@@ -155,14 +163,14 @@ class clientController
 
     public function viewCart()
     {
-       
+
         // var_dump($listCart);
         if (isset($_SESSION["user_id"])) {
             $vouchers = $this->cartModel->getVoucherByIdUser($_SESSION["user_id"]);
             $voucher = $this->cartModel->getVoucher($_SESSION["user_id"]);
             $listCart = $this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
-
-            // var_dump($voucher);
+            // $cartVariant = $this->productModel->getVariantById($cartItemId);
+            // var_dump($listCart);
         }
         include "./views/client/cart.php";
     }
@@ -184,6 +192,7 @@ class clientController
     }
     public function updateCart()
     {
+
         if (isset($_POST['cart_item_id']) && isset($_POST['quantity'])) {
             $cartItemId = $_POST['cart_item_id'];
             $newQuantity = $_POST['quantity'];
@@ -195,7 +204,10 @@ class clientController
 
                 if ($result) {
                     // Cập nhật thành công, có thể chuyển hướng về trang giỏ hàng
-                    header("Location: ?act=viewCart");
+                    echo "<script>
+                    alert('Cập nhật giỏ hàng thành công!!!');
+                    window.location.href='?act=viewCart';  // Quay lại trang chi tiết sản phẩm
+                  </script>";
                 } else {
                     // Xử lý khi cập nhật thất bại
                     echo "Update failed!";
@@ -207,28 +219,122 @@ class clientController
     }
     public function updateCartVoucher()
     {
+        // Khởi tạo thông báo lỗi
+        $thongBaoLoiName = "";
+        $thongBaoLoiEmail = "";
+        $thongBaoLoiPhone = "";
+        $thongBaoLoiAddress = "";
+        $thongBaoLoiCity = "";
+        $thongBaoLoiHuyen = "";
+        $thongBaoLoiRoad = "";
+        $thongBaoLoiNumber = "";
+
+        if (isset($_SESSION["user_id"])) {
+            $vouchers = $this->cartModel->getVoucherByIdUser($_SESSION["user_id"]);
+            $voucher = $this->cartModel->getVoucher($_SESSION["user_id"]);
+            $listCart = $this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
+
+
+
+            $totalAmount = 0;
+            $subTotal = 0;
+            foreach ($listCart as $product) {
+                $total = $product["unit_price"] * $product["quantity"];
+                $subTotal += $total;
+            }
+        }
+
         // Kiểm tra nếu người dùng đã đăng nhập và voucher được chọn
         if (isset($_POST['voucher']) && $_POST['voucher'] !== '' && isset($_SESSION["user_id"])) {
             $voucherCode = $_POST['voucher']; // Mã voucher người dùng chọn
             $userId = $_SESSION["user_id"];   // Lấy user_id từ session
-
+            $_SESSION['user_data']['shipping'] = $_POST['shipping'] ?? 0;
             // Gọi model để cập nhật voucher trong giỏ hàng
-            $result = $this->cartModel->updateCartVoucher($userId, $voucherCode);
 
-            // Kiểm tra kết quả
-            if ($result) {
-                // Cập nhật thành công, chuyển hướng về trang giỏ hàng
-                header("Location: ?act=viewCart");
-                exit;
-            } else {
-                // Thông báo khi cập nhật thất bại
-                echo "Update failed!";
+            $result = $this->cartModel->updateCartVoucher($userId, $voucherCode);
+            if (isset($_POST["submit_user"])) {
+                // Kiểm tra các trường nhập liệu có bị trống không
+                if (empty(trim($_POST['name']))) {
+                    $thongBaoLoiName = "Trường tên không được để trống!";
+                }
+                if (empty(trim($_POST['email']))) {
+                    $thongBaoLoiEmail = "Trường email không được để trống!";
+                }
+                if (empty(trim($_POST['phone']))) {
+                    $thongBaoLoiPhone = "Trường Số điện thoại không được để trống!";
+                }
+                if (empty(trim($_POST['address']))) {
+                    $thongBaoLoiAddress = "Trường địa chỉ không được để trống!";
+                }
+                if (empty(trim($_POST['city']))) {
+                    $thongBaoLoiCity = "Trường Thành phố không được để trống!";
+                }
+                if (empty(trim($_POST['huyen']))) {
+                    $thongBaoLoiHuyen = "Trường huyện không được để trống!";
+                }
+                if (empty(trim($_POST['road']))) {
+                    $thongBaoLoiRoad = "Trường tên đường không được để trống!";
+                }
+                if (empty(trim($_POST['number']))) {
+                    $thongBaoLoiNumber = "Trường số nhà không được để trống!";
+                }
+                // var_dump($_SESSION["user_data"]);
+                // Nếu tất cả trường hợp không có lỗi
+                if ($thongBaoLoiName == "") {
+                    // Lưu lại thông tin người dùng vào session
+                    $_SESSION['user_data']["name"] = $_POST["name"];
+                } // Lưu lại dữ liệu người dùng
+                if ($thongBaoLoiEmail == "") {
+                    // Lưu lại thông tin người dùng vào session
+                    $_SESSION['user_data']["email"] = $_POST["email"];
+                } // Lưu lại dữ liệu người dùng
+                if ($thongBaoLoiPhone == "") {
+                    // Lưu lại thông tin người dùng vào session
+                    $_SESSION['user_data']["phone"] = $_POST["phone"];
+                } // Lưu lại dữ liệu người dùng
+                if ($thongBaoLoiAddress == "") {
+                    // Lưu lại thông tin người dùng vào session
+                    $_SESSION['user_data']["address"] = $_POST["address"];
+                } // Lưu lại dữ liệu người dùng
+                if ($thongBaoLoiCity == "") {
+                    // Lưu lại thông tin người dùng vào session
+                    $_SESSION['user_data']["city"] = $_POST["city"];
+                } // Lưu lại dữ liệu người dùng
+                if ($thongBaoLoiHuyen == "") {
+                    // Lưu lại thông tin người dùng vào session
+                    $_SESSION['user_data']["huyen"] = $_POST["huyen"];
+                } // Lưu lại dữ liệu người dùng
+                if ($thongBaoLoiRoad == "") {
+                    // Lưu lại thông tin người dùng vào session
+                    $_SESSION['user_data']["road"] = $_POST["road"];
+                } // Lưu lại dữ liệu người dùng
+                if ($thongBaoLoiNumber == "") {
+                    // Lưu lại thông tin người dùng vào session
+                    $_SESSION['user_data']["number"] = $_POST["number"];
+                } // Lưu lại dữ liệu người dùng
+                if (isset($_POST['voucher_id'])) {
+                    $_SESSION["user_data"]["voucher_id"] = $_POST['voucher_id']; // Update voucher ID in session
+                }
+                $_SESSION['user_data']["ordernote"] = $_POST["ordernote"];
+                $_SESSION["user_data"]["voucher_discount"] = $_POST['voucher']; // Lưu voucher discount
+                $voucherDiscount = $_SESSION["user_data"]["voucher_discount"] ?? 0;
+                $shippingCost = $_SESSION['user_data']['shipping'] ?? 0;
+                $totalAmount = $subTotal + $shippingCost - $voucherDiscount;
+                // Kiểm tra kết quả
+                if ($result) {
+                    if (isset($_SERVER['HTTP_REFERER'])) {
+                        header("Location: " . $_SERVER['HTTP_REFERER']);
+                    } else {
+                        header("Location: ?act=viewCart"); // Trường hợp không có trang trước đó
+                    }
+                }
             }
-        } else {
-            // Nếu không có voucher hoặc người dùng chưa đăng nhập
-            echo "Voucher not selected or user not logged in.";
         }
+        // Lưu thông tin người dùng vào session để giữ lại sau khi redirect
+        include "./views/client/checkout.php";
     }
+
+
     public function updateAccount()
     {
         if (isset($_SESSION['user_id'])) {
@@ -417,7 +523,7 @@ class clientController
             $user = $this->userModel->getIdTK($_SESSION["user_id"]);
             $listCart = $this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
             $cart = count($listCart);
-            
+
             $vouchers = $this->cartModel->getVoucherByIdUser($_SESSION["user_id"]);
             $voucher = $this->cartModel->getVoucher($_SESSION["user_id"]);
         }
@@ -513,10 +619,10 @@ class clientController
             $this->wishlistModel->addWishlist($productId);
         } else {
             // Người dùng chưa đăng nhập, thêm sản phẩm vào cookie
-    
+
             // Lấy thông tin chi tiết của sản phẩm từ database dựa trên $productId
             $product = $this->productModel->getProductById($productId);
-    
+
             // Nếu sản phẩm tồn tại
             if ($product) {
                 // Lấy danh sách wishlist từ cookie (nếu có)
@@ -525,7 +631,7 @@ class clientController
                 } else {
                     $wishlist = []; // Nếu chưa có cookie thì tạo mảng mới
                 }
-    
+
                 // Kiểm tra xem sản phẩm đã có trong wishlist chưa dựa vào product_id
                 $found = false;
                 foreach ($wishlist as $item) {
@@ -534,7 +640,7 @@ class clientController
                         break;
                     }
                 }
-    
+
                 // Nếu chưa có sản phẩm này trong wishlist, thêm vào
                 if (!$found) {
                     $wishlist[] = [
@@ -543,13 +649,13 @@ class clientController
                         'product_price' => $product['price'],
                         'product_image' => $product['image'], // Hoặc đường dẫn ảnh
                     ];
-    
+
                     // Cập nhật cookie với giá trị mới (JSON hóa mảng)
                     setcookie('wishlist', json_encode($wishlist), time() + (86400 * 30), "/"); // Lưu cookie trong 30 ngày
                 }
             }
         }
-    
+
         // Quay lại trang trước đó sau khi thêm sản phẩm
         if (isset($_SERVER['HTTP_REFERER'])) {
             header("Location: " . $_SERVER['HTTP_REFERER']);
@@ -559,81 +665,81 @@ class clientController
         }
         exit();
     }
-    
+
 
 
 
     // Phương thức này gọi Model để thêm sản phẩm vào wishlist
     public function listWishlist()
-{
-    if (isset($_SESSION["user_id"])) {
-        // Người dùng đã đăng nhập, lấy wishlist từ cơ sở dữ liệu
-        $wishlist = $this->wishlistModel->getAllWishlist($_SESSION["user_id"]);
-    } else {
-        // Người dùng chưa đăng nhập, lấy wishlist từ cookie
-        if (isset($_COOKIE['wishlist'])) {
-            $wishlist = json_decode($_COOKIE['wishlist'], true); // Chuyển JSON thành mảng PHP
-        } else {
-            $wishlist = []; // Nếu chưa có cookie thì danh sách wishlist rỗng
-        }
-    }
-
-    // Hiển thị wishlist trong view
-    include "./views/client/wishlist.php";
-}
-
-public function deleteWishlist($id)
-{
-    if (!empty($id)) {
-        // Kiểm tra xem người dùng đã đăng nhập hay chưa
+    {
         if (isset($_SESSION["user_id"])) {
-            // Người dùng đã đăng nhập, thực hiện xóa trong cơ sở dữ liệu
-            $datadelete = $this->wishlistModel->deleteWishlist($id);
-            if ($datadelete === "OK") {
-                header("location: ?act=wishlist");
-                exit();
-            } else {
-                echo "Đã có lỗi xảy ra trong quá trình xóa.";
-            }
+            // Người dùng đã đăng nhập, lấy wishlist từ cơ sở dữ liệu
+            $wishlist = $this->wishlistModel->getAllWishlist($_SESSION["user_id"]);
         } else {
-            // Người dùng chưa đăng nhập, xóa trong cookie
-
-            // Lấy danh sách wishlist từ cookie (nếu có)
+            // Người dùng chưa đăng nhập, lấy wishlist từ cookie
             if (isset($_COOKIE['wishlist'])) {
                 $wishlist = json_decode($_COOKIE['wishlist'], true); // Chuyển JSON thành mảng PHP
+            } else {
+                $wishlist = []; // Nếu chưa có cookie thì danh sách wishlist rỗng
+            }
+        }
 
-                // Kiểm tra nếu wishlist không rỗng và có sản phẩm trong đó
-                if (!empty($wishlist)) {
-                    // Tìm và xóa sản phẩm có $id trong mảng wishlist
-                    foreach ($wishlist as $key => $item) {
-                        if ($item['product_id'] == $id) {
-                            unset($wishlist[$key]); // Xóa sản phẩm khỏi mảng
-                            break; // Dừng vòng lặp khi tìm thấy sản phẩm cần xóa
-                        }
-                    }
+        // Hiển thị wishlist trong view
+        include "./views/client/wishlist.php";
+    }
 
-                    // Nếu có sản phẩm trong wishlist, cập nhật lại cookie
-                    if (!empty($wishlist)) {
-                        setcookie('wishlist', json_encode(array_values($wishlist)), time() + (86400 * 30), "/"); // Cập nhật lại cookie
-                    } else {
-                        // Nếu wishlist trống sau khi xóa, xóa cookie
-                        setcookie('wishlist', '', time() - 3600, "/");
-                    }
-
-                    // Quay lại trang wishlist
+    public function deleteWishlist($id)
+    {
+        if (!empty($id)) {
+            // Kiểm tra xem người dùng đã đăng nhập hay chưa
+            if (isset($_SESSION["user_id"])) {
+                // Người dùng đã đăng nhập, thực hiện xóa trong cơ sở dữ liệu
+                $datadelete = $this->wishlistModel->deleteWishlist($id);
+                if ($datadelete === "OK") {
                     header("location: ?act=wishlist");
                     exit();
                 } else {
-                    echo "Danh sách yêu thích trống.";
+                    echo "Đã có lỗi xảy ra trong quá trình xóa.";
                 }
             } else {
-                echo "Không có dữ liệu wishlist trong cookie.";
+                // Người dùng chưa đăng nhập, xóa trong cookie
+
+                // Lấy danh sách wishlist từ cookie (nếu có)
+                if (isset($_COOKIE['wishlist'])) {
+                    $wishlist = json_decode($_COOKIE['wishlist'], true); // Chuyển JSON thành mảng PHP
+
+                    // Kiểm tra nếu wishlist không rỗng và có sản phẩm trong đó
+                    if (!empty($wishlist)) {
+                        // Tìm và xóa sản phẩm có $id trong mảng wishlist
+                        foreach ($wishlist as $key => $item) {
+                            if ($item['product_id'] == $id) {
+                                unset($wishlist[$key]); // Xóa sản phẩm khỏi mảng
+                                break; // Dừng vòng lặp khi tìm thấy sản phẩm cần xóa
+                            }
+                        }
+
+                        // Nếu có sản phẩm trong wishlist, cập nhật lại cookie
+                        if (!empty($wishlist)) {
+                            setcookie('wishlist', json_encode(array_values($wishlist)), time() + (86400 * 30), "/"); // Cập nhật lại cookie
+                        } else {
+                            // Nếu wishlist trống sau khi xóa, xóa cookie
+                            setcookie('wishlist', '', time() - 3600, "/");
+                        }
+
+                        // Quay lại trang wishlist
+                        header("location: ?act=wishlist");
+                        exit();
+                    } else {
+                        echo "Danh sách yêu thích trống.";
+                    }
+                } else {
+                    echo "Không có dữ liệu wishlist trong cookie.";
+                }
             }
+        } else {
+            echo "Không có thông tin id, mời bạn kiểm tra lại.";
         }
-    } else {
-        echo "Không có thông tin id, mời bạn kiểm tra lại.";
     }
-}
 
     public function myAccount()
     {
@@ -657,6 +763,9 @@ public function deleteWishlist($id)
         $listProducVariant = $this->productModel->getAllProductVariant($id);
         $getAllProductImagePhu = $this->productModel->getAllProductVariant($id);
         $getAllColor = $this->productModel->getAllColor();
+        $getAllColorById = $this->productModel->getAllColorByid($id);
+        $getAllSizeById = $this->productModel->getAllSizeByid($id);
+        // var_dump($getAllSizeById);
         $getAllSize = $this->productModel->getAllSize();
         $listProduct = $this->productModel->getAllProduct();
         $productLimit20 = $this->productModel->getProductLimit20();
@@ -664,9 +773,9 @@ public function deleteWishlist($id)
         $countReview = count($listReview);
         $totalRating = 0;  // Biến lưu tổng điểm rating
         $countReview = count($listReview);  // Đếm số lượng review
-        if(isset($_SESSION["user_id"])){
-            $user_id=$_SESSION["user_id"];
-        $cartUser=$this->cartModel->getCartByIdUser($user_id);
+        if (isset($_SESSION["user_id"])) {
+            $user_id = $_SESSION["user_id"];
+            $cartUser = $this->cartModel->getCartByIdUser($user_id);
         }
         // var_dump($cartUser);
         // Duyệt qua tất cả các review và cộng dồn rating
@@ -679,14 +788,15 @@ public function deleteWishlist($id)
         // var_dump($productLimit20);
         include "./views/client/product_detail.php";
     }
-    public function addCart($id) {
+    public function addCart($id)
+    {
         if (isset($_POST["submit"])) {
             // Lấy dữ liệu từ form
             $product_id = $id;
             $quantity = $_POST["quantity"];
             $size_id = $_POST["size_id"];
             $color_id = $_POST["color_id"];
-    
+
             // Kiểm tra số lượng sản phẩm hợp lệ
             if ($quantity < 1) {
                 echo "<script>
@@ -695,22 +805,22 @@ public function deleteWishlist($id)
                       </script>";
                 return; // Kết thúc hàm nếu số lượng không hợp lệ
             }
-    
+
             // Kiểm tra biến thể sản phẩm có tồn tại
             $data = $this->productModel->checkVariant($product_id, $size_id, $color_id, $quantity);
-    
+
             // Nếu người dùng đã đăng nhập
             if (isset($_SESSION["user_id"])) {
                 // Lấy danh sách sản phẩm trong giỏ hàng của người dùng
                 $listCart = $this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
-                
+
                 // Nếu biến thể sản phẩm tồn tại
                 if ($data) {
                     $variant_id = $data["id"];
                     $price = $_POST["price"];
                     $cart_id = $_POST["cart_id"];
                     $existsInCart = false;
-    
+
                     // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
                     foreach ($listCart as $cartItem) {
                         if ($cartItem['variant_id'] == $variant_id) {
@@ -720,15 +830,15 @@ public function deleteWishlist($id)
                             break;
                         }
                     }
-    
+
                     // Nếu sản phẩm đã có trong giỏ hàng thì cập nhật số lượng
                     if ($existsInCart) {
                         $result = $this->cartModel->updateCart($idCart, $quantityUpdate);
-                        
+
                         if ($result === "OK") {
                             echo "<script>
                                     alert('Giỏ hàng đã được cập nhật!');
-                                    window.history.back();  // Quay lại trang trước
+                                    window.location.href='?act=productDetail&id=$id';  // Quay lại trang trước
                                   </script>";
                         } else {
                             echo "<script>alert('Có lỗi xảy ra trong quá trình cập nhật giỏ hàng.');</script>";
@@ -736,11 +846,11 @@ public function deleteWishlist($id)
                     } else {
                         // Nếu sản phẩm chưa có trong giỏ hàng thì thêm mới
                         $result = $this->cartModel->addCart($cart_id, $variant_id, $quantity, $price);
-    
+
                         if ($result === "OK") {
                             echo "<script>
                                     alert('Sản phẩm đã được thêm vào giỏ hàng thành công!');
-                                    window.history.back();  // Quay lại trang trước
+                                    window.location.href='?act=productDetail&id=$id';
                                   </script>";
                         } else {
                             echo "<script>alert('Có lỗi xảy ra trong quá trình thêm sản phẩm vào giỏ hàng.');</script>";
@@ -750,7 +860,7 @@ public function deleteWishlist($id)
                     // Nếu không có biến thể sản phẩm hoặc không đủ số lượng
                     echo "<script>
                             alert('Sản phẩm này đã hết hàng hoặc không đủ số lượng. Vui lòng chọn sản phẩm khác.');
-                            window.history.back();  // Quay lại trang trước
+                            window.location.href='?act=productDetail&id=$id';  // Quay lại trang trước
                           </script>";
                 }
             } else {
@@ -762,8 +872,8 @@ public function deleteWishlist($id)
             }
         }
     }
-    
-    
+
+
 
     public function formEmail()
     {
@@ -832,7 +942,7 @@ public function deleteWishlist($id)
         if (isset($_POST['email'], $_POST['temp_password'], $_POST['new_password'])) {
             $email = $_POST['email'];
             $tempPassword = $_POST['temp_password'];
-            $newPassword = $_POST['new_password'];
+            $newPassword = $_POST['new_passwordw'];
             $user = $this->userModel->verifyTempPassword($email, $tempPassword);
             if ($user) {
                 // Cập nhật mật khẩu mới
@@ -850,16 +960,17 @@ public function deleteWishlist($id)
             }
         }
     }
-    public function review() {
+    public function review()
+    {
         if (isset($_SESSION['user_id'])) {
             $userId = $_SESSION['user_id'];
             $productId = $_POST['product_id'];
             $reviewText = $_POST['review_text'];
             $rating = $_POST['rating'];
-    
+
             // Lưu review vào cơ sở dữ liệu
             $this->reviewModel->addReview($userId, $productId, $rating, $reviewText);
-    
+
             // Chuyển hướng lại trang chi tiết sản phẩm
             header('Location: ?act=productDetail&id=' . $productId);
         } else {
@@ -867,7 +978,98 @@ public function deleteWishlist($id)
             header('Location: login.php');
         }
     }
-    public function checkout(){
+
+    public function checkout()
+    {
+
+        if (isset($_SESSION["user_id"])) {
+            $vouchers = $this->cartModel->getVoucherByIdUser($_SESSION["user_id"]);
+            $voucher = $this->cartModel->getVoucher($_SESSION["user_id"]);
+            $listCart = $this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
+
+
+
+            // var_dump($_SESSION['user_data']);
+
+            if (isset($_POST['submit_shipping'])) {
+                $_SESSION['user_data']['shipping'] = $_POST['shipping'] ?? 0;
+            }
+            $totalAmount = 0;
+            $subTotal = 0;
+            foreach ($listCart as $product) {
+                $total = $product["unit_price"] * $product["quantity"];
+                $subTotal += $total;
+            }
+            $voucherDiscount = $_SESSION["user_data"]["voucher_discount"] ?? 0;
+            $shippingCost = $_SESSION['user_data']['shipping'] ?? 0;
+            $totalAmount = $subTotal + $shippingCost - $voucherDiscount;
+        }
+
         include "./views/client/checkout.php";
+    }
+    public function order()
+    {
+        if (isset($_POST["submitOrder"])) {
+            $paymentMethod = $_POST['paymentmethod'];
+
+            if ($paymentMethod === 'cash') {
+                $user_id = $_SESSION["user_id"];
+                $guest_name = $_SESSION["user_data"]["name"];
+                $guest_email = $_SESSION["user_data"]["email"];
+                $guest_phone = $_SESSION["user_data"]["phone"];
+                $shipping_address = $_SESSION["user_data"]["shipping"];
+                $total_price = $_POST["total"];
+                $voucher_id  = $_SESSION["user_data"]["voucher_id"];
+                $thanh_pho = $_SESSION["user_data"]["city"];
+                $huyen = $_SESSION["user_data"]["huyen"];
+                $ten_duong = $_SESSION["user_data"]["road"];
+                $so_nha = $_SESSION["user_data"]["number"];
+                $ordernote = $_SESSION["user_data"]["ordernote"];
+                $date = new DateTime('now', new DateTimeZone('Asia/Ho_Chi_Minh'));
+                $created_at = $date->format('Y-m-d H:i:s');
+                $updated_at = $created_at;
+
+                // Insert order
+                $order_id = $this->oderModel->insertOrder($user_id, $guest_name, $guest_email, $guest_phone, $shipping_address, $total_price, $created_at, $updated_at, $voucher_id, $thanh_pho, $huyen, $ten_duong, $so_nha, $ordernote);
+
+                // Get cart items
+                $listCart = $this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
+                $cart = $this->cartModel->getCartBy($_SESSION["user_id"]);
+
+                if ($order_id) {
+                    foreach ($listCart as $row) {
+                        // Insert order item
+                        $addItemOrder = $this->oderModel->insertOrderItem($order_id, $row['variant_id'], $row["quantity"], $row["unit_price"]);
+
+                        if ($addItemOrder === "OK") {
+                            // Xóa các sản phẩm trong giỏ hàng, nhưng giữ lại giỏ hàng
+                            $this->cartModel->deleteCartItemsByCartId($cart["id"]);
+                        } else {
+                            echo "<script>alert('Đặt hàng thất bại vui lòng kiểm tra lại!');
+                            window.history.back();
+                            </script>";
+                            return;  // Dừng hàm nếu việc thêm đơn hàng thất bại
+                        }
+                    }
+
+                    // Xóa thông tin người dùng sau khi đặt hàng thành công
+                    unset($_SESSION['user_data']);
+
+                    echo "<script>alert('Đặt hàng thành công! Chúng tôi sẽ giao hàng đến bạn trong thời gian sớm nhất.');
+                window.location.href='?act=homeClient';
+                </script>";
+                }
+            } elseif ($paymentMethod === 'bank') {
+                // Thanh toán qua Vnpay
+                header('Location: vnpay_payment_page.php'); // Điều hướng đến trang thanh toán online (thay URL bằng trang thanh toán thật)
+                exit();
+            }
+        }
+    }
+
+
+    public function Er404()
+    {
+        include "./views/404.php";
     }
 }

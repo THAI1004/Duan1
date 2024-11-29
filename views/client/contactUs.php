@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="./corano/assets/css/plugins/jqueryui.min.css">
     <!-- main style css -->
     <link rel="stylesheet" href="./corano/assets/css/style.css">
+
 </head>
 
 <body>
@@ -54,6 +55,7 @@
                                 </nav>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

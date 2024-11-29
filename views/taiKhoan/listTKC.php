@@ -123,7 +123,7 @@ include './include/header.php';
 <body>
     <div class="container">
         <h1>Danh sách khách hàng</h1>
-        <form action="" method="post">
+        <form action="?act=listTKC" method="post">
             <table class="table">
                 <thead>
                     <tr>
