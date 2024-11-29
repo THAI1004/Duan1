@@ -55,6 +55,7 @@
                                 </nav>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -62,25 +63,24 @@
             <!-- contact area start -->
             <div class="contact-area section-padding mt-5 pt-0">
                 <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="contact-info">
+                                <h4 class="contact-title">Liên hệ với chúng tôi :</h4>
+                                <p>Chúng tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn. Nếu bạn có bất kỳ câu hỏi, góp ý, hoặc yêu cầu nào, đừng ngần ngại liên hệ với chúng tôi. Hãy sử dụng biểu mẫu bên dưới, gọi điện hoặc gửi email – đội ngũ của chúng tôi sẽ phản hồi bạn trong thời gian sớm nhất.
 
-
-                    <div class="col-lg-6">
-                        <div class="contact-info">
-                            <h4 class="contact-title">Contact Us</h4>
-                            <p>Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum
-                                est notare quam littera gothica, quam nunc putamus parum claram anteposuerit litterarum
-                                formas human.</p>
-                            <ul>
-                                <li><i class="fa fa-fax"></i> Address : No 40 Baria Sreet 133/2 NewYork City</li>
-                                <li><i class="fa fa-phone"></i> E-mail: info@yourdomain.com</li>
-                                <li><i class="fa fa-envelope-o"></i> +88013245657</li>
-                            </ul>
-                            <div class="working-time">
-                                <h6>Working Hours</h6>
-                                <p><span>Monday – Saturday:</span>08AM – 22PM</p>
+                                    Hãy  kết nối với chúng tôi, cùng xây dựng những trải nghiệm tốt hơn !</p>
+                                <ul>
+                                    <li><i class="fa fa-fax"></i> Địa chỉ : Tòa nhà FPT Polytechnic, Phố Trịnh Văn Bô, Nam Từ Liêm, Hà Nội.</li>
+                                    <li><i class="fa fa-phone"></i> Điện thoại: (024) 7300 1955</li>
+                                    <li><i class="fa fa-envelope-o"></i> E-mail: caodang@fpt.edu.vn</li>
+                                </ul>
+                                <div class="working-time">
+                                    <h6>Thời gian làm việc:</h6>
+                                    <p><span>Thứ 2 – Thứ 7:</span>08AM – 22PM</p>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

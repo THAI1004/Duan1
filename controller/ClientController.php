@@ -75,7 +75,7 @@ class clientController
         $listBlogs = $this->blogModel->getAllBlog();
         include "./views/client/homeBlog.php";
     }
-    public function contactUS()
+    public function getContactUs()
     {
 
         include "./views/client/contactUS.php";
