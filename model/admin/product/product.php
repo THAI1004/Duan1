@@ -163,16 +163,7 @@ class productModel
             echo "<hr>";
         }
     }
-    public function imageAllVariant($id)
-    {
-        $sql = "SELECT image_variant
-        FROM product_variants
-        WHERE product_id = $id
-        GROUP BY image_variant;
-        ";
-        $data = $this->pdo->query($sql)->fetchAll();
-        return $data;
-    }
+
     public function getAllProductVariant($id)
     {
         // Tính toán giá trị OFFSET
