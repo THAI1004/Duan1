@@ -160,7 +160,7 @@
                                             </a>
                                             <div class="product-badge">
                                                 <div class="product-label new"><span>new</span></div>
-                                                <div class="product-label discount"><span><?= $discountPercentage ?> %</span></div>
+                                                <div class="product-label discount"><span id="giamGia"><?= floor($discountPercentage) ?>%</span></div>
                                             </div>
                                             <div class="button-group">
                                                 <a href="?act=addWishlist&id=<?= $product["id"] ?>" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
@@ -189,7 +189,7 @@
                                                     <span>new</span>
                                                 </div>
                                                 <div class="product-label discount">
-                                                    <span><?= $discountPercentage ?> %</span>
+                                                <span id="giamGia"><?= floor($discountPercentage) ?>%</span>
                                                 </div>
                                             </div>
                                             <div class="button-group">
