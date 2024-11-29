@@ -133,7 +133,8 @@ class productModel
     public function update($id, $product_name, $description, $category_id, $price, $created_at, $updated_at, $image)
     {
         try {
-            $sql = "UPDATE products 
+            if (isset($image)) {
+                $sql = "UPDATE products 
         SET product_name = '$product_name', 
             description = '$description', 
             category_id = $category_id, 
@@ -142,6 +143,16 @@ class productModel
             updated_at = '$updated_at',
             image='$image'
         WHERE id = $id";
+            } else {
+                $sql = "UPDATE products 
+                SET product_name = '$product_name', 
+                    description = '$description', 
+                    category_id = $category_id, 
+                    price = $price, 
+                    created_at = '$created_at', 
+                    updated_at = '$updated_at'
+                WHERE id = $id";
+            }
             // Thực thi câu lệnh SQL
             $data = $this->pdo->exec($sql);
             if ($data === 1 || $data === 0) {
@@ -151,6 +162,16 @@ class productModel
             echo "Lỗi hàm insert :" . $er->getMessage();
             echo "<hr>";
         }
+    }
+    public function imageAllVariant($id)
+    {
+        $sql = "SELECT image_variant
+        FROM product_variants
+        WHERE product_id = $id
+        GROUP BY image_variant;
+        ";
+        $data = $this->pdo->query($sql)->fetchAll();
+        return $data;
     }
     public function getAllProductVariant($id)
     {

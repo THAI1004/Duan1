@@ -75,7 +75,7 @@ class clientController
         $listBlogs = $this->blogModel->getAllBlog();
         include "./views/client/homeBlog.php";
     }
-    public function contactUS()
+    public function getContactUs()
     {
 
         include "./views/client/contactUS.php";
@@ -768,6 +768,7 @@ class clientController
         $getAllSizeById = $this->productModel->getAllSizeByid($id);
         $imageAll = $this->productModel->imageAllVariant($id);
         // var_dump($imageAll);
+        // var_dump($getAllSizeById);
         $getAllSize = $this->productModel->getAllSize();
         $listProduct = $this->productModel->getAllProduct();
         $productLimit20 = $this->productModel->getProductLimit20();
