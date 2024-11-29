@@ -165,7 +165,7 @@ class productController
 
         // Lấy sản phẩm hiện tại
         $product = $this->productModel->getProductById($id);
-        $image = $product['image']; 
+        $image = $product['image'];
 
         if (isset($_POST['submit'])) {
             // Lấy giá trị từ form
@@ -198,8 +198,8 @@ class productController
                 } else {
                     $thongBaoLoiUpload = "upload thất bại";
                 }
-            }else{
-                $thamSo1 = $thamSo2= null;
+            } else {
+                $thamSo1 = $thamSo2 = null;
             }
             // Nếu không có lỗi, thực hiện cập nhật sản phẩm
             if (empty($thongBaoLoiProductName) && empty($thongBaoLoiUpload) && empty($thongBaoLoiDescription) && empty($thongBaoLoiCategory) && empty($thongBaoLoiPrice)) {
@@ -209,6 +209,7 @@ class productController
 
                 $created_at = $product["created_at"]; // Giữ nguyên created_at từ sản phẩm cũ
                 $result = $this->productModel->update($id, $product_name, $description, $category_id, $price, $created_at, $updated_at, $image);
+                // var_dump($result);
                 if ($result === "OK") {
                     $thongBaoTC = "Sửa sản phẩm thành công. Mời bạn tiếp tục tạo mới hoặc quay lại trang danh sách.";
                     // Chuyển hướng hoặc hiển thị thông báo thành công

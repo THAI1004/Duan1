@@ -73,6 +73,16 @@ class productModel
         $data = $this->pdo->query($sql)->fetchAll();
         return $data;
     }
+    public function imageAllVariant($id)
+    {
+        $sql = "SELECT image_variant
+        FROM product_variants
+        WHERE product_id = $id
+        GROUP BY image_variant;
+        ";
+        $data = $this->pdo->query($sql)->fetchAll();
+        return $data;
+    }
     public function getColorById($id)
     {
         $sql = "SELECT * FROM `product_colors` where id=$id";
@@ -153,16 +163,7 @@ class productModel
             echo "<hr>";
         }
     }
-    public function imageAllVariant($id)
-    {
-        $sql = "SELECT image_variant
-        FROM product_variants
-        WHERE product_id = $id
-        GROUP BY image_variant;
-        ";
-        $data = $this->pdo->query($sql)->fetchAll();
-        return $data;
-    }
+
     public function getAllProductVariant($id)
     {
         // Tính toán giá trị OFFSET
@@ -189,6 +190,10 @@ class productModel
         product_sizes  ON product_variants.size_id = product_sizes.id
     WHERE 
         product_variants.product_id = :product_id";
+
+
+
+
         // Chuẩn bị câu lệnh truy vấn
         $stmt = $this->pdo->prepare($sql);
 

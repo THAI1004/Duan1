@@ -266,6 +266,20 @@ switch ($act) {
     case "order":
         $client->order();
         break;
+    case "chitietOrder":
+        $client->includeClient();
+        $client->chitietOrder($id);
+        break;
+    case "huyOrder":
+
+        $client->huyOrder($id);
+        break;
+    case "deleteOrder":
+        $client->deleteOrder($id);
+        break;
+    case "buyNow":
+        $client->muangay($id);
+        break;
     case "Er404":
         $client->Er404();
         break;

@@ -111,17 +111,19 @@
                                             <span class="price-regular"><?= $Product["discount_price"] ?></span>
                                             <span class="price-old"><del><?= $Product["price"] ?></del></span>
                                         </div>
-                                        <form action="?act=addCart&id=<?= $Product["id"] ?>" method="post">
+                                        <form id="productForm" action="?act=addCart&id=<?= $Product["id"] ?>" method="post">
                                             <div class="quantity-cart-box d-flex align-items-center">
                                                 <h6 class="option-title">Số lượng:</h6>
                                                 <div class="quantity">
-                                                    <input style="width:50px" min=1 name='quantity' type="number">
+                                                    <input style="width:50px" min="1" name="quantity" type="number">
                                                     <input type="hidden" value="<?= $Product["discount_price"] ?>" name="price">
                                                     <input type="hidden" value="<?= $cartUser["id"] ?>" name="cart_id">
-
                                                 </div>
                                                 <div class="action_link">
-                                                    <button name="submit" type="submit" class="btn btn-cart2">Add to cart</button>
+                                                    <!-- Nút Add to Cart -->
+                                                    <button id="addToCartBtn" name="submit" type="submit" class="btn btn-cart2">Thêm vào giỏ hàng</button>
+                                                    <!-- Nút Mua Ngay -->
+                                                    <button id="buyNowBtn" name="muangay" type="submit" class="btn btn-cart2">Mua ngay</button>
                                                 </div>
                                             </div>
                                             <div class="pro-size">
@@ -139,9 +141,10 @@
                                                         <option value="<?= $row['id'] ?>"><?= $row['color_name'] ?></option>
                                                     <?php } ?>
                                                 </select>
-
                                             </div>
                                         </form>
+
+
                                         <div class="useful-links">
                                             <a href="?act=addWishlist&id=<?= $Product["id"] ?>" data-bs-toggle="tooltip" title="Wishlist"><i
                                                     class="pe-7s-like"></i>wishlist</a>
@@ -404,6 +407,27 @@
                 var newImage = thumbnail.getAttribute('src'); // Lấy URL ảnh từ thumbnail
                 document.querySelector('.product-large-slider .pro-large-img img').setAttribute('src', newImage); // Đổi ảnh lớn
             });
+        });
+
+        // Lấy form và các nút
+        const form = document.getElementById('productForm');
+        const addToCartBtn = document.getElementById('addToCartBtn');
+        const buyNowBtn = document.getElementById('buyNowBtn');
+
+        // Sự kiện khi bấm "Add to Cart"
+        addToCartBtn.addEventListener('click', function() {
+            // Đặt action là thêm vào giỏ hàng
+            form.action = "?act=addCart&id=<?= $Product['id'] ?>";
+            // Gửi form
+            form.submit();
+        });
+
+        // Sự kiện khi bấm "Mua Ngay"
+        buyNowBtn.addEventListener('click', function() {
+            // Đặt action là mua ngay
+            form.action = "?act=buyNow&id=<?= $Product['id'] ?>";
+            // Gửi form
+            form.submit();
         });
     </script>
 </body>

@@ -745,6 +745,8 @@ class clientController
     {
         if (isset($_SESSION['user_id'])) {
             $user = $this->userModel->getIdTK($_SESSION["user_id"]);
+            $listOrder = $this->oderModel->getOrderByIdUser($_SESSION['user_id']);
+            // var_dump($listOrder);
         }
         if (isset($_SESSION['user_id'])) {
             $orders = $this->oderModel->getOrderUser($_SESSION['user_id']);
@@ -761,11 +763,11 @@ class clientController
         }
         $Product = $this->productModel->getProductById($id);
         $listProducVariant = $this->productModel->getAllProductVariant($id);
-        $getAllProductImagePhu = $this->productModel->getAllProductVariant($id);
         $getAllColor = $this->productModel->getAllColor();
         $getAllColorById = $this->productModel->getAllColorByid($id);
         $getAllSizeById = $this->productModel->getAllSizeByid($id);
         $imageAll = $this->productModel->imageAllVariant($id);
+        // var_dump($imageAll);
         // var_dump($getAllSizeById);
         $getAllSize = $this->productModel->getAllSize();
         $listProduct = $this->productModel->getAllProduct();
@@ -789,6 +791,7 @@ class clientController
         // var_dump($productLimit20);
         include "./views/client/product_detail.php";
     }
+
     public function addCart($id)
     {
         if (isset($_POST["submit"])) {
@@ -873,7 +876,90 @@ class clientController
             }
         }
     }
+    public function muangay($id)
+    {
+        if (isset($_POST["muangay"])) {
+            // Lấy dữ liệu từ form
+            $product_id = $id;
+            $quantity = $_POST["quantity"];
+            $size_id = $_POST["size_id"];
+            $color_id = $_POST["color_id"];
 
+            // Kiểm tra số lượng sản phẩm hợp lệ
+            if ($quantity < 1) {
+                echo "<script>
+                        alert('Số lượng sản phẩm không hợp lệ!');
+                        window.location.href='?act=productDetail&id=$id';  // Quay lại trang chi tiết sản phẩm
+                      </script>";
+                return; // Kết thúc hàm nếu số lượng không hợp lệ
+            }
+
+            // Kiểm tra biến thể sản phẩm có tồn tại
+            $data = $this->productModel->checkVariant($product_id, $size_id, $color_id, $quantity);
+
+            // Nếu người dùng đã đăng nhập
+            if (isset($_SESSION["user_id"])) {
+                // Lấy danh sách sản phẩm trong giỏ hàng của người dùng
+                $listCart = $this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
+
+                // Nếu biến thể sản phẩm tồn tại
+                if ($data) {
+                    $variant_id = $data["id"];
+                    $price = $_POST["price"];
+                    $cart_id = $_POST["cart_id"];
+                    $existsInCart = false;
+
+                    // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+                    foreach ($listCart as $cartItem) {
+                        if ($cartItem['variant_id'] == $variant_id) {
+                            $quantityUpdate = $cartItem['quantity'] + $quantity;
+                            $idCart = $cartItem["id"];
+                            $existsInCart = true;
+                            break;
+                        }
+                    }
+
+                    // Nếu sản phẩm đã có trong giỏ hàng thì cập nhật số lượng
+                    if ($existsInCart) {
+                        $result = $this->cartModel->updateCart($idCart, $quantityUpdate);
+
+                        if ($result === "OK") {
+                            echo "<script>
+                                    alert('Sản phẩm đã được thêm vào giỏ hàng thành công. Bắt đầu thanh toán ngay!');
+                                    window.location.href='?act=checkout';
+                                  </script>";
+                        } else {
+                            echo "<script>alert('Có lỗi xảy ra trong quá trình cập nhật giỏ hàng.');</script>";
+                        }
+                    } else {
+                        // Nếu sản phẩm chưa có trong giỏ hàng thì thêm mới
+                        $result = $this->cartModel->addCart($cart_id, $variant_id, $quantity, $price);
+
+                        if ($result === "OK") {
+                            echo "<script>
+                                    alert('Sản phẩm đã được thêm vào giỏ hàng thành công. Bắt đầu thanh toán ngay!');
+                                    window.location.href='?act=checkout';
+                                  </script>";
+                        } else {
+                            echo "<script>alert('Có lỗi xảy ra trong quá trình thêm sản phẩm vào giỏ hàng.');</script>";
+                        }
+                    }
+                } else {
+                    // Nếu không có biến thể sản phẩm hoặc không đủ số lượng
+                    echo "<script>
+                            alert('Sản phẩm này đã hết hàng hoặc không đủ số lượng. Vui lòng chọn sản phẩm khác.');
+                            window.location.href='?act=productDetail&id=$id';  // Quay lại trang trước
+                          </script>";
+                }
+            } else {
+                // Nếu người dùng chưa đăng nhập
+                echo "<script>
+                        alert('Bạn cần đăng nhập trước khi thêm vào giỏ hàng.');
+                        window.location.href='?act=formLogin';  // Chuyển hướng đến trang đăng nhập
+                      </script>";
+            }
+        }
+    }
 
 
     public function formEmail()
@@ -1057,7 +1143,7 @@ class clientController
                     unset($_SESSION['user_data']);
 
                     echo "<script>alert('Đặt hàng thành công! Chúng tôi sẽ giao hàng đến bạn trong thời gian sớm nhất.');
-                window.location.href='?act=homeClient';
+                window.location.href='?act=chitietOrder&id=$order_id';
                 </script>";
                 }
             } elseif ($paymentMethod === 'bank') {
@@ -1072,5 +1158,67 @@ class clientController
     public function Er404()
     {
         include "./views/404.php";
+    }
+    public function chitietOrder($id)
+    {
+        $listOrder = $this->oderModel->getOrder($id);
+        $listItem = $this->oderModel->getAllItem($id);
+        // var_dump($listItem);
+        include "./views/client/order.php";
+    }
+    public function huyOrder($id)
+    {
+        // Lấy thông tin đơn hàng để hiển thị cho người dùng xác nhận
+        $listItemOrder = $this->oderModel->getAllOderById($id);
+
+        // Hiển thị hộp thoại xác nhận trong JavaScript
+        echo "<script>
+            var result = confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?');
+            if (result) {
+                // Nếu người dùng đồng ý hủy, gửi yêu cầu tới PHP để thực hiện hành động
+                window.location.href = '?act=deleteOrder&id=" . $id . "';
+            } else {
+                // Nếu người dùng không đồng ý hủy, quay lại trang chi tiết đơn hàng
+                window.location.href = '?act=chitietOrder&id=" . $id . "';
+            }
+        </script>";
+
+        // Dừng xử lý tiếp sau khi đã gửi JavaScript
+        exit();
+    }
+
+    public function deleteOrder($id)
+    {
+        // Lấy giỏ hàng của người dùng
+        $cart = $this->cartModel->getCartBy($_SESSION["user_id"]);
+        $idCart = $cart["id"];
+
+        // Lấy các sản phẩm trong đơn hàng
+        $listItemOrder = $this->oderModel->getAllOderById($id);
+
+        // Chuyển các sản phẩm trong đơn hàng vào giỏ hàng
+        foreach ($listItemOrder as $Item) {
+            $variant_id = $Item["variant_id"];
+            $quantity = $Item["quantity"];
+            $price = $Item["unit_price"];
+
+            // Thêm sản phẩm vào giỏ hàng
+            $this->cartModel->addCart($idCart, $variant_id, $quantity, $price);
+        }
+
+        // Xóa đơn hàng
+        $dataDelete = $this->oderModel->deleteOrder($id);
+
+        if ($dataDelete == "OK") {
+            echo "<script>
+                alert('Hủy đơn hàng thành công!!!');
+                window.location.href = '?act=viewCart';
+            </script>";
+        } else {
+            echo "<script>
+                alert('Lỗi khi hủy đơn hàng, vui lòng thử lại!');
+                window.location.href = '?act=chitietOrder&id=" . $id . "';
+            </script>";
+        }
     }
 }
