@@ -79,6 +79,12 @@ include "./include/headerClient.php";
             font-size: 18px;
             color: white;
         }
+
+        .banner-statistics img {
+            width: 100%;
+            max-width: 300px;
+            height: 200px;
+        }
     </style>
 </head>
 
@@ -168,7 +174,7 @@ include "./include/headerClient.php";
                         </div>
                     </div>
                 </div>
-            </div>/-strong/-heart:>:o:-((:-h
+            </div>
         </div> <!-- service policy area end -->
 
         <!-- banner statistics area start -->
@@ -212,9 +218,7 @@ include "./include/headerClient.php";
                                     } ?>
                                 </ul>
                             </div>
-                            <!-- product tab menu end -->
-
-                            <!-- product tab content start -->
+                            <!-- product tab menu end --> <!-- product tab content start -->
                             <div class="tab-content">
                                 <?php
                                 $i = 1;
@@ -279,8 +283,7 @@ include "./include/headerClient.php";
                                                 // Nếu không tìm thấy sản phẩm nào cho danh mục, thông báo
                                                 if (!$found) {
                                                     echo "<p>Không có sản phẩm nào trong danh mục này.</p>";
-                                                }
-                                                ?>
+                                                } ?>
                                             </div>
                                         </div>
                                 <?php $i++;

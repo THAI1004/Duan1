@@ -203,7 +203,7 @@ include './include/header.php';
                                     <br>
                                     <div class="single-zoom-thumb">
                                         <ul class="s-tab-zoom single-product-active owl-carousel" id="gallery_01">
-                                            <?php foreach ($allProductVariants as $row) { ?>
+                                            <?php foreach ($imageAll as $row) { ?>
                                                 <li>
                                                     <a href="#" class="elevatezoom-gallery active" data-image="<?= $row['image_variant'] ?>" data-zoom-image="<?= $row['image_variant'] ?>">
                                                         <img src="<?= $row['image_variant'] ?>" alt="zo-th-1" />

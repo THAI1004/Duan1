@@ -165,6 +165,7 @@ class productController
 
         // Lấy sản phẩm hiện tại
         $product = $this->productModel->getProductById($id);
+        $image = $product['image']; 
 
         if (isset($_POST['submit'])) {
             // Lấy giá trị từ form
@@ -191,11 +192,14 @@ class productController
             }
             $thamSo1 = $_FILES["image"]["tmp_name"];
             $thamSo2 = "./images/imgs" . $_FILES["image"]["name"]; //đường dẫn để di chuyển file từ bộ nhớ tạm vào
-
-            if (move_uploaded_file($thamSo1, $thamSo2)) {
-                $image = "./images/imgs" . $_FILES["image"]["name"];
-            } else {
-                $thongBaoLoiUpload = "upload thất bại";
+            if (!empty($thamSo1) && !empty($thamSo2)) {
+                if (move_uploaded_file($thamSo1, $thamSo2)) {
+                    $image = "./images/imgs" . $_FILES["image"]["name"];
+                } else {
+                    $thongBaoLoiUpload = "upload thất bại";
+                }
+            }else{
+                $thamSo1 = $thamSo2= null;
             }
             // Nếu không có lỗi, thực hiện cập nhật sản phẩm
             if (empty($thongBaoLoiProductName) && empty($thongBaoLoiUpload) && empty($thongBaoLoiDescription) && empty($thongBaoLoiCategory) && empty($thongBaoLoiPrice)) {
@@ -204,10 +208,7 @@ class productController
 
 
                 $created_at = $product["created_at"]; // Giữ nguyên created_at từ sản phẩm cũ
-
-
                 $result = $this->productModel->update($id, $product_name, $description, $category_id, $price, $created_at, $updated_at, $image);
-
                 if ($result === "OK") {
                     $thongBaoTC = "Sửa sản phẩm thành công. Mời bạn tiếp tục tạo mới hoặc quay lại trang danh sách.";
                     // Chuyển hướng hoặc hiển thị thông báo thành công
@@ -256,6 +257,7 @@ class productController
         $productVariantOnPage = array_slice($allProductVariants, $offset, $limit);
 
         // Load view và truyền các biến cần thiết
+        $imageAll = $this->productModel->imageAllVariant($id);
         require_once './views/product/listProductVariant.php';
     }
 
@@ -335,13 +337,13 @@ class productController
 
                 $result = $this->productModel->addProductVariant($product_id, $color_id, $size_id, $stock_quantity, $image_variant, $created_at, $updated_at);
 
-                if ($result === "OK") {
-                    $thongBaoTC = "Tạo mới thành công, mời bạn tiếp tục tạo mới hoặc quay lại trang danh sách";
-                    // Reset form fields sau khi thêm thành công
-                    $color_id = $size_id = $stock_quantity = $image_variant = "";
-                } else {
-                    $thongBaoLoi = "Có lỗi xảy ra trong quá trình tạo biến thể.";
-                }
+                // if ($result === "OK") {
+                //     $thongBaoTC = "Tạo mới thành công, mời bạn tiếp tục tạo mới hoặc quay lại trang danh sách";
+                //     // Reset form fields sau khi thêm thành công
+                //     $color_id = $size_id = $stock_quantity = $image_variant = "";
+                // } else {
+                //     $thongBaoLoi = "Có lỗi xảy ra trong quá trình tạo biến thể.";
+                // }
             }
         }
 
