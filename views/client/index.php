@@ -79,6 +79,12 @@ include "./include/headerClient.php";
             font-size: 18px;
             color: white;
         }
+
+        .banner-statistics img {
+            width: 100%;
+            max-width: 300px;
+            height: 200px;
+        }
     </style>
 </head>
 
@@ -90,7 +96,8 @@ include "./include/headerClient.php";
 
     <main>
         <!-- hero slider area start -->
-        <section class="slider-area"> <div class="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">
+        <section class="slider-area">
+            <div class="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">
                 <!-- single slider item start -->
                 <?php foreach ($listSlider as $row) { ?>
                     <div class="hero-single-slide hero-overlay">
@@ -152,7 +159,8 @@ include "./include/headerClient.php";
                             <div class="policy-content">
                                 <h6>Money Return</h6>
                                 <p>30 days for free return</p>
-                            </div> </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-sm-6 col-lg-3">
                         <div class="policy-item">
@@ -166,7 +174,7 @@ include "./include/headerClient.php";
                         </div>
                     </div>
                 </div>
-            </div>/-strong/-heart:>:o:-((:-h
+            </div>
         </div> <!-- service policy area end -->
 
         <!-- banner statistics area start -->
@@ -342,7 +350,8 @@ include "./include/headerClient.php";
                     <div class="col-12">
                         <div class="product-carousel-4_2 slick-row-10 slick-arrow-style">
                             <!-- product item start -->
-                            <?php foreach ($productLimit20 as $row) { $discountPercentage = (($row["price"] - $row["discount_price"]) / $row["price"]) * 100;
+                            <?php foreach ($productLimit20 as $row) {
+                                $discountPercentage = (($row["price"] - $row["discount_price"]) / $row["price"]) * 100;
                             ?>
                                 <div class="product-item">
                                     <figure class="product-thumb">
@@ -459,7 +468,8 @@ include "./include/headerClient.php";
     <script src="./corano/assets/js/plugins/jqueryui.min.js"></script>
     <!-- Image zoom JS -->
     <script src="./corano/assets/js/plugins/image-zoom.min.js"></script>
-    <!-- Images loaded JS --> <script src="./corano/assets/js/plugins/imagesloaded.pkgd.min.js"></script>
+    <!-- Images loaded JS -->
+    <script src="./corano/assets/js/plugins/imagesloaded.pkgd.min.js"></script>
     <!-- mail-chimp active js -->
     <script src="./corano/assets/js/plugins/ajaxchimp.js"></script>
     <!-- contact form dynamic js -->

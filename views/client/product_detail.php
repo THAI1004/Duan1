@@ -83,7 +83,7 @@
                                         </div>
                                     </div>
                                     <div class="pro-nav slick-row-10 slick-arrow-style">
-                                        <?php foreach ($listProducVariant as $row) { ?>
+                                        <?php foreach ($imageAll as $row) { ?>
                                             <div class="pro-nav-thumb">
                                                 <img src="<?= $row["image_variant"] ?>" alt="product-details" />
                                             </div>

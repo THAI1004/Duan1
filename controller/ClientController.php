@@ -765,6 +765,7 @@ class clientController
         $getAllColor = $this->productModel->getAllColor();
         $getAllColorById = $this->productModel->getAllColorByid($id);
         $getAllSizeById = $this->productModel->getAllSizeByid($id);
+        $imageAll = $this->productModel->imageAllVariant($id);
         // var_dump($getAllSizeById);
         $getAllSize = $this->productModel->getAllSize();
         $listProduct = $this->productModel->getAllProduct();
