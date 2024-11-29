@@ -1106,7 +1106,7 @@ class clientController
                 $guest_phone = $_SESSION["user_data"]["phone"];
                 $shipping_address = $_SESSION["user_data"]["shipping"];
                 $total_price = $_POST["total"];
-                $voucher_id  = $_SESSION["user_data"]["voucher_id"];
+                $voucher_id  = $_SESSION["user_data"]["voucher_id"] ?? "";
                 $thanh_pho = $_SESSION["user_data"]["city"];
                 $huyen = $_SESSION["user_data"]["huyen"];
                 $ten_duong = $_SESSION["user_data"]["road"];
@@ -1163,6 +1163,8 @@ class clientController
     {
         $listOrder = $this->oderModel->getOrder($id);
         $listItem = $this->oderModel->getAllItem($id);
+        $listItemOrder = $this->oderModel->getAllOderById($id);
+        // var_dump($listItemOrder);
         // var_dump($listItem);
         include "./views/client/order.php";
     }
@@ -1170,6 +1172,7 @@ class clientController
     {
         // Lấy thông tin đơn hàng để hiển thị cho người dùng xác nhận
         $listItemOrder = $this->oderModel->getAllOderById($id);
+        var_dump($listItemOrder);
 
         // Hiển thị hộp thoại xác nhận trong JavaScript
         echo "<script>
@@ -1194,7 +1197,7 @@ class clientController
         $idCart = $cart["id"];
 
         // Lấy các sản phẩm trong đơn hàng
-        $listItemOrder = $this->oderModel->getAllOderById($id);
+        $listItemOrder = $this->oderModel->getAllItem($id);
 
         // Chuyển các sản phẩm trong đơn hàng vào giỏ hàng
         foreach ($listItemOrder as $Item) {
