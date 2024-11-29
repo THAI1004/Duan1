@@ -237,7 +237,7 @@ switch ($act) {
         break;
     case "contactUS":
         $client->includeClient();
-        $client->getContactUS();
+        $client->contactUS();
         break;
     case "addCart":
         $client->addCart($id);

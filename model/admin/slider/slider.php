@@ -24,10 +24,10 @@ class sliderModel{
         $data=$this->pdo->query($sql)->fetch();
         return $data;
     }
-    public function addSlider($image_url, $content, $description, $link, $created_at, $updated_at){  
+    public function addSlider($image_url, $link, $created_at, $updated_at){  
         try{
             //tạo lệnh SQL
-            $sql = "INSERT INTO sliders (image_url, content, description, link) VALUES ('$image_url', '$content', '$description', '$link')";
+            $sql = "INSERT INTO sliders (image_url, link) VALUES ('$image_url', '$link')";
             //thực thi lệnh SQL
             $stmt = $this->pdo->exec($sql);
             //kiem tra neu cau lenh thuc thi thanh cong
@@ -43,12 +43,10 @@ class sliderModel{
         }
      }    
      
-     public function update($id,$image_url,$content,$description,$link,$created_at,$updated_at){
+     public function update($id,$image_url,$link,$created_at,$updated_at){
         try{
             $sql = "UPDATE sliders
             SET image_url = '$image_url',
-                content = '$content',
-                description = '$description',
                 link = '$link',
                 created_at = '$created_at', 
                 updated_at = '$updated_at'
@@ -80,12 +78,10 @@ class sliderModel{
         }
     }
 
-    public function updateSlider($id,$image_url,$content,$description,$link){
+    public function updateSlider($id,$image_url,$link){
         try{
             $sql = "UPDATE slider 
             SET image_url = '$image_url', 
-                content = '$content', 
-                description = '$description', 
                 link = '$link', 
             
             WHERE id = $id";

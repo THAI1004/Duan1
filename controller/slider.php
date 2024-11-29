@@ -23,14 +23,10 @@ class sliderController
         // Kiểm tra submit
         if (isset($_POST['submit'])) {
             // $image_url = trim($_FILES['image_url']);
-            $content = trim($_POST['content']);
-            $description = trim($_POST['description']);
             $link = trim($_POST['link']);
 
             //biến thông báo lỗi từng trường
             $thongBaoLoiImage = "";
-            $thongBaoLoiContent = "";
-            $thongBaoLoiDesciption = "";
             $thongBaoLoiLink = "";
             // Kiểm tra lỗi cho từng trường
             if (empty($image_url)) {
@@ -43,19 +39,13 @@ class sliderController
                     $thongBaoLoiUpload = "upload thất bại";
                 }
             }
-            if (empty($content)) {
-                $thongBaoLoiContent = "Vui lòng nhập nội dung";
-            }
-            if (empty($description)) {
-                $thongBaoLoiLink = "Vui lòng nhập mô tả";
-            }
             if (empty($link)) {
                 $thongBaoLoiLink = "Vui lòng nhập link";
             }
             if (empty($thongBaoLoiImage) && empty($thongBaoLoiLink)) {
                 $created_at = date("Y-m-d H:i:s");
                 $updated_at = date("Y-m-d H:i:s");
-                $result = $this->sliderModel->addSlider($image_url,$content,$description, $link, $created_at, $updated_at);
+                $result = $this->sliderModel->addSlider($image_url, $link, $created_at, $updated_at);
                 if ($result == "OK") {
                     $thongBaoTC = "Thêm mới thành công";
                 } else {
@@ -87,8 +77,6 @@ class sliderController
          // Khởi tạo các biến
          $slider_id=$_GET["id"];
          $image_url = trim($slider["image_url"]);
-         $content = trim($slider["content"]);
-         $description = trim($slider["description"]);
          $link = trim($slider["link"]);
          $created_at = trim($slider["created_at"]);
 
@@ -104,9 +92,7 @@ class sliderController
         }
 
         // Khởi tạo thông báo
-        $thongBaoLoiImageurl = "";  
-        $thongBaoLoiContent = "";
-        $thongBaoLoiDescription = "";
+        $thongBaoLoiImageurl = "";
         $thongBaoLoiLink = "";
         $thongBaoLoi = "";
         $thongBaoTC = "";
@@ -116,20 +102,12 @@ class sliderController
     
         if (isset($_POST['submit'])) {
             // Lấy giá trị từ form
-            $content = trim($_POST['content']);
-            $description = trim($_POST['description']);
             $link = trim($_POST['link']);
           
             
             // Kiểm tra lỗi cho từng trường
-            if (empty($content)) {
-                $thongBaoLoiContent = "Vui lòng nhập nội dung";
-            }
-            if (empty($description)) {
-                $thongBaoLoiLink = "Vui lòng nhập mô tả";
-            }
             if (empty($link)) {
-                $thongBaoLoiLink = "Vui lòng nhập link";
+                $thongBaoLoiLink = "Vui lòng nhập link.";
             }
             $thamSo1=$_FILES["image_url"]["tmp_name"];
             $thamSo2="./images/imgs".$_FILES["image_url"]["name"]; //đường dẫn để di chuyển file từ bộ nhớ tạm vào
@@ -148,7 +126,7 @@ class sliderController
                     $created_at = $slider["created_at"]; // Giữ nguyên created_at từ banner cũ
                
                 
-                $result = $this->sliderModel->update( $id,$image_url,$content,$description,$link,$created_at,$updated_at);
+                $result = $this->sliderModel->update( $id,$image_url,$link,$created_at,$updated_at);
                 
                 if ($result === "OK") {
                     $thongBaoTC = "Sửa banner thành công. Mời bạn tiếp tục tạo mới hoặc quay lại trang danh sách.";
