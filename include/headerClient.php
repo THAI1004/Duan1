@@ -56,7 +56,7 @@ ob_start(); // Bắt đầu output buffer
                     <div class="col-lg-2">
                         <div class="logo">
                             <a class="m-5" href="?act=Trangchu">
-                                <img style="width:120px" src="./images/imgs/logo.png" alt="Brand Logo">
+                                <img style="width:100px" src="./images/imgs/logo.png" alt="Brand Logo">
                             </a>
                         </div>
                     </div>

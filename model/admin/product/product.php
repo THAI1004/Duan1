@@ -36,7 +36,7 @@ class productModel
     }
     public function getAllColorByid($id)
     {
-        $sql = "SELECT product_colors.id, product_colors.color_name
+        $sql = "SELECT DISTINCT product_colors.id, product_colors.color_name
         FROM product_variants
         JOIN product_colors ON product_variants.color_id = product_colors.id
         WHERE product_variants.product_id = $id;";
@@ -95,12 +95,12 @@ class productModel
         $data = $this->pdo->query($sql)->fetch();
         return $data;
     }
-    public function addProduct($product_name, $description, $category_id, $price, $created_at, $updated_at, $image)
+    public function addProduct($product_name, $description, $category_id, $price, $discount_price, $created_at, $updated_at, $image)
     {
         try {
             // Tạo câu lệnh SQL
-            $sql = "INSERT INTO products (product_name, description, category_id, price, created_at, updated_at,image) 
-                    VALUES ('$product_name', '$description', '$category_id', '$price', '$created_at', '$updated_at','$image')";
+            $sql = "INSERT INTO products (product_name, description, category_id, price,discount_price, created_at, updated_at,image) 
+                    VALUES ('$product_name', '$description', '$category_id', '$price','$discount_price', '$created_at', '$updated_at','$image')";
 
             // Thực thi câu lệnh SQL
             $stmt = $this->pdo->exec($sql);
@@ -130,7 +130,7 @@ class productModel
             echo "<hr>";
         }
     }
-    public function update($id, $product_name, $description, $category_id, $price, $created_at, $updated_at, $image)
+    public function update($id, $product_name, $description, $category_id, $price, $discount_price, $created_at, $updated_at, $image)
     {
         try {
             if (isset($image)) {
@@ -139,6 +139,7 @@ class productModel
             description = '$description', 
             category_id = $category_id, 
             price = $price, 
+            discount_price=$discount_price,
             created_at = '$created_at', 
             updated_at = '$updated_at',
             image='$image'
@@ -149,6 +150,7 @@ class productModel
                     description = '$description', 
                     category_id = $category_id, 
                     price = $price, 
+                    discount_price=$discount_price
                     created_at = '$created_at', 
                     updated_at = '$updated_at'
                 WHERE id = $id";
