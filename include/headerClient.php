@@ -55,8 +55,8 @@ ob_start(); // Bắt đầu output buffer
                     <!-- start logo area -->
                     <div class="col-lg-2">
                         <div class="logo">
-                            <a href="?act=Trangchu">
-                                <img src="./corano/assets/img/logo/logo.png" alt="Brand Logo">
+                            <a class="m-5" href="?act=Trangchu">
+                                <img style="width:120px" src="./images/imgs/logo.png" alt="Brand Logo">
                             </a>
                         </div>
                     </div>

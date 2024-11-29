@@ -73,6 +73,16 @@ class productModel
         $data = $this->pdo->query($sql)->fetchAll();
         return $data;
     }
+    public function imageAllVariant($id)
+    {
+        $sql = "SELECT image_variant
+        FROM product_variants
+        WHERE product_id = $id
+        GROUP BY image_variant;
+        ";
+        $data = $this->pdo->query($sql)->fetchAll();
+        return $data;
+    }
     public function getColorById($id)
     {
         $sql = "SELECT * FROM `product_colors` where id=$id";
@@ -149,25 +159,28 @@ class productModel
 
         // Truy vấn SQL có phân trang
         $sql = "
-        SELECT
-            pv.id AS variant_id, 
-            pv.product_id,  
-            p.product_name, 
-            pc.color_name, 
-            pc.color_code,
-            ps.size_name, 
-            pv.stock_quantity,
-            pv.image_variant
-        FROM 
-            Product_Variants pv
-        JOIN 
-            Products p ON pv.product_id = p.id
-        JOIN 
-            Product_Colors pc ON pv.color_id = pc.id
-        JOIN 
-            Product_Sizes ps ON pv.size_id = ps.id
-        WHERE 
-            pv.product_id = :product_id";
+    SELECT DISTINCT
+        product_variants.id AS variant_id, 
+        product_variants.product_id,  
+        products.product_name, 
+        product_colors.color_name, 
+        product_colors.color_code,
+        product_sizes.size_name, 
+        product_variants.stock_quantity,
+        product_variants.image_variant
+    FROM 
+        product_variants 
+    JOIN 
+        products  ON product_variants.product_id = products.id
+    JOIN 
+        product_colors  ON product_variants.color_id = product_colors.id
+    JOIN 
+        product_sizes  ON product_variants.size_id = product_sizes.id
+    WHERE 
+        product_variants.product_id = :product_id";
+
+
+
 
         // Chuẩn bị câu lệnh truy vấn
         $stmt = $this->pdo->prepare($sql);

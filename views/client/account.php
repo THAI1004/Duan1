@@ -109,7 +109,7 @@
                                                                         <td><?= $order['created_at'] ?></td>
                                                                         <td><?= $order['shipping_status'] ?></td>
                                                                         <td><?= $order['total_price'] ?></td>
-                                                                        <td><a href="?act=viewCart" class="btn btn-sqr">View</a>
+                                                                        <td><a href="?act=chitietOrder&id=<?= $order['id'] ?>" class="btn btn-sqr">View</a>
                                                                         </td>
                                                                     </tr>
                                                                 <?php endforeach ?>
@@ -238,7 +238,7 @@
     </div>
     <!-- Scroll to Top End -->
     <!-- Quick view modal start -->
-    
+
     <!-- Quick view modal end -->
 
 

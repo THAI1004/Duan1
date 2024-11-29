@@ -207,7 +207,7 @@ class productController
 
 
                 $result = $this->productModel->update($id, $product_name, $description, $category_id, $price, $created_at, $updated_at, $image);
-
+                // var_dump($result);
                 if ($result === "OK") {
                     $thongBaoTC = "Sửa sản phẩm thành công. Mời bạn tiếp tục tạo mới hoặc quay lại trang danh sách.";
                     // Chuyển hướng hoặc hiển thị thông báo thành công
