@@ -11,12 +11,12 @@ ob_start(); // Bắt đầu output buffer
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Corano - Jewelry Shop eCommerce Bootstrap 5 Template</title>
+    <title>1 Sneakers - Đẳng cấp giày hiệu</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="./corano/assets/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="./images/imgs/logo.png">
 
     <!-- CSS
 	============================================ -->
@@ -106,7 +106,7 @@ ob_start(); // Bắt đầu output buffer
                                         <li><a href="?act=contactUS">Liên hệ</a></li>
                                     </ul>
                                 </nav>
-                                <!-- main menu navbar end -->   
+                                <!-- main menu navbar end -->
                             </div>
                         </div>
                     </div>

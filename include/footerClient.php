@@ -8,17 +8,16 @@
                     <div class="widget-item">
                         <div class="widget-title">
                             <div class="widget-logo">
-                                <h3>Giới thiệu</h3>
+                                <a href="index.html">
+                                    <img src="./corano/assets/img/logo/logo.png" alt="brand logo">
+                                </a>
                             </div>
                         </div>
-
                         <div class="widget-body">
-                            <p>1 Sneaker là thương hiệu giày sneaker nổi tiếng với thiết kế thời thượng và chất lượng vượt trội. Chúng tôi cung cấp các dòng giày phù hợp với mọi phong cách, từ thể thao năng động đến thời trang dạo phố.</p>
+                            <p>Corano là thương hiệu giày sneaker nổi tiếng với thiết kế thời thượng và chất lượng vượt trội. Chúng tôi cung cấp các dòng giày phù hợp với mọi phong cách, từ thể thao năng động đến thời trang dạo phố.</p>
                         </div>
                     </div>
                 </div>
-
-
                 <div class="col-lg-3 col-md-6">
                     <div class="widget-item">
                         <h6 class="widget-title">Liên hệ</h6>
@@ -38,29 +37,12 @@
                         <h6 class="widget-title">Thông tin</h6>
                         <div class="widget-body">
                             <ul class="info-list">
-                                <li><a href="#">about us</a></li>
-                                <li><a href="#">Delivery Information</a></li>
-                                <li><a href="#">privet policy</a></li>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">contact us</a></li>
-                                <li><a href="#">site map</a></li>
-                                >>>>>>> a1ddae4f4937280df1e39832e1824fec3656c48e
-                            </ul>
-                            </address>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="widget-item">
-                        <h6 class="widget-title">Information</h6>
-                        <div class="widget-body">
-                            <ul class="info-list">
-                                <li><a href="#">about us</a></li>
-                                <li><a href="#">Delivery Information</a></li>
-                                <li><a href="#">privet policy</a></li>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">contact us</a></li>
-                                <li><a href="#">site map</a></li>
+                                <li><a href="#">Liên lạc</a></li>
+                                <li><a href="#">Giao hàng</a></li>
+                                <li><a href="#">Chính sách</a></li>
+                                <li><a href="#">Điều khoản</a></li>
+                                <li><a href="#">Liên hệ với chúng tôi</a></li>
+                                <li><a href="#">Địa chỉ</a></li>
                             </ul>
                         </div>
                     </div>
@@ -101,7 +83,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="copyright-text text-center">
-                        <p>&copy; 2024 <b>1 Sneaker</b> Made with <i class="fa fa-heart text-danger"></i> by THP></p>
+                        <p>&copy; 2024 <b>1 Sneaker</b> Made with <i class="fa fa-heart text-danger"></i> by <b>THP</b></p>
                     </div>
                 </div>
             </div>
