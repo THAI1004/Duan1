@@ -8,13 +8,14 @@
                     <div class="widget-item">
                         <div class="widget-title">
                             <div class="widget-logo">
-                                <a href="index.html">
-                                    <img src="./corano/assets/img/logo/logo.png" alt="brand logo">
-                                </a>
+
+                                <h3>Giới thiệu</h3>
                             </div>
                         </div>
                         <div class="widget-body">
-                            <p>Corano là thương hiệu giày sneaker nổi tiếng với thiết kế thời thượng và chất lượng vượt trội. Chúng tôi cung cấp các dòng giày phù hợp với mọi phong cách, từ thể thao năng động đến thời trang dạo phố.</p>
+                            <p>
+                                <a href="?act=homeClient"><strong>1 Sneakers</strong></a> là thương hiệu giày sneaker nổi tiếng với thiết kế thời thượng và chất lượng vượt trội. Chúng tôi cung cấp các dòng giày phù hợp với mọi phong cách, từ thể thao năng động đến thời trang dạo phố.
+                            </p>
                         </div>
                     </div>
                 </div>
