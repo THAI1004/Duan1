@@ -160,7 +160,7 @@
                                             </a>
                                             <div class="product-badge">
                                                 <div class="product-label new"><span>new</span></div>
-                                                <div class="product-label discount"><span><?= $discountPercentage ?> %</span></div>
+                                                <div class="product-label discount"><span id="giamGia"><?= floor($discountPercentage) ?>%</span></div>
                                             </div>
                                             <div class="button-group">
                                                 <a href="?act=addWishlist&id=<?= $product['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
@@ -172,8 +172,12 @@
                                         <div class="product-caption text-center">
                                             <h6 class="product-name"><a href="?act=productDetail&id=<?= $product["id"] ?>"><?= $product['product_name'] ?></a></h6>
                                             <div class="price-box">
-                                                <span class="price-regular"><?= $product['discount_price'] ?></span>
-                                                <span class="price-old"><del><?= $product['price'] ?></del></span>
+                                                <?php if (!empty($product['discount_price'])): ?>
+                                                    <span class="price-regular"><?= $product['discount_price'] ?></span>
+                                                    <span class="price-old"><del><?= $product['price'] ?></del></span>
+                                                <?php else: ?>
+                                                    <span class="price-regular"><?= $product['price'] ?></span>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                                     </div>
@@ -188,7 +192,7 @@
                                                     <span>new</span>
                                                 </div>
                                                 <div class="product-label discount">
-                                                    <span><?= $discountPercentage ?> %</span>
+                                                <span id="giamGia"><?= floor($discountPercentage) ?>%</span>
                                                 </div>
                                             </div>
                                             <div class="button-group">

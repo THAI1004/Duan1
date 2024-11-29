@@ -159,7 +159,7 @@ WHERE
             }
         } catch (Exception $e) {
             // In ra lỗi nếu có lỗi xảy ra
-            echo "lỗi: " . $e->getMessage();
+            echo "lỗi add cart: " . $e->getMessage();
             return "Error";
         }
     }

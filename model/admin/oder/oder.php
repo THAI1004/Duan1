@@ -19,6 +19,27 @@ class oderModel
         $data = $this->pdo->query($sql)->fetchAll();
         return $data;
     }
+    public function getOrder($id)
+    {
+        $sql = "
+    SELECT orders.*, vouchers.*
+    FROM orders 
+    LEFT JOIN vouchers ON orders.voucher_id = vouchers.voucher_id
+    WHERE orders.id = $id
+    ";
+        $data = $this->pdo->query($sql)->fetch();
+        return $data;
+    }
+    public function getOrderByIdUser($id)
+    {
+        $sql = "
+    SELECT *
+    FROM orders 
+    WHERE user_id  = $id
+    ";
+        $data = $this->pdo->query($sql)->fetchAll();
+        return $data;
+    }
     public function updateOrder($id, $payment_status = null, $shipping_status = null)
     {
         // Khởi tạo mảng để lưu các trường cần cập nhật
@@ -120,7 +141,30 @@ ORDER BY order_day;
             return false;
         }
     }
-
+    public function getAllItem($id)
+    {
+        $sql = "SELECT order_items.*, 
+                   products.product_name, 
+                   product_colors.color_name, 
+                   product_sizes.size_name, 
+                   product_variants.image_variant
+            FROM order_items
+            JOIN product_variants ON order_items.variant_id = product_variants.id
+            JOIN products ON product_variants.product_id = products.id
+            JOIN product_colors ON product_variants.color_id = product_colors.id
+            JOIN product_sizes ON product_variants.size_id = product_sizes.id
+            WHERE order_items.order_id = $id;
+    ";
+        $data = $this->pdo->query($sql)->fetchAll();
+        return $data;
+    }
+    public function getAllOderById($id)
+    {
+        $sql = "SELECT * From orders WHERE id=$id
+";
+        $data = $this->pdo->query($sql)->fetchAll();
+        return $data;
+    }
     public function insertOrderItem($order_id, $variant_id, $quantity, $unit_price)
     {
         try {
@@ -155,5 +199,18 @@ ORDER BY order_day;
 
         // Trả về kết quả dưới dạng mảng
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function deleteOrder($id)
+    {
+        try {
+            $sql = "DELETE FROM orders WHERE id=$id";
+            $data = $this->pdo->exec($sql);
+            if ($data === 1) {
+                return "OK";
+            }
+        } catch (Exception $er) {
+            echo "Lỗi hàm xóa :" . $er->getMessage();
+            echo "<hr>";
+        }
     }
 }

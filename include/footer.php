@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-</div>
-            <!-- #/ container -->
-        </div>
-        <!--**********************************
+    </div>
+    <!-- #/ container -->
+    </div>
+    <!--**********************************
             Content body end
         ***********************************-->
-        
-        
-        <!--**********************************
+
+
+    <!--**********************************
             Footer start
         ***********************************-->
-        <div class="footer">
-            <div class="copyright">
-                <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
-            </div>
+    <div class="footer">
+        <div class="copyright">
+            <p>Copyright &copy; Designed & Developed by THP 2024</p>
         </div>
-        <!--**********************************
+    </div>
+    <!--**********************************
             Footer end
         ***********************************-->
     </div>
@@ -63,4 +65,5 @@
     <script src="./js/dashboard/dashboard-1.js"></script>
 
 </body>
+
 </html>
