@@ -14,7 +14,6 @@ class clientController
     public $slideModel;
     public $reviewModel;
     public $blogModel;
-    public $projectInforModel;
     public $wishlistModel;
     public $cartModel;
 
@@ -27,7 +26,6 @@ class clientController
         $this->slideModel = new sliderModel();
         $this->reviewModel = new reviewModel();
         $this->blogModel = new blogModel();
-        $this->projectInforModel = new projectInforModel();
         $this->wishlistModel = new WishlistModel();
         $this->cartModel = new cartModel();
     }
@@ -37,7 +35,6 @@ class clientController
         $listCateTop = $this->categoryModel->getCategoryTop();
         $listCateTopOrder = $this->categoryModel->getCategoryTopOrder();
         $listProduct = $this->productModel->getAllProduct();
-        $projectInfor = $this->projectInforModel->getAllProjectInfor();
 
         // var_dump($listProduct);
         if (isset($_SESSION['user_id'])) {
@@ -447,7 +444,10 @@ class clientController
             $addressError = "";
             $passwordError = "";
             $repeatPasswordError = "";
-
+            $existingUser = $this->userModel->findUserByUsername($username);
+            if ($existingUser) {
+                $usernameError = "Tên người dùng đã tồn tại. Vui lòng chọn tên khác.";
+            }
             // Kiểm tra các điều kiện
             if (empty($username)) {
                 $usernameError = "Username is required.";
@@ -456,6 +456,8 @@ class clientController
                 $emailError = "Email is required.";
             } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $emailError = "Invalid email format.";
+            } elseif ($this->userModel->findUserByEmail($email)) { // Kiểm tra email đã tồn tại
+                $emailError = "This email is already registered. Please use a different email.";
             }
             if (empty($phone)) {
                 $phoneError = "Phone number is required.";
@@ -1075,7 +1077,6 @@ class clientController
             $listCart = $this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
 
 
-
             // var_dump($_SESSION['user_data']);
 
             if (isset($_POST['submit_shipping'])) {
@@ -1091,6 +1092,7 @@ class clientController
             $shippingCost = $_SESSION['user_data']['shipping'] ?? 0;
             $totalAmount = $subTotal + $shippingCost - $voucherDiscount;
         }
+
 
         include "./views/client/checkout.php";
     }
@@ -1123,11 +1125,14 @@ class clientController
                 $listCart = $this->cartModel->getAllCartItemByIdUser($_SESSION["user_id"]);
                 $cart = $this->cartModel->getCartBy($_SESSION["user_id"]);
 
+
                 if ($order_id) {
                     foreach ($listCart as $row) {
                         // Insert order item
                         $addItemOrder = $this->oderModel->insertOrderItem($order_id, $row['variant_id'], $row["quantity"], $row["unit_price"]);
-
+                        $variant = $this->productModel->getVariantById($row["variant_id"]);
+                        $quantityNew = $variant["stock_quantity"] - $row["quantity"];
+                        $this->productModel->updateQuantityVariant($variant["id"], $quantityNew);
                         if ($addItemOrder === "OK") {
                             // Xóa các sản phẩm trong giỏ hàng, nhưng giữ lại giỏ hàng
                             $this->cartModel->deleteCartItemsByCartId($cart["id"]);
@@ -1172,7 +1177,7 @@ class clientController
     {
         // Lấy thông tin đơn hàng để hiển thị cho người dùng xác nhận
         $listItemOrder = $this->oderModel->getAllOderById($id);
-        var_dump($listItemOrder);
+
 
         // Hiển thị hộp thoại xác nhận trong JavaScript
         echo "<script>
@@ -1207,6 +1212,9 @@ class clientController
 
             // Thêm sản phẩm vào giỏ hàng
             $this->cartModel->addCart($idCart, $variant_id, $quantity, $price);
+            $variant = $this->productModel->getVariantById($Item["variant_id"]);
+            $quantityNew = $variant["stock_quantity"] + $Item["quantity"];
+            $this->productModel->updateQuantityVariant($variant["id"], $quantityNew);
         }
 
         // Xóa đơn hàng

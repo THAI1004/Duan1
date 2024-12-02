@@ -173,7 +173,7 @@
                                     <div class="single-input-item">
                                         <label for="shipping">Phương thức vận chuyển:</label>
                                         <select name="shipping" id="shipping">
-                                            <option value="50000" <?= $_SESSION['user_data']['shipping'] == 50000 ? 'selected' : '' ?>>Hỏa tốc: 50000đ</option>
+                                            <option value="50000" <?= $_SESSION['user_data']['shipping'] == 50000 ? 'selected' : '' ?>>Hỏa tốc: 50000 VND</option>
                                             <option value="0" <?= $_SESSION['user_data']['shipping'] == 0 ? 'selected' : '' ?>>Free Shipping</option>
                                         </select>
                                     </div>
@@ -195,7 +195,7 @@
                                     <div class="single-input-item">
                                         <label for="shipping">Phương thức vận chuyển:</label>
                                         <select name="shipping" id="shipping">
-                                            <option value="50000">Hỏa tốc: 50000đ</option>
+                                            <option value="50000">Hỏa tốc: 50000 VND</option>
                                             <option value="0">Free Shipping</option>
                                         </select>
                                     </div>
@@ -232,29 +232,33 @@
                                                     <p><?= $product["color_name"] ?> - <?= $product["size_name"] ?></p>
                                                     </p>
                                                 </td>
-                                                <td><?= $total ?>đ</td>
+                                                <td><?= number_format($product["unit_price"], 0, '.', ',')    ?>VND</td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td>Tổng tiền thanh toán</td>
-                                            <td><strong><?= $subTotal ?>đ</strong></td>
+                                            <td>Tổng tiền</td>
+                                            <td><strong><?= number_format($total, 0, '.', ',') ?> VND</strong></td>
                                         </tr>
                                         <tr>
                                             <td>Voucher</td>
-                                            <td><strong><?= $voucherDiscount = $_SESSION["user_data"]["voucher_discount"] ?? 0 ?>đ</strong></td>
+                                            <?php
+                                            $voucherDiscount = $_SESSION["user_data"]["voucher_discount"] ?? 0;
+                                            ?>
+                                            <td><strong><?= number_format($voucherDiscount, 0, '.', ',') ?> VND</strong></td>
+
                                         </tr>
 
                                         <tr>
                                             <td>Shipping</td>
 
-                                            <td><strong><?= isset($_SESSION["user_data"]) ? $_SESSION["user_data"]["shipping"] : 0 ?>đ</strong></td>
+                                            <td><strong><?= isset($_SESSION["user_data"]) ? number_format($_SESSION["user_data"]["shipping"], 0, '.', ',') : 0 ?> VND</strong></td>
 
                                         </tr>
                                         <tr>
                                             <td>Tổng phí thanh toán</td>
-                                            <td><strong><?= $totalAmount ?>đ</strong></td>
+                                            <td><strong><?= number_format($totalAmount, 0, '.', ',');  ?> VND</strong></td>
                                         </tr>
                                     </tfoot>
 

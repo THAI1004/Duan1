@@ -108,14 +108,20 @@
                                             </div>
                                         </div>
                                         <div class="price-box">
-                                            <span class="price-regular"><?= $Product["discount_price"] ?></span>
-                                            <span class="price-old"><del><?= $Product["price"] ?></del></span>
+                                            <span class="price-regular"><?= number_format($Product["discount_price"], 0, '.', ','); ?> VND</span>
+                                            <span class="price-old"><del><?= number_format($Product["price"], 0, '.', ','); ?> VND</del></span>
                                         </div>
                                         <form id="productForm" action="?act=addCart&id=<?= $Product["id"] ?>" method="post">
                                             <div class="quantity-cart-box d-flex align-items-center">
                                                 <h6 class="option-title">Số lượng:</h6>
                                                 <div class="quantity">
-                                                    <input style="width:50px" min="1" name="quantity" type="number">
+                                                    <input style="width:50px" min="1" name="quantity" type="number" id="quantityInput">
+
+                                                    <script>
+                                                        window.onload = function() {
+                                                            document.getElementById("quantityInput").value = 1;
+                                                        };
+                                                    </script>
                                                     <input type="hidden" value="<?= $Product["discount_price"] ?>" name="price">
                                                     <input type="hidden" value="<?= $cartUser["id"] ?>" name="cart_id">
                                                 </div>
@@ -322,7 +328,7 @@
                                                 <span>new</span>
                                             </div>
                                             <div class="product-label discount">
-                                            <span id="giamGia"><?= floor($discountPercentage) ?>%</span>
+                                                <span id="giamGia"><?= floor($discountPercentage) ?>%</span>
                                             </div>
                                         </div>
                                         <div class="button-group">
@@ -338,8 +344,8 @@
                                             <a href="?act=productDetail&id=<?= $product["id"] ?>"><?= $product["product_name"] ?></a>
                                         </h6>
                                         <div class="price-box">
-                                            <span class="price-regular"><?= $product["discount_price"] ?></span>
-                                            <span class="price-old"><del><?= $product["price"] ?></del></span>
+                                            <span class="price-regular"><?= number_format($product["discount_price"], 0, '.', ',');  ?> VND</span>
+                                            <span class="price-old"><del><?= number_format($product["price"], 0, '.', ','); ?> VND</del></span>
                                         </div>
                                     </div>
                                 </div>

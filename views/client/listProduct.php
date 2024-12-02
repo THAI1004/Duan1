@@ -173,10 +173,10 @@
                                             <h6 class="product-name"><a href="?act=productDetail&id=<?= $product["id"] ?>"><?= $product['product_name'] ?></a></h6>
                                             <div class="price-box">
                                                 <?php if (!empty($product['discount_price'])): ?>
-                                                    <span class="price-regular"><?= $product['discount_price'] ?></span>
-                                                    <span class="price-old"><del><?= $product['price'] ?></del></span>
+                                                    <span class="price-regular"><?= number_format($product['discount_price'], 0, '.', ','); ?> VND</span>
+                                                    <span class="price-old"><del><?= number_format($product['price'], 0, '.', ',');  ?> VND</del></span>
                                                 <?php else: ?>
-                                                    <span class="price-regular"><?= $product['price'] ?></span>
+                                                    <span class="price-regular"><?= number_format($product['price'], 0, '.', ',');  ?> VND</span>
                                                 <?php endif; ?>
                                             </div>
                                         </div>
@@ -192,7 +192,7 @@
                                                     <span>new</span>
                                                 </div>
                                                 <div class="product-label discount">
-                                                <span id="giamGia"><?= floor($discountPercentage) ?>%</span>
+                                                    <span id="giamGia"><?= floor($discountPercentage) ?>%</span>
                                                 </div>
                                             </div>
                                             <div class="button-group">
@@ -207,8 +207,8 @@
                                         <div class="product-content-list">
                                             <h5 class="product-name"><a href="?act=productDetail&id=<?= $product["id"] ?>"></a><?= $product['product_name'] ?></h5>
                                             <div class="price-box">
-                                                <span class="price-regular"><?= $product['discount_price'] ?></span>
-                                                <span class="price-old"><del><?= $product['price'] ?></del></span>
+                                                <span class="price-regular"><?= number_format($product['discount_price'], 0, '.', ','); ?> VND</span>
+                                                <span class="price-old"><del><?= number_format($product['price'], 0, '.', ',');  ?> VND</del></span>
                                             </div>
                                             <p><?= $product["description"] ?></p>
                                         </div>

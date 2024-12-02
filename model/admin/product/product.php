@@ -272,6 +272,16 @@ class productModel
             echo "<hr>";
         }
     }
+    public function updateQuantityVariant($id, $quantity)
+    {
+        try {
+            $sql = "UPDATE product_variants SET stock_quantity='$quantity' WHERE id=$id";
+            $data = $this->pdo->exec($sql);
+        } catch (Exception $er) {
+            echo "Lỗi hàm Updatequantity :" . $er->getMessage();
+            echo "<hr>";
+        }
+    }
     public function getProductByCategoryId($category_id)
     {
         $sql = "SELECT * FROM products WHERE category_id = $category_id";
