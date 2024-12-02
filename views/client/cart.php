@@ -114,28 +114,26 @@
                                         if (isset($_SESSION["user_id"])) {
 
                                             foreach ($listCart as $row) {
-                                                $total = $row["price"] * $row["quantity"];
+                                                $total = $row["unit_price"] * $row["quantity"];
                                                 $totalAmount += $total;
                                         ?>
                                                 <tr>
                                                     <td class="pro-thumbnail"><a href="?act=productDetail&id=<?= $row["product_id"] ?>"><img class="img-fluid" src="<?= $row["image_variant"] ?>" alt="Product" /></a></td>
                                                     <td class="pro-title"><a href="?act=productDetail&id=<?= $row["product_id"] ?>"><?= $row["product_name"] ?><p><?= $row["color_name"] ?> - <?= $row["size_name"] ?></p></a></td>
-                                                    <td class="pro-price"><span><?= $row["price"] ?></span></td>
+                                                    <td class="pro-price"><span><?= number_format($row["unit_price"], 0, '.', ',');  ?> VND</span></td>
                                                     <td class="pro-quantity">
 
                                                         <input type="number" name="quantity" id="quantity-<?= $row['cart_item_id'] ?>" value="<?= $row["quantity"] ?>" min="1" class="form-control">
 
                                                     </td>
-                                                    <td class="pro-subtotal"><span><?= $total ?></span></td>
-                                                    <td class="pro-remove">
-                                                        <!-- Form cập nhật giỏ hàng -->
-                                                        <form action="?act=updateCart" method="post" class="d-inline">
-                                                            <input type="hidden" name="cart_item_id" value="<?= $row["cart_item_id"] ?>">
-                                                            <input type="hidden" name="quantity" id="hidden-quantity-<?= $row['cart_item_id'] ?>" value="<?= $row['quantity'] ?>">
-                                                            <button type="submit" class="btn-cart">Update</button>
-                                                        </form>
+                                                    <td class="pro-subtotal"><span><?= number_format($total, 0, '.', ',');  ?> VND
+                                                            <form action="?act=updateCart" method="post" class="d-inline">
+                                                                <input type="hidden" name="cart_item_id" value="<?= $row["cart_item_id"] ?>">
+                                                                <input type="hidden" name="quantity" id="hidden-quantity-<?= $row['cart_item_id'] ?>" value="<?= $row['quantity'] ?>">
+                                                                <button type="submit" class="btn-cart">Update</button>
+                                                            </form>
 
-                                                        <a href="?act=deleteCart&id=<?= $row["cart_item_id"] ?>" class="btn-cart btn-cart-delete ml-2">Xóa</a>
+                                                            <a href="?act=deleteCart&id=<?= $row["cart_item_id"] ?>" class="btn-cart btn-cart-delete ml-2">Xóa</a>
                                                     </td>
                                                 </tr>
                                         <?php }
@@ -157,7 +155,7 @@
                                         <table class="table">
                                             <tr>
                                                 <td>Tổng tiền</td>
-                                                <td><?= $totalAmount ?> đ</td>
+                                                <td><?= number_format($totalAmount, 0, '.', ','); ?> đ</td>
                                             </tr>
                                             <tr>
 

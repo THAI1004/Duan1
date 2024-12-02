@@ -73,92 +73,106 @@
 
      <div class="wishlist-main-wrapper section-padding">
          <div class="m-5">
-             <h2>Chi tiết đơn hàng của tôi</h2>
-             <!-- Wishlist Page Content Start -->
-             <div class="section-bg-color">
-                 <div class="row">
-                     <div class="col-lg-12">
-                         <!-- Wishlist Table Area -->
+             <!-- Giữ thẻ h2 inline-block để không đẩy các bảng xuống -->
+             <h2 class="mt-3">Chi tiết đơn hàng của tôi</h2>
 
-                         <div class="cart-table table-responsive">
-                             <table class="table table-bordered">
-                                 <thead>
-                                     <tr>
-                                         <th class="pro-thumbnail">Địa chỉ</th>
-                                         <th class="pro-title">Tên người nhận</th>
-                                         <th class="pro-price">Số điện thoại</th>
-                                         <th class="pro-quantity">Trạng thái thanh toán</th>
-                                         <th class="pro-subtotal">Trạng thái vận chuyển</th>
-                                         <th class="pro-remove">Voucher</th>
-                                         <th class="pro-remove">Tổng tiền</th>
-                                         <th class="pro-remove">Note</th>
-                                         <th class="pro-remove">Tương tác</th>
-                                     </tr>
-                                 </thead>
-                                 <tbody>
+             <!-- Flex container -->
+             <div class="section-bg-color" style="display: flex; justify-content: space-between; align-items: flex-start;">
 
+                 <!-- Bảng 1: Thông tin đơn hàng -->
+                 <div class="cart-table table-responsive" style="flex: 1; margin-right: 10px;">
+                     <table class="table table-bordered">
+                         <thead>
+                             <tr>
+                                 <th>Thông tin</th>
+                                 <th>Chi tiết</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             <tr>
+                                 <td>Địa chỉ</td>
+                                 <td>Số nhà <?= $listOrder["so_nha"] ?>, Đường <?= $listOrder["ten_duong"] ?>, Huyện <?= $listOrder["huyen"] ?>, Thành phố <?= $listOrder["thanh_pho"] ?></td>
+                             </tr>
+                             <tr>
+                                 <td>Tên người nhận</td>
+                                 <td><?= $listOrder["guest_name"] ?></td>
+                             </tr>
+                             <tr>
+                                 <td>Số điện thoại</td>
+                                 <td><?= $listOrder["guest_phone"] ?></td>
+                             </tr>
+                             <tr>
+                                 <td>Trạng thái thanh toán</td>
+                                 <td><?= $listOrder["payment_status"] ?></td>
+                             </tr>
+                             <tr>
+                                 <td>Trạng thái vận chuyển</td>
+                                 <td><?= $listOrder["shipping_status"] ?></td>
+                             </tr>
+                             <tr>
+                                 <td>Voucher</td>
+                                 <td><?= $listOrder["code"] ?></td>
+                             </tr>
+                             <tr>
+                                 <td>Tổng tiền</td>
+                                 <td><?= number_format($listOrder["total_price"], 0, '.', ',');  ?> VND</td>
+                             </tr>
+                             <tr>
+                                 <td>Note</td>
+                                 <td><?= $listOrder["ordernote"] ?></td>
+                             </tr>
+                             <tr>
+                                 <td>Thao tác</td>
+                                 <td>
+                                     <?php if ($listOrder["shipping_status"] === "pending") { ?>
+                                         <!-- Cho phép hủy khi trạng thái là pending -->
+                                         <a class="btn btn-danger custom-btn" href="?act=huyOrder&id=<?= $_GET["id"] ?>">Hủy</a>
+                                     <?php } else { ?>
+                                         <!-- Thông báo alert khi trạng thái không phải là pending -->
+                                         <a class="btn btn-danger custom-btn" href="javascript:void(0);" onclick="alert('Bạn không thể hủy đơn hàng vì trạng thái hiện tại không cho phép.');">Hủy</a>
+                                     <?php } ?>
+                                 </td>
 
-                                     <tr>
-                                         <td>Số nhà <?= $listOrder["so_nha"] ?>, Đường <?= $listOrder["ten_duong"] ?>, Huyện <?= $listOrder["huyen"] ?>, Thành phố <?= $listOrder["thanh_pho"] ?></td>
-                                         <td><?= $listOrder["guest_name"] ?></td>
-                                         <td><?= $listOrder["guest_phone"] ?></td>
-                                         <td><?= $listOrder["payment_status"] ?></td>
-                                         <td><?= $listOrder["shipping_status"] ?></td>
-                                         <td><?= $listOrder["code"] ?></td>
-                                         <td><?= $listOrder["total_price"] ?></td>
-                                         <td><?= $listOrder["ordernote"] ?></td>
-                                         <td>
-                                             <a class="btn btn-danger custom-btn" href="?act=huyOrder&id=<?= $_GET["id"] ?>">Hủy</a>
-                                         </td>
-                                     </tr>
-                                 </tbody>
-                             </table>
+                             </tr>
+                         </tbody>
+                     </table>
+                 </div>
 
-                         </div>
-                         <div class="cart-table table-responsive container ">
-                             <h3 class="mt-3" style="text-align: center;">Danh sách sản phẩm</h3>
-                             <table class="table table-bordered">
-                                 <thead>
-                                     <tr>
-                                         <th class="pro-thumbnail">Ảnh sản phẩm</th>
-                                         <th class="pro-title">Tên sản phẩm</th>
-                                         <th class="pro-price">Giá</th>
-                                         <th class="pro-quantity">Số lượng</th>
-                                         <th class="pro-subtotal">Tổng tiền</th>
-                                     </tr>
-                                 </thead>
-                                 <tbody>
-
-                                     <?php
-
-
-                                        foreach ($listItem as $row) {
-                                            $total = $row["quantity"] * $row["unit_price"];
-                                        ?>
-                                         <tr>
-                                             <td class="pro-thumbnail"><img class="img-fluid" src="<?= $row["image_variant"] ?>" alt="Product" /></td>
-                                             <td class="pro-title"><?= $row["product_name"] ?><p><?= $row["color_name"] ?> - <?= $row["size_name"] ?></p>
-                                             </td>
-                                             <td class="pro-price"><span><?= $row["unit_price"] ?></span></td>
-                                             <td class="pro-quantity">
-
-                                                 <span><?= $row["quantity"] ?></span>
-
-                                             </td>
-                                             <td class="pro-subtotal"><span><?= $total ?></span></td>
-
-                                         </tr>
-                                     <?php }
-                                        ?>
-                                 </tbody>
-                             </table>
-                         </div>
-                     </div>
+                 <!-- Bảng 2: Danh sách sản phẩm -->
+                 <div class="cart-table table-responsive" style="flex: 1; margin-left: 10px;">
+                     <h3 class="">Danh sách sản phẩm</h3>
+                     <table class="table table-bordered">
+                         <thead>
+                             <tr>
+                                 <th>Ảnh sản phẩm</th>
+                                 <th>Chi tiết</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             <?php foreach ($listItem as $row) {
+                                    $total = $row["quantity"] * $row["unit_price"];
+                                ?>
+                                 <tr>
+                                     <td class="pro-thumbnail">
+                                         <img class="img-fluid" src="<?= $row["image_variant"] ?>" alt="Product" />
+                                     </td>
+                                     <td>
+                                         Tên: <?= $row["product_name"] ?><br>
+                                         Phân loại: <?= $row["color_name"] ?> - <?= $row["size_name"] ?><br>
+                                         Giá: <?= number_format($row["unit_price"], 0, '.', ',');  ?> VND<br>
+                                         Số lượng: <?= $row["quantity"] ?><br>
+                                         Tổng tiền: <?= number_format($total, 0, '.', ',')  ?> VND
+                                     </td>
+                                 </tr>
+                             <?php } ?>
+                         </tbody>
+                     </table>
                  </div>
              </div>
-             <!-- Wishlist Page Content End -->
          </div>
      </div>
+
+
      <!-- wishlist main wrapper end -->
  </main>
 

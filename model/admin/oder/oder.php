@@ -10,15 +10,16 @@ class oderModel
     {
         $this->pdo = null;
     }
-    public function getAllOder()
+    public function getAllOrder()
     {
         $sql = "SELECT orders.*, users.username, vouchers.code, users.email, users.phone, users.address
-        FROM orders 
-        JOIN users ON orders.user_id = users.id
-        JOIN vouchers ON orders.voucher_id = vouchers.voucher_id";
+                FROM orders 
+                JOIN users ON orders.user_id = users.id
+                LEFT JOIN vouchers ON orders.voucher_id = vouchers.voucher_id";
         $data = $this->pdo->query($sql)->fetchAll();
         return $data;
     }
+
     public function getOrder($id)
     {
         $sql = "

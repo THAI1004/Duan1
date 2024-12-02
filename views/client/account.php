@@ -103,12 +103,14 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <?php foreach ($orders as $order): ?>
+                                                                <?php
+                                                                $i = 1;
+                                                                foreach ($orders as $order): ?>
                                                                     <tr>
-                                                                        <td><?= $order['id'] ?></td>
+                                                                        <td><?= $i++; ?></td>
                                                                         <td><?= $order['created_at'] ?></td>
                                                                         <td><?= $order['shipping_status'] ?></td>
-                                                                        <td><?= $order['total_price'] ?></td>
+                                                                        <td><?= number_format($order['total_price'], 0, '.', ',');  ?></td>
                                                                         <td><a href="?act=chitietOrder&id=<?= $order['id'] ?>" class="btn btn-sqr">View</a>
                                                                         </td>
                                                                     </tr>

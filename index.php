@@ -12,7 +12,6 @@ include_once "./model/admin/slider/slider.php";
 include_once "./model/admin/oder/oder.php";
 include_once "./model/admin/blog/blog.php";
 include_once "./model/admin/cart/cart.php";
-include_once "./model/admin/projectInfo/projectInfo.php";
 include_once "./controller/product.php";
 include_once "./controller/review.php";
 include_once "./controller/slider.php";

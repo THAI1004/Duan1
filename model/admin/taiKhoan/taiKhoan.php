@@ -60,6 +60,15 @@ class AccountModel
             return "Failed";  // Trả về "Failed" nếu không có dòng nào bị ảnh hưởng
         }
     }
+    public function findUserByUsername($username)
+    {
+        $query = "SELECT * FROM users WHERE username = :username LIMIT 1";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
     public function updateTaiKhoan($id, $username, $email, $phone, $address, $password)
     {
         $query = "UPDATE users SET username='$username',email='$email',phone='$phone',address='$address',password='$password' WHERE id=$id";
@@ -72,7 +81,7 @@ class AccountModel
     }
     public function findUserByEmail($email)
     {
-        $query = "SELECT * FROM users WHERE email = :email";
+        $query = "SELECT * FROM users WHERE email = :email LIMIT 1";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':email', $email);
         $stmt->execute();

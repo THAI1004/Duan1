@@ -266,9 +266,9 @@ include "./include/headerClient.php";
                                                                         <a href="?act=productDetail&id=<?= $product["id"] ?>"><?= $product["product_name"] ?></a>
                                                                     </h6>
                                                                     <div class="price-box">
-                                                                        <span class="price-regular"><?= $product["discount_price"] ?? $product["price"] ?>đ</span>
+                                                                        <span class="price-regular"><?= number_format($product["discount_price"], 0, '.', ',') ?? number_format($product["price"], 0, '.', ',')   ?> VND</span>
                                                                         <?php if ($product["discount_price"]): ?>
-                                                                            <span class="price-old"><del><?= $product["price"] ?>đ</del></span>
+                                                                            <span class="price-old"><del><?= number_format($product["price"], 0, '.', ',')  ?> VND</del></span>
                                                                         <?php endif; ?>
                                                                     </div>
                                                                 </div>
@@ -379,8 +379,8 @@ include "./include/headerClient.php";
                                             <a href="?act=productDetail&id=<?= $row["id"] ?>"><?= $row["product_name"] ?></a>
                                         </h6>
                                         <div class="price-box">
-                                            <span class="price-regular"><?= $row["price"] ?></span>
-                                            <span class="price-old"><del><?= $row["discount_price"] ?></del></span>
+                                            <span class="price-regular"><?= number_format($row["price"], 0, '.', ',');  ?> VND</span>
+                                            <span class="price-old"><del><?= number_format($row["discount_price"], 0, '.', ','); ?> VND</del></span>
                                         </div>
                                     </div>
                                 </div>
