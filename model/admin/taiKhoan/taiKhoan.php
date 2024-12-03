@@ -88,6 +88,14 @@ class AccountModel
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
+    public function findUserByUsername($username){
+        $query = "SELECT * FROM users WHERE username = :username LIMIT 1";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
     public function addtempPassword($email, $tempPassword, $expiry)
     {
         $query = "UPDATE users SET temp_password ='$tempPassword',temp_password_expiry='$expiry' WHERE email = '$email'";

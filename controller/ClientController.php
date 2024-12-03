@@ -1012,7 +1012,7 @@ class clientController
             $mail->Port = 587;  // Cổng SMTP cho STARTTLS
 
             // Cấu hình người gửi
-            $mail->setFrom('kimphong102005@gmail.com', 'phongdz');
+            $mail->setFrom('kimphong102005@gmail.com', '1Sneaker');
             $mail->addAddress($email);  // Thêm địa chỉ email người nhận
 
             // Nội dung email
@@ -1031,7 +1031,7 @@ class clientController
         if (isset($_POST['email'], $_POST['temp_password'], $_POST['new_password'])) {
             $email = $_POST['email'];
             $tempPassword = $_POST['temp_password'];
-            $newPassword = $_POST['new_passwordw'];
+            $newPassword = $_POST['new_password'];
             $user = $this->userModel->verifyTempPassword($email, $tempPassword);
             if ($user) {
                 // Cập nhật mật khẩu mới

@@ -73,10 +73,10 @@ if (isset($_SESSION['login_success'])) {
 
                             <form action="?act=login" method="post">
                                 <div class="single-input-item">
-                                    <input type="text" name="username" placeholder="Username" required />
+                                    <input type="text" name="username" placeholder="Username"  />
                                 </div>
                                 <div class="single-input-item">
-                                    <input type="password" name="password" placeholder="Enter your Password" required />
+                                    <input type="password" name="password" placeholder="Enter your Password"  />
                                 </div>
                                 <div class="single-input-item">
                                     <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
@@ -120,31 +120,31 @@ if (isset($_SESSION['login_success'])) {
                             ?>
                             <form action="?act=singup" method="post">
                                 <div class="single-input-item">
-                                    <input name="username" type="text" placeholder="Enter your Username" required />
+                                    <input name="username" type="text" placeholder="Enter your Username"  />
                                     <span class="error-message"><?php echo $usernameError ?? ''; ?></span>
                                 </div>
                                 <div class="single-input-item">
-                                    <input name="email" type="email" placeholder="Enter your Email" required />
+                                    <input name="email" type="email" placeholder="Enter your Email"  />
                                     <span class="error-message"><?php echo $emailError ?? ''; ?></span>
                                 </div>
                                 <div class="single-input-item">
-                                    <input name="phone" type="phone" placeholder="Enter your Phone" required />
+                                    <input name="phone" type="phone" placeholder="Enter your Phone"  />
                                     <span class="error-message"><?php echo $phoneError ?? ''; ?></span>
                                 </div>
                                 <div class="single-input-item">
-                                    <input name="address" type="address" placeholder="Enter your Address" required />
+                                    <input name="address" type="address" placeholder="Enter your Address"  />
                                     <span class="error-message"><?php echo $addressError ?? ''; ?></span>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="single-input-item">
-                                            <input name="password" type="password" placeholder="Enter your Password" required />
+                                            <input name="password" type="password" placeholder="Enter your Password"  />
                                             <span class="error-message"><?php echo $passwordError ?? ''; ?></span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="single-input-item">
-                                            <input name="repeatPassword" type="password" placeholder="Repeat your Password" required />
+                                            <input name="repeatPassword" type="password" placeholder="Repeat your Password"  />
                                             <span class="error-message"><?php echo $repeatPasswordError ?? ''; ?></span>
                                         </div>
                                     </div>
