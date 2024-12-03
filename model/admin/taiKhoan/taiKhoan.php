@@ -72,9 +72,17 @@ class AccountModel
     }
     public function findUserByEmail($email)
     {
-        $query = "SELECT * FROM users WHERE email = :email";
+        $query = "SELECT * FROM users WHERE email = :email LIMIT 1";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function findUserByUsername($username){
+        $query = "SELECT * FROM users WHERE username = :username LIMIT 1";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':username', $username);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;
